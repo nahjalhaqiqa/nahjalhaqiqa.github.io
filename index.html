@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نهج الحقيقة | منصة الأبحاث والمناظرات العقائدية</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            50: '#fbf8ed',
+                            100: '#f5eece',
+                            200: '#ebd99c',
+                            300: '#e0bd63',
+                            400: '#d7a136',
+                            500: '#c58622',
+                            600: '#a3641a',
+                            700: '#824918',
+                            800: '#6d3b19',
+                            900: '#5a3118',
+                            gold2: '#f1d58a',
+                        },
+                        darkbg: '#0f0f0e',
+                        panel: '#181715',
+                        panel2: '#21201c',
+                        line: '#312e27',
+                    },
+                    fontFamily: {
+                        title: ['Amiri', 'serif'],
+                        body: ['Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar and sleek visual effects */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 15, 14, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a3641a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d7a136;
+        }
+        .glass-panel {
+            background: rgba(24, 23, 21, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(215, 161, 54, 0.15);
+        }
+        .light .glass-panel {
+            background: rgba(255, 253, 248, 0.85);
+            border: 1px solid rgba(163, 100, 26, 0.15);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #f1d58a 0%, #d7a136 50%, #9b7526 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #d7a136 0%, #a3641a 100%);
+        }
+        .hero-pattern {
+            background-image: radial-gradient(circle at 80% 20%, rgba(215, 161, 54, 0.12) 0%, transparent 45%),
+                              radial-gradient(circle at 20% 80%, rgba(163, 100, 26, 0.08) 0%, transparent 50%);
+        }
+        @media print {
+            body * { visibility: hidden; }
+            #printableArea, #printableArea * { visibility: visible; }
+            #printableArea { position: absolute; left: 0; top: 0; width: 100%; color: #000; background: #fff; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="font-body bg-darkbg text-gray-200 dark:bg-darkbg dark:text-gray-200 light:bg-[#f8f6f0] light:text-[#24221d] transition-colors duration-300 min-h-screen flex flex-col selection:bg-gold-500 selection:text-white">
+
+    <!-- Top decorative accent line -->
+    <div class="h-1 w-full bg-gradient-to-r from-gold-700 via-gold-300 to-gold-600 sticky top-0 z-50"></div>
+
+    <header class="sticky top-1 z-40 bg-darkbg/85 dark:bg-darkbg/85 light:bg-[#f8f6f0]/90 backdrop-blur-md border-b border-line dark:border-line light:border-gray-200 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+            
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl border border-gold-400/40 bg-gradient-to-br from-panel2 to-darkbg flex items-center justify-center text-gold-300 text-2xl shadow-lg shadow-gold-500/10 group-hover:border-gold-300 group-hover:scale-105 transition-all duration-300">
+                    ۞
+                </div>
+                <div>
+                    <strong class="font-title text-xl sm:text-2xl font-bold tracking-wide text-gray-100 dark:text-gray-100 light:text-gray-900 group-hover:text-gold-300 transition-colors">
+                        نهج الحقيقة
+                    </strong>
+                    <small class="block text-xs text-gold-400/80 font-medium -mt-1">بحثٌ • توثيقٌ • حوارٌ علمي</small>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+                <a href="#research" class="hover:text-gold-300 transition-colors text-gray-300 dark:text-gray-300 light:text-gray-700">الأبحاث والمقالات</a>
+                <a href="#evidence" class="hover:text-gold-300 transition-colors text-gray-300 dark:text-gray-300 light:text-gray-700">الأدلة والمصادر</a>
+                <a href="#debates" class="hover:text-gold-300 transition-colors text-gray-300 dark:text-gray-300 light:text-gray-700">المناظرات والردود</a>
+                <a href="#videos" class="hover:text-gold-300 transition-colors text-gray-300 dark:text-gray-300 light:text-gray-700">القناة والأفلام</a>
+                <a href="#bookmarks" id="navBookmarksBtn" class="hover:text-gold-300 transition-colors text-gray-300 dark:text-gray-300 light:text-gray-700 flex items-center gap-1">
+                    <span>★ المفضلات</span>
+                    <span id="bookmarkBadge" class="bg-gold-500/20 text-gold-300 text-xs px-1.5 py-0.5 rounded-full font-bold">0</span>
+                </a>
+            </nav>
+
+            <!-- Actions Header Button -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button id="themeToggleBtn" type="button" class="p-2.5 rounded-lg border border-line dark:border-line light:border-gray-300 hover:border-gold-400 text-gold-400 bg-panel/50 hover:bg-gold-500/10 transition-all text-sm flex items-center gap-2" title="تبديل المظهر">
+                    <span id="themeIcon">☼</span>
+                    <span class="hidden sm:inline text-xs">المظهر</span>
+                </button>
+
+                <button id="openAdminBtn" class="px-3.5 py-2 rounded-lg bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/30 text-gold-300 hover:text-gold-200 text-xs sm:text-sm font-bold flex items-center gap-2 transition-all shadow-sm">
+                    <span>⚙</span>
+                    <span class="hidden sm:inline">لوحة التحكم</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Quick Sub-Nav -->
+        <div class="md:hidden flex items-center justify-around px-4 py-2 border-t border-line/50 text-xs overflow-x-auto gap-4 scrollbar-none">
+            <a href="#research" class="whitespace-nowrap text-gray-300 hover:text-gold-300">الأبحاث</a>
+            <a href="#evidence" class="whitespace-nowrap text-gray-300 hover:text-gold-300">الأدلة</a>
+            <a href="#debates" class="whitespace-nowrap text-gray-300 hover:text-gold-300">المناظرات</a>
+            <a href="#videos" class="whitespace-nowrap text-gray-300 hover:text-gold-300">القناة</a>
+            <a href="#bookmarks" id="mobBookmarksBtn" class="whitespace-nowrap text-gold-400 font-bold">★ المفضلات (<span id="mobBookmarkBadge">0</span>)</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section id="home" class="relative py-16 lg:py-24 overflow-hidden hero-pattern border-b border-line">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="max-w-3xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-300 text-xs sm:text-sm font-semibold mb-6">
+                        <span class="w-2 h-2 rounded-full bg-gold-400 animate-pulse"></span>
+                        منصة معرفية علمية متخصصة بالحوار والتوثيق
+                    </div>
+
+                    <h1 class="font-title text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6 text-gray-100 dark:text-gray-100 light:text-gray-900">
+                        نبحث عن الدليل،<br>
+                        <span class="gold-gradient-text">ونسير على نهج الحقيقة</span>
+                    </h1>
+
+                    <p class="text-base sm:text-xl text-gray-400 dark:text-gray-400 light:text-gray-600 leading-relaxed mb-8 max-w-2xl">
+                        موسوعة إسلامية علمية تعتني بتقديم الأبحاث العقائدية، وتحقيق أسانيد الروايات ودلالات الآيات القرآنية، وتوثيق المناظرات والردود بمنهجية موضوعية رصينة.
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="#research" class="px-6 py-3.5 rounded-xl gold-gradient-bg text-darkbg font-bold text-sm sm:text-base hover:brightness-110 shadow-lg shadow-gold-500/20 transition-all flex items-center gap-2">
+                            <span>تصفّح مكتبة الأبحاث</span>
+                            <span class="text-lg">←</span>
+                        </a>
+                        <a href="#videos" class="px-6 py-3.5 rounded-xl bg-panel hover:bg-panel2 border border-line text-gold-300 font-semibold text-sm sm:text-base transition-all flex items-center gap-2">
+                            <span>شاهد المناظرات المرئية</span>
+                            <span>▶</span>
+                        </a>
+                    </div>
+
+                    <!-- Statistics Bar -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 mt-12 pt-8 border-t border-line/60">
+                        <div class="border-r-2 border-gold-500/50 pr-4">
+                            <b class="block text-2xl sm:text-3xl font-title text-gold-300 font-bold" id="statArticlesCount">0+</b>
+                            <span class="text-xs sm:text-sm text-gray-400">بحث ومقال موثّق</span>
+                        </div>
+                        <div class="border-r-2 border-gold-500/50 pr-4">
+                            <b class="block text-2xl sm:text-3xl font-title text-gold-300 font-bold" id="statSourcesCount">100%</b>
+                            <span class="text-xs sm:text-sm text-gray-400">توثيق بالأجزاء والصفحات</span>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1 border-r-2 border-gold-500/50 pr-4">
+                            <b class="block text-2xl sm:text-3xl font-title text-gold-300 font-bold">حوار برهاني</b>
+                            <span class="text-xs sm:text-sm text-gray-400">ردود وعرض علمي هادئ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Watermark Motif Background -->
+            <div class="absolute -left-10 -bottom-10 text-[260px] font-title opacity-5 text-gold-400 pointer-events-none select-none">
+                ۞
+            </div>
+        </section>
+
+        <section id="research" class="py-16 bg-darkbg/50 border-b border-line">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+                    <div>
+                        <span class="text-xs font-bold tracking-widest text-gold-400 uppercase">مكتبة المعرفة والتوثيق</span>
+                        <h2 class="font-title text-3xl sm:text-4xl font-bold text-gray-100 dark:text-gray-100 light:text-gray-900 mt-1">الأبحاث والدراسات الميدانية</h2>
+                    </div>
+                    <p class="text-sm text-gray-400 max-w-md">
+                        استعرض الدراسات المعتمدة. يمكنك تصفية الأبحاث حسب التصنيف أو البحث المباشر في أسانيد ومتون الروايات.
+                    </p>
+                </div>
+
+                <!-- Search & Filters Toolbar -->
+                <div class="p-4 rounded-2xl glass-panel mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+                    <div class="relative w-full md:w-96">
+                        <input id="searchInput" type="search" placeholder="ابحث عن عنوان، حديث، أو مصدر..." class="w-full pl-4 pr-10 py-3 rounded-xl bg-panel2/80 border border-line text-sm text-gray-200 focus:outline-none focus:border-gold-400 transition-colors">
+                        <span class="absolute right-3 top-3.5 text-gray-400">🔍</span>
+                    </div>
+
+                    <!-- Categories Filter Buttons -->
+                    <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none" id="categoryFilterContainer">
+                        <button class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-gold-500 text-darkbg border border-gold-400 whitespace-nowrap transition-all" data-category="الكل">الكل</button>
+                        <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-panel border border-line text-gray-300 hover:border-gold-500/50 whitespace-nowrap transition-all" data-category="عقائد">العقائد</button>
+                        <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-panel border border-line text-gray-300 hover:border-gold-500/50 whitespace-nowrap transition-all" data-category="قرآن">القرآن الكريم</button>
+                        <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-panel border border-line text-gray-300 hover:border-gold-500/50 whitespace-nowrap transition-all" data-category="حديث">الحديث والأسانيد</button>
+                        <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-panel border border-line text-gray-300 hover:border-gold-500/50 whitespace-nowrap transition-all" data-category="تاريخ">التاريخ والسير</button>
+                        <button class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-panel border border-line text-gray-300 hover:border-gold-500/50 whitespace-nowrap transition-all" data-category="مناظرات">المناظرات</button>
+                    </div>
+                </div>
+
+                <!-- Research Cards Grid Grid -->
+                <div id="articlesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Cards are rendered dynamically via JavaScript -->
+                </div>
+
+                <!-- Empty Search Result Alert -->
+                <div id="noResults" class="hidden text-center py-16 p-8 glass-panel rounded-2xl">
+                    <span class="text-4xl block mb-3">🔍</span>
+                    <h3 class="font-title text-xl text-gray-200 font-bold mb-1">لم يتم العثور على أبحاث مطابقة</h3>
+                    <p class="text-sm text-gray-400">جرب البحث بكلمات مختلفة أو اختر تصنيفاً آخر.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="evidence" class="py-16 bg-panel2/40 border-b border-line relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <div class="lg:col-span-5 relative">
+                        <div class="p-8 rounded-3xl glass-panel text-center relative z-10 border border-gold-500/30 shadow-2xl">
+                            <div class="w-24 h-24 mx-auto rounded-full border-2 border-gold-400/50 flex items-center justify-center text-5xl text-gold-300 bg-darkbg mb-4 shadow-inner">
+                                ۞
+                            </div>
+                            <h3 class="font-title text-2xl font-bold text-gold-200 mb-2">الدليل القاطع والمعيار السليم</h3>
+                            <p class="text-sm text-gray-400 leading-relaxed">
+                                نلتزم بمنهج التثبت المباشر، وفصل النص الشريف عن وجه الاستدلال وقرائن السند.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7">
+                        <span class="text-xs font-bold tracking-widest text-gold-400 uppercase">قواعد الاستدلال العلمي</span>
+                        <h2 class="font-title text-3xl sm:text-4xl font-bold text-gray-100 dark:text-gray-100 light:text-gray-900 mt-1 mb-6">
+                            كيف نتعامل مع النص والدليل؟
+                        </h2>
+                        
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-panel border border-line flex gap-4 items-start">
+                                <span class="w-8 h-8 rounded-lg bg-gold-500/10 text-gold-300 flex items-center justify-center font-bold text-sm shrink-0">1</span>
+                                <div>
+                                    <h4 class="font-bold text-gray-200 text-sm mb-1">توثيق المصدر والطبعة</h4>
+                                    <p class="text-xs text-gray-400">تخريج النص من أمّات الكتب المعتمدة مع ذكر اسم المؤلف، الجزء، الصفحة، وعام الطبع.</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-panel border border-line flex gap-4 items-start">
+                                <span class="w-8 h-8 rounded-lg bg-gold-500/10 text-gold-300 flex items-center justify-center font-bold text-sm shrink-0">2</span>
+                                <div>
+                                    <h4 class="font-bold text-gray-200 text-sm mb-1">تحقيق الإسناد والدلالة</h4>
+                                    <p class="text-xs text-gray-400">عرض أقوال علماء الحديث والتراجم، وتمييز صحة النقل عن حدود ما يثبته اللفظ.</p>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-panel border border-line flex gap-4 items-start">
+                                <span class="w-8 h-8 rounded-lg bg-gold-500/10 text-gold-300 flex items-center justify-center font-bold text-sm shrink-0">3</span>
+                                <div>
+                                    <h4 class="font-bold text-gray-200 text-sm mb-1">النزاهة والحوار المحترم</h4>
+                                    <p class="text-xs text-gray-400">عرض الشبهات والرد عليها بدون شخصنة أو إساءة، مع الالتزام بالبرهان والمنطق.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-4 rounded-2xl bg-gold-500/10 border border-gold-500/20 text-gold-300 font-title text-lg text-center">
+                            ﴿ قُلْ هَاتُوا بُرْهَانَكُمْ إِنْ كُنْتُمْ صَادِقِينَ ﴾
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="debates" class="py-16 bg-darkbg border-b border-line">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+                    <div>
+                        <span class="text-xs font-bold tracking-widest text-gold-400 uppercase">حوارٌ بالبرهان</span>
+                        <h2 class="font-title text-3xl sm:text-4xl font-bold text-gray-100 dark:text-gray-100 light:text-gray-900 mt-1">المناظرات والحوارات المكتوبة والمرئية</h2>
+                    </div>
+                </div>
+
+                <div id="debatesGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Dynamic debates cards rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Channel Section -->
+        <section id="videos" class="py-16 bg-panel2/30 border-b border-line">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <span class="text-xs font-bold tracking-widest text-gold-400 uppercase">المحتوى المرئي والمناظرات</span>
+                        <h2 class="font-title text-3xl sm:text-4xl font-bold text-gray-100">قناة نهج الحقيقة المرئية</h2>
+                    </div>
+                    <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl border border-gold-500/40 text-gold-300 hover:bg-gold-500/10 transition-all text-sm font-semibold flex items-center gap-2 self-start md:self-auto">
+                        <span>زيارة القناة الرسمية</span>
+                        <span>↗</span>
+                    </a>
+                </div>
+
+                <!-- Embedded YouTube Video Player Container -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <div class="lg:col-span-8 bg-black rounded-2xl overflow-hidden border border-gold-500/30 shadow-2xl aspect-video relative">
+                        <iframe id="mainVideoIframe" class="w-full h-full" src="https://www.youtube-nocookie.com/embed/videoseries?list=UUQHlBznG46xNg1nnS4CXgIw" title="فيديوهات قناة نهج الحقيقة" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
+                    <!-- Video Playlist Dynamic Items -->
+                    <div class="lg:col-span-4 space-y-4">
+                        <h3 class="font-title text-lg font-bold text-gold-200 border-b border-line pb-2">سلسلة المظلومية والمناظرات</h3>
+                        <div id="videoListContainer" class="space-y-3 max-h-[420px] overflow-y-auto pr-1">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bookmarks Section -->
+        <section id="bookmarks" class="py-16 bg-darkbg border-b border-line">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-3 mb-8">
+                    <span class="text-2xl text-gold-400">★</span>
+                    <h2 class="font-title text-3xl font-bold text-gray-100">المفضلة والأبحاث المحفوظة</h2>
+                </div>
+                
+                <div id="bookmarksGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Bookmarked items injected here -->
+                </div>
+
+                <div id="noBookmarks" class="text-center py-12 p-6 glass-panel rounded-2xl">
+                    <p class="text-gray-400 text-sm">لم تقم بإضافة أي بحث للمفضلة بعد. انقر على نجمة "إضافة للمفضلة" في أي بطاقة بحث لحفظه هنا للمراجعة السريعة.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="adminPanel" class="py-16 bg-panel/90 border-b border-line hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex items-center justify-between pb-6 mb-8 border-b border-line">
+                    <div>
+                        <span class="text-xs font-bold text-gold-400 uppercase tracking-widest">إدارة محتوى المتصفح المتقدمة</span>
+                        <h2 class="font-title text-3xl font-bold text-gray-100">لوحة تحكم منصة نهج الحقيقة</h2>
+                    </div>
+                    <button id="closeAdminBtn" class="px-4 py-2 rounded-xl bg-red-500/10 hover:bg-red-500/20 text-red-300 border border-red-500/30 text-sm font-bold transition-all">
+                        إغلاق اللوحة ✕
+                    </button>
+                </div>
+
+                <!-- Add/Edit Article Form -->
+                <form id="adminForm" class="glass-panel p-6 sm:p-8 rounded-3xl space-y-6 mb-12">
+                    <h3 class="font-title text-xl font-bold text-gold-300 mb-4" id="formHeaderTitle">إضافة بحث أو مناظرة جديدة</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 mb-2">نوع المحتوى</label>
+                            <select id="itemType" class="w-full px-4 py-2.5 rounded-xl bg-panel2 border border-line text-sm text-gray-200 focus:outline-none focus:border-gold-400">
+                                <option value="article">بحث أو مقال مفصّل</option>
+                                <option value="debate">مناظرة / رد علمي</option>
+                                <option value="video">فيديو مرئي (يوتيوب)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 mb-2">التصنيف الموضوعي</label>
+                            <select id="itemCategory" class="w-full px-4 py-2.5 rounded-xl bg-panel2 border border-line text-sm text-gray-200 focus:outline-none focus:border-gold-400">
+                                <option value="عقائد">عقائد</option>
+                                <option value="قرآن">القرآن الكريم</option>
+                                <option value="حديث">الحديث والأسانيد</option>
+                                <option value="تاريخ">التاريخ والسير</option>
+                                <option value="مناظرات">مناظرات وردود</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 mb-2">درجة التحقيق / الصحة</label>
+                            <select id="itemAuthenticity" class="w-full px-4 py-2.5 rounded-xl bg-panel2 border border-line text-sm text-gray-200 focus:outline-none focus:border-gold-400">
+                                <option value="صحيح/موثق بمصادر">صحيح / موثق بمصادر قطعية</option>
+                                <option value="حسن/مستفيض">حسن / مستفيض في الكتب</option>
+                                <option value="دراسة نقدية">دراسة نقدية للسند والمتن</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-2">عنوان البحث أو المادة</label>
+                        <input id="itemTitle" type="text" required placeholder="أدخل عنواناً دقيقاً ومباشراً..." class="w-full px-4 py-3 rounded-xl bg-panel2 border border-line text-sm text-gray-200 focus:outline-none focus:border-gold-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-2">الملخص التنفيذي (يظهر في البطاقة)</label>
+                        <textarea id="itemSummary" rows="2" required placeholder="ملخص قصير للبحث يوضح أهم فكرة..." class="w-full px-4 py-3 rounded-xl bg-panel2 border border-line text-sm text-gray-200 focus:outline-none focus:border-gold-400"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-2">النص الكامل للبحث والدراسة</label>
+                        <textarea id="itemFullContent" rows="6" placeholder="اكتب متن البحث الكامل هنا، الأدلة والمناقشة التفصيلية..." class="w-full px-4 py-3 rounded-xl bg-panel2 border border-line text-sm text-gray-200 focus:outline-none focus:border-gold-400 font-body"></textarea>
+                    </div>
+
+                    <!-- Sources and Citation Builder -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-2xl bg-panel2/50 border border-line">
+                        <div>
+                            <label class="block text-xs font-semibold text-gold-300 mb-1">بيانات المصدر والتخريج</label>
+                            <input id="itemSourceBook" type="text" placeholder="الكتاب، المؤلف، الجزء والصفحة (مثال: الكافي، ج1 ص20)" class="w-full px-3 py-2 rounded-lg bg-panel border border-line text-xs text-gray-200 focus:outline-none focus:border-gold-400">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gold-300 mb-1">رابط يوتيوب / صورة مصغرة (اختياري)</label>
+                            <input id="itemMediaUrl" type="url" placeholder="https://www.youtube.com/watch?v=... أو رابط صورة" class="w-full px-3 py-2 rounded-lg bg-panel border border-line text-xs text-gray-200 focus:outline-none focus:border-gold-400">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+                        <div class="flex items-center gap-3">
+                            <button type="submit" class="px-6 py-3 rounded-xl gold-gradient-bg text-darkbg font-bold text-sm hover:brightness-110 transition-all shadow-md">
+                                حفظ البحث في المكتبة
+                            </button>
+                            <button id="cancelEditBtn" type="button" class="hidden px-4 py-3 rounded-xl bg-panel hover:bg-panel2 border border-line text-xs text-gray-300 transition-all">
+                                إلغاء التعديل
+                            </button>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <button id="exportDataBtn" type="button" class="px-3.5 py-2.5 rounded-xl bg-panel border border-line text-xs font-semibold text-gold-300 hover:border-gold-400 transition-all">
+                                📤 تصدير نسخة احتياطية (JSON)
+                            </button>
+                            <label class="px-3.5 py-2.5 rounded-xl bg-panel border border-line text-xs font-semibold text-gold-300 hover:border-gold-400 cursor-pointer transition-all">
+                                📥 استيراد بيانات
+                                <input id="importDataInput" type="file" accept=".json" class="hidden">
+                            </label>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Admin Items Table -->
+                <div class="space-y-4">
+                    <h3 class="font-title text-xl font-bold text-gray-200">الأبحاث والمواد المسجلة بذاكرة الموقع</h3>
+                    <div id="adminItemsList" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-panel border-t border-line py-12 text-gray-400 text-xs sm:text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 border-b border-line/60 pb-8 mb-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-gold-500/10 border border-gold-500/20 flex items-center justify-center text-gold-300 text-xl font-title">
+                        ۞
+                    </div>
+                    <div>
+                        <strong class="text-base text-gray-200 font-title block">نهج الحقيقة</strong>
+                        <p class="text-xs text-gray-400">منصة إسلامية مستقلة تُعنى بنشر الأبحاث والدراسات العقائدية الموثقة.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6 text-xs font-semibold">
+                    <a href="#home" class="hover:text-gold-300">الرئيسية</a>
+                    <a href="#research" class="hover:text-gold-300">الأبحاث</a>
+                    <a href="#evidence" class="hover:text-gold-300">منهجية الاستدلال</a>
+                    <a href="#debates" class="hover:text-gold-300">المناظرات</a>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+                <p>© <span id="currentYear">2026</span> نهج الحقيقة — جميع الحقوق محفوظة لجميع الباحثين طالبِي الحقيقة.</p>
+                <div class="flex items-center gap-4">
+                    <button id="shareSiteBtn" class="hover:text-gold-300 transition-colors">مشاركة المنصة 🔗</button>
+                    <span>•</span>
+                    <a href="#home" class="hover:text-gold-300">العودة للأعلى ↑</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="readerModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+        <div class="bg-panel border border-gold-500/40 rounded-3xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden relative">
+            
+            <!-- Reader Modal Controls Header -->
+            <div class="p-4 sm:p-6 border-b border-line bg-darkbg/60 flex items-center justify-between gap-4 no-print">
+                <div class="flex items-center gap-2">
+                    <span id="modalCategoryBadge" class="px-2.5 py-1 rounded-md bg-gold-500/10 border border-gold-500/20 text-gold-300 text-xs font-bold">
+                        عقائد
+                    </span>
+                    <span id="modalAuthBadge" class="px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-bold">
+                        صحيح وموثق
+                    </span>
+                </div>
+
+                <!-- Reader Controls (Font size, Print, Copy, Close) -->
+                <div class="flex items-center gap-2">
+                    <button id="fontDecrease" class="p-2 rounded-lg bg-panel2 hover:bg-gold-500/20 text-xs text-gray-300 hover:text-gold-300" title="تصغير الخط">A-</button>
+                    <button id="fontIncrease" class="p-2 rounded-lg bg-panel2 hover:bg-gold-500/20 text-xs text-gray-300 hover:text-gold-300" title="تكبير الخط">A+</button>
+                    <button id="copyArticleBtn" class="p-2 rounded-lg bg-panel2 hover:bg-gold-500/20 text-xs text-gray-300 hover:text-gold-300" title="نسخ البحث">📋 نسخ</button>
+                    <button id="printArticleBtn" class="p-2 rounded-lg bg-panel2 hover:bg-gold-500/20 text-xs text-gray-300 hover:text-gold-300" title="طباعة">🖨️ طباعة</button>
+                    <button id="closeModalBtn" class="p-2 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-300 text-sm font-bold pr-3 pl-3" title="إغلاق">✕</button>
+                </div>
+            </div>
+
+            <!-- Printable Article Content Area -->
+            <div id="printableArea" class="p-6 sm:p-10 overflow-y-auto space-y-6 flex-grow">
+                
+                <!-- Article Main Header -->
+                <div>
+                    <h2 id="modalArticleTitle" class="font-title text-2xl sm:text-4xl font-bold text-gold-200 leading-tight mb-3">
+                        عنوان البحث المنشور
+                    </h2>
+                    <p id="modalArticleSummary" class="text-sm sm:text-base text-gray-300 leading-relaxed italic border-r-2 border-gold-400 pr-4 my-4 bg-gold-500/5 py-2">
+                        ملخص تنفيذي للمادة العلمية...
+                    </p>
+                </div>
+
+                <!-- Sources & Citation Section Card -->
+                <div id="modalSourceCard" class="p-4 rounded-2xl bg-panel2/80 border border-line space-y-2">
+                    <strong class="text-xs text-gold-300 font-bold block uppercase tracking-wider">📜 توثيق المصادر والأسانيد:</strong>
+                    <div id="modalSourceText" class="text-xs text-gray-300 font-mono">
+                        الكتاب: المصدر المعتمد • المؤلف: الباحث الشيعي • الجزء والصفحة: ج1 ص100
+                    </div>
+                </div>
+
+                <!-- Article Body Text -->
+                <div id="modalArticleBody" class="text-gray-200 leading-loose space-y-4 font-body text-base sm:text-lg pt-4 border-t border-line/60">
+                    <!-- Text content inserted dynamically -->
+                </div>
+            </div>
+
+            <!-- Modal Bottom Quick Actions Footer -->
+            <div class="p-4 border-t border-line bg-darkbg/80 flex items-center justify-between no-print text-xs">
+                <button id="modalBookmarkToggle" class="px-4 py-2 rounded-xl bg-gold-500/10 border border-gold-500/30 text-gold-300 font-bold flex items-center gap-1.5 hover:bg-gold-500/20 transition-all">
+                    <span>★</span>
+                    <span id="modalBookmarkText">حفظ في المفضلات</span>
+                </button>
+                <span class="text-gray-400">منصة نهج الحقيقة المعرفية</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* Initial Default Research & Debate Articles Dataset */
+        const DEFAULT_ITEMS = [
+            {
+                id: 'art-1',
+                type: 'article',
+                category: 'عقائد',
+                authenticity: 'صحيح/موثق بمصادر',
+                title: 'الإمامة: دراسة مستفيضة في الأدلة القرآنية والروائية',
+                summary: 'مدخل بحثي شامل لمفهوم الإمامة الإلهية وأبرز النصوص التي يستدل بها الباحثون مع توثيق الروايات من أمهات الكتب.',
+                fullContent: `تُعد الإمامة من الأصول العقائدية المحورية، وحيث إن القرآن الكريم هو المرجع الأول، فإن الاستدلال يبدأ بآيات الإمامة والولاية كآية (إِنَّمَا وَلِيُّكُمُ اللَّهُ وَرَسُولُهُ وَالَّذِينَ آمَنُوا الَّذِينَ يُقِيمُونَ الصَّلاةَ وَيُؤْتُونَ الزَّكَاةَ وَهُمْ رَاكِعُونَ).\n\nوقد اتفق المفسرون والمحدثون على نزولها في شأن أمير المؤمنين علي بن أبي طالب عليه السلام عند تصدقه بالخاتم وهو راكع. ومن الروايات المتواترة حديث الغدير وحديث الثقلين (إني تارك فيكم الثقلين: كتاب الله وعترتي أهل بيتي).\n\nإن دراسة الإسناد والمواضع التاريخية تظهر أن مفهوم الإمامة منصَب إلهي لا يخضع للاختيار البشري بل للنص والتعيين.`,
+                sourceBook: 'الكافي للكليني ج1 ص174 • التفسير الكبير للرازي ج12 ص26 • صحيح مسلم ج4 ص1873',
+                mediaUrl: ''
+            },
+            {
+                id: 'art-2',
+                type: 'article',
+                category: 'قرآن',
+                authenticity: 'صحيح/موثق بمصادر',
+                title: 'آية الولاية: قراءة نقدية في النص ودلالة المفردات',
+                summary: 'عرض تفصيلي لآية الولاية وسياقها القرآني، ومقارنة بين اتجاهات التفسير المختلفة مع توثيق أسباب النزول.',
+                fullContent: `إن كلمة "ولي" في لسان العرب والنص القرآني تأتي بمعنى الأحق بالتصرف والولائم والأولى بالإمامة، وليست مجرد المحبة أو النصرة العامة المتوفرة لكل مؤمن.\n\nإن اقتران ولائية الله ورسوله والذين آمنوا في صيغة حصر (إنما) يفيد أصل الولاية المطلقة والقيادة الإلهية.\n\nوتضاف إلى ذلك القرائن الحالية والحديثية المجمعة على وقوع حادثة التصدق بالخاتم في المسجد النبوي.`,
+                sourceBook: 'شواهد التنزيل للحسكاني ج1 ص209 • تفسير الطبري ج6 ص288',
+                mediaUrl: ''
+            },
+            {
+                id: 'art-3',
+                type: 'article',
+                category: 'حديث',
+                authenticity: 'دراسة نقدية',
+                title: 'منهج تحقيق الأسانيد ومتون الروايات الحديثية',
+                summary: 'خطوات منهجية دقيقة لفحص اتصال السند وأحوال الرواة ومقارنة الطرق وتطبيق القواعد الرجالية.',
+                fullContent: `التحقيق الحديثي العلمي يرتكز على دعامتين أساسيتين:\n1. دراسة السند: التحقق من وثاقة الرجال وعدم الإرسال أو التخليط.\n2. دراسة المتن: عرض الحديث على كتاب الله والسنة القطعية والتثبت من عدم وجود الركاكة أو المعارضة العقلية الصريحة.\n\nإن وجود حديث في كتاب لا يعني ثبوته التلقائي بل يحتاج القارئ والباحث لمراجعة مباني الأعلام كالشيخ الطوسي والنجاشي وابن غضائري.`,
+                sourceBook: 'معجم رجال الحديث للسيد الخوئي ج1 ص12 • وسائل الشيعة ج30 ص21',
+                mediaUrl: ''
+            },
+            {
+                id: 'art-4',
+                type: 'debate',
+                category: 'مناظرات',
+                authenticity: 'صحيح/موثق بمصادر',
+                title: 'رزية يوم الخميس: قراءة في المسانيد والآثار',
+                summary: 'ملف لمناقشة حادثة كتابة الوصية وروايات رزية يوم الخميس المخرجة في الصحيحين.',
+                fullContent: `تُعتبر حادثة "رزية يوم الخميس" من الحوادث المفصلية في التاريخ الإسلامي المبكر، وهي الحادثة التي طلب فيها النبي ﷺ كتابة كتاب لا يضل الأمة بعده أبداً.\n\nوقد أخرج هذه الحادثة البخاري ومسلم في صحيحيهما من طرق متعددة عن ابن عباس رضي الله عنهما. والبحث يحلل السياق والدوافع والنتائج الناتجة عن منع كتابة الكتاب.`,
+                sourceBook: 'صحيح البخاري، كتاب العلم، باب كتابة العلم ج1 ص37 • صحيح مسلم ج3 ص1257',
+                mediaUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+            },
+            {
+                id: 'art-5',
+                type: 'video',
+                category: 'مناظرات',
+                authenticity: 'صحيح/موثق بمصادر',
+                title: 'مناظرة علمية: حديث الثقلين وسند العترة الطاهرة',
+                summary: 'تسجيل وفيديو تفصيلي يشرح طرق حديث الثقلين والدلالة الصريحة على اتباع أهل البيت.',
+                fullContent: `فيديو ومحاضرة بحثية تستعرض أطرق حديث الثقلين من كتب الفريقين وتثبت تواتره اللفظي والمعنوي.`,
+                sourceBook: 'مسند أحمد بن حنبل ج3 ص17 • سنن الترمذي ج5 ص663',
+                mediaUrl: 'https://www.youtube.com/watch?v=UCQHlBznG46xNg1nnS4CXgIw'
+            }
+        ];
+
+        /* Application State Management */
+        const STORAGE_KEY = 'nahj_alhaqiqa_v2_data';
+        const BOOKMARKS_KEY = 'nahj_alhaqiqa_bookmarks';
+
+        let items = [];
+        let bookmarks = [];
+        let currentFilterCategory = 'الكل';
+        let currentSearchQuery = '';
+        let activeReadingItem = null;
+        let readerFontSize = 18; // Default font size in px
+
+        function initApp() {
+            // Load Items from LocalStorage or seed defaults
+            const savedItems = localStorage.getItem(STORAGE_KEY);
+            if (savedItems) {
+                try {
+                    items = JSON.parse(savedItems);
+                } catch (e) {
+                    items = DEFAULT_ITEMS;
+                }
+            } else {
+                items = DEFAULT_ITEMS;
+                saveItems();
+            }
+
+            // Load Bookmarks
+            const savedBookmarks = localStorage.getItem(BOOKMARKS_KEY);
+            if (savedBookmarks) {
+                try {
+                    bookmarks = JSON.parse(savedBookmarks);
+                } catch (e) {
+                    bookmarks = [];
+                }
+            }
+
+            // Render components
+            renderArticles();
+            renderDebates();
+            renderVideoPlaylist();
+            renderBookmarks();
+            renderAdminItems();
+            updateStats();
+            updateBookmarkBadges();
+
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        }
+
+        function saveItems() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+            updateStats();
+        }
+
+        function saveBookmarks() {
+            localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
+            updateBookmarkBadges();
+            renderBookmarks();
+        }
+
+        function updateStats() {
+            document.getElementById('statArticlesCount').textContent = `${items.length}+`;
+        }
+
+        function updateBookmarkBadges() {
+            const count = bookmarks.length;
+            document.getElementById('bookmarkBadge').textContent = count;
+            document.getElementById('mobBookmarkBadge').textContent = count;
+        }
+
+        function isBookmarked(id) {
+            return bookmarks.includes(id);
+        }
+
+        function toggleBookmark(id) {
+            if (isBookmarked(id)) {
+                bookmarks = bookmarks.filter(bId => bId !== id);
+            } else {
+                bookmarks.push(id);
+            }
+            saveBookmarks();
+            renderArticles();
+            renderDebates();
+            if (activeReadingItem && activeReadingItem.id === id) {
+                updateModalBookmarkButton();
+            }
+        }
+
+        function renderArticles() {
+            const container = document.getElementById('articlesGrid');
+            const noResults = document.getElementById('noResults');
+
+            const filtered = items.filter(item => {
+                const matchesCat = (currentFilterCategory === 'الكل' || item.category === currentFilterCategory);
+                const q = currentSearchQuery.toLowerCase();
+                const matchesSearch = !q || 
+                    item.title.toLowerCase().includes(q) || 
+                    item.summary.toLowerCase().includes(q) || 
+                    (item.sourceBook && item.sourceBook.toLowerCase().includes(q));
+                return matchesCat && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+            container.innerHTML = filtered.map(item => createCardHTML(item)).join('');
+        }
+
+        function createCardHTML(item) {
+            const bookmarked = isBookmarked(item.id);
+            const isVideo = item.type === 'video';
+
+            return `
+                <article class="glass-panel rounded-2xl overflow-hidden hover:border-gold-400/60 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="p-5 pb-3 border-b border-line/50 flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-1 rounded-md bg-gold-500/10 border border-gold-500/20 text-gold-300 text-xs font-bold">
+                                    ${escapeHTML(item.category)}
+                                </span>
+                                <span class="text-[11px] text-gray-400">
+                                    ${item.authenticity || 'بحث موثق'}
+                                </span>
+                            </div>
+                            <button onclick="toggleBookmark('${item.id}')" class="text-lg hover:scale-125 transition-transform ${bookmarked ? 'text-gold-400' : 'text-gray-500 hover:text-gold-300'}" title="حفظ للمفضلة">
+                                ${bookmarked ? '★' : '☆'}
+                            </button>
+                        </div>
+
+                        <div class="p-5">
+                            <h3 class="font-title text-xl font-bold text-gray-100 group-hover:text-gold-300 transition-colors line-clamp-2 leading-snug mb-2">
+                                ${escapeHTML(item.title)}
+                            </h3>
+                            <p class="text-xs sm:text-sm text-gray-400 line-clamp-3 leading-relaxed mb-4">
+                                ${escapeHTML(item.summary)}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="p-5 pt-0 flex items-center justify-between border-t border-line/30 pt-4 mt-auto">
+                        <span class="text-xs text-gray-400 truncate max-w-[150px]">
+                            📖 ${escapeHTML(item.sourceBook || 'مصادر متعددة')}
+                        </span>
+                        <button onclick="openReaderModal('${item.id}')" class="px-3.5 py-1.5 rounded-lg bg-gold-500/10 border border-gold-500/30 text-gold-300 hover:bg-gold-500/20 text-xs font-bold transition-all flex items-center gap-1">
+                            <span>اقرأ البحث</span>
+                            <span>←</span>
+                        </button>
+                    </div>
+                </article>
+            `;
+        }
+
+        /* Render Debates Section */
+        function renderDebates() {
+            const container = document.getElementById('debatesGrid');
+            const debateItems = items.filter(i => i.type === 'debate' || i.category === 'مناظرات').slice(0, 3);
+
+            if (debateItems.length === 0) {
+                container.innerHTML = `<p class="text-xs text-gray-400 col-span-3 text-center py-6">لا توجد مناظرات مضافة حالياً.</p>`;
+                return;
+            }
+
+            container.innerHTML = debateItems.map(item => `
+                <div class="glass-panel p-6 rounded-2xl border border-line hover:border-gold-400/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-bold">مناظرة / رد</span>
+                            <span class="text-xs text-gray-400">حوار برهاني</span>
+                        </div>
+                        <h3 class="font-title text-lg font-bold text-gray-100 mb-2">${escapeHTML(item.title)}</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4 line-clamp-3">${escapeHTML(item.summary)}</p>
+                    </div>
+                    <button onclick="openReaderModal('${item.id}')" class="w-full py-2 rounded-xl bg-panel2 border border-line hover:border-gold-400 text-gold-300 text-xs font-bold transition-all text-center">
+                        تصفح ملف المناظرة ←
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        /* Render Video Playlist */
+        function renderVideoPlaylist() {
+            const container = document.getElementById('videoListContainer');
+            const videoItems = items.filter(i => i.type === 'video' || i.mediaUrl);
+
+            if (videoItems.length === 0) {
+                container.innerHTML = `<p class="text-xs text-gray-400 p-4">لا توجد فيديوهات قائمة بعد.</p>`;
+                return;
+            }
+
+            container.innerHTML = videoItems.map((v, idx) => `
+                <div onclick="playVideoInMainFrame('${v.mediaUrl}')" class="p-3 rounded-xl bg-panel border border-line hover:border-gold-400/60 cursor-pointer transition-all flex items-center gap-3 group">
+                    <div class="w-8 h-8 rounded-full bg-gold-500/10 text-gold-300 flex items-center justify-center font-bold text-xs shrink-0 group-hover:bg-gold-500 group-hover:text-darkbg transition-colors">
+                        ▶
+                    </div>
+                    <div class="overflow-hidden">
+                        <h4 class="text-xs font-bold text-gray-200 group-hover:text-gold-300 truncate">${escapeHTML(v.title)}</h4>
+                        <span class="text-[10px] text-gray-400 block truncate">${escapeHTML(v.summary)}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function playVideoInMainFrame(url) {
+            if (!url) return;
+            let embedUrl = url;
+            if (url.includes('youtube.com/watch?v=')) {
+                const id = url.split('v=')[1].split('&')[0];
+                embedUrl = `https://www.youtube-nocookie.com/embed/${id}`;
+            } else if (url.includes('youtu.be/')) {
+                const id = url.split('youtu.be/')[1].split('?')[0];
+                embedUrl = `https://www.youtube-nocookie.com/embed/${id}`;
+            }
+            document.getElementById('mainVideoIframe').src = embedUrl;
+            document.getElementById('videos').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* Render Bookmarks Section */
+        function renderBookmarks() {
+            const container = document.getElementById('bookmarksGrid');
+            const noBookmarks = document.getElementById('noBookmarks');
+
+            const bookmarkedItems = items.filter(i => bookmarks.includes(i.id));
+
+            if (bookmarkedItems.length === 0) {
+                container.innerHTML = '';
+                noBookmarks.classList.remove('hidden');
+                return;
+            }
+
+            noBookmarks.classList.add('hidden');
+            container.innerHTML = bookmarkedItems.map(item => createCardHTML(item)).join('');
+        }
+
+        function openReaderModal(id) {
+            const item = items.find(i => i.id === id);
+            if (!item) return;
+
+            activeReadingItem = item;
+
+            document.getElementById('modalArticleTitle').textContent = item.title;
+            document.getElementById('modalArticleSummary').textContent = item.summary;
+            document.getElementById('modalCategoryBadge').textContent = item.category;
+            document.getElementById('modalAuthBadge').textContent = item.authenticity || 'موثق';
+            document.getElementById('modalSourceText').textContent = item.sourceBook || 'المصادر والتحقيق محفوظ بذاكرة المادة.';
+
+            // Render Full Content or formatted summary
+            const contentContainer = document.getElementById('modalArticleBody');
+            const fullText = item.fullContent || item.summary;
+            
+            // Format paragraphs
+            contentContainer.innerHTML = fullText.split('\n\n').map(paragraph => `
+                <p class="leading-relaxed text-gray-200">${escapeHTML(paragraph).replace(/\n/g, '<br>')}</p>
+            `).join('');
+
+            updateModalBookmarkButton();
+
+            // Show modal
+            const modal = document.getElementById('readerModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('readerModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            activeReadingItem = null;
+        }
+
+        function updateModalBookmarkButton() {
+            if (!activeReadingItem) return;
+            const bookmarked = isBookmarked(activeReadingItem.id);
+            const btnText = document.getElementById('modalBookmarkText');
+            btnText.textContent = bookmarked ? 'محفوظ في المفضلات ★' : 'حفظ في المفضلات ☆';
+        }
+
+        function renderAdminItems() {
+            const container = document.getElementById('adminItemsList');
+            if (items.length === 0) {
+                container.innerHTML = `<p class="text-xs text-gray-400 p-4">لا توجد أبحاث مضافة.</p>`;
+                return;
+            }
+
+            container.innerHTML = items.map(item => `
+                <div class="p-4 rounded-xl bg-panel2 border border-line flex items-center justify-between gap-4">
+                    <div class="overflow-hidden">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-gold-500/10 text-gold-300 border border-gold-500/20">${item.category}</span>
+                            <span class="text-[10px] text-gray-400">${item.type}</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-gray-200 truncate">${escapeHTML(item.title)}</h4>
+                    </div>
+
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button onclick="editAdminItem('${item.id}')" class="px-2.5 py-1 rounded-lg bg-gold-500/10 text-gold-300 text-xs font-bold hover:bg-gold-500/20">تعديل</button>
+                        <button onclick="deleteAdminItem('${item.id}')" class="px-2.5 py-1 rounded-lg bg-red-500/10 text-red-300 text-xs font-bold hover:bg-red-500/20">حذف</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        let editingItemId = null;
+
+        document.getElementById('adminForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('itemTitle').value.trim();
+            const summary = document.getElementById('itemSummary').value.trim();
+            const fullContent = document.getElementById('itemFullContent').value.trim();
+            const category = document.getElementById('itemCategory').value;
+            const type = document.getElementById('itemType').value;
+            const authenticity = document.getElementById('itemAuthenticity').value;
+            const sourceBook = document.getElementById('itemSourceBook').value.trim();
+            const mediaUrl = document.getElementById('itemMediaUrl').value.trim();
+
+            if (!title || !summary) return;
+
+            if (editingItemId) {
+                // Update existing item
+                const index = items.findIndex(i => i.id === editingItemId);
+                if (index !== -1) {
+                    items[index] = {
+                        ...items[index],
+                        title, summary, fullContent, category, type, authenticity, sourceBook, mediaUrl
+                    };
+                }
+            } else {
+                // Create new item
+                const newItem = {
+                    id: 'art-' + Date.now(),
+                    title, summary, fullContent, category, type, authenticity, sourceBook, mediaUrl
+                };
+                items.unshift(newItem);
+            }
+
+            saveItems();
+            resetAdminForm();
+            renderArticles();
+            renderDebates();
+            renderVideoPlaylist();
+            renderAdminItems();
+
+            alert('تم حفظ البيانات بنجاح في متصفحك!');
+        });
+
+        function editAdminItem(id) {
+            const item = items.find(i => i.id === id);
+            if (!item) return;
+
+            editingItemId = id;
+            document.getElementById('formHeaderTitle').textContent = 'تعديل بيانات البحث: ' + item.title;
+            document.getElementById('itemTitle').value = item.title;
+            document.getElementById('itemSummary').value = item.summary;
+            document.getElementById('itemFullContent').value = item.fullContent || '';
+            document.getElementById('itemCategory').value = item.category;
+            document.getElementById('itemType').value = item.type;
+            document.getElementById('itemAuthenticity').value = item.authenticity || 'صحيح/موثق بمصادر';
+            document.getElementById('itemSourceBook').value = item.sourceBook || '';
+            document.getElementById('itemMediaUrl').value = item.mediaUrl || '';
+
+            document.getElementById('cancelEditBtn').classList.remove('hidden');
+            document.getElementById('adminForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetAdminForm() {
+            editingItemId = null;
+            document.getElementById('adminForm').reset();
+            document.getElementById('formHeaderTitle').textContent = 'إضافة بحث أو مناظرة جديدة';
+            document.getElementById('cancelEditBtn').classList.add('hidden');
+        }
+
+        function deleteAdminItem(id) {
+            if (confirm('هل أنت تأكد من رغبتك في حذف هذا البحث من الموقع؟')) {
+                items = items.filter(i => i.id !== id);
+                bookmarks = bookmarks.filter(bId => bId !== id);
+                saveItems();
+                saveBookmarks();
+                renderArticles();
+                renderDebates();
+                renderVideoPlaylist();
+                renderAdminItems();
+            }
+        }
+
+        document.getElementById('exportDataBtn').addEventListener('click', () => {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(items, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `nahj_alhaqiqa_backup_${Date.now()}.json`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        });
+
+        document.getElementById('importDataInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                try {
+                    const importedData = JSON.parse(evt.target.result);
+                    if (Array.isArray(importedData)) {
+                        items = importedData;
+                        saveItems();
+                        renderArticles();
+                        renderDebates();
+                        renderVideoPlaylist();
+                        renderAdminItems();
+                        alert('تم استيراد كافة البيانات بنجاح!');
+                    }
+                } catch (err) {
+                    alert('ملف غير صالح، يرجى التأكد من اختيار ملف JSON صحيح.');
+                }
+            };
+            reader.readAsText(file);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initApp();
+
+            // Search input binding
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                currentSearchQuery = e.target.value.trim();
+                renderArticles();
+            });
+
+            // Category filter click handler
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('active', 'bg-gold-500', 'text-darkbg', 'border-gold-400');
+                        b.classList.add('bg-panel', 'text-gray-300', 'border-line');
+                    });
+                    btn.classList.add('active', 'bg-gold-500', 'text-darkbg', 'border-gold-400');
+                    btn.classList.remove('bg-panel', 'text-gray-300', 'border-line');
+
+                    currentFilterCategory = btn.dataset.category;
+                    renderArticles();
+                });
+            });
+
+            // Admin panel toggle
+            document.getElementById('openAdminBtn').addEventListener('click', () => {
+                const adminSection = document.getElementById('adminPanel');
+                adminSection.classList.remove('hidden');
+                adminSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            document.getElementById('closeAdminBtn').addEventListener('click', () => {
+                document.getElementById('adminPanel').classList.add('hidden');
+            });
+
+            document.getElementById('cancelEditBtn').addEventListener('click', resetAdminForm);
+
+            // Modal Controls
+            document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+            document.getElementById('modalBookmarkToggle').addEventListener('click', () => {
+                if (activeReadingItem) {
+                    toggleBookmark(activeReadingItem.id);
+                }
+            });
+
+            // Font size resizing
+            document.getElementById('fontIncrease').addEventListener('click', () => {
+                if (readerFontSize < 28) {
+                    readerFontSize += 2;
+                    document.getElementById('modalArticleBody').style.fontSize = `${readerFontSize}px`;
+                }
+            });
+
+            document.getElementById('fontDecrease').addEventListener('click', () => {
+                if (readerFontSize > 14) {
+                    readerFontSize -= 2;
+                    document.getElementById('modalArticleBody').style.fontSize = `${readerFontSize}px`;
+                }
+            });
+
+            // Copy Article Text
+            document.getElementById('copyArticleBtn').addEventListener('click', () => {
+                if (!activeReadingItem) return;
+                const textToCopy = `${activeReadingItem.title}\n\n${activeReadingItem.summary}\n\n${activeReadingItem.fullContent || ''}\n\nالمصدر: ${activeReadingItem.sourceBook || 'منصة نهج الحقيقة'}`;
+                
+                const tempTextArea = document.createElement('textarea');
+                tempTextArea.value = textToCopy;
+                document.body.appendChild(tempTextArea);
+                tempTextArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempTextArea);
+
+                alert('تم نسخ نص البحث والمصادر بنجاح للحافظة!');
+            });
+
+            // Print Article
+            document.getElementById('printArticleBtn').addEventListener('click', () => {
+                window.print();
+            });
+
+            // Dark/Light Theme Switcher Toggle
+            const themeBtn = document.getElementById('themeToggleBtn');
+            const themeIcon = document.getElementById('themeIcon');
+
+            themeBtn.addEventListener('click', () => {
+                const htmlEl = document.documentElement;
+                if (htmlEl.classList.contains('dark')) {
+                    htmlEl.classList.remove('dark');
+                    htmlEl.classList.add('light');
+                    themeIcon.textContent = '🌙';
+                    localStorage.setItem('nahj_theme', 'light');
+                } else {
+                    htmlEl.classList.remove('light');
+                    htmlEl.classList.add('dark');
+                    themeIcon.textContent = '☼';
+                    localStorage.setItem('nahj_theme', 'dark');
+                }
+            });
+
+            // Restore Theme Preference
+            const savedTheme = localStorage.getItem('nahj_theme');
+            if (savedTheme === 'light') {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+                themeIcon.textContent = '🌙';
+            }
+
+            // Share Website URL Action
+            document.getElementById('shareSiteBtn').addEventListener('click', async () => {
+                if (navigator.share) {
+                    try {
+                        await navigator.share({
+                            title: 'منصة نهج الحقيقة',
+                            text: 'منصة معرفية علمية تعتني بتقديم الأبحاث العقائدية الموثقة والمناظرات.',
+                            url: window.location.href
+                        });
+                    } catch (e) {}
+                } else {
+                    const tempInput = document.createElement('input');
+                    tempInput.value = window.location.href;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+                    alert('تم نسخ رابط منصة نهج الحقيقة.');
+                }
+            });
+        });
+
+        // Utility Escaper Function
+        function escapeHTML(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+    </script>
+</body>
+</html>
