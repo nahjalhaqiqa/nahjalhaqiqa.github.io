@@ -58,7 +58,7 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 document.getElementById('year').textContent = new Date().getFullYear();
 
 // 1. إعداد بيانات الاتصال الخاصة بـ Supabase
-const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co'; // استبدل هذا برابط مشروعك
+const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co/rest/v1/'; // استبدل هذا برابط مشروعك
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4c3h4a2F1eG91eW5lYWFtZWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MjQxMjMsImV4cCI6MjEwNzMwMDEyM30.wvVWq3TXd83mJ2FtViIwWO7O_hN1OazD91MkmiWZdh0'; // استبدل هذا بمفتاح الـ Anon الخاص بك
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
