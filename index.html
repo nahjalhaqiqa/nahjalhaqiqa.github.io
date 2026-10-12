@@ -70,17 +70,15 @@ section{padding:15px 0}
 .video-box{min-height:210px;display:grid;place-items:center;text-align:center;background:linear-gradient(135deg,#071c2c,#0a5b57);border-radius:12px;border:1px solid var(--line);padding:18px;color:#fff}
 .play{font-size:3rem;color:#ff3038}
 
-/* تنسيق نموذج مراسلتنا */
 .contact-form{display:grid;gap:12px;max-width:600px;margin:auto}
 .contact-form input,.contact-form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--input-bg);color:var(--ink);outline:none}
 .contact-form textarea{resize:vertical;min-height:120px}
 
-/* تواصل اجتماعي في الفوتر */
 footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);padding:25px 0;color:#fff}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-.social-icons{display:flex;gap:12px;font-size:1.2rem}
-.social-icons a{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#ffffff15;border:1px solid #ffffff30;transition:.2s}
-.social-icons a:hover{background:var(--green);color:#fff}
+.social-icons{display:flex;gap:10px;font-size:0.9rem}
+.social-icons a{display:inline-flex;align-items:center;justify-content:center;padding:6px 12px;border-radius:20px;background:#ffffff15;border:1px solid #ffffff30;transition:.2s;color:#fff}
+.social-icons a:hover{background:var(--green)}
 
 @media(max-width:800px){.nav{justify-content:center;flex-wrap:wrap;padding:8px 0}.nav nav{justify-content:center;gap:12px}.features,.video-layout{grid-template-columns:1fr}.doc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.wrap{width:calc(100% - 22px)}.doc-grid{grid-template-columns:1fr}.tools{grid-template-columns:1fr}.hero{padding-top:25px}.hero-logo{width:85px;height:85px}h1{font-size:2.5rem}.feature{padding:16px}}
@@ -135,9 +133,7 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <option value="متنوع">📁 متنوع</option>
 </select>
 </div>
-<div class="doc-grid" id="docs">
-    <!-- سيتم تعبئة البطاقات ديناميكياً من Supabase -->
-</div>
+<div class="doc-grid" id="docs"></div>
 <div class="empty" id="empty" style="display:none;">لا توجد نتائج مطابقة. جرّب كلمة أخرى أو اختر تصنيفاً مختلفاً.</div>
 <div class="note">💡 تنبيه: يتم جلب الكتب والملفات مباشرة من قاعدة البيانات المحدثة.</div>
 </section>
@@ -163,7 +159,6 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 </div>
 </section>
 
-<!-- قسم مراسلتنا -->
 <section class="wrap" id="contact">
 <div class="panel">
 <h2>تواصل معنا</h2>
@@ -194,10 +189,10 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 </div>
 <span>معاً نحو وعي أعمق وحقائق أوضح</span>
 <div class="social-icons">
-<a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" title="يوتيوب">▶</a>
-<a href="#" target="_blank" title="فيسبوك">📘</a>
-<a href="#" target="_blank" title="تيك توك">🎵</a>
-<a href="#" target="_blank" title="إكس (تويتر)">✖</a>
+<a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank">يوتيوب</a>
+<a href="#" target="_blank">فيسبوك</a>
+<a href="#" target="_blank">تيك توك</a>
+<a href="#" target="_blank">إكس</a>
 </div>
 <small>© <span id="year"></span> نهج الحقيقة</small>
 </div>
@@ -206,7 +201,6 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// نظام الوضع الليلي والنهاري
 function toggleTheme() {
     const html = document.documentElement;
     const btn = document.getElementById('themeToggle');
@@ -221,14 +215,12 @@ function toggleTheme() {
     }
 }
 
-// استعادة الثيم المحفوظ عند التحميل
 window.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
     document.getElementById('themeToggle').textContent = savedTheme === 'dark' ? '🌙 الوضع النهاري' : '☀️ الوضع الليلي';
 });
 
-// إعداد بيانات الاتصال بـ Supabase (تم تصحيح الرابط بإزالة /rest/v1/ الزائدة)
 const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co'; 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4c3h4a2F1eG91eW5lYWFtZWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MjQxMjMsImV4cCI6MjEwNzMwMDEyM30.wvVWq3TXd83mJ2FtViIwWO7O_hN1OazD91MkmiWZdh0'; 
 
@@ -241,7 +233,6 @@ try {
 
 let allDocs = [];
 
-// جلب البيانات من جدول documents
 async function fetchDocuments() {
     if (!supabaseClient) return;
     const { data, error } = await supabaseClient
@@ -258,7 +249,6 @@ async function fetchDocuments() {
     renderDocs(allDocs);
 }
 
-// عرض البطاقات
 function renderDocs(docs) {
     const grid = document.getElementById('docs');
     if (!grid) return;
@@ -296,7 +286,6 @@ function renderDocs(docs) {
     });
 }
 
-// البحث والتصفية
 const q = document.getElementById('q'), cat = document.getElementById('category');
 
 function filterDocs() {
@@ -316,7 +305,6 @@ function filterDocs() {
 if (q) q.addEventListener('input', filterDocs);
 if (cat) cat.addEventListener('change', filterDocs);
 
-// تشغيل جلب البيانات عند التحميل
 fetchDocuments();
 </script>
 </body>
