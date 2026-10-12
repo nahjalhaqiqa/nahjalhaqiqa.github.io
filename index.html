@@ -5,8 +5,6 @@
 <meta name="theme-color" content="#063e42">
 <meta name="description" content="نهج الحقيقة: مكتبة وثائق وبحوث وكتب وملفات PDF، وقناة نهج الحقيقة.">
 <title>نهج الحقيقة | المكتبة الرقمية</title><link rel="icon" href="assets/logo.png">
-<!-- استدعاء مكتبة Supabase عبر CDN -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--green:#00a977;--mint:#27d5b1;--gold:#f3d58a;--ink:#effaf8;--muted:#c4d9dc;--panel:rgba(2,28,42,.92);--line:#ffffff27}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:Tahoma,Arial,sans-serif;line-height:1.75;background:#042c42 url('assets/background.jpg') center top/cover fixed no-repeat}
@@ -38,13 +36,14 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <article class="feature"><div class="ico">📚</div><div><h2>مكتبة رقمية</h2><p>وثائق وبحوث وكتب ومصادر، مرتبة حسب التصنيف وقابلة للبحث.</p><a class="btn" href="#library">استعراض الملفات</a></div></article>
 <article class="feature"><div class="ico">▶️</div><div><h2>نهج الحقيقة</h2><p>مساحة للتعريف بالفيديوهات والحوارات وربطها بالمصادر ذات الصلة.</p><a class="btn red" id="channel" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener">زيارة القناة</a></div></article>
 </div></section>
-<section class="wrap" id="library"><div class="head"><h2>مكتبة الوثائق والملفات</h2><small id="count">جاري التحميل...</small></div>
+<section class="wrap" id="library"><div class="head"><h2>مكتبة الوثائق والملفات</h2><small id="count">3 ملفات تجريبية</small></div>
 <div class="tools"><input id="q" type="search" placeholder="ابحث باسم الوثيقة أو المؤلف أو الوصف..." aria-label="بحث في المكتبة"><select id="category" aria-label="تصفية حسب التصنيف"><option value="">كل التصنيفات</option><option>وثائق تاريخية</option><option>بحوث عقائدية</option><option>كتب ومراجع</option><option>مقالات ودراسات</option><option>متنوع</option></select></div>
 <div class="doc-grid" id="docs">
-    <!-- سيتم تعبئة البطاقات ديناميكياً من قاعدة بيانات Supabase -->
-</div>
-<div class="empty" id="empty" style="display:none;">لا توجد نتائج مطابقة. جرّب كلمة أخرى أو اختر تصنيفاً مختلفاً.</div>
-<div class="note">هذه المكتبة متصلة بقاعدة بيانات سوبابيس (Supabase) لجلب الوثائق والملفات مباشرة.</div>
+<article class="doc-card" data-category="وثائق تاريخية"><span class="tag">وثائق تاريخية</span><div class="symbol">📕</div><h3>عنوان الوثيقة الأولى</h3><div class="doc-meta">المؤلف: اسم المؤلف أو الجهة · التاريخ: تاريخ النشر</div><p>اكتب نبذة مختصرة، واذكر المصدر الأصلي ورقم الصفحة إن توفر.</p><div class="doc-actions"><a class="btn" href="files/document-1.pdf" target="_blank" rel="noopener">قراءة / تحميل PDF</a></div></article>
+<article class="doc-card" data-category="بحوث عقائدية"><span class="tag">بحوث عقائدية</span><div class="symbol">📘</div><h3>عنوان البحث الثاني</h3><div class="doc-meta">المؤلف: اسم الباحث · التاريخ: تاريخ النشر</div><p>ملخص البحث ومعلومات المرجع والمصدر.</p><div class="doc-actions"><a class="btn" href="files/document-2.pdf" target="_blank" rel="noopener">قراءة / تحميل PDF</a></div></article>
+<article class="doc-card" data-category="كتب ومراجع"><span class="tag">كتب ومراجع</span><div class="symbol">📗</div><h3>عنوان الكتاب الثالث</h3><div class="doc-meta">المؤلف: اسم المؤلف · التاريخ: تاريخ النشر</div><p>نبذة عن الكتاب وبيانات الطبعة والناشر.</p><div class="doc-actions"><a class="btn" href="files/document-3.pdf" target="_blank" rel="noopener">قراءة / تحميل PDF</a></div></article>
+</div><div class="empty" id="empty">لا توجد نتائج مطابقة. جرّب كلمة أخرى أو اختر تصنيفاً مختلفاً.</div>
+<div class="note">هذه بطاقات تجريبية وليست وثائق فعلية. قبل النشر استبدل عناوينها وبياناتها وأضف ملفات PDF الحقيقية داخل مجلد files مع مطابقة أسماء الملفات للروابط.</div>
 </section>
 <section class="wrap" id="youtube"><div class="head"><h2>قناة نهج الحقيقة</h2><small>فيديوهات وحوارات نهج الحقيقة</small></div><div class="video-layout">
 <div class="panel"><h2>تابع أحدث الحوارات</h2><p>تابع قناة نهج الحقيقة على يوتيوب، ويمكن إضافة رابط فيديو مميز أو قائمة تشغيل لاحقاً.</p><a class="btn red" id="channel2" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener">فتح قناة يوتيوب ↗</a></div>
@@ -53,89 +52,10 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <section class="wrap" id="about"><div class="panel"><h2>عن نهج الحقيقة</h2><p>منصة لنشر الوثائق والبحوث والملفات، والتعريف بالمصادر والمحتوى الحواري. نوصي بإرفاق مصدر كل وثيقة وتاريخها، والتمييز بين النص الأصلي والتعليق عليه، واحترام حقوق النشر وخصوصية الأفراد.</p></div></section>
 </main>
 <footer><div class="wrap foot"><div><img src="assets/logo.png" alt=""> <strong>نهج الحقيقة</strong></div><span>معاً نحو وعي أعمق وحقائق أوضح</span><small>© <span id="year"></span> نهج الحقيقة</small></div></footer>
-
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// 1. إعداد بيانات الاتصال الخاصة بـ Supabase
-const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co'; // استبدل هذا برابط مشروعك
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4c3h4a2F1eG91eW5lYWFtZWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MjQxMjMsImV4cCI6MjEwNzMwMDEyM30.wvVWq3TXd83mJ2FtViIwWO7O_hN1OazD91MkmiWZdh0'; // استبدل هذا بمفتاح الـ Anon الخاص بك
-
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-let allDocs = [];
-
-// 2. دالة جلب البيانات من جدول documents في Supabase
-async function fetchDocuments() {
-    const { data, error } = await supabaseClient
-        .from('documents')
-        .select('*');
-
-    if (error) {
-        console.error('خطأ في جلب البيانات:', error);
-        document.getElementById('count').textContent = 'خطأ في تحميل البيانات';
-        return;
-    }
-
-    allDocs = data || [];
-    renderDocs(allDocs);
-}
-
-// 3. دالة رسم وبناء البطاقات في الصفحة
-function renderDocs(docs) {
-    const grid = document.getElementById('docs');
-    grid.innerHTML = '';
-
-    if (docs.length === 0) {
-        document.getElementById('empty').style.display = 'block';
-        document.getElementById('count').textContent = '0 نتائج';
-        return;
-    }
-
-    document.getElementById('empty').style.display = 'none';
-    document.getElementById('count').textContent = docs.length + ' ملفات';
-
-    docs.forEach(doc => {
-        let symbol = '📕';
-        if (doc.category === 'بحوث عقائدية') symbol = '📘';
-        else if (doc.category === 'كتب ومراجع') symbol = '📗';
-
-        const card = document.createElement('article');
-        card.className = 'doc-card';
-        card.dataset.category = doc.category || '';
-        
-        card.innerHTML = `
-            <span class="tag">${doc.category || 'متنوع'}</span>
-            <div class="symbol">${symbol}</div>
-            <h3>${doc.title}</h3>
-            <div class="doc-meta">المؤلف: ${doc.author || 'غير معروف'} · التاريخ: ${doc.date || 'غير محدد'}</div>
-            <p>${doc.description || ''}</p>
-            <div class="doc-actions"><a class="btn" href="${doc.file_url}" target="_blank" rel="noopener">قراءة / تحميل PDF</a></div>
-        `;
-        grid.appendChild(card);
-    });
-}
-
-// 4. تفعيل البحث والتصفية
-const q = document.getElementById('q'), cat = document.getElementById('category');
-
-function filterDocs() {
-    let term = q.value.trim().toLocaleLowerCase('ar');
-    let category = cat.value;
-
-    let filtered = allDocs.filter(doc => {
-        let textMatch = (doc.title + ' ' + (doc.author || '') + ' ' + (doc.description || '')).toLocaleLowerCase('ar').includes(term);
-        let catMatch = !category || doc.category === category;
-        return textMatch && catMatch;
-    });
-
-    renderDocs(filtered);
-}
-
-q.addEventListener('input', filterDocs);
-cat.addEventListener('change', filterDocs);
-
-// جلب البيانات عند تحميل الصفحة
-fetchDocuments();
+document.getElementById('year').textContent=new Date().getFullYear();
+const q=document.getElementById('q'),cat=document.getElementById('category'),cards=[...document.querySelectorAll('.doc-card')];
+function filterDocs(){let term=q.value.trim().toLocaleLowerCase('ar'),category=cat.value,visible=0;cards.forEach(card=>{let ok=card.innerText.toLocaleLowerCase('ar').includes(term)&&(!category||card.dataset.category===category);card.style.display=ok?'':'none';if(ok)visible++;});document.getElementById('count').textContent=visible+' نتائج';document.getElementById('empty').style.display=visible?'none':'block';}
+q.addEventListener('input',filterDocs);cat.addEventListener('change',filterDocs);
 </script>
 </body></html>
