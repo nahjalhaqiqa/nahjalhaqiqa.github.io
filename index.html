@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#063e42">
-<meta name="description" content="نهج الحقيقة: مكتبة وثائق وبحوث وكتب وملفات PDF، وقناة نهج الحقيقة.">
-<title>نهج الحقيقة | المكتبة الرقمية</title>
+<meta name="description" content="نهج الحقيقة: مكتبة وثائق وبحوث وكتب وملفات PDF، وقناة نهج الحقيقة والمصادر المصورة.">
+<title>نهج الحقيقة | المكتبة الرقمية والأدلة المصورة</title>
 <link rel="icon" href="assets/logo.png">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -51,7 +51,9 @@ section{padding:15px 0}
 .tools input,.tools select{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #ffffff3b;background:var(--input-bg);color:var(--ink);outline:none}
 .tools input::placeholder{color:var(--muted)}.tools select option{color:#152b2b}
 .doc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
-.doc-card{padding:17px;min-width:0}.doc-card .symbol{font-size:1.9rem}
+.doc-card{padding:17px;min-width:0;cursor:pointer;transition:.2s}
+.doc-card:hover{border-color:var(--mint);transform:translateY(-3px)}
+.doc-card .symbol{font-size:1.9rem}
 .doc-card h3{margin:6px 0;font-size:1.08rem}.doc-card p{color:var(--muted);font-size:.9rem;margin:6px 0 12px}
 .tag{display:inline-block;padding:3px 10px;border-radius:20px;background:#00a97726;border:1px solid #00d99a55;color:var(--green);font-size:.78rem;font-weight:bold}
 .doc-meta{font-size:.8rem;color:var(--muted);margin-bottom:12px}
@@ -62,6 +64,17 @@ section{padding:15px 0}
 .panel{padding:20px}
 .videos-grid{display:grid;grid-template-columns:1fr;gap:15px;}
 .video-item{background:#00000030;border:1px solid var(--line);border-radius:12px;overflow:hidden;padding:10px;}
+
+/* تصميم النافذة المنبثقة (Modal) لعرض صور الأدلة */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center;z-index:100;padding:20px;backdrop-filter:blur(5px)}
+.modal-content{background:var(--panel);border:1px solid var(--line);border-radius:16px;width:min(800px, 100%);max-height:90vh;overflow-y:auto;padding:25px;position:relative}
+.close-btn{position:absolute;top:15px;left:15px;background:none;border:0;color:var(--ink);font-size:1.5rem;cursor:pointer}
+.source-images-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px, 1fr));gap:15px;margin-top:20px}
+.source-img-card{background:rgba(0,0,0,0.2);border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center}
+.source-img-card img{width:100%;height:auto;border-radius:6px;cursor:pointer;transition:.2s}
+.source-img-card img:hover{opacity:.9}
+.source-img-card p{color:var(--muted);font-size:0.85rem;margin-top:8px}
+
 .contact-form{display:grid;gap:12px;max-width:600px;margin:auto}
 .contact-form input,.contact-form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--input-bg);color:var(--ink);outline:none}
 .contact-form textarea{resize:vertical;min-height:120px}
@@ -81,6 +94,7 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <nav>
 <a href="#top">الرئيسية</a>
 <a href="#library">المكتبة</a>
+<a href="#sources-section">المصادر والأدلة</a>
 <a href="#youtube">القناة</a>
 <a href="#contact">مراسلتنا</a>
 <a href="#about">عن الموقع</a>
@@ -96,6 +110,7 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <p>من أجل معرفة أعمق .. ووعي أصدق</p>
 <div class="actions">
 <a class="btn" href="#library">📚 تصفح المكتبة</a>
+<a class="btn" href="#sources-section">🔍 الأدلة المصورة</a>
 <a class="btn red" href="https://www.youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw" target="_blank" rel="noopener">▶ قناة نهج الحقيقة</a>
 </div>
 </section>
@@ -103,10 +118,11 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <section class="wrap">
 <div class="features">
 <article class="feature"><div class="ico">📚</div><div><h2>مكتبة رقمية متجددة</h2><p>وثائق وبحوث وكتب ومصادر علمية وعقائدية، مرتبة حسب التصنيف وقابلة للبحث الفوري.</p><a class="btn" href="#library">استعراض الملفات</a></div></article>
-<article class="feature"><div class="ico">▶️</div><div><h2>قناة نهج الحقيقة</h2><p>مساحة مرئية للتعريف بالفيديوهات والحوارات الفكرية وربطها بالمصادر والمراجع.</p><a class="btn red" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener">زيارة القناة الرسمية</a></div></article>
+<article class="feature"><div class="ico">🔍</div><div><h2>موسوعة الأدلة المصورة</h2><p>صور صفحات الكتب والمصادر المعتمدة مرتبة حسب المواضيع (كعدالة الصحابة وزواج المتعة وغيرها).</p><a class="btn" href="#sources-section">استعراض الأدلة</a></div></article>
 </div>
 </section>
 
+<!-- قسم مكتبة الملفات والوثائق -->
 <section class="wrap" id="library">
 <div class="head">
 <h2>مكتبة الوثائق والملفات</h2>
@@ -128,6 +144,18 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <div class="note">💡 تنبيه: يتم جلب الكتب والملفات مباشرة من قاعدة البيانات المحدثة.</div>
 </section>
 
+<!-- قسم موسوعة الأدلة والمصادر المصورة الجديد -->
+<section class="wrap" id="sources-section" style="margin-top: 30px;">
+<div class="head">
+<h2>موسوعة الأدلة والمصادر المصورة</h2>
+<small>انقر على أي موضوع لعرض الوثائق المرتبطة به</small>
+</div>
+<div class="doc-grid" id="sources-grid">
+<p style="color:var(--muted);">جاري تحميل المواضيع والأدلة...</p>
+</div>
+</section>
+
+<!-- قسم القناة (الفيديوهات) -->
 <section class="wrap" id="youtube">
 <div class="head">
 <h2>قناة نهج الحقيقة</h2>
@@ -169,6 +197,18 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 </div>
 </section>
 </main>
+
+<!-- نافذة منبثقة (Modal) لعرض صور الأدلة عند النقر على الموضوع -->
+<div class="modal" id="sourceModal">
+<div class="modal-content">
+<button class="close-btn" onclick="closeSourceModal()">&times;</button>
+<h2 id="modalTitle" style="margin-top:0; color:var(--gold);">عنوان الموضوع</h2>
+<p id="modalDesc" style="color:var(--muted); font-size:0.9rem;">مجموعة الوثائق والمصادر المستدلة:</p>
+<div class="source-images-grid" id="modalImagesContainer">
+<!-- سيتم عرض الصور هنا ديناميكياً -->
+</div>
+</div>
+</div>
 
 <footer>
 <div class="wrap foot">
@@ -221,48 +261,119 @@ try {
 }
 
 let allDocs = [];
+let allSources = [];
 
 // جلب الكتب والملفات من جدول documents
 async function fetchDocuments() {
     if (!supabaseClient) return;
     try {
-        const { data, error } = await supabaseClient
-            .from('documents')
-            .select('*');
+        const { data, error } = await supabaseClient.from('documents').select('*');
+        if (error) return;
+        allDocs = data || [];
+        renderDocs(allDocs);
+    } catch (err) { console.error(err); }
+}
 
-        if (error) {
-            console.error('خطأ من سوبابيس في جدول documents:', error);
-            document.getElementById('count').textContent = 'خطأ في تحميل البيانات';
+// جلب الأدلة والمصادر المصورة من جدول sources
+async function fetchSources() {
+    if (!supabaseClient) return;
+    const grid = document.getElementById('sources-grid');
+    if (!grid) return;
+
+    try {
+        const { data, error } = await supabaseClient.from('sources').select('*');
+        if (error || !data || data.length === 0) {
+            grid.innerHTML = '<p style="color:var(--muted); grid-column:1/-1; text-align:center;">لا توجد مصادر مصورة مضافة حالياً في جدول sources.</p>';
             return;
         }
 
-        allDocs = data || [];
-        renderDocs(allDocs);
+        allSources = data;
+
+        // تجميع المصادر حسب العنوان (title) لتظهر كل موضوع بطاقة مستقلة
+        const grouped = {};
+        data.forEach(item => {
+            const title = item.title || 'أدلة متنوعة';
+            if (!grouped[title]) {
+                grouped[title] = {
+                    title: title,
+                    images: [],
+                    sampleImg: item.image_url
+                };
+            }
+            grouped[title].images.push(item);
+        });
+
+        grid.innerHTML = '';
+        Object.keys(grouped).forEach(title => {
+            const group = grouped[title];
+            const card = document.createElement('article');
+            card.className = 'doc-card';
+            card.innerHTML = `
+                <div class="symbol">📑</div>
+                <h3>${title}</h3>
+                <p style="color:var(--muted); font-size:0.88rem;">موسوعة وثائق وصور مستدلة (يحتوي على ${group.images.length} مستند)</p>
+                <span class="tag">عرض المصادر ↗</span>
+            `;
+            // عند النقر على بطاقة الموضوع، تفتح النافذة المنبثقة وتعرض صوره
+            card.addEventListener('click', () => {
+                openSourceModal(title, group.images);
+            });
+            grid.appendChild(card);
+        });
+
     } catch (err) {
-        console.error('خطأ غير متوقع:', err);
-        document.getElementById('count').textContent = 'خطأ في تحميل البيانات';
+        console.error(err);
+        grid.innerHTML = '<p style="color:var(--muted); text-align:center;">تعذر تحميل المصادر.</p>';
     }
 }
 
-// جلب أحدث الفيديوهات من جدول videos
+// فتح النافذة المنبثقة لعرض الصور
+function openSourceModal(title, images) {
+    const modal = document.getElementById('sourceModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const container = document.getElementById('modalImagesContainer');
+
+    modalTitle.textContent = title;
+    container.innerHTML = '';
+
+    images.forEach(imgData => {
+        const div = document.createElement('div');
+        div.className = 'source-img-card';
+        div.innerHTML = `
+            <a href="${imgData.image_url}" target="_blank" rel="noopener">
+                <img src="${imgData.image_url}" alt="${title}" loading="lazy">
+            </a>
+            <p>${imgData.description || 'مصدر معتمد من الكتب'}</p>
+        `;
+        container.appendChild(div);
+    });
+
+    modal.style.display = 'flex';
+}
+
+// إغلاق النافذة المنبثقة
+function closeSourceModal() {
+    const modal = document.getElementById('sourceModal');
+    modal.style.display = 'none';
+}
+
+// إغلاق النافذة عند الضغط خارجها
+window.addEventListener('click', (e) => {
+    const modal = document.getElementById('sourceModal');
+    if (e.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+// جلب الفيديوهات من جدول videos
 async function fetchLatestVideos() {
     if (!supabaseClient) return;
     const container = document.getElementById('videos-container');
     if (!container) return;
 
     try {
-        const { data, error } = await supabaseClient
-            .from('videos')
-            .select('*')
-            .limit(2);
-
-        if (error) {
-            console.log('خطأ في جدول videos:', error.message);
-            container.innerHTML = '<p style="color:var(--muted); text-align:center;">تعذر جلب الفيديوهات من جدول videos.</p>';
-            return;
-        }
-
-        if (!data || data.length === 0) {
+        const { data, error } = await supabaseClient.from('videos').select('*').limit(2);
+        if (error || !data || data.length === 0) {
             container.innerHTML = '<p style="color:var(--muted); text-align:center;">لا توجد فيديوهات مضافة حالياً.</p>';
             return;
         }
@@ -343,6 +454,7 @@ if (q) q.addEventListener('input', filterDocs);
 if (cat) cat.addEventListener('change', filterDocs);
 
 fetchDocuments();
+fetchSources();
 fetchLatestVideos();
 </script>
 </body>
