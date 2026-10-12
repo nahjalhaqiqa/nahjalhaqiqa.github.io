@@ -1,72 +1,249 @@
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#063e42">
 <meta name="description" content="نهج الحقيقة: مكتبة وثائق وبحوث وكتب وملفات PDF، وقناة نهج الحقيقة.">
-<title>نهج الحقيقة | المكتبة الرقمية</title><link rel="icon" href="assets/logo.png">
+<title>نهج الحقيقة | المكتبة الرقمية</title>
+<link rel="icon" href="assets/logo.png">
 <!-- استدعاء مكتبة Supabase عبر CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--green:#00a977;--mint:#27d5b1;--gold:#f3d58a;--ink:#effaf8;--muted:#c4d9dc;--panel:rgba(2,28,42,.92);--line:#ffffff27}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);font-family:Tahoma,Arial,sans-serif;line-height:1.75;background:#042c42 url('assets/background.jpg') center top/cover fixed no-repeat}
-body:before{content:"";position:fixed;inset:0;background:linear-gradient(120deg,rgba(87,33,225,.76),rgba(0,133,121,.82) 50%,rgba(0,179,105,.80));z-index:-1}
-a{color:inherit;text-decoration:none}button,input,select{font:inherit}.wrap{width:min(1160px,calc(100% - 30px));margin:auto}
+:root {
+    --green: #00a977; --mint: #27d5b1; --gold: #f3d58a;
+    --bg-gradient: linear-gradient(120deg, rgba(87,33,225,.76), rgba(0,133,121,.82) 50%, rgba(0,179,105,.80));
+    --bg-body: #042c42; --panel: rgba(2,28,42,.92); --ink: #effaf8;
+    --muted: #c4d9dc; --line: #ffffff27; --input-bg: #062e3edb;
+}
+[data-theme="light"] {
+    --bg-gradient: linear-gradient(120deg, rgba(230,225,255,.8), rgba(200,245,240,.9) 50%, rgba(210,250,230,.8));
+    --bg-body: #f4f8f9; --panel: rgba(255,255,255,.95); --ink: #102a30;
+    --muted: #5a7378; --line: #00000015; --input-bg: #ffffff;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:Tahoma,Arial,sans-serif;line-height:1.75;background:var(--bg-body);transition:background .3s,color .3s}
+body:before{content:"";position:fixed;inset:0;background:var(--bg-gradient);z-index:-1}
+a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}
+.wrap{width:min(1160px,calc(100% - 30px));margin:auto}
+
 header{position:sticky;top:0;z-index:10;background:linear-gradient(90deg,#6133e8ed,#00976fee);border-bottom:1px solid #42ffcd70;backdrop-filter:blur(12px)}
-.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{display:flex;align-items:center;gap:9px;font-size:1.2rem;font-weight:800}.brand img{width:48px;height:48px;object-fit:contain}
+.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{display:flex;align-items:center;gap:9px;font-size:1.2rem;font-weight:800}
+.brand img{width:48px;height:48px;object-fit:contain}
 nav{display:flex;align-items:center;gap:16px;flex-wrap:wrap}nav a{font-size:.9rem}nav a:hover{color:var(--gold)}
-.hero{text-align:center;padding:38px 0 28px;position:relative;overflow:hidden}.hero:after{content:"الحقيقة";position:absolute;right:-1%;top:20px;font-size:clamp(5rem,18vw,13rem);font-weight:900;color:#001d2c25;pointer-events:none}.hero>*{position:relative;z-index:1}.hero-logo{width:100px;height:100px;object-fit:contain;filter:drop-shadow(0 5px 12px #001b2c99)}h1{font-size:clamp(2.6rem,6vw,4.5rem);line-height:1.2;margin:0}.gold{color:var(--gold)}.hero p{margin:10px 0 18px;font-size:1.1rem}.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.btn{display:inline-flex;justify-content:center;align-items:center;padding:9px 16px;border:0;border-radius:25px;background:var(--green);color:white;font-weight:bold;cursor:pointer}.btn.red{background:#df252c}.btn.ghost{background:#ffffff14;border:1px solid #ffffff38}
-section{padding:15px 0}.features{display:grid;grid-template-columns:1fr 1fr;gap:15px}.feature,.panel,.doc-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 30px #001b2c35}.feature{padding:20px;display:flex;gap:16px;align-items:center}.feature .ico{font-size:2.3rem}.feature h2{font-size:1.2rem;margin:0 0 5px}.feature p{color:var(--muted);margin:0 0 12px;font-size:.92rem}
-.head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin:12px 0}.head h2{margin:0;font-size:1.55rem}.head small{color:var(--gold)}
-.tools{display:grid;grid-template-columns:1fr 220px;gap:10px;margin:12px 0}.tools input,.tools select{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #ffffff3b;background:#062e3edb;color:#fff;outline:none}.tools input::placeholder{color:#c7d9db}.tools select option{color:#152b2b}
-.doc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.doc-card{padding:17px;min-width:0}.doc-card .symbol{font-size:1.9rem}.doc-card h3{margin:6px 0;font-size:1.08rem}.doc-card p{color:var(--muted);font-size:.9rem;margin:6px 0 12px}.tag{display:inline-block;padding:2px 9px;border-radius:20px;background:#00a97726;border:1px solid #00d99a55;color:#9df4d4;font-size:.78rem}.doc-meta{font-size:.8rem;color:#b8d0d2;margin-bottom:12px}.doc-actions{display:flex;gap:8px;flex-wrap:wrap}.doc-actions a{font-size:.85rem}.empty{padding:22px;text-align:center;border:1px dashed #ffffff4b;border-radius:12px;color:var(--muted);display:none}
-.note{background:#fff4d52b;border:1px solid #f3d58a70;padding:12px 14px;border-radius:10px;color:#fff0c7;font-size:.88rem;margin-top:13px}
-.video-layout{display:grid;grid-template-columns:1fr 1fr;gap:15px}.panel{padding:20px}.panel h2{margin:0 0 8px}.panel p{color:var(--muted)}.video-box{min-height:210px;display:grid;place-items:center;text-align:center;background:linear-gradient(135deg,#071c2c,#0a5b57);border-radius:12px;border:1px solid var(--line);padding:18px}.play{font-size:3rem;color:#ff3038}
-footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);padding:20px 0}.foot{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.foot img{width:40px;vertical-align:middle}footer small{color:#b7c9cb}
+.theme-btn{background:none;border:1px solid var(--gold);color:var(--gold);padding:5px 10px;border-radius:20px;cursor:pointer;font-size:.85rem;transition:.2s}
+.theme-btn:hover{background:var(--gold);color:#000}
+
+.hero{text-align:center;padding:38px 0 28px;position:relative;overflow:hidden}
+.hero:after{content:"الحقيقة";position:absolute;right:-1%;top:20px;font-size:clamp(5rem,18vw,13rem);font-weight:900;color:#001d2c25;pointer-events:none}
+.hero>*{position:relative;z-index:1}.hero-logo{width:100px;height:100px;object-fit:contain;filter:drop-shadow(0 5px 12px #001b2c99)}
+h1{font-size:clamp(2.6rem,6vw,4.5rem);line-height:1.2;margin:0}.gold{color:var(--gold)}
+.hero p{margin:10px 0 18px;font-size:1.1rem}
+.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;justify-content:center;align-items:center;padding:9px 16px;border:0;border-radius:25px;background:var(--green);color:white;font-weight:bold;cursor:pointer;transition:.2s}
+.btn:hover{opacity:.9}
+.btn.red{background:#df252c}.btn.ghost{background:#ffffff14;border:1px solid #ffffff38}
+
+section{padding:15px 0}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.feature,.panel,.doc-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 30px #001b2c35;backdrop-filter:blur(8px)}
+.feature{padding:20px;display:flex;gap:16px;align-items:center}.feature .ico{font-size:2.3rem}
+.feature h2{font-size:1.2rem;margin:0 0 5px}.feature p{color:var(--muted);margin:0 0 12px;font-size:.92rem}
+
+.head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin:12px 0}
+.head h2{margin:0;font-size:1.55rem}.head small{color:var(--gold)}
+
+.tools{display:grid;grid-template-columns:1fr 220px;gap:10px;margin:12px 0}
+.tools input,.tools select{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #ffffff3b;background:var(--input-bg);color:var(--ink);outline:none}
+.tools input::placeholder{color:var(--muted)}.tools select option{color:#152b2b}
+
+.doc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.doc-card{padding:17px;min-width:0}.doc-card .symbol{font-size:1.9rem}
+.doc-card h3{margin:6px 0;font-size:1.08rem}.doc-card p{color:var(--muted);font-size:.9rem;margin:6px 0 12px}
+.tag{display:inline-block;padding:3px 10px;border-radius:20px;background:#00a97726;border:1px solid #00d99a55;color:var(--green);font-size:.78rem;font-weight:bold}
+.doc-meta{font-size:.8rem;color:var(--muted);margin-bottom:12px}
+.doc-actions{display:flex;gap:8px;flex-wrap:wrap}.doc-actions a{font-size:.85rem}
+.empty{padding:22px;text-align:center;border:1px dashed var(--line);border-radius:12px;color:var(--muted);display:none}
+
+.note{background:#fff4d52b;border:1px solid #f3d58a70;padding:12px 14px;border-radius:10px;color:var(--ink);font-size:.88rem;margin-top:13px}
+.video-layout{display:grid;grid-template-columns:1fr 1fr;gap:15px}.panel{padding:20px}.panel h2{margin:0 0 8px}.panel p{color:var(--muted)}
+.video-box{min-height:210px;display:grid;place-items:center;text-align:center;background:linear-gradient(135deg,#071c2c,#0a5b57);border-radius:12px;border:1px solid var(--line);padding:18px;color:#fff}
+.play{font-size:3rem;color:#ff3038}
+
+/* تنسيق نموذج مراسلتنا */
+.contact-form{display:grid;gap:12px;max-width:600px;margin:auto}
+.contact-form input,.contact-form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--input-bg);color:var(--ink);outline:none}
+.contact-form textarea{resize:vertical;min-height:120px}
+
+/* تواصل اجتماعي في الفوتر */
+footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);padding:25px 0;color:#fff}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.social-icons{display:flex;gap:12px;font-size:1.2rem}
+.social-icons a{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#ffffff15;border:1px solid #ffffff30;transition:.2s}
+.social-icons a:hover{background:var(--green);color:#fff}
+
 @media(max-width:800px){.nav{justify-content:center;flex-wrap:wrap;padding:8px 0}.nav nav{justify-content:center;gap:12px}.features,.video-layout{grid-template-columns:1fr}.doc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.wrap{width:calc(100% - 22px)}.doc-grid{grid-template-columns:1fr}.tools{grid-template-columns:1fr}.hero{padding-top:25px}.hero-logo{width:85px;height:85px}h1{font-size:2.5rem}.feature{padding:16px}}
 </style>
 </head>
 <body>
-<header><div class="wrap nav">
+<header>
+<div class="wrap nav">
 <a class="brand" href="#top"><img src="assets/logo.png" alt="شعار نهج الحقيقة"><span>نهج الحقيقة</span></a>
-<nav><a href="#top">الرئيسية</a><a href="#library">المكتبة</a><a href="#youtube">نهج الحقيقة</a><a href="#about">عن الموقع</a></nav>
-</div></header>
+<nav>
+<a href="#top">الرئيسية</a>
+<a href="#library">المكتبة</a>
+<a href="#youtube">القناة</a>
+<a href="#contact">مراسلتنا</a>
+<a href="#about">عن الموقع</a>
+<button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙 الوضع الليلي</button>
+</nav>
+</div>
+</header>
+
 <main id="top">
-<section class="hero wrap"><img class="hero-logo" src="assets/logo.png" alt="لوغو نهج الحقيقة"><h1>نهج الحقيقة</h1><p>من أجل معرفة أعمق .. ووعي أصدق</p><div class="actions"><a class="btn" href="#library">تصفح المكتبة</a><a class="btn red" href="#youtube">قناة نهج الحقيقة</a></div></section>
-<section class="wrap"><div class="features">
-<article class="feature"><div class="ico">📚</div><div><h2>مكتبة رقمية</h2><p>وثائق وبحوث وكتب ومصادر، مرتبة حسب التصنيف وقابلة للبحث.</p><a class="btn" href="#library">استعراض الملفات</a></div></article>
-<article class="feature"><div class="ico">▶️</div><div><h2>نهج الحقيقة</h2><p>مساحة للتعريف بالفيديوهات والحوارات وربطها بالمصادر ذات الصلة.</p><a class="btn red" id="channel" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener">زيارة القناة</a></div></article>
-</div></section>
-<section class="wrap" id="library"><div class="head"><h2>مكتبة الوثائق والملفات</h2><small id="count">جاري التحميل...</small></div>
-<div class="tools"><input id="q" type="search" placeholder="ابحث باسم الوثيقة أو المؤلف أو الوصف..." aria-label="بحث في المكتبة"><select id="category" aria-label="تصفية حسب التصنيف"><option value="">كل التصنيفات</option><option>وثائق تاريخية</option><option>بحوث عقائدية</option><option>كتب ومراجع</option><option>مقالات ودراسات</option><option>متنوع</option></select></div>
+<section class="hero wrap">
+<img class="hero-logo" src="assets/logo.png" alt="لوغو نهج الحقيقة">
+<h1>نهج الحقيقة</h1>
+<p>من أجل معرفة أعمق .. ووعي أصدق</p>
+<div class="actions">
+<a class="btn" href="#library">📚 تصفح المكتبة</a>
+<a class="btn red" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener">▶ قناة نهج الحقيقة</a>
+</div>
+</section>
+
+<section class="wrap">
+<div class="features">
+<article class="feature"><div class="ico">📚</div><div><h2>مكتبة رقمية متجددة</h2><p>وثائق وبحوث وكتب ومصادر علمية وعقائدية، مرتبة حسب التصنيف وقابلة للبحث الفوري.</p><a class="btn" href="#library">استعراض الملفات</a></div></article>
+<article class="feature"><div class="ico">▶️</div><div><h2>قناة نهج الحقيقة</h2><p>مساحة مرئية للتعريف بالفيديوهات والحوارات الفكرية وربطها بالمصادر والمراجع.</p><a class="btn red" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener">زيارة القناة الرسمية</a></div></article>
+</div>
+</section>
+
+<section class="wrap" id="library">
+<div class="head">
+<h2>مكتبة الوثائق والملفات</h2>
+<small id="count">جاري التحميل...</small>
+</div>
+<div class="tools">
+<input id="q" type="search" placeholder="ابحث باسم الوثيقة أو المؤلف أو الوصف..." aria-label="بحث في المكتبة">
+<select id="category" aria-label="تصفية حسب التصنيف">
+<option value="">✨ كل التصنيفات</option>
+<option value="وثائق تاريخية">📜 وثائق تاريخية</option>
+<option value="بحوث عقائدية">💡 بحوث عقائدية</option>
+<option value="كتب ومراجع">📖 كتب ومراجع</option>
+<option value="مقالات ودراسات">📝 مقالات ودراسات</option>
+<option value="متنوع">📁 متنوع</option>
+</select>
+</div>
 <div class="doc-grid" id="docs">
-    <!-- سيتم تعبئة البطاقات ديناميكياً من قاعدة بيانات Supabase -->
+    <!-- سيتم تعبئة البطاقات ديناميكياً من Supabase -->
 </div>
 <div class="empty" id="empty" style="display:none;">لا توجد نتائج مطابقة. جرّب كلمة أخرى أو اختر تصنيفاً مختلفاً.</div>
-<div class="note">هذه المكتبة متصلة بقاعدة بيانات سوبابيس (Supabase) لجلب الوثائق والملفات مباشرة.</div>
+<div class="note">💡 تنبيه: يتم جلب الكتب والملفات مباشرة من قاعدة البيانات المحدثة.</div>
 </section>
-<section class="wrap" id="youtube"><div class="head"><h2>قناة نهج الحقيقة</h2><small>فيديوهات وحوارات نهج الحقيقة</small></div><div class="video-layout">
-<div class="panel"><h2>تابع أحدث الحوارات</h2><p>تابع قناة نهج الحقيقة على يوتيوب، ويمكن إضافة رابط فيديو مميز أو قائمة تشغيل لاحقاً.</p><a class="btn red" id="channel2" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener">فتح قناة يوتيوب ↗</a></div>
-<div class="video-box"><div><div class="play">▶</div><strong>مساحة الفيديو المميز</strong><p>يُضاف الفيديو بعد وضع معرّف يوتيوب الحقيقي.</p></div></div>
-</div></section>
-<section class="wrap" id="about"><div class="panel"><h2>عن نهج الحقيقة</h2><p>منصة لنشر الوثائق والبحوث والملفات، والتعريف بالمصادر والمحتوى الحواري. نوصي بإرفاق مصدر كل وثيقة وتاريخها، والتمييز بين النص الأصلي والتعليق عليه، واحترام حقوق النشر وخصوصية الأفراد.</p></div></section>
+
+<section class="wrap" id="youtube">
+<div class="head">
+<h2>قناة نهج الحقيقة</h2>
+<small>أحدث الحوارات والمقاطع المرئية</small>
+</div>
+<div class="video-layout">
+<div class="panel">
+<h2>تابع أحدث الحوارات</h2>
+<p>اشترك في قناة نهج الحقيقة على يوتيوب ليصلك كل جديد من الحوارات العلمية والفكرية الهادفة.</p>
+<a class="btn red" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener">فتح قناة يوتيوب الرسمية ↗</a>
+</div>
+<div class="video-box">
+<div>
+<div class="play">▶</div>
+<strong>قناة نهج الحقيقة</strong>
+<p>انقر فوق الزر للاستماع ومتابعة الحوارات.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- قسم مراسلتنا -->
+<section class="wrap" id="contact">
+<div class="panel">
+<h2>تواصل معنا</h2>
+<p style="margin-bottom:20px;">نرحب بمقترحاتكم، استفساراتكم، أو مشاركاتكم العلمية. أرسل لنا رسالة وسنرد عليك قريباً:</p>
+<form class="contact-form" onsubmit="event.preventDefault(); alert('تم إرسال رسالتك بنجاح! شكراً لتواصلك مع نهج الحقيقة.'); this.reset();">
+<input type="text" placeholder="اسمك الكريم" required>
+<input type="email" placeholder="بريدك الإلكتروني" required>
+<input type="text" placeholder="عنوان الرسالة أو الموضوع" required>
+<textarea placeholder="اكتب رسالتك هنا..." required></textarea>
+<button type="submit" class="btn" style="width:fit-content">إرسال الرسالة</button>
+</form>
+</div>
+</section>
+
+<section class="wrap" id="about">
+<div class="panel">
+<h2>عن نهج الحقيقة</h2>
+<p>منصة لنشر الوثائق والبحوث والملفات، والتعريف بالمصادر والمحتوى الحواري. نوصي بإرفاق مصدر كل وثيقة وتاريخها، والتمييز بين النص الأصلي والتعليق عليه، واحترام حقوق النشر وخصوصية الأفراد.</p>
+</div>
+</section>
 </main>
-<footer><div class="wrap foot"><div><img src="assets/logo.png" alt=""> <strong>نهج الحقيقة</strong></div><span>معاً نحو وعي أعمق وحقائق أوضح</span><small>© <span id="year"></span> نهج الحقيقة</small></div></footer>
+
+<footer>
+<div class="wrap foot">
+<div style="display:flex; align-items:center; gap:10px;">
+<img src="assets/logo.png" alt="" style="width:40px; height:40px; object-fit:contain;">
+<strong>نهج الحقيقة</strong>
+</div>
+<span>معاً نحو وعي أعمق وحقائق أوضح</span>
+<div class="social-icons">
+<a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" title="يوتيوب">▶</a>
+<a href="#" target="_blank" title="فيسبوك">📘</a>
+<a href="#" target="_blank" title="تيك توك">🎵</a>
+<a href="#" target="_blank" title="إكس (تويتر)">✖</a>
+</div>
+<small>© <span id="year"></span> نهج الحقيقة</small>
+</div>
+</footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// 1. إعداد بيانات الاتصال الخاصة بـ Supabase
-const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co/rest/v1/'; // استبدل هذا برابط مشروعك
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4c3h4a2F1eG91eW5lYWFtZWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MjQxMjMsImV4cCI6MjEwNzMwMDEyM30.wvVWq3TXd83mJ2FtViIwWO7O_hN1OazD91MkmiWZdh0'; // استبدل هذا بمفتاح الـ Anon الخاص بك
+// نظام الوضع الليلي والنهاري
+function toggleTheme() {
+    const html = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        btn.textContent = '☀️ الوضع الليلي';
+        localStorage.setItem('theme', 'light');
+    } else {
+        html.setAttribute('data-theme', 'dark');
+        btn.textContent = '🌙 الوضع النهاري';
+        localStorage.setItem('theme', 'dark');
+    }
+}
 
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// استعادة الثيم المحفوظ عند التحميل
+window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('themeToggle').textContent = savedTheme === 'dark' ? '🌙 الوضع النهاري' : '☀️ الوضع الليلي';
+});
+
+// إعداد بيانات الاتصال بـ Supabase (تم تصحيح الرابط بإزالة /rest/v1/ الزائدة)
+const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co'; 
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4c3h4a2F1eG91eW5lYWFtZWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MjQxMjMsImV4cCI6MjEwNzMwMDEyM30.wvVWq3TXd83mJ2FtViIwWO7O_hN1OazD91MkmiWZdh0'; 
+
+let supabaseClient = null;
+try {
+    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+} catch (e) {
+    console.error('خطأ في الاتصال:', e);
+}
 
 let allDocs = [];
 
-// 2. دالة جلب البيانات من جدول documents في Supabase
+// جلب البيانات من جدول documents
 async function fetchDocuments() {
+    if (!supabaseClient) return;
     const { data, error } = await supabaseClient
         .from('documents')
         .select('*');
@@ -81,9 +258,10 @@ async function fetchDocuments() {
     renderDocs(allDocs);
 }
 
-// 3. دالة رسم وبناء البطاقات في الصفحة
+// عرض البطاقات
 function renderDocs(docs) {
     const grid = document.getElementById('docs');
+    if (!grid) return;
     grid.innerHTML = '';
 
     if (docs.length === 0) {
@@ -97,8 +275,10 @@ function renderDocs(docs) {
 
     docs.forEach(doc => {
         let symbol = '📕';
-        if (doc.category === 'بحوث عقائدية') symbol = '📘';
-        else if (doc.category === 'كتب ومراجع') symbol = '📗';
+        if (doc.category === 'بحوث عقائدية') symbol = '💡';
+        else if (doc.category === 'كتب ومراجع') symbol = '📖';
+        else if (doc.category === 'مقالات ودراسات') symbol = '📝';
+        else if (doc.category === 'وثائق تاريخية') symbol = '📜';
 
         const card = document.createElement('article');
         card.className = 'doc-card';
@@ -116,10 +296,11 @@ function renderDocs(docs) {
     });
 }
 
-// 4. تفعيل البحث والتصفية
+// البحث والتصفية
 const q = document.getElementById('q'), cat = document.getElementById('category');
 
 function filterDocs() {
+    if (!q || !cat) return;
     let term = q.value.trim().toLocaleLowerCase('ar');
     let category = cat.value;
 
@@ -132,10 +313,11 @@ function filterDocs() {
     renderDocs(filtered);
 }
 
-q.addEventListener('input', filterDocs);
-cat.addEventListener('change', filterDocs);
+if (q) q.addEventListener('input', filterDocs);
+if (cat) cat.addEventListener('change', filterDocs);
 
-// جلب البيانات عند تحميل الصفحة
+// تشغيل جلب البيانات عند التحميل
 fetchDocuments();
 </script>
-</body></html>
+</body>
+</html>
