@@ -67,7 +67,6 @@ section{padding:15px 0}
 
 .note{background:#fff4d52b;border:1px solid #f3d58a70;padding:12px 14px;border-radius:10px;color:var(--ink);font-size:.88rem;margin-top:13px}
 
-/* تنسيق قسم الفيديوهات الجديد */
 .video-layout{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 .panel{padding:20px}
 .videos-grid{display:grid;grid-template-columns:1fr;gap:15px;}
@@ -152,7 +151,6 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <p>اشترك في قناة نهج الحقيقة على يوتيوب ليصلك كل جديد من الحوارات العلمية والفكرية الهادفة.</p>
 <a class="btn red" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener" style="margin-top:15px; display:inline-flex;">فتح قناة يوتيوب الرسمية ↗</a>
 </div>
-<!-- قسم جلب وعرض أحدث الفيديوهات ديناميكياً من جدول videos -->
 <div class="panel">
 <h3 style="margin-top:0; font-size:1.1rem; color:var(--gold);">أحدث المقاطع المرئية</h3>
 <div class="videos-grid" id="videos-container">
@@ -236,57 +234,61 @@ try {
 
 let allDocs = [];
 
-// جلب الكتب والملفات من جدول articles
+// دالة جلب الكتب والملفات من جدول articles بشكل آمن
 async function fetchDocuments() {
     if (!supabaseClient) return;
-    const { data, error } = await supabaseClient
-        .from('articles')
-        .select('*');
+    try {
+        const { data, error } = await supabaseClient
+            .from('articles')
+            .select('*');
 
-    if (error) {
-        console.error('خطأ في جلب البيانات:', error);
+        if (error) {
+            console.error('خطأ من سوبابيس:', error);
+            document.getElementById('count').textContent = 'خطأ في تحميل البيانات';
+            return;
+        }
+
+        allDocs = data || [];
+        renderDocs(allDocs);
+    } catch (err) {
+        console.error('خطأ غير متوقع:', err);
         document.getElementById('count').textContent = 'خطأ في تحميل البيانات';
-        return;
     }
-
-    allDocs = data || [];
-    renderDocs(allDocs);
 }
 
-// جلب أحدث الفيديوهات من جدول videos الجديد تلقائياً
+// دالة جلب الفيديوهات من جدول videos بشكل آمن
 async function fetchLatestVideos() {
     if (!supabaseClient) return;
     const container = document.getElementById('videos-container');
     if (!container) return;
 
-    const { data, error } = await supabaseClient
-        .from('videos')
-        .select('*')
-        .order('id', { ascending: false })
-        .limit(2);
+    try {
+        const { data, error } = await supabaseClient
+            .from('videos')
+            .select('*')
+            .limit(2);
 
-    if (error || !data || data.length === 0) {
-        container.innerHTML = '<p style="color:var(--muted); text-align:center;">لا توجد فيديوهات مضافة حالياً في جدول videos.</p>';
-        return;
-    }
-
-    container.innerHTML = '';
-    data.forEach(vid => {
-        if (vid.youtube_id) {
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'video-item';
-            itemDiv.innerHTML = `
-                <div style="position:relative; width:100%; padding-bottom:56.25%; border-radius:8px; overflow:hidden; background:#000; margin-bottom:8px;">
-                    <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" src="https://www.youtube.com/embed/${vid.youtube_id}" title="${vid.title || 'فيديو'}" allowfullscreen></iframe>
-                </div>
-                <h4 style="margin:0; font-size:0.95rem; color:var(--ink);">${vid.title || ''}</h4>
-            `;
-            container.appendChild(itemDiv);
+        if (error || !data || data.length === 0) {
+            container.innerHTML = '<p style="color:var(--muted); text-align:center;">لا توجد فيديوهات مضافة حالياً.</p>';
+            return;
         }
-    });
 
-    if (container.innerHTML === '') {
-        container.innerHTML = '<p style="color:var(--muted); text-align:center;">تأكد من إدخال youtube_id صحيح في جدول videos.</p>';
+        container.innerHTML = '';
+        data.forEach(vid => {
+            if (vid.youtube_id) {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'video-item';
+                itemDiv.innerHTML = `
+                    <div style="position:relative; width:100%; padding-bottom:56.25%; border-radius:8px; overflow:hidden; background:#000; margin-bottom:8px;">
+                        <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" src="https://www.youtube.com/embed/${vid.youtube_id}" title="${vid.title || 'فيديو'}" allowfullscreen></iframe>
+                    </div>
+                    <h4 style="margin:0; font-size:0.95rem; color:var(--ink);">${vid.title || ''}</h4>
+                `;
+                container.appendChild(itemDiv);
+            }
+        });
+    } catch (err) {
+        container.innerHTML = '<p style="color:var(--muted); text-align:center;">تعذر تحميل الفيديوهات.</p>';
     }
 }
 
@@ -329,24 +331,22 @@ function renderDocs(docs) {
 
 const q = document.getElementById('q'), cat = document.getElementById('category');
 
-class FilterHelper {
-    static run() {
-        if (!q || !cat) return;
-        let term = q.value.trim().toLocaleLowerCase('ar');
-        let category = cat.value;
+function filterDocs() {
+    if (!q || !cat) return;
+    let term = q.value.trim().toLocaleLowerCase('ar');
+    let category = cat.value;
 
-        let filtered = allDocs.filter(doc => {
-            let textMatch = (doc.title + ' ' + (doc.author || '') + ' ' + (doc.description || '')).toLocaleLowerCase('ar').includes(term);
-            let catMatch = !category || doc.category === category;
-            return textMatch && catMatch;
-        });
+    let filtered = allDocs.filter(doc => {
+        let textMatch = (doc.title + ' ' + (doc.author || '') + ' ' + (doc.description || '')).toLocaleLowerCase('ar').includes(term);
+        let catMatch = !category || doc.category === category;
+        return textMatch && catMatch;
+    });
 
-        renderDocs(filtered);
-    }
+    renderDocs(filtered);
 }
 
-if (q) q.addEventListener('input', FilterHelper.run);
-if (cat) cat.addEventListener('change', FilterHelper.run);
+if (q) q.addEventListener('input', filterDocs);
+if (cat) cat.addEventListener('change', filterDocs);
 
 fetchDocuments();
 fetchLatestVideos();
