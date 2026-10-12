@@ -67,8 +67,6 @@ section{padding:15px 0}
 
 .note{background:#fff4d52b;border:1px solid #f3d58a70;padding:12px 14px;border-radius:10px;color:var(--ink);font-size:.88rem;margin-top:13px}
 .video-layout{display:grid;grid-template-columns:1fr 1fr;gap:15px}.panel{padding:20px}.panel h2{margin:0 0 8px}.panel p{color:var(--muted)}
-.video-box{min-height:210px;display:grid;place-items:center;text-align:center;background:linear-gradient(135deg,#071c2c,#0a5b57);border-radius:12px;border:1px solid var(--line);padding:18px;color:#fff}
-.play{font-size:3rem;color:#ff3038}
 
 .contact-form{display:grid;gap:12px;max-width:600px;margin:auto}
 .contact-form input,.contact-form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--input-bg);color:var(--ink);outline:none}
@@ -147,14 +145,11 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <div class="panel">
 <h2>تابع أحدث الحوارات</h2>
 <p>اشترك في قناة نهج الحقيقة على يوتيوب ليصلك كل جديد من الحوارات العلمية والفكرية الهادفة.</p>
-<a class="btn red" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener">فتح قناة يوتيوب الرسمية ↗</a>
+<a class="btn red" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener" style="margin-top:15px;">فتح قناة يوتيوب الرسمية ↗</a>
 </div>
-<div class="video-box">
-<div>
-<div class="play">▶</div>
-<strong>قناة نهج الحقيقة</strong>
-<p>https://youtu.be/j3HVHtdW0YU?si=qwTV70tSchzEGcs8.</p>
-</div>
+<!-- قسم عرض أحدث الفيديوهات ديناميكياً من سوبابيس -->
+<div class="panel" style="display:flex; flex-direction:column; gap:12px;" id="videos-container">
+<p style="color:var(--muted); text-align:center; margin:auto;">جاري جلب أحدث الفيديوهات...</p>
 </div>
 </div>
 </section>
@@ -233,10 +228,11 @@ try {
 
 let allDocs = [];
 
+// جلب الكتب والملفات من جدول articles
 async function fetchDocuments() {
     if (!supabaseClient) return;
     const { data, error } = await supabaseClient
-        .from('documents')
+        .from('articles')
         .select('*');
 
     if (error) {
@@ -247,6 +243,47 @@ async function fetchDocuments() {
 
     allDocs = data || [];
     renderDocs(allDocs);
+}
+
+// جلب أحدث الفيديوهات تلقائياً (يمكنك وضع حقل youtube_url أو embed_url في الجدول)
+async function fetchLatestVideos() {
+    if (!supabaseClient) return;
+    const container = document.getElementById('videos-container');
+    if (!container) return;
+
+    // جلب أحدث عنصرين يحتويان على فيديو (مثلاً بناءً على تصنيف أو جدول الفيديوهات)
+    const { data, error } = await supabaseClient
+        .from('articles')
+        .select('*')
+        .order('id', { ascending: false })
+        .limit(2);
+
+    if (error || !data || data.length === 0) {
+        container.innerHTML = '<p style="color:var(--muted); text-align:center; margin:auto;">لا توجد فيديوهات مضافة حالياً.</p>';
+        return;
+    }
+
+    container.innerHTML = '';
+    data.forEach(item => {
+        // إذا كان العنصر يحتوي على رابط يوتيوب أو تضمين
+        if (item.file_url && (item.file_url.includes('youtube') || item.file_url.includes('youtu.be'))) {
+            let videoEmbedUrl = item.file_url;
+            if (videoEmbedUrl.includes('watch?v=')) {
+                videoEmbedUrl = videoEmbedUrl.replace('watch?v=', 'embed/');
+            } else if (videoEmbedUrl.includes('youtu.be/')) {
+                videoEmbedUrl = videoEmbedUrl.replace('youtu.be/', 'www.youtube.com/embed/');
+            }
+
+            const videoBox = document.createElement('div');
+            videoBox.style.cssText = 'position:relative; width:100%; padding-bottom:56.25%; border-radius:12px; overflow:hidden; background:#000;';
+            videoBox.innerHTML = `<iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" src="${videoEmbedUrl}" title="${item.title || 'فيديو'}" allowfullscreen></iframe>`;
+            container.appendChild(videoBox);
+        }
+    });
+
+    if (container.innerHTML === '') {
+        container.innerHTML = '<p style="color:var(--muted); text-align:center; margin:auto;">أضف رابط فيديو يوتيوب في حقل الـ file_url لأي مقال ليظهر هنا تلقائياً.</p>';
+    }
 }
 
 function renderDocs(docs) {
@@ -280,7 +317,7 @@ function renderDocs(docs) {
             <h3>${doc.title}</h3>
             <div class="doc-meta">المؤلف: ${doc.author || 'غير معروف'} · التاريخ: ${doc.date || 'غير محدد'}</div>
             <p>${doc.description || ''}</p>
-            <div class="doc-actions"><a class="btn" href="${doc.file_url}" target="_blank" rel="noopener">قراءة / تحميل PDF</a></div>
+            <div class="doc-actions"><a class="btn" href="${doc.file_url}" target="_blank" rel="noopener">قراءة / تحميل</a></div>
         `;
         grid.appendChild(card);
     });
@@ -306,6 +343,7 @@ if (q) q.addEventListener('input', filterDocs);
 if (cat) cat.addEventListener('change', filterDocs);
 
 fetchDocuments();
+fetchLatestVideos();
 </script>
 </body>
 </html>
