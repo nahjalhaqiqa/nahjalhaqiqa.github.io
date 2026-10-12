@@ -66,7 +66,12 @@ section{padding:15px 0}
 .empty{padding:22px;text-align:center;border:1px dashed var(--line);border-radius:12px;color:var(--muted);display:none}
 
 .note{background:#fff4d52b;border:1px solid #f3d58a70;padding:12px 14px;border-radius:10px;color:var(--ink);font-size:.88rem;margin-top:13px}
-.video-layout{display:grid;grid-template-columns:1fr 1fr;gap:15px}.panel{padding:20px}.panel h2{margin:0 0 8px}.panel p{color:var(--muted)}
+
+/* تنسيق قسم الفيديوهات الجديد */
+.video-layout{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.panel{padding:20px}
+.videos-grid{display:grid;grid-template-columns:1fr;gap:15px;}
+.video-item{background:#00000030;border:1px solid var(--line);border-radius:12px;overflow:hidden;padding:10px;}
 
 .contact-form{display:grid;gap:12px;max-width:600px;margin:auto}
 .contact-form input,.contact-form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--input-bg);color:var(--ink);outline:none}
@@ -145,11 +150,14 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <div class="panel">
 <h2>تابع أحدث الحوارات</h2>
 <p>اشترك في قناة نهج الحقيقة على يوتيوب ليصلك كل جديد من الحوارات العلمية والفكرية الهادفة.</p>
-<a class="btn red" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener" style="margin-top:15px;">فتح قناة يوتيوب الرسمية ↗</a>
+<a class="btn red" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener" style="margin-top:15px; display:inline-flex;">فتح قناة يوتيوب الرسمية ↗</a>
 </div>
-<!-- قسم عرض أحدث الفيديوهات ديناميكياً من سوبابيس -->
-<div class="panel" style="display:flex; flex-direction:column; gap:12px;" id="videos-container">
-<p style="color:var(--muted); text-align:center; margin:auto;">جاري جلب أحدث الفيديوهات...</p>
+<!-- قسم جلب وعرض أحدث الفيديوهات ديناميكياً من جدول videos -->
+<div class="panel">
+<h3 style="margin-top:0; font-size:1.1rem; color:var(--gold);">أحدث المقاطع المرئية</h3>
+<div class="videos-grid" id="videos-container">
+<p style="color:var(--muted); text-align:center;">جاري جلب الفيديوهات...</p>
+</div>
 </div>
 </div>
 </section>
@@ -245,44 +253,40 @@ async function fetchDocuments() {
     renderDocs(allDocs);
 }
 
-// جلب أحدث الفيديوهات تلقائياً (يمكنك وضع حقل youtube_url أو embed_url في الجدول)
+// جلب أحدث الفيديوهات من جدول videos الجديد تلقائياً
 async function fetchLatestVideos() {
     if (!supabaseClient) return;
     const container = document.getElementById('videos-container');
     if (!container) return;
 
-    // جلب أحدث عنصرين يحتويان على فيديو (مثلاً بناءً على تصنيف أو جدول الفيديوهات)
     const { data, error } = await supabaseClient
-        .from('articles')
+        .from('videos')
         .select('*')
         .order('id', { ascending: false })
         .limit(2);
 
     if (error || !data || data.length === 0) {
-        container.innerHTML = '<p style="color:var(--muted); text-align:center; margin:auto;">لا توجد فيديوهات مضافة حالياً.</p>';
+        container.innerHTML = '<p style="color:var(--muted); text-align:center;">لا توجد فيديوهات مضافة حالياً في جدول videos.</p>';
         return;
     }
 
     container.innerHTML = '';
-    data.forEach(item => {
-        // إذا كان العنصر يحتوي على رابط يوتيوب أو تضمين
-        if (item.file_url && (item.file_url.includes('youtube') || item.file_url.includes('youtu.be'))) {
-            let videoEmbedUrl = item.file_url;
-            if (videoEmbedUrl.includes('watch?v=')) {
-                videoEmbedUrl = videoEmbedUrl.replace('watch?v=', 'embed/');
-            } else if (videoEmbedUrl.includes('youtu.be/')) {
-                videoEmbedUrl = videoEmbedUrl.replace('youtu.be/', 'www.youtube.com/embed/');
-            }
-
-            const videoBox = document.createElement('div');
-            videoBox.style.cssText = 'position:relative; width:100%; padding-bottom:56.25%; border-radius:12px; overflow:hidden; background:#000;';
-            videoBox.innerHTML = `<iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" src="${videoEmbedUrl}" title="${item.title || 'فيديو'}" allowfullscreen></iframe>`;
-            container.appendChild(videoBox);
+    data.forEach(vid => {
+        if (vid.youtube_id) {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'video-item';
+            itemDiv.innerHTML = `
+                <div style="position:relative; width:100%; padding-bottom:56.25%; border-radius:8px; overflow:hidden; background:#000; margin-bottom:8px;">
+                    <iframe style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" src="https://www.youtube.com/embed/${vid.youtube_id}" title="${vid.title || 'فيديو'}" allowfullscreen></iframe>
+                </div>
+                <h4 style="margin:0; font-size:0.95rem; color:var(--ink);">${vid.title || ''}</h4>
+            `;
+            container.appendChild(itemDiv);
         }
     });
 
     if (container.innerHTML === '') {
-        container.innerHTML = '<p style="color:var(--muted); text-align:center; margin:auto;">أضف رابط فيديو يوتيوب في حقل الـ file_url لأي مقال ليظهر هنا تلقائياً.</p>';
+        container.innerHTML = '<p style="color:var(--muted); text-align:center;">تأكد من إدخال youtube_id صحيح في جدول videos.</p>';
     }
 }
 
@@ -325,22 +329,24 @@ function renderDocs(docs) {
 
 const q = document.getElementById('q'), cat = document.getElementById('category');
 
-function filterDocs() {
-    if (!q || !cat) return;
-    let term = q.value.trim().toLocaleLowerCase('ar');
-    let category = cat.value;
+class FilterHelper {
+    static run() {
+        if (!q || !cat) return;
+        let term = q.value.trim().toLocaleLowerCase('ar');
+        let category = cat.value;
 
-    let filtered = allDocs.filter(doc => {
-        let textMatch = (doc.title + ' ' + (doc.author || '') + ' ' + (doc.description || '')).toLocaleLowerCase('ar').includes(term);
-        let catMatch = !category || doc.category === category;
-        return textMatch && catMatch;
-    });
+        let filtered = allDocs.filter(doc => {
+            let textMatch = (doc.title + ' ' + (doc.author || '') + ' ' + (doc.description || '')).toLocaleLowerCase('ar').includes(term);
+            let catMatch = !category || doc.category === category;
+            return textMatch && catMatch;
+        });
 
-    renderDocs(filtered);
+        renderDocs(filtered);
+    }
 }
 
-if (q) q.addEventListener('input', filterDocs);
-if (cat) cat.addEventListener('change', filterDocs);
+if (q) q.addEventListener('input', FilterHelper.run);
+if (cat) cat.addEventListener('change', FilterHelper.run);
 
 fetchDocuments();
 fetchLatestVideos();
