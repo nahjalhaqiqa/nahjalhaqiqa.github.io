@@ -337,13 +337,18 @@ function openSourceModal(title, images) {
     container.innerHTML = '';
 
     images.forEach(imgData => {
+        let imgUrl = imgData.image_url || '';
+
+        // تنظيف الرابط للتأكد من المجلدات المحلية
+        imgUrl = imgUrl.trim();
+
         const div = document.createElement('div');
         div.className = 'source-img-card';
         div.innerHTML = `
-            <a href="${imgData.image_url}" target="_blank" rel="noopener">
-                <img src="${imgData.image_url}" alt="${title}" loading="lazy">
+            <a href="${imgUrl}" target="_blank" rel="noopener" title="انقر لفتح الصورة بحجم كامل">
+                <img src="${imgUrl}" alt="${title}" loading="lazy" style="width:100%; max-height:450px; object-fit:contain; border-radius:8px; display:block; margin:auto;" onerror="this.onerror=null; this.parentElement.innerHTML='<p style=\\'color:var(--gold);padding:20px;\\'>⚠️ لم يتم العثور على ملف الصورة على السيرفر في المسار:<br><small>${imgUrl}</small></p>';">
             </a>
-            <p>${imgData.description || 'مصدر معتمد من الكتب'}</p>
+            <p style="margin-top:10px; font-size:0.88rem; color:var(--muted);">${imgData.description || 'مصدر معتمد من الكتب'}</p>
         `;
         container.appendChild(div);
     });
