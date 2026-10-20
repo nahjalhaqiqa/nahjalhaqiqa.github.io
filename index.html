@@ -395,7 +395,7 @@ section{padding:20px 0}
     margin: 15px 0;
 }
 
-/* النوافذ المنبثقة الشاملة مع أزرار الرجوع والتنزيل الواضحة */
+/* النوافذ المنبثقة والشاملة */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,0.88);display:none;align-items:center;justify-content:center;z-index:200;padding:12px;backdrop-filter:blur(8px)}
 .modal-header-bar {
     display: flex;
@@ -710,7 +710,7 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 </section>
 </main>
 
-<!-- نافذة عرض صور الأدلة المصورة المتكاملة مع زر الرجوع والتنزيل -->
+<!-- نافذة عرض صور الأدلة المصورة مع أزرار الفتح، التحميل، والرجوع -->
 <div class="modal" id="sourceModal">
 <div class="modal-content">
 <div class="modal-header-bar">
@@ -1166,9 +1166,12 @@ function openSourceModal(title, images) {
         const div = document.createElement('div');
         div.className = 'source-img-card';
         div.innerHTML = `
-            <img src="${imgUrl}" alt="${title}" loading="lazy" style="width:100%; max-height:420px; object-fit:contain; border-radius:10px; display:block; margin:auto;" onerror="this.onerror=null; this.parentElement.innerHTML='<p style=\\'color:var(--gold);padding:20px;\\'>⚠️ لم يتم العثور على ملف الصورة على السيرفر في المسار:<br><small>${imgUrl}</small></p>';">
+            <img src="${imgUrl}" alt="${title}" loading="lazy" style="width:100%; max-height:420px; object-fit:contain; border-radius:10px;" onerror="this.onerror=null; this.parentElement.innerHTML='<p style=\\'color:var(--gold);padding:20px;\\'>⚠️ تعذر تحميل المعاينة المباشرة للصورة من المصدر الخارجي.<br><small>${imgUrl}</small></p>';">
             <p style="margin-top:10px; font-size:0.88rem; color:var(--muted);">${imgData.description || 'مصدر معتمد من الكتب'}</p>
-            <button class="btn" onclick="triggerDirectDownload('${imgUrl}', 'nahj_source_image.jpg')" style="padding:8px 18px; font-size:0.85rem; margin-top:8px; width:100%;">⬇️ تحميل الصورة</button>
+            <div style="display:flex; gap:8px; margin-top:8px;">
+                <a class="btn" href="${imgUrl}" target="_blank" rel="noopener" style="flex:1; padding:8px 12px; font-size:0.85rem; text-align:center;">🔍 فتح الصورة</a>
+                <button class="btn ghost" onclick="triggerDirectDownload('${imgUrl}', 'nahj_source_image.jpg')" style="flex:1; padding:8px 12px; font-size:0.85rem; border-color:var(--mint); color:var(--mint);">⬇️ تحميل</button>
+            </div>
         `;
         container.appendChild(div);
     });
