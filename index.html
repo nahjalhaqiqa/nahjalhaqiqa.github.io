@@ -15,6 +15,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- مكتبة EmailJS لإرسال الإيميلات -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <style>
 :root {
     --green: #00a977; --mint: #27d5b1; --gold: #f3d58a;
@@ -166,7 +167,8 @@ section{padding:20px 0}
 .head h2{margin:0;font-size:1.65rem; font-weight:800; border-right: 4px solid var(--mint); padding-right: 12px;}
 .head small{color:var(--gold); font-weight:600;}
 
-.tools{display:grid;grid-template-columns:1fr 240px;gap:12px;margin:16px 0 20px}
+/* أداة البحث والوسوم الذكية المحدثة */
+.tools{display:grid;grid-template-columns:1fr 200px 160px;gap:12px;margin:16px 0 12px}
 .tools input,.tools select{
     width:100%;
     padding:14px 18px;
@@ -184,6 +186,28 @@ section{padding:20px 0}
 .tools input::placeholder{color:var(--muted)}
 .tools select option{background: var(--bg-body); color: var(--ink);}
 
+.quick-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.tag-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.tag-btn:hover, .tag-btn.active {
+    background: rgba(39, 213, 177, 0.15);
+    border-color: var(--mint);
+    color: var(--mint);
+}
+
 .doc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 
 .doc-card{
@@ -196,6 +220,8 @@ section{padding:20px 0}
     border: 1px solid var(--line);
     border-radius: 20px;
     background: var(--panel);
+    display: flex;
+    flex-direction: column;
 }
 .doc-card:hover{
     border-color: var(--mint);
@@ -210,7 +236,7 @@ section{padding:20px 0}
 }
 .doc-card .symbol{font-size:2.2rem; margin-bottom: 8px;}
 .doc-card h3{margin:8px 0;font-size:1.15rem; font-weight:700; line-height: 1.5;}
-.doc-card p{color:var(--muted);font-size:.92rem;margin:8px 0 16px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;}
+.doc-card p{color:var(--muted);font-size:.92rem;margin:8px 0 16px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex: 1;}
 .tag{
     display:inline-block;
     padding:4px 12px;
@@ -222,7 +248,29 @@ section{padding:20px 0}
     font-weight:700
 }
 .doc-meta{font-size:.82rem;color:var(--muted);margin-bottom:14px; opacity:0.8;}
-.doc-actions{display:flex;gap:8px;flex-wrap:wrap}.doc-actions a{font-size:.88rem}
+
+/* شريط المشاركة للوثيقة */
+.share-bar {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+}
+.share-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+.share-btn:hover {
+    background: var(--mint);
+    color: #000;
+}
 
 .empty{padding:30px;text-align:center;border:1px dashed var(--line);border-radius:16px;color:var(--muted);display:none}
 .note{
@@ -236,17 +284,13 @@ section{padding:20px 0}
     display: flex; align-items: center; gap: 10px;
 }
 
-/* ========================================================
-   تنسيق احترافي جديد ومطور لقسم القناة (YouTube Section)
-======================================================== */
+/* قسم القناة */
 .video-layout{
     display:grid;
     grid-template-columns: 320px 1fr;
     gap:22px;
     align-items: start;
 }
-
-/* كارت التعريف بالقناة على اليمين */
 .channel-info-card {
     background: linear-gradient(160deg, rgba(223, 37, 44, 0.12), var(--panel));
     border: 1px solid rgba(223, 37, 44, 0.3);
@@ -264,28 +308,15 @@ section{padding:20px 0}
     border-radius: 12px;
     display: inline-block;
     margin-bottom: 12px;
-    letter-spacing: 0.5px;
 }
-.channel-info-card h2 {
-    margin: 8px 0;
-    font-size: 1.35rem;
-    font-weight: 800;
-}
-.channel-info-card p {
-    color: var(--muted);
-    font-size: 0.92rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
+.channel-info-card h2 { margin: 8px 0; font-size: 1.35rem; font-weight: 800;}
+.channel-info-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 20px;}
 
-/* شبكة الفيديوهات */
 .videos-grid{
     display:grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap:20px;
 }
-
-/* تصميم كارت الفيديو التفاعلي الاحترافي */
 .video-card {
     background: var(--panel);
     border: 1px solid var(--line);
@@ -300,23 +331,16 @@ section{padding:20px 0}
     transform: translateY(-5px);
     box-shadow: 0 15px 35px -10px rgba(223, 37, 44, 0.3);
 }
-
 .video-thumb-wrapper {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    padding-bottom: 56.25%;
     background: #000;
     overflow: hidden;
 }
 .video-thumb-wrapper iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
 }
-
 .video-info {
     padding: 16px;
     display: flex;
@@ -324,23 +348,10 @@ section{padding:20px 0}
     gap: 8px;
     flex: 1;
 }
-.video-info h4 {
-    margin: 0;
-    font-size: 1.02rem;
-    font-weight: 700;
-    line-height: 1.5;
-    color: var(--ink);
-}
-.video-meta-tag {
-    font-size: 0.78rem;
-    color: var(--gold);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
+.video-info h4 { margin: 0; font-size: 1.02rem; font-weight: 700; line-height: 1.5; color: var(--ink);}
+.video-meta-tag { font-size: 0.78rem; color: var(--gold); font-weight: 600;}
 
-/* النافذة المنبثقة (Modal) */
+/* النوافذ المنبثقة (Modals) */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;backdrop-filter:blur(8px)}
 .modal-content{background:var(--bg-body);border:1px solid var(--mint);border-radius:22px;width:min(850px, 100%);max-height:88vh;overflow-y:auto;padding:28px;position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8);}
 .close-btn{position:absolute;top:18px;left:18px;background:rgba(255,255,255,0.1);border:0;color:var(--ink);width:36px; height:36px; border-radius:50%; font-size:1.3rem;cursor:pointer; display:flex; align-items:center; justify-content:center;}
@@ -348,7 +359,27 @@ section{padding:20px 0}
 .source-images-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px, 1fr));gap:18px;margin-top:22px}
 .source-img-card{background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
 .source-img-card img{width:100%;height:auto;border-radius:10px;cursor:pointer;}
-.source-img-card img:hover{transform: scale(1.02);}
+
+/* عارض PDF المنبثق الاحترافي */
+.pdf-modal-content {
+    background: var(--bg-body);
+    border: 1px solid var(--mint);
+    border-radius: 22px;
+    width: min(1000px, 100%);
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+}
+.pdf-viewer-frame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 12px;
+    background: #fff;
+    margin-top: 15px;
+}
 
 /* النماذج (Forms) */
 .contact-form{display:grid;gap:14px;max-width:650px;margin:auto}
@@ -382,13 +413,15 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 @media(max-width:960px){
     .video-layout{grid-template-columns: 1fr;}
     .videos-grid{grid-template-columns: repeat(2, minmax(0, 1fr));}
+    .tools{grid-template-columns: 1fr 1fr;}
 }
 @media(max-width:650px){
     .videos-grid{grid-template-columns: 1fr;}
+    .tools{grid-template-columns: 1fr;}
 }
 @media(max-width:900px){.doc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:800px){.nav{justify-content:center;flex-wrap:wrap;padding:12px 0}.nav nav{justify-content:center;gap:14px}.features{grid-template-columns:1fr}}
-@media(max-width:560px){.wrap{width:calc(100% - 24px)}.doc-grid{grid-template-columns:1fr}.tools{grid-template-columns:1fr}.hero{padding-top:35px}.hero-logo{width:90px;height:90px}h1{font-size:2.4rem}.feature{padding:18px}}
+@media(max-width:560px){.wrap{width:calc(100% - 24px)}.doc-grid{grid-template-columns:1fr}.hero{padding-top:35px}.hero-logo{width:90px;height:90px}h1{font-size:2.4rem}.feature{padding:18px}}
 </style>
 </head>
 <body>
@@ -442,14 +475,15 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 </div>
 </section>
 
-<!-- قسم مكتبة الملفات والوثائق -->
+<!-- قسم مكتبة الملفات والوثائق المتطور -->
 <section class="wrap" id="library">
 <div class="head">
 <h2>مكتبة الوثائق والملفات</h2>
 <small id="count">جاري التحميل...</small>
 </div>
+
 <div class="tools">
-<input id="q" type="search" placeholder="ابحث باسم الوثيقة أو المؤلف أو الوصف..." aria-label="بحث في المكتبة">
+<input id="q" type="search" placeholder="ابحث باسم الوثيقة، المؤلف، أو الكلمات المفتاحية..." aria-label="بحث في المكتبة">
 <select id="category" aria-label="تصفية حسب التصنيف">
 <option value="">✨ كل التصنيفات</option>
 <option value="وثائق تاريخية">📜 وثائق تاريخية</option>
@@ -458,7 +492,21 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 <option value="مقالات ودراسات">📝 مقالات ودراسات</option>
 <option value="متنوع">📁 متنوع</option>
 </select>
+<select id="sortBy" aria-label="ترتيب حسب">
+<option value="newest">📅 الأحدث إضافتاً</option>
+<option value="title">🔤 الترتيب الأبجدي</option>
+</select>
 </div>
+
+<!-- الوسوم السريعة -->
+<div class="quick-tags">
+<button class="tag-btn active" onclick="filterByTag('', this)">الكل</button>
+<button class="tag-btn" onclick="filterByTag('بحوث عقائدية', this)">💡 بحوث عقائدية</button>
+<button class="tag-btn" onclick="filterByTag('وثائق تاريخية', this)">📜 وثائق تاريخية</button>
+<button class="tag-btn" onclick="filterByTag('كتب ومراجع', this)">📖 كتب ومراجع</button>
+<button class="tag-btn" onclick="filterByTag('مقالات ودراسات', this)">📝 مقالات ودراسات</button>
+</div>
+
 <div class="doc-grid" id="docs"></div>
 <div class="empty" id="empty" style="display:none;">لا توجد نتائج مطابقة. جرّب كلمة أخرى أو اختر تصنيفاً مختلفاً.</div>
 <div class="note"><span>💡</span> <div>تنبه: الموقع قيد التطوير حاليًا، نعمل على تحسينه وتحديث خدماته لتقديم تجربة أفضل لكم. شكرًا لصبركم وتفهمكم.</div></div>
@@ -475,14 +523,13 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 </div>
 </section>
 
-<!-- قسم القناة المطور كلياً (الفيديوهات الاحترافية) -->
+<!-- قسم القناة المرئية -->
 <section class="wrap" id="youtube">
 <div class="head">
 <h2>قناة نهج الحقيقة المرئية</h2>
 <small>أحدث الحوارات والمقاطع المرئية على يوتيوب</small>
 </div>
 <div class="video-layout">
-<!-- كارت التعريف بالقناة على اليمين -->
 <div class="channel-info-card">
 <span class="yt-badge">▶ YOUTUBE</span>
 <h2>قناة نهج الحقيقة</h2>
@@ -491,8 +538,6 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 <span>الاشتراك في القناة ↗</span>
 </a>
 </div>
-
-<!-- شبكة الفيديوهات -->
 <div class="videos-grid" id="videos-container">
 <p style="color:var(--muted); grid-column:1/-1; text-align:center;">جاري جلب الفيديوهات...</p>
 </div>
@@ -530,6 +575,15 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 <h2 id="modalTitle" style="margin-top:0; color:var(--gold);">عنوان الموضوع</h2>
 <p id="modalDesc" style="color:var(--muted); font-size:0.92rem;">مجموعة الوثائق والمصادر المستدلة:</p>
 <div class="source-images-grid" id="modalImagesContainer"></div>
+</div>
+</div>
+
+<!-- عارض PDF الداخلي (PDF Viewer Modal) -->
+<div class="modal" id="pdfModal">
+<div class="pdf-modal-content">
+<button class="close-btn" onclick="closePdfModal()">&times;</button>
+<h3 id="pdfTitle" style="margin:0; color:var(--gold); font-size:1.1rem;">عرض الوثيقة</h3>
+<iframe id="pdfFrame" class="pdf-viewer-frame" src=""></iframe>
 </div>
 </div>
 
@@ -661,183 +715,3 @@ let allSources = [];
 
 async function fetchDocuments() {
     if (!supabaseClient) return;
-    try {
-        const { data, error } = await supabaseClient.from('documents').select('*');
-        if (error) return;
-        allDocs = data || [];
-        renderDocs(allDocs);
-    } catch (err) { console.error(err); }
-}
-
-async function fetchSources() {
-    if (!supabaseClient) return;
-    const grid = document.getElementById('sources-grid');
-    if (!grid) return;
-
-    try {
-        const { data, error } = await supabaseClient.from('sources').select('*');
-        if (error || !data || data.length === 0) {
-            grid.innerHTML = '<p style="color:var(--muted); grid-column:1/-1; text-align:center;">لا توجد مصادر مصورة مضافة حالياً في جدول sources.</p>';
-            return;
-        }
-
-        allSources = data;
-        const grouped = {};
-        data.forEach(item => {
-            const title = item.title || 'أدلة متنوعة';
-            if (!grouped[title]) {
-                grouped[title] = { title: title, images: [], sampleImg: item.image_url };
-            }
-            grouped[title].images.push(item);
-        });
-
-        grid.innerHTML = '';
-        Object.keys(grouped).forEach(title => {
-            const group = grouped[title];
-            const card = document.createElement('article');
-            card.className = 'doc-card';
-            card.innerHTML = `
-                <div class="symbol">📑</div>
-                <h3>${title}</h3>
-                <p style="color:var(--muted); font-size:0.88rem;">موسوعة وثائق وصور مستدلة (يحتوي على ${group.images.length} مستند)</p>
-                <span class="tag">عرض المصادر ↗</span>
-            `;
-            card.addEventListener('click', () => { openSourceModal(title, group.images); });
-            grid.appendChild(card);
-        });
-    } catch (err) {
-        console.error(err);
-        grid.innerHTML = '<p style="color:var(--muted); text-align:center;">تعذر تحميل المصادر.</p>';
-    }
-}
-
-function openSourceModal(title, images) {
-    const modal = document.getElementById('sourceModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const container = document.getElementById('modalImagesContainer');
-
-    modalTitle.textContent = title;
-    container.innerHTML = '';
-
-    images.forEach(imgData => {
-        let imgUrl = (imgData.image_url || '').trim();
-        const div = document.createElement('div');
-        div.className = 'source-img-card';
-        div.innerHTML = `
-            <a href="${imgUrl}" target="_blank" rel="noopener" title="انقر لفتح الصورة بحجم كامل">
-                <img src="${imgUrl}" alt="${title}" loading="lazy" style="width:100%; max-height:450px; object-fit:contain; border-radius:10px; display:block; margin:auto;" onerror="this.onerror=null; this.parentElement.innerHTML='<p style=\\'color:var(--gold);padding:20px;\\'>⚠️ لم يتم العثور على ملف الصورة على السيرفر في المسار:<br><small>${imgUrl}</small></p>';">
-            </a>
-            <p style="margin-top:10px; font-size:0.88rem; color:var(--muted);">${imgData.description || 'مصدر معتمد من الكتب'}</p>
-        `;
-        container.appendChild(div);
-    });
-
-    modal.style.display = 'flex';
-}
-
-function closeSourceModal() {
-    document.getElementById('sourceModal').style.display = 'none';
-}
-
-window.addEventListener('click', (e) => {
-    const modal = document.getElementById('sourceModal');
-    if (e.target === modal) modal.style.display = 'none';
-});
-
-// جلب الفيديوهات وتنسيقها بطريقة الكروت الاحترافية
-async function fetchLatestVideos() {
-    if (!supabaseClient) return;
-    const container = document.getElementById('videos-container');
-    if (!container) return;
-
-    try {
-        const { data, error } = await supabaseClient.from('videos').select('*').limit(4);
-        if (error || !data || data.length === 0) {
-            container.innerHTML = '<p style="color:var(--muted); grid-column:1/-1; text-align:center;">لا توجد فيديوهات مضافة حالياً.</p>';
-            return;
-        }
-
-        container.innerHTML = '';
-        data.forEach(vid => {
-            if (vid.youtube_id) {
-                const card = document.createElement('div');
-                card.className = 'video-card';
-                card.innerHTML = `
-                    <div class="video-thumb-wrapper">
-                        <iframe src="https://www.youtube.com/embed/${vid.youtube_id}" title="${vid.title || 'فيديو'}" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <span class="video-meta-tag">🎬 مقطع مرئي</span>
-                        <h4>${vid.title || 'فيديو بدون عنوان'}</h4>
-                    </div>
-                `;
-                container.appendChild(card);
-            }
-        });
-    } catch (err) {
-        container.innerHTML = '<p style="color:var(--muted); grid-column:1/-1; text-align:center;">تعذر تحميل الفيديوهات.</p>';
-    }
-}
-
-function renderDocs(docs) {
-    const grid = document.getElementById('docs');
-    if (!grid) return;
-    grid.innerHTML = '';
-
-    if (docs.length === 0) {
-        document.getElementById('empty').style.display = 'block';
-        document.getElementById('count').textContent = '0 نتائج';
-        return;
-    }
-
-    document.getElementById('empty').style.display = 'none';
-    document.getElementById('count').textContent = docs.length + ' ملفات';
-
-    docs.forEach(doc => {
-        let symbol = '📕';
-        if (doc.category === 'بحوث عقائدية') symbol = '💡';
-        else if (doc.category === 'كتب ومراجع') symbol = '📖';
-        else if (doc.category === 'مقالات ودراسات') symbol = '📝';
-        else if (doc.category === 'وثائق تاريخية') symbol = '📜';
-
-        const card = document.createElement('article');
-        card.className = 'doc-card';
-        card.dataset.category = doc.category || '';
-        
-        card.innerHTML = `
-            <span class="tag">${doc.category || 'متنوع'}</span>
-            <div class="symbol">${symbol}</div>
-            <h3>${doc.title}</h3>
-            <div class="doc-meta">المؤلف: ${doc.author || 'غير معروف'} · التاريخ: ${doc.date || 'غير محدد'}</div>
-            <p>${doc.description || ''}</p>
-            <div class="doc-actions"><a class="btn" href="${doc.file_url}" target="_blank" rel="noopener">قراءة / تحميل</a></div>
-        `;
-        grid.appendChild(card);
-    });
-}
-
-const q = document.getElementById('q'), cat = document.getElementById('category');
-
-function filterDocs() {
-    if (!q || !cat) return;
-    let term = q.value.trim().toLocaleLowerCase('ar');
-    let category = cat.value;
-
-    let filtered = allDocs.filter(doc => {
-        let textMatch = (doc.title + ' ' + (doc.author || '') + ' ' + (doc.description || '')).toLocaleLowerCase('ar').includes(term);
-        let catMatch = !category || doc.category === category;
-        return textMatch && catMatch;
-    });
-
-    renderDocs(filtered);
-}
-
-if (q) q.addEventListener('input', filterDocs);
-if (cat) cat.addEventListener('change', filterDocs);
-
-fetchDocuments();
-fetchSources();
-fetchLatestVideos();
-</script>
-</body>
-</html>
