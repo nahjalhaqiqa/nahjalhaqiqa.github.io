@@ -715,3 +715,248 @@ let allSources = [];
 
 async function fetchDocuments() {
     if (!supabaseClient) return;
+    try {
+        const { data, error } = await supabaseClient.from('documents').select('*');
+        if (error) return;
+        allDocs = data || [];
+        filterAndRenderDocs();
+    } catch (err) { console.error(err); }
+}
+
+// فتح وثيقة PDF داخل النوافذ المنبثقة
+function openPdfViewer(title, fileUrl) {
+    const modal = document.getElementById('pdfModal');
+    const pdfFrame = document.getElementById('pdfFrame');
+    const pdfTitle = document.getElementById('pdfTitle');
+    
+    pdfTitle.textContent = title;
+    pdfFrame.src = fileUrl;
+    modal.style.display = 'flex';
+}
+
+function closePdfModal() {
+    const modal = document.getElementById('pdfModal');
+    const pdfFrame = document.getElementById('pdfFrame');
+    pdfFrame.src = '';
+    modal.style.display = 'none';
+}
+
+// دالة المشاركة السريعة للوثائق
+function shareDocument(platform, title, url) {
+    const text = encodeURIComponent(`💡 وثيقة من نهج الحقيقة:\n*${title}*\n\n`);
+    const docUrl = encodeURIComponent(url);
+    
+    let shareLink = '';
+    if (platform === 'whatsapp') {
+        shareLink = `https://api.whatsapp.com/send?text=${text}${docUrl}`;
+    } else if (platform === 'telegram') {
+        shareLink = `https://t.me/share/url?url=${docUrl}&text=${text}`;
+    } else if (platform === 'twitter') {
+        shareLink = `https://twitter.com/intent/tweet?text=${text}&url=${docUrl}`;
+    }
+    
+    window.open(shareLink, '_blank');
+}
+
+async function fetchSources() {
+    if (!supabaseClient) return;
+    const grid = document.getElementById('sources-grid');
+    if (!grid) return;
+
+    try {
+        const { data, error } = await supabaseClient.from('sources').select('*');
+        if (error || !data || data.length === 0) {
+            grid.innerHTML = '<p style="color:var(--muted); grid-column:1/-1; text-align:center;">لا توجد مصادر مصورة مضافة حالياً في جدول sources.</p>';
+            return;
+        }
+
+        allSources = data;
+        const grouped = {};
+        data.forEach(item => {
+            const title = item.title || 'أدلة متنوعة';
+            if (!grouped[title]) {
+                grouped[title] = { title: title, images: [], sampleImg: item.image_url };
+            }
+            grouped[title].images.push(item);
+        });
+
+        grid.innerHTML = '';
+        Object.keys(grouped).forEach(title => {
+            const group = grouped[title];
+            const card = document.createElement('article');
+            card.className = 'doc-card';
+            card.innerHTML = `
+                <div class="symbol">📑</div>
+                <h3>${title}</h3>
+                <p style="color:var(--muted); font-size:0.88rem;">موسوعة وثائق وصور مستدلة (يحتوي على ${group.images.length} مستند)</p>
+                <span class="tag">عرض المصادر ↗</span>
+            `;
+            card.addEventListener('click', () => { openSourceModal(title, group.images); });
+            grid.appendChild(card);
+        });
+    } catch (err) {
+        console.error(err);
+        grid.innerHTML = '<p style="color:var(--muted); text-align:center;">تعذر تحميل المصادر.</p>';
+    }
+}
+
+function openSourceModal(title, images) {
+    const modal = document.getElementById('sourceModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const container = document.getElementById('modalImagesContainer');
+
+    modalTitle.textContent = title;
+    container.innerHTML = '';
+
+    images.forEach(imgData => {
+        let imgUrl = (imgData.image_url || '').trim();
+        const div = document.createElement('div');
+        div.className = 'source-img-card';
+        div.innerHTML = `
+            <a href="${imgUrl}" target="_blank" rel="noopener" title="انقر لفتح الصورة بحجم كامل">
+                <img src="${imgUrl}" alt="${title}" loading="lazy" style="width:100%; max-height:450px; object-fit:contain; border-radius:10px; display:block; margin:auto;" onerror="this.onerror=null; this.parentElement.innerHTML='<p style=\\'color:var(--gold);padding:20px;\\'>⚠️ لم يتم العثور على ملف الصورة على السيرفر في المسار:<br><small>${imgUrl}</small></p>';">
+            </a>
+            <p style="margin-top:10px; font-size:0.88rem; color:var(--muted);">${imgData.description || 'مصدر معتمد من الكتب'}</p>
+        `;
+        container.appendChild(div);
+    });
+
+    modal.style.display = 'flex';
+}
+
+function closeSourceModal() {
+    document.getElementById('sourceModal').style.display = 'none';
+}
+
+window.addEventListener('click', (e) => {
+    const modal = document.getElementById('sourceModal');
+    const pdfModal = document.getElementById('pdfModal');
+    if (e.target === modal) modal.style.display = 'none';
+    if (e.target === pdfModal) closePdfModal();
+});
+
+async function fetchLatestVideos() {
+    if (!supabaseClient) return;
+    const container = document.getElementById('videos-container');
+    if (!container) return;
+
+    try {
+        const { data, error } = await supabaseClient.from('videos').select('*').limit(4);
+        if (error || !data || data.length === 0) {
+            container.innerHTML = '<p style="color:var(--muted); grid-column:1/-1; text-align:center;">لا توجد فيديوهات مضافة حالياً.</p>';
+            return;
+        }
+
+        container.innerHTML = '';
+        data.forEach(vid => {
+            if (vid.youtube_id) {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.innerHTML = `
+                    <div class="video-thumb-wrapper">
+                        <iframe src="https://www.youtube.com/embed/${vid.youtube_id}" title="${vid.title || 'فيديو'}" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-meta-tag">🎬 مقطع مرئي</span>
+                        <h4>${vid.title || 'فيديو بدون عنوان'}</h4>
+                    </div>
+                `;
+                container.appendChild(card);
+            }
+        });
+    } catch (err) {
+        container.innerHTML = '<p style="color:var(--muted); grid-column:1/-1; text-align:center;">تعذر تحميل الفيديوهات.</p>';
+    }
+}
+
+function renderDocs(docs) {
+    const grid = document.getElementById('docs');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    if (docs.length === 0) {
+        document.getElementById('empty').style.display = 'block';
+        document.getElementById('count').textContent = '0 نتائج';
+        return;
+    }
+
+    document.getElementById('empty').style.display = 'none';
+    document.getElementById('count').textContent = docs.length + ' ملفات';
+
+    docs.forEach(doc => {
+        let symbol = '📕';
+        if (doc.category === 'بحوث عقائدية') symbol = '💡';
+        else if (doc.category === 'كتب ومراجع') symbol = '📖';
+        else if (doc.category === 'مقالات ودراسات') symbol = '📝';
+        else if (doc.category === 'وثائق تاريخية') symbol = '📜';
+
+        const card = document.createElement('article');
+        card.className = 'doc-card';
+        card.dataset.category = doc.category || '';
+        
+        const docTitle = doc.title || 'وثيقة بدون عنوان';
+        const fileUrl = doc.file_url || '#';
+
+        card.innerHTML = `
+            <span class="tag">${doc.category || 'متنوع'}</span>
+            <div class="symbol">${symbol}</div>
+            <h3>${docTitle}</h3>
+            <div class="doc-meta">المؤلف: ${doc.author || 'غير معروف'} · التاريخ: ${doc.date || 'غير محدد'}</div>
+            <p>${doc.description || ''}</p>
+            <div style="display:flex; gap:8px; margin-top:auto;">
+                <button class="btn" style="flex:1; padding:8px 12px; font-size:0.85rem;" onclick="openPdfViewer('${docTitle.replace(/'/g, "\\'")}', '${fileUrl}')">📖 قراءة الوثيقة</button>
+                <a class="btn ghost" href="${fileUrl}" target="_blank" rel="noopener" style="padding:8px 12px; font-size:0.85rem;" title="تحميل الملف">⬇️</a>
+            </div>
+            <div class="share-bar">
+                <span style="font-size:0.78rem; color:var(--muted);">مشاركة:</span>
+                <button class="share-btn" onclick="event.stopPropagation(); shareDocument('whatsapp', '${docTitle.replace(/'/g, "\\'")}', '${fileUrl}')">واتساب</button>
+                <button class="share-btn" onclick="event.stopPropagation(); shareDocument('telegram', '${docTitle.replace(/'/g, "\\'")}', '${fileUrl}')">تليجرام</button>
+                <button class="share-btn" onclick="event.stopPropagation(); shareDocument('twitter', '${docTitle.replace(/'/g, "\\'")}', '${fileUrl}')">إكس</button>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+const q = document.getElementById('q'), cat = document.getElementById('category'), sortBy = document.getElementById('sortBy');
+
+function filterAndRenderDocs() {
+    if (!q || !cat) return;
+    let term = q.value.trim().toLocaleLowerCase('ar');
+    let category = cat.value;
+    let sortOption = sortBy ? sortBy.value : 'newest';
+
+    let filtered = allDocs.filter(doc => {
+        let textMatch = (doc.title + ' ' + (doc.author || '') + ' ' + (doc.description || '')).toLocaleLowerCase('ar').includes(term);
+        let catMatch = !category || doc.category === category;
+        return textMatch && catMatch;
+    });
+
+    if (sortOption === 'title') {
+        filtered.sort((a, b) => (a.title || '').localeCompare(b.title || '', 'ar'));
+    } else {
+        filtered.reverse();
+    }
+
+    renderDocs(filtered);
+}
+
+function filterByTag(category, btnElement) {
+    if (cat) {
+        cat.value = category;
+        filterAndRenderDocs();
+    }
+    document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+    if (btnElement) btnElement.classList.add('active');
+}
+
+if (q) q.addEventListener('input', filterAndRenderDocs);
+if (cat) cat.addEventListener('change', filterAndRenderDocs);
+if (sortBy) sortBy.addEventListener('change', filterAndRenderDocs);
+
+fetchDocuments();
+fetchSources();
+fetchLatestVideos();
+</script>
+</body>
+</html>
