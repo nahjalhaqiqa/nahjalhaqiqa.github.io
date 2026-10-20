@@ -395,7 +395,7 @@ section{padding:20px 0}
     margin: 15px 0;
 }
 
-/* النوافذ المنبثقة الشاملة مع زر الرجوع */
+/* النوافذ المنبثقة الشاملة مع زري التنزيل والرجوع */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,0.88);display:none;align-items:center;justify-content:center;z-index:200;padding:12px;backdrop-filter:blur(8px)}
 .modal-header-bar {
     display: flex;
@@ -409,19 +409,19 @@ section{padding:20px 0}
 .modal-content{background:var(--bg-body);border:1px solid var(--mint);border-radius:20px;width:min(900px, 100%);max-height:92vh;overflow-y:auto;padding:20px;position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8);}
 
 .back-btn{
-    background: rgba(255,255,255,0.1);
-    border: 1px solid var(--line);
-    color: var(--ink);
-    padding: 6px 16px;
+    background: rgba(223, 37, 44, 0.2);
+    border: 1px solid #df252c;
+    color: #ff6b6b;
+    padding: 7px 18px;
     border-radius: 20px;
     font-size: 0.9rem;
-    font-weight: 700;
+    font-weight: 800;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 6px;
 }
-.back-btn:hover{background: #df252c; color: white; border-color: #df252c;}
+.back-btn:hover{background: #df252c; color: white;}
 
 .source-images-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px, 1fr));gap:18px;margin-top:15px}
 .source-img-card{background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
@@ -722,13 +722,13 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 </div>
 </div>
 
-<!-- عارض PDF الداخلي المزود بزر الرجوع والتنزيل -->
+<!-- عارض PDF الداخلي المزود بزر الرجوع والتنزيل المباشر -->
 <div class="modal" id="pdfModal">
 <div class="pdf-modal-content">
 <div class="modal-header-bar">
-<h3 id="pdfTitle" style="margin:0; color:var(--gold); font-size:1.1rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:65%;">عرض الوثيقة</h3>
+<h3 id="pdfTitle" style="margin:0; color:var(--gold); font-size:1.1rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:50%;">عرض الوثيقة</h3>
 <div style="display:flex; gap:8px;">
-<a id="pdfDownloadDirectBtn" class="btn" href="" download target="_blank" style="padding:6px 14px; font-size:0.85rem;">⬇️ تحميل الملف</a>
+<button id="pdfDownloadBtn" class="btn" onclick="downloadFileDirectly()" style="padding:6px 14px; font-size:0.85rem;">⬇️ تحميل الملف</button>
 <button class="back-btn" onclick="closePdfModal()">← رجوع</button>
 </div>
 </div>
@@ -824,6 +824,36 @@ try {
     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 } catch (e) {
     console.error('خطأ في الاتصال:', e);
+}
+
+/* ========================================================
+   دالة التحميل المباشر للملفات على الحاسوب والهاتف
+======================================================== */
+let activePdfUrl = '';
+let activePdfName = '';
+
+async function triggerDirectDownload(fileUrl, fileName) {
+    try {
+        const response = await fetch(fileUrl);
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = fileName || 'nahj-alhaq-document';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+        // في حال اعتراض المتصفح، يتم التحويل لفتح وتنزيل الملف بطريقة موازية
+        window.open(fileUrl, '_blank');
+    }
+}
+
+function downloadFileDirectly() {
+    if (activePdfUrl) {
+        triggerDirectDownload(activePdfUrl, activePdfName + '.pdf');
+    }
 }
 
 /* ========================================================
@@ -1050,15 +1080,17 @@ async function fetchDocuments() {
 }
 
 function openPdfViewer(title, fileUrl) {
+    activePdfUrl = fileUrl;
+    activePdfName = title;
+    
     const modal = document.getElementById('pdfModal');
     const pdfFrame = document.getElementById('pdfFrame');
     const pdfTitle = document.getElementById('pdfTitle');
-    const downloadBtn = document.getElementById('pdfDownloadDirectBtn');
     
     pdfTitle.textContent = title;
-    // استخدام عرض Google Docs Viewer للتأفق الكامل مع متصفحات الجوال
+    
+    // استخدام العارض التوافقي الشامل للحاسوب والهواتف
     pdfFrame.src = `https://docs.google.com/viewer?url=${encodeURIComponent(fileUrl)}&embedded=true`;
-    downloadBtn.href = fileUrl;
     modal.style.display = 'flex';
 }
 
@@ -1067,6 +1099,8 @@ function closePdfModal() {
     const pdfFrame = document.getElementById('pdfFrame');
     pdfFrame.src = '';
     modal.style.display = 'none';
+    activePdfUrl = '';
+    activePdfName = '';
 }
 
 function shareDocument(platform, title, url) {
@@ -1144,7 +1178,7 @@ function openSourceModal(title, images) {
                 <img src="${imgUrl}" alt="${title}" loading="lazy" style="width:100%; max-height:420px; object-fit:contain; border-radius:10px; display:block; margin:auto;" onerror="this.onerror=null; this.parentElement.innerHTML='<p style=\\'color:var(--gold);padding:20px;\\'>⚠️ لم يتم العثور على ملف الصورة على السيرفر في المسار:<br><small>${imgUrl}</small></p>';">
             </a>
             <p style="margin-top:10px; font-size:0.88rem; color:var(--muted);">${imgData.description || 'مصدر معتمد من الكتب'}</p>
-            <a class="btn" href="${imgUrl}" download target="_blank" style="padding:6px 16px; font-size:0.8rem; margin-top:6px;">⬇️ تحميل الصورة</a>
+            <button class="btn" onclick="triggerDirectDownload('${imgUrl}', 'source_image')" style="padding:6px 16px; font-size:0.8rem; margin-top:6px; width:100%;">⬇️ تحميل الصورة للكمبيوتر والجوال</button>
         `;
         container.appendChild(div);
     });
@@ -1155,6 +1189,14 @@ function openSourceModal(title, images) {
 function closeSourceModal() {
     document.getElementById('sourceModal').style.display = 'none';
 }
+
+// دمج زر الـ Escape للإغلاق السريع وحركات الرجوع
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeSourceModal();
+        closePdfModal();
+    }
+});
 
 window.addEventListener('click', (e) => {
     const modal = document.getElementById('sourceModal');
@@ -1233,7 +1275,7 @@ function renderDocs(docs) {
             <p>${doc.description || ''}</p>
             <div style="display:flex; gap:8px; margin-top:auto;">
                 <button class="btn" style="flex:1; padding:8px 12px; font-size:0.85rem;" onclick="openPdfViewer('${docTitle.replace(/'/g, "\\'")}', '${fileUrl}')">📖 قراءة الوثيقة</button>
-                <a class="btn ghost" href="${fileUrl}" download target="_blank" rel="noopener" style="padding:8px 12px; font-size:0.85rem;" title="تحميل الملف">⬇️</a>
+                <button class="btn ghost" onclick="triggerDirectDownload('${fileUrl}', '${docTitle.replace(/'/g, "\\'")}.pdf')" style="padding:8px 12px; font-size:0.85rem;" title="تحميل الملف مباشرة">⬇️</button>
             </div>
             <div class="share-bar">
                 <span style="font-size:0.78rem; color:var(--muted);">مشاركة:</span>
