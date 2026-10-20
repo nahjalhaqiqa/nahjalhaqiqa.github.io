@@ -460,4 +460,384 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 </select>
 </div>
 <div class="doc-grid" id="docs"></div>
-<div class="empty" id="empty" style
+<div class="empty" id="empty" style="display:none;">لا توجد نتائج مطابقة. جرّب كلمة أخرى أو اختر تصنيفاً مختلفاً.</div>
+<div class="note"><span>💡</span> <div>تنبه: الموقع قيد التطوير حاليًا، نعمل على تحسينه وتحديث خدماته لتقديم تجربة أفضل لكم. شكرًا لصبركم وتفهمكم.</div></div>
+</section>
+
+<!-- قسم موسوعة الأدلة والمصادر المصورة -->
+<section class="wrap" id="sources-section" style="margin-top: 25px;">
+<div class="head">
+<h2>موسوعة الأدلة والمصادر المصورة</h2>
+<small>انقر على أي موضوع لعرض الوثائق المرتبطة به</small>
+</div>
+<div class="doc-grid" id="sources-grid">
+<p style="color:var(--muted);">جاري تحميل المواضيع والأدلة...</p>
+</div>
+</section>
+
+<!-- قسم القناة المطور كلياً (الفيديوهات الاحترافية) -->
+<section class="wrap" id="youtube">
+<div class="head">
+<h2>قناة نهج الحقيقة المرئية</h2>
+<small>أحدث الحوارات والمقاطع المرئية على يوتيوب</small>
+</div>
+<div class="video-layout">
+<!-- كارت التعريف بالقناة على اليمين -->
+<div class="channel-info-card">
+<span class="yt-badge">▶ YOUTUBE</span>
+<h2>قناة نهج الحقيقة</h2>
+<p>اشترك في القناة الرسمية لمتابعة أحدث الحوارات العلمية، المناظرات، والبحوث العقائدية المصورة أولاً بأول.</p>
+<a class="btn red" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener" style="width: 100%; gap: 8px;">
+<span>الاشتراك في القناة ↗</span>
+</a>
+</div>
+
+<!-- شبكة الفيديوهات -->
+<div class="videos-grid" id="videos-container">
+<p style="color:var(--muted); grid-column:1/-1; text-align:center;">جاري جلب الفيديوهات...</p>
+</div>
+</div>
+</section>
+
+<!-- قسم التواصل وإرسال رسالة مباشرة لبريدك الإلكتروني -->
+<section class="wrap" id="contact">
+<div class="panel">
+<h2 style="margin-top: 0;">تواصل معنا وإرسال رسالة</h2>
+<p style="margin-bottom:22px; color: var(--muted);">نرحب بمقترحاتكم أو استفساراتكم. أرسل رسالة وسيتم إرسالها مباشرة إلى بريد المنصة:</p>
+<form class="contact-form" id="contactForm" onsubmit="sendEmailMessage(event)">
+<input type="text" id="from_name" placeholder="اسمك الكريم" required>
+<input type="email" id="from_email" placeholder="بريدك الإلكتروني" required>
+<input type="text" id="subject" placeholder="عنوان الرسالة أو الموضوع" required>
+<textarea id="message" placeholder="اكتب رسالتك هنا..." required></textarea>
+<button type="submit" id="sendBtn" class="btn" style="width:fit-content">إرسال الرسالة الآن</button>
+</form>
+<p id="contactMsg" style="margin-top: 14px; font-size: 0.95rem; text-align: center; display: none; font-weight:700;"></p>
+</div>
+</section>
+
+<section class="wrap" id="about">
+<div class="panel">
+<h2 style="margin-top: 0;">عن نهج الحقيقة</h2>
+<p style="color: var(--muted); margin: 0;">منصة لنشر الوثائق والبحوث والملفات، والتعريف بالمصادر والمحتوى الحواري. نوصي بإرفاق مصدر كل وثيقة وتاريخها، والتمييز بين النص الأصلي والتعليق عليه، واحترام حقوق النشر وخصوصية الأفراد.</p>
+</div>
+</section>
+</main>
+
+<!-- نافذة منبثقة (Modal) لعرض صور الأدلة -->
+<div class="modal" id="sourceModal">
+<div class="modal-content">
+<button class="close-btn" onclick="closeSourceModal()">&times;</button>
+<h2 id="modalTitle" style="margin-top:0; color:var(--gold);">عنوان الموضوع</h2>
+<p id="modalDesc" style="color:var(--muted); font-size:0.92rem;">مجموعة الوثائق والمصادر المستدلة:</p>
+<div class="source-images-grid" id="modalImagesContainer"></div>
+</div>
+</div>
+
+<footer>
+<div class="wrap foot">
+<div style="display:flex; align-items:center; gap:12px;">
+<img src="assets/logo.png" alt="" style="width:42px; height:42px; object-fit:contain;">
+<strong style="color: var(--ink); font-size: 1.1rem;">نهج الحقيقة</strong>
+</div>
+<span>معاً نحو وعي أعمق وحقائق أوضح</span>
+<div class="social-icons">
+<a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank">يوتيوب</a>
+<a href="#" target="_blank">فيسبوك</a>
+<a href="https://www.tiktok.com/@ha_no_88?is_from_webapp=1&sender_device=pc" target="_blank">تيك توك</a>
+<a href="https://x.com/raf88idi" target="_blank">إكس</a>
+</div>
+<small>© <span id="year"></span> نهج الحقيقة</small>
+</div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+function toggleTheme() {
+    const html = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        btn.textContent = '☀️ الوضع النهاري';
+        localStorage.setItem('theme', 'light');
+    } else {
+        html.setAttribute('data-theme', 'dark');
+        btn.textContent = '🌙 الوضع الليلي';
+        localStorage.setItem('theme', 'dark');
+    }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('themeToggle').textContent = savedTheme === 'dark' ? '🌙 الوضع النهاري' : '☀️ الوضع الليلي';
+    
+    try {
+        emailjs.init("xd1Jo81I__MsksgB9");
+    } catch(e) { console.log(e); }
+});
+
+const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co'; 
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4c3h4a2F1eG91eW5lYWFtZWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MjQxMjMsImV4cCI6MjEwNzMwMDEyM30.wvVWq3TXd83mJ2FtViIwWO7O_hN1OazD91MkmiWZdh0'; 
+
+let supabaseClient = null;
+try {
+    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+} catch (e) {
+    console.error('خطأ في الاتصال:', e);
+}
+
+// دالة حفظ إيميلات المشتركين
+async function handleSubscribe(e) {
+    e.preventDefault();
+    const emailInput = document.getElementById('subscriberEmail');
+    const msg = document.getElementById('subscribeMsg');
+    const email = emailInput.value.trim();
+
+    if (!supabaseClient) {
+        msg.style.display = 'block';
+        msg.style.color = '#df252c';
+        msg.textContent = '⚠️ تعذر الاتصال بقاعدة البيانات.';
+        return;
+    }
+
+    try {
+        const { error } = await supabaseClient.from('subscribers').insert([{ email: email, created_at: new Date() }]);
+        msg.style.display = 'block';
+        if (error) {
+            msg.style.color = '#f3d58a';
+            if (error.code === '23505' || (error.message && error.message.includes('duplicate'))) {
+                msg.textContent = '🌹 أهلاً بك مجدداً! هذا البريد مسجل مسبقاً في قائمتنا البريدية.';
+            } else {
+                msg.textContent = '⚠️ يبدو أن هناك خطأ بسيط، يرجى المحاولة لاحقاً.';
+            }
+        } else {
+            msg.style.color = 'var(--mint)';
+            msg.textContent = '✅ شكراً لاشتراكك! تم إضافتك لقائمة متابعي نهج الحقيقة بنجاح.';
+            emailInput.value = '';
+        }
+    } catch (err) {
+        msg.style.display = 'block';
+        msg.style.color = '#df252c';
+        msg.textContent = '⚠️ حدث خطأ أثناء التسجيل.';
+    }
+}
+
+// دالة إرسال الرسائل عبر EmailJS
+function sendEmailMessage(e) {
+    e.preventDefault();
+    const btn = document.getElementById('sendBtn');
+    const contactMsg = document.getElementById('contactMsg');
+    
+    btn.disabled = true;
+    btn.textContent = 'جاري الإرسال...';
+
+    const templateParams = {
+        from_name: document.getElementById('from_name').value,
+        from_email: document.getElementById('from_email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+    };
+
+    emailjs.send('service_bwh87m7', 'template_ogee95s', templateParams)
+        .then(() => {
+            contactMsg.style.display = 'block';
+            contactMsg.style.color = 'var(--mint)';
+            contactMsg.textContent = '✅ تم إرسال رسالتك بنجاح إلى بريد الموقع! شكراً لتواصلك.';
+            document.getElementById('contactForm').reset();
+            btn.disabled = false;
+            btn.textContent = 'إرسال الرسالة الآن';
+        }, (error) => {
+            contactMsg.style.display = 'block';
+            contactMsg.style.color = '#df252c';
+            contactMsg.textContent = '⚠️ عذراً، لم يتم إرسال الرسالة. يرجى التحقق لاحقاً.';
+            btn.disabled = false;
+            btn.textContent = 'إرسال الرسالة الآن';
+        });
+}
+
+let allDocs = [];
+let allSources = [];
+
+async function fetchDocuments() {
+    if (!supabaseClient) return;
+    try {
+        const { data, error } = await supabaseClient.from('documents').select('*');
+        if (error) return;
+        allDocs = data || [];
+        renderDocs(allDocs);
+    } catch (err) { console.error(err); }
+}
+
+async function fetchSources() {
+    if (!supabaseClient) return;
+    const grid = document.getElementById('sources-grid');
+    if (!grid) return;
+
+    try {
+        const { data, error } = await supabaseClient.from('sources').select('*');
+        if (error || !data || data.length === 0) {
+            grid.innerHTML = '<p style="color:var(--muted); grid-column:1/-1; text-align:center;">لا توجد مصادر مصورة مضافة حالياً في جدول sources.</p>';
+            return;
+        }
+
+        allSources = data;
+        const grouped = {};
+        data.forEach(item => {
+            const title = item.title || 'أدلة متنوعة';
+            if (!grouped[title]) {
+                grouped[title] = { title: title, images: [], sampleImg: item.image_url };
+            }
+            grouped[title].images.push(item);
+        });
+
+        grid.innerHTML = '';
+        Object.keys(grouped).forEach(title => {
+            const group = grouped[title];
+            const card = document.createElement('article');
+            card.className = 'doc-card';
+            card.innerHTML = `
+                <div class="symbol">📑</div>
+                <h3>${title}</h3>
+                <p style="color:var(--muted); font-size:0.88rem;">موسوعة وثائق وصور مستدلة (يحتوي على ${group.images.length} مستند)</p>
+                <span class="tag">عرض المصادر ↗</span>
+            `;
+            card.addEventListener('click', () => { openSourceModal(title, group.images); });
+            grid.appendChild(card);
+        });
+    } catch (err) {
+        console.error(err);
+        grid.innerHTML = '<p style="color:var(--muted); text-align:center;">تعذر تحميل المصادر.</p>';
+    }
+}
+
+function openSourceModal(title, images) {
+    const modal = document.getElementById('sourceModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const container = document.getElementById('modalImagesContainer');
+
+    modalTitle.textContent = title;
+    container.innerHTML = '';
+
+    images.forEach(imgData => {
+        let imgUrl = (imgData.image_url || '').trim();
+        const div = document.createElement('div');
+        div.className = 'source-img-card';
+        div.innerHTML = `
+            <a href="${imgUrl}" target="_blank" rel="noopener" title="انقر لفتح الصورة بحجم كامل">
+                <img src="${imgUrl}" alt="${title}" loading="lazy" style="width:100%; max-height:450px; object-fit:contain; border-radius:10px; display:block; margin:auto;" onerror="this.onerror=null; this.parentElement.innerHTML='<p style=\\'color:var(--gold);padding:20px;\\'>⚠️ لم يتم العثور على ملف الصورة على السيرفر في المسار:<br><small>${imgUrl}</small></p>';">
+            </a>
+            <p style="margin-top:10px; font-size:0.88rem; color:var(--muted);">${imgData.description || 'مصدر معتمد من الكتب'}</p>
+        `;
+        container.appendChild(div);
+    });
+
+    modal.style.display = 'flex';
+}
+
+function closeSourceModal() {
+    document.getElementById('sourceModal').style.display = 'none';
+}
+
+window.addEventListener('click', (e) => {
+    const modal = document.getElementById('sourceModal');
+    if (e.target === modal) modal.style.display = 'none';
+});
+
+// جلب الفيديوهات وتنسيقها بطريقة الكروت الاحترافية
+async function fetchLatestVideos() {
+    if (!supabaseClient) return;
+    const container = document.getElementById('videos-container');
+    if (!container) return;
+
+    try {
+        const { data, error } = await supabaseClient.from('videos').select('*').limit(4);
+        if (error || !data || data.length === 0) {
+            container.innerHTML = '<p style="color:var(--muted); grid-column:1/-1; text-align:center;">لا توجد فيديوهات مضافة حالياً.</p>';
+            return;
+        }
+
+        container.innerHTML = '';
+        data.forEach(vid => {
+            if (vid.youtube_id) {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.innerHTML = `
+                    <div class="video-thumb-wrapper">
+                        <iframe src="https://www.youtube.com/embed/${vid.youtube_id}" title="${vid.title || 'فيديو'}" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <span class="video-meta-tag">🎬 مقطع مرئي</span>
+                        <h4>${vid.title || 'فيديو بدون عنوان'}</h4>
+                    </div>
+                `;
+                container.appendChild(card);
+            }
+        });
+    } catch (err) {
+        container.innerHTML = '<p style="color:var(--muted); grid-column:1/-1; text-align:center;">تعذر تحميل الفيديوهات.</p>';
+    }
+}
+
+function renderDocs(docs) {
+    const grid = document.getElementById('docs');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    if (docs.length === 0) {
+        document.getElementById('empty').style.display = 'block';
+        document.getElementById('count').textContent = '0 نتائج';
+        return;
+    }
+
+    document.getElementById('empty').style.display = 'none';
+    document.getElementById('count').textContent = docs.length + ' ملفات';
+
+    docs.forEach(doc => {
+        let symbol = '📕';
+        if (doc.category === 'بحوث عقائدية') symbol = '💡';
+        else if (doc.category === 'كتب ومراجع') symbol = '📖';
+        else if (doc.category === 'مقالات ودراسات') symbol = '📝';
+        else if (doc.category === 'وثائق تاريخية') symbol = '📜';
+
+        const card = document.createElement('article');
+        card.className = 'doc-card';
+        card.dataset.category = doc.category || '';
+        
+        card.innerHTML = `
+            <span class="tag">${doc.category || 'متنوع'}</span>
+            <div class="symbol">${symbol}</div>
+            <h3>${doc.title}</h3>
+            <div class="doc-meta">المؤلف: ${doc.author || 'غير معروف'} · التاريخ: ${doc.date || 'غير محدد'}</div>
+            <p>${doc.description || ''}</p>
+            <div class="doc-actions"><a class="btn" href="${doc.file_url}" target="_blank" rel="noopener">قراءة / تحميل</a></div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+const q = document.getElementById('q'), cat = document.getElementById('category');
+
+function filterDocs() {
+    if (!q || !cat) return;
+    let term = q.value.trim().toLocaleLowerCase('ar');
+    let category = cat.value;
+
+    let filtered = allDocs.filter(doc => {
+        let textMatch = (doc.title + ' ' + (doc.author || '') + ' ' + (doc.description || '')).toLocaleLowerCase('ar').includes(term);
+        let catMatch = !category || doc.category === category;
+        return textMatch && catMatch;
+    });
+
+    renderDocs(filtered);
+}
+
+if (q) q.addEventListener('input', filterDocs);
+if (cat) cat.addEventListener('change', filterDocs);
+
+fetchDocuments();
+fetchSources();
+fetchLatestVideos();
+</script>
+</body>
+</html>
