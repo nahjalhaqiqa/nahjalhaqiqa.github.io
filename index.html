@@ -125,7 +125,7 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 </div>
 </section>
 
-<!-- قسم الاشتراك في النشرة البريدية (يحفظ الإيميلات في Supabase) -->
+<!-- قسم الاشتراك في النشرة البريدية -->
 <section class="wrap" id="subscribe-section" style="margin-top: 25px;">
 <div class="panel" style="text-align: center; border: 1px solid var(--mint);">
 <h2 style="color: var(--mint); margin-top: 0;">🔔 انضم إلى قائمة متابعي نهج الحقيقة</h2>
@@ -162,7 +162,7 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <div class="note">💡 تنبيه: الموقع قيد التطوير حاليًا، نعمل على تحسينه وتحديث خدماته لتقديم تجربة أفضل لكم. شكرًا لصبركم وتفهمكم، ونترقب زيارتكم قريبًا بحلّته الجديدة</div>
 </section>
 
-<!-- قسم موسوعة الأدلة والمصادر المصورة الجديد -->
+<!-- قسم موسوعة الأدلة والمصادر المصورة -->
 <section class="wrap" id="sources-section" style="margin-top: 30px;">
 <div class="head">
 <h2>موسوعة الأدلة والمصادر المصورة</h2>
@@ -218,15 +218,13 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 </section>
 </main>
 
-<!-- نافذة منبثقة (Modal) لعرض صور الأدلة عند النقر على الموضوع -->
+<!-- نافذة منبثقة (Modal) لعرض صور الأدلة -->
 <div class="modal" id="sourceModal">
 <div class="modal-content">
 <button class="close-btn" onclick="closeSourceModal()">&times;</button>
 <h2 id="modalTitle" style="margin-top:0; color:var(--gold);">عنوان الموضوع</h2>
 <p id="modalDesc" style="color:var(--muted); font-size:0.9rem;">مجموعة الوثائق والمصادر المستدلة:</p>
-<div class="source-images-grid" id="modalImagesContainer">
-<!-- سيتم عرض الصور هنا ديناميكياً -->
-</div>
+<div class="source-images-grid" id="modalImagesContainer"></div>
 </div>
 </div>
 
@@ -269,7 +267,6 @@ window.addEventListener('DOMContentLoaded', () => {
     document.documentElement.setAttribute('data-theme', savedTheme);
     document.getElementById('themeToggle').textContent = savedTheme === 'dark' ? '🌙 الوضع النهاري' : '☀️ الوضع الليلي';
     
-    // تهيئة خدمة EmailJS (استبدل 'YOUR_PUBLIC_KEY' بمفتاحك المجاني من موقع emailjs.com)
     try {
         emailjs.init("xd1Jo81I__MsksgB9");
     } catch(e) { console.log(e); }
@@ -285,7 +282,7 @@ try {
     console.error('خطأ في الاتصال:', e);
 }
 
-// دالة حفظ إيميلات المشتركين في قاعدة بيانات Supabase (جدول باسم: subscribers)
+// دالة حفظ إيميلات المشتركين مع معالجة رسالة البريد المسجل مسبقاً
 async function handleSubscribe(e) {
     e.preventDefault();
     const emailInput = document.getElementById('subscriberEmail');
@@ -304,7 +301,12 @@ async function handleSubscribe(e) {
         msg.style.display = 'block';
         if (error) {
             msg.style.color = '#f3d58a';
-            msg.textContent = '⚠️ يبدو أن هذا البريد مسجل مسبقاً أو حدث خطأ بسيط.';
+            // التحقق إذا كان الخطأ بسبب تكرار البريد الإلكتروني
+            if (error.code === '23505' || (error.message && error.message.includes('duplicate'))) {
+                msg.textContent = '🌹 أهلاً بك مجدداً! هذا البريد مسجل مسبقاً في قائمتنا البريدية.';
+            } else {
+                msg.textContent = '⚠️ يبدو أن هناك خطأ بسيط، يرجى المحاولة لاحقاً.';
+            }
         } else {
             msg.style.color = 'var(--mint)';
             msg.textContent = '✅ شكراً لاشتراكك! تم إضافتك لقائمة متابعي نهج الحقيقة بنجاح.';
@@ -317,7 +319,7 @@ async function handleSubscribe(e) {
     }
 }
 
-// دالة إرسال الرسائل مباشرة إلى بريدك الإلكتروني عبر EmailJS
+// دالة إرسال الرسائل عبر EmailJS
 function sendEmailMessage(e) {
     e.preventDefault();
     const btn = document.getElementById('sendBtn');
@@ -333,7 +335,6 @@ function sendEmailMessage(e) {
         message: document.getElementById('message').value
     };
 
-    // استبدل 'YOUR_SERVICE_ID' و 'YOUR_TEMPLATE_ID' بالبيانات من حسابك المجاني في EmailJS
     emailjs.send('service_bwh87m7', 'template_ogee95s', templateParams)
         .then(() => {
             contactMsg.style.display = 'block';
@@ -345,7 +346,7 @@ function sendEmailMessage(e) {
         }, (error) => {
             contactMsg.style.display = 'block';
             contactMsg.style.color = '#df252c';
-            contactMsg.textContent = '⚠️ عذراً، لم يتم إرسال الرسالة. يجدر بك التأكد من إعدادات EmailJS.';
+            contactMsg.textContent = '⚠️ عذراً، لم يتم إرسال الرسالة. يرجى التحقق لاحقاً.';
             btn.disabled = false;
             btn.textContent = 'إرسال الرسالة الآن';
         });
@@ -354,7 +355,6 @@ function sendEmailMessage(e) {
 let allDocs = [];
 let allSources = [];
 
-// جلب الكتب والملفات من جدول documents
 async function fetchDocuments() {
     if (!supabaseClient) return;
     try {
@@ -365,7 +365,6 @@ async function fetchDocuments() {
     } catch (err) { console.error(err); }
 }
 
-// جلب الأدلة والمصادر المصورة من جدول sources
 async function fetchSources() {
     if (!supabaseClient) return;
     const grid = document.getElementById('sources-grid');
@@ -379,7 +378,6 @@ async function fetchSources() {
         }
 
         allSources = data;
-
         const grouped = {};
         data.forEach(item => {
             const title = item.title || 'أدلة متنوعة';
@@ -403,7 +401,6 @@ async function fetchSources() {
             card.addEventListener('click', () => { openSourceModal(title, group.images); });
             grid.appendChild(card);
         });
-
     } catch (err) {
         console.error(err);
         grid.innerHTML = '<p style="color:var(--muted); text-align:center;">تعذر تحميل المصادر.</p>';
