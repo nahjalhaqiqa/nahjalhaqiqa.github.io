@@ -61,7 +61,6 @@ button,input,select,textarea{font:inherit}
 
 .wrap{width:min(1180px,calc(100% - 32px));margin:auto}
 
-/* الترويسة العليا (Header) */
 header{
     position:sticky;
     top:0;
@@ -93,7 +92,6 @@ nav a:hover{color:var(--mint); opacity:1; transform: translateY(-1px);}
 }
 .theme-btn:hover{background:var(--gold);color:#000; box-shadow: var(--glow);}
 
-/* قسم الواجهة الرئيسية (Hero) */
 .hero{text-align:center;padding:55px 0 35px;position:relative;overflow:hidden}
 .hero:after{
     content:"الحقيقة";
@@ -167,9 +165,8 @@ section{padding:20px 0}
 .head h2{margin:0;font-size:1.65rem; font-weight:800; border-right: 4px solid var(--mint); padding-right: 12px;}
 .head small{color:var(--gold); font-weight:600;}
 
-/* أداة البحث والوسوم الذكية المحدثة */
 .tools{display:grid;grid-template-columns:1fr 200px 160px;gap:12px;margin:16px 0 12px}
-.tools input,.tools select{
+.tools input,.tools select, .admin-form input, .admin-form select, .admin-form textarea{
     width:100%;
     padding:14px 18px;
     border-radius:14px;
@@ -179,7 +176,7 @@ section{padding:20px 0}
     outline:none;
     font-size: 0.95rem;
 }
-.tools input:focus, .tools select:focus, .contact-form input:focus, .contact-form textarea:focus {
+.tools input:focus, .tools select:focus, .contact-form input:focus, .contact-form textarea:focus, .admin-form input:focus {
     border-color: var(--mint);
     box-shadow: 0 0 12px rgba(39, 213, 177, 0.25);
 }
@@ -249,7 +246,6 @@ section{padding:20px 0}
 }
 .doc-meta{font-size:.82rem;color:var(--muted);margin-bottom:14px; opacity:0.8;}
 
-/* شريط المشاركة للوثيقة */
 .share-bar {
     display: flex;
     gap: 8px;
@@ -284,7 +280,6 @@ section{padding:20px 0}
     display: flex; align-items: center; gap: 10px;
 }
 
-/* قسم القناة */
 .video-layout{
     display:grid;
     grid-template-columns: 320px 1fr;
@@ -351,6 +346,28 @@ section{padding:20px 0}
 .video-info h4 { margin: 0; font-size: 1.02rem; font-weight: 700; line-height: 1.5; color: var(--ink);}
 .video-meta-tag { font-size: 0.78rem; color: var(--gold); font-weight: 600;}
 
+/* تصميم لوحة الأدمن الخاصة */
+.admin-tab-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 8px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+}
+.admin-tab-btn.active {
+    background: var(--mint);
+    color: #000;
+    border-color: var(--mint);
+}
+.admin-form {
+    display: grid;
+    gap: 14px;
+    max-width: 650px;
+    margin: 15px 0;
+}
+
 /* النوافذ المنبثقة (Modals) */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:200;padding:20px;backdrop-filter:blur(8px)}
 .modal-content{background:var(--bg-body);border:1px solid var(--mint);border-radius:22px;width:min(850px, 100%);max-height:88vh;overflow-y:auto;padding:28px;position:relative; box-shadow: 0 20px 50px rgba(0,0,0,0.8);}
@@ -360,7 +377,6 @@ section{padding:20px 0}
 .source-img-card{background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
 .source-img-card img{width:100%;height:auto;border-radius:10px;cursor:pointer;}
 
-/* عارض PDF المنبثق الاحترافي */
 .pdf-modal-content {
     background: var(--bg-body);
     border: 1px solid var(--mint);
@@ -381,7 +397,6 @@ section{padding:20px 0}
     margin-top: 15px;
 }
 
-/* النماذج (Forms) */
 .contact-form{display:grid;gap:14px;max-width:650px;margin:auto}
 .contact-form input,.contact-form textarea{
     width:100%;
@@ -435,7 +450,7 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 <a href="#youtube">القناة</a>
 <a href="#subscribe-section" style="color:var(--gold); font-weight:bold;">🔔 اشترك معنا</a>
 <a href="#contact">مراسلتنا</a>
-<a href="#about">عن الموقع</a>
+<a href="#admin-section" style="color: var(--mint); font-weight:700;">⚙️ الإدارة</a>
 <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙 الوضع الليلي</button>
 </nav>
 </div>
@@ -475,7 +490,7 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 </div>
 </section>
 
-<!-- قسم مكتبة الملفات والوثائق المتطور -->
+<!-- قسم مكتبة الملفات والوثائق -->
 <section class="wrap" id="library">
 <div class="head">
 <h2>مكتبة الوثائق والملفات</h2>
@@ -498,7 +513,6 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 </select>
 </div>
 
-<!-- الوسوم السريعة -->
 <div class="quick-tags">
 <button class="tag-btn active" onclick="filterByTag('', this)">الكل</button>
 <button class="tag-btn" onclick="filterByTag('بحوث عقائدية', this)">💡 بحوث عقائدية</button>
@@ -560,6 +574,73 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 </div>
 </section>
 
+<!-- قسم لوحة التحكم والمشرفين (Admin Panel) -->
+<section class="wrap" id="admin-section">
+<div class="panel" style="border: 1px solid var(--mint);">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+<h2 style="margin:0; color:var(--mint);">⚙️ لوحة إدارة نهج الحقيقة</h2>
+<span id="adminStatusBadge" style="background:rgba(223,37,44,0.2); color:#df252c; padding:4px 12px; border-radius:20px; font-size:0.85rem; font-weight:700;">🔒 غير مسجّل</span>
+</div>
+
+<!-- واجهة إدخال الرمز الدخولي -->
+<div id="adminLoginBox" style="margin-top: 20px; text-align: center;">
+<p style="color:var(--muted);">الرجاء إدخال رمز الدخول الخاص بالمشرف لإدارة الموقع:</p>
+<form onsubmit="handleAdminLogin(event)" style="display:flex; gap:10px; justify-content:center; max-width:400px; margin:auto;">
+<input type="password" id="adminPinInput" placeholder="أدخل رمز الدخول..." required style="padding:12px 18px; border-radius:12px; border:1px solid var(--line); background:var(--input-bg); color:var(--ink); outline:none; text-align:center;">
+<button type="submit" class="btn">دخول</button>
+</form>
+<p id="loginErrorMsg" style="color:#df252c; font-size:0.88rem; margin-top:10px; display:none;"></p>
+</div>
+
+<!-- محتوى اللوحة بعد تسجيل الدخول الصحيح -->
+<div id="adminContentBox" style="display:none; margin-top:25px;">
+<div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
+<button class="admin-tab-btn active" onclick="switchAdminTab('addDoc', this)">📄 إضافة وثيقة جديدة</button>
+<button class="admin-tab-btn" onclick="switchAdminTab('addVid', this)">🎬 إضافة فيديو للقناة</button>
+<button class="admin-tab-btn" onclick="switchAdminTab('viewSubs', this)">📧 عرض المشتركين</button>
+</div>
+
+<!-- نموذج إضافة وثيقة -->
+<form id="addDocForm" class="admin-form" onsubmit="handleAddDocument(event)">
+<input type="text" id="doc_title" placeholder="عنوان الوثيقة أو الكتاب" required>
+<input type="text" id="doc_author" placeholder="اسم المؤلف">
+<select id="doc_category" required>
+<option value="بحوث عقائدية">💡 بحوث عقائدية</option>
+<option value="وثائق تاريخية">📜 وثائق تاريخية</option>
+<option value="كتب ومراجع">📖 كتب ومراجع</option>
+<option value="مقالات ودراسات">📝 مقالات ودراسات</option>
+<option value="متنوع">📁 متنوع</option>
+</select>
+<input type="url" id="doc_file_url" placeholder="رابط ملف PDF أو الوثيقة (URL)" required>
+<textarea id="doc_description" placeholder="وصف مختصر للوثيقة..."></textarea>
+<button type="submit" class="btn" style="width:fit-content;">نشر الوثيقة الآن</button>
+<p id="docAdminMsg" style="font-size:0.9rem; font-weight:700;"></p>
+</form>
+
+<!-- نموذج إضافة فيديو -->
+<form id="addVidForm" class="admin-form" style="display:none;" onsubmit="handleAddVideo(event)">
+<input type="text" id="vid_title" placeholder="عنوان الفيديو" required>
+<input type="text" id="vid_youtube_id" placeholder="معرّف يوتيوب (YouTube Video ID - مثال: dQw4w9WgXcQ)" required>
+<button type="submit" class="btn" style="width:fit-content;">نشر الفيديو للقناة</button>
+<p id="vidAdminMsg" style="font-size:0.9rem; font-weight:700;"></p>
+</form>
+
+<!-- جدول وقائمة المشتركين -->
+<div id="viewSubsBox" style="display:none;">
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
+<h3 style="margin:0; color:var(--gold);">قائمة البريد المسجلة (<span id="subscribersCount">0</span>)</h3>
+<button class="btn" onclick="downloadSubscribersCSV()" style="font-size:0.85rem; padding:6px 16px;">📥 تنزيل قائمة الإيميلات (CSV)</button>
+</div>
+<div style="max-height:300px; overflow-y:auto; border:1px solid var(--line); border-radius:12px; padding:10px; background:rgba(0,0,0,0.2);">
+<ul id="subscribersList" style="list-style:none; padding:0; margin:0;">
+<li style="color:var(--muted);">جاري التحميل...</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+
 <section class="wrap" id="about">
 <div class="panel">
 <h2 style="margin-top: 0;">عن نهج الحقيقة</h2>
@@ -578,7 +659,7 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 </div>
 </div>
 
-<!-- عارض PDF الداخلي (PDF Viewer Modal) -->
+<!-- عارض PDF الداخلي -->
 <div class="modal" id="pdfModal">
 <div class="pdf-modal-content">
 <button class="close-btn" onclick="closePdfModal()">&times;</button>
@@ -639,6 +720,125 @@ try {
     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 } catch (e) {
     console.error('خطأ في الاتصال:', e);
+}
+
+/* ========================================================
+   برمجة ومحرك لوحة الإدارة (Admin Panel Engine)
+======================================================== */
+const ADMIN_PIN = "123456"; // رمز الدخول للوحة الإدارة (يمكنك تغييره هنا)
+let isAdminLoggedIn = false;
+let subscribersData = [];
+
+function handleAdminLogin(e) {
+    e.preventDefault();
+    const pin = document.getElementById('adminPinInput').value;
+    const errorMsg = document.getElementById('loginErrorMsg');
+
+    if (pin === ADMIN_PIN) {
+        isAdminLoggedIn = true;
+        document.getElementById('adminLoginBox').style.display = 'none';
+        document.getElementById('adminContentBox').style.display = 'block';
+        const badge = document.getElementById('adminStatusBadge');
+        badge.textContent = '🔓 تم تسجيل الدخول';
+        badge.style.background = 'rgba(39, 213, 177, 0.2)';
+        badge.style.color = 'var(--mint)';
+        errorMsg.style.display = 'none';
+        fetchSubscribersList();
+    } else {
+        errorMsg.style.display = 'block';
+        errorMsg.textContent = '⚠️ رمز الدخول غير صحيح!';
+    }
+}
+
+function switchAdminTab(tabName, btn) {
+    document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.getElementById('addDocForm').style.display = tabName === 'addDoc' ? 'grid' : 'none';
+    document.getElementById('addVidForm').style.display = tabName === 'addVid' ? 'grid' : 'none';
+    document.getElementById('viewSubsBox').style.display = tabName === 'viewSubs' ? 'block' : 'none';
+}
+
+async function handleAddDocument(e) {
+    e.preventDefault();
+    const msg = document.getElementById('docAdminMsg');
+    const docData = {
+        title: document.getElementById('doc_title').value,
+        author: document.getElementById('doc_author').value || 'غير معروف',
+        category: document.getElementById('doc_category').value,
+        file_url: document.getElementById('doc_file_url').value,
+        description: document.getElementById('doc_description').value,
+        date: new Date().toLocaleDateString('ar-EG')
+    };
+
+    try {
+        const { error } = await supabaseClient.from('documents').insert([docData]);
+        if (error) throw error;
+        msg.style.color = 'var(--mint)';
+        msg.textContent = '✅ تم إضافات الوثيقة بنجاح للمكتبة!';
+        document.getElementById('addDocForm').reset();
+        fetchDocuments();
+    } catch (err) {
+        msg.style.color = '#df252c';
+        msg.textContent = '⚠️ حدث خطأ أثناء إضافة الوثيقة.';
+    }
+}
+
+async function handleAddVideo(e) {
+    e.preventDefault();
+    const msg = document.getElementById('vidAdminMsg');
+    const vidData = {
+        title: document.getElementById('vid_title').value,
+        youtube_id: document.getElementById('vid_youtube_id').value.trim()
+    };
+
+    try {
+        const { error } = await supabaseClient.from('videos').insert([vidData]);
+        if (error) throw error;
+        msg.style.color = 'var(--mint)';
+        msg.textContent = '✅ تم إضافة الفيديو بنجاح للقناة!';
+        document.getElementById('addVidForm').reset();
+        fetchLatestVideos();
+    } catch (err) {
+        msg.style.color = '#df252c';
+        msg.textContent = '⚠️ حدث خطأ أثناء إضافة الفيديو.';
+    }
+}
+
+async function fetchSubscribersList() {
+    if (!supabaseClient) return;
+    const list = document.getElementById('subscribersList');
+    try {
+        const { data, error } = await supabaseClient.from('subscribers').select('*');
+        if (error || !data) return;
+        subscribersData = data;
+        document.getElementById('subscribersCount').textContent = data.length;
+        
+        list.innerHTML = '';
+        data.forEach((sub, idx) => {
+            const li = document.createElement('li');
+            li.style.padding = '8px 0';
+            li.style.borderBottom = '1px solid var(--line)';
+            li.style.fontSize = '0.9rem';
+            li.innerHTML = `<strong>${idx + 1}.</strong> ${sub.email} <span style="color:var(--muted); font-size:0.8rem; float:left;">${new Date(sub.created_at).toLocaleDateString('ar-EG')}</span>`;
+            list.appendChild(li);
+        });
+    } catch(err) { console.error(err); }
+}
+
+function downloadSubscribersCSV() {
+    if (subscribersData.length === 0) return alert('لا يوجد مشتركين للتنزيل.');
+    let csvContent = "data:text/csv;charset=utf-8,البريد الإلكتروني,تاريخ الاشتراك\n";
+    subscribersData.forEach(s => {
+        csvContent += `${s.email},${new Date(s.created_at).toLocaleDateString('ar-EG')}\n`;
+    });
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "subscribers_list.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 // دالة حفظ إيميلات المشتركين
@@ -723,7 +923,6 @@ async function fetchDocuments() {
     } catch (err) { console.error(err); }
 }
 
-// فتح وثيقة PDF داخل النوافذ المنبثقة
 function openPdfViewer(title, fileUrl) {
     const modal = document.getElementById('pdfModal');
     const pdfFrame = document.getElementById('pdfFrame');
@@ -741,7 +940,6 @@ function closePdfModal() {
     modal.style.display = 'none';
 }
 
-// دالة المشاركة السريعة للوثائق
 function shareDocument(platform, title, url) {
     const text = encodeURIComponent(`💡 وثيقة من نهج الحقيقة:\n*${title}*\n\n`);
     const docUrl = encodeURIComponent(url);
