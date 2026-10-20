@@ -7,6 +7,8 @@
 <title>نهج الحقيقة | المكتبة الرقمية والأدلة المصورة</title>
 <link rel="icon" href="assets/logo.png">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- مكتبة EmailJS لإرسال الإيميلات -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 :root {
     --green: #00a977; --mint: #27d5b1; --gold: #f3d58a;
@@ -96,6 +98,7 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <a href="#library">المكتبة</a>
 <a href="#sources-section">المصادر والأدلة</a>
 <a href="#youtube">القناة</a>
+<a href="#subscribe-section" style="color:var(--gold); font-weight:bold;">🔔 اشترك معنا</a>
 <a href="#contact">مراسلتنا</a>
 <a href="#about">عن الموقع</a>
 <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙 الوضع الليلي</button>
@@ -111,7 +114,7 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <div class="actions">
 <a class="btn" href="#library">📚 تصفح المكتبة</a>
 <a class="btn" href="#sources-section">🔍 الأدلة المصورة</a>
-<a class="btn red" href="https://www.youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw" target="_blank" rel="noopener">▶ قناة نهج الحقيقة</a>
+<a class="btn ghost" href="#subscribe-section" style="border-color:var(--gold); color:var(--gold);">🔔 اشترك في النشرة</a>
 </div>
 </section>
 
@@ -119,6 +122,21 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 <div class="features">
 <article class="feature"><div class="ico">📚</div><div><h2>مكتبة رقمية متجددة</h2><p>وثائق وبحوث وكتب ومصادر علمية وعقائدية، مرتبة حسب التصنيف وقابلة للبحث الفوري.</p><a class="btn" href="#library">استعراض الملفات</a></div></article>
 <article class="feature"><div class="ico">🔍</div><div><h2>موسوعة الأدلة المصورة</h2><p>صور صفحات الكتب والمصادر المعتمدة مرتبة حسب المواضيع (كعدالة الصحابة وزواج المتعة وغيرها).</p><a class="btn" href="#sources-section">استعراض الأدلة</a></div></article>
+</div>
+</section>
+
+<!-- قسم الاشتراك في النشرة البريدية (يحفظ الإيميلات في Supabase) -->
+<section class="wrap" id="subscribe-section" style="margin-top: 25px;">
+<div class="panel" style="text-align: center; border: 1px solid var(--mint);">
+<h2 style="color: var(--mint); margin-top: 0;">🔔 انضم إلى قائمة متابعي نهج الحقيقة</h2>
+<p style="color: var(--muted); max-width: 650px; margin: 8px auto 18px; font-size: 0.95rem;">
+اشترك ببريدك الإلكتروني لتصلك أحدث الوثائق والبحوث والمقالات الجديدة مباشرة عند نشرها على الموقع.
+</p>
+<form id="subscribeForm" onsubmit="handleSubscribe(event)" style="display: flex; gap: 10px; justify-content: center; max-width: 500px; margin: auto; flex-wrap: wrap;">
+<input type="email" id="subscriberEmail" placeholder="أدخل بريدك الإلكتروني هنا..." required style="flex: 1; min-width: 260px; padding: 12px; border-radius: 25px; border: 1px solid var(--line); background: var(--input-bg); color: var(--ink); outline: none;">
+<button type="submit" class="btn" style="border-radius: 25px; padding: 0 22px;">اشتراك الآن</button>
+</form>
+<p id="subscribeMsg" style="margin-top: 10px; font-size: 0.88rem; display: none;"></p>
 </div>
 </section>
 
@@ -176,17 +194,19 @@ footer{margin-top:25px;background:#001b28ed;border-top:1px solid var(--mint);pad
 </div>
 </section>
 
+<!-- قسم التواصل وإرسال رسالة مباشرة لبريدك الإلكتروني -->
 <section class="wrap" id="contact">
 <div class="panel">
-<h2>تواصل معنا</h2>
-<p style="margin-bottom:20px;">نرحب بمقترحاتكم، استفساراتكم، أو مشاركاتكم العلمية. أرسل لنا رسالة وسنرد عليك قريباً:</p>
-<form class="contact-form" onsubmit="event.preventDefault(); alert('تم إرسال رسالتك بنجاح! شكراً لتواصلك مع نهج الحقيقة.'); this.reset();">
-<input type="text" placeholder="اسمك الكريم" required>
-<input type="email" placeholder="بريدك الإلكتروني" required>
-<input type="text" placeholder="عنوان الرسالة أو الموضوع" required>
-<textarea placeholder="اكتب رسالتك هنا..." required></textarea>
-<button type="submit" class="btn" style="width:fit-content">إرسال الرسالة</button>
+<h2>تواصل معنا وإرسال رسالة</h2>
+<p style="margin-bottom:20px;">نرحب بمقترحاتكم أو استفساراتكم. أرسل رسالة وسيتم إرسالها مباشرة إلى بريدك الإلكتروني:</p>
+<form class="contact-form" id="contactForm" onsubmit="sendEmailMessage(event)">
+<input type="text" id="from_name" placeholder="اسمك الكريم" required>
+<input type="email" id="from_email" placeholder="بريدك الإلكتروني" required>
+<input type="text" id="subject" placeholder="عنوان الرسالة أو الموضوع" required>
+<textarea id="message" placeholder="اكتب رسالتك هنا..." required></textarea>
+<button type="submit" id="sendBtn" class="btn" style="width:fit-content">إرسال الرسالة الآن</button>
 </form>
+<p id="contactMsg" style="margin-top: 10px; font-size: 0.9rem; text-align: center; display: none;"></p>
 </div>
 </section>
 
@@ -248,6 +268,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', savedTheme);
     document.getElementById('themeToggle').textContent = savedTheme === 'dark' ? '🌙 الوضع النهاري' : '☀️ الوضع الليلي';
+    
+    // تهيئة خدمة EmailJS (استبدل 'YOUR_PUBLIC_KEY' بمفتاحك المجاني من موقع emailjs.com)
+    try {
+        emailjs.init("xd1Jo81I__MsksgB9");
+    } catch(e) { console.log(e); }
 });
 
 const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co'; 
@@ -258,6 +283,72 @@ try {
     supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 } catch (e) {
     console.error('خطأ في الاتصال:', e);
+}
+
+// دالة حفظ إيميلات المشتركين في قاعدة بيانات Supabase (جدول باسم: subscribers)
+async function handleSubscribe(e) {
+    e.preventDefault();
+    const emailInput = document.getElementById('subscriberEmail');
+    const msg = document.getElementById('subscribeMsg');
+    const email = emailInput.value.trim();
+
+    if (!supabaseClient) {
+        msg.style.display = 'block';
+        msg.style.color = '#df252c';
+        msg.textContent = '⚠️ تعذر الاتصال بقاعدة البيانات.';
+        return;
+    }
+
+    try {
+        const { error } = await supabaseClient.from('subscribers').insert([{ email: email, created_at: new Date() }]);
+        msg.style.display = 'block';
+        if (error) {
+            msg.style.color = '#f3d58a';
+            msg.textContent = '⚠️ يبدو أن هذا البريد مسجل مسبقاً أو حدث خطأ بسيط.';
+        } else {
+            msg.style.color = 'var(--mint)';
+            msg.textContent = '✅ شكراً لاشتراكك! تم إضافتك لقائمة متابعي نهج الحقيقة بنجاح.';
+            emailInput.value = '';
+        }
+    } catch (err) {
+        msg.style.display = 'block';
+        msg.style.color = '#df252c';
+        msg.textContent = '⚠️ حدث خطأ أثناء التسجيل.';
+    }
+}
+
+// دالة إرسال الرسائل مباشرة إلى بريدك الإلكتروني عبر EmailJS
+function sendEmailMessage(e) {
+    e.preventDefault();
+    const btn = document.getElementById('sendBtn');
+    const contactMsg = document.getElementById('contactMsg');
+    
+    btn.disabled = true;
+    btn.textContent = 'جاري الإرسال...';
+
+    const templateParams = {
+        from_name: document.getElementById('from_name').value,
+        from_email: document.getElementById('from_email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+    };
+
+    // استبدل 'YOUR_SERVICE_ID' و 'YOUR_TEMPLATE_ID' بالبيانات من حسابك المجاني في EmailJS
+    emailjs.send('service_bwh87m7', 'template_ogee95s', templateParams)
+        .then(() => {
+            contactMsg.style.display = 'block';
+            contactMsg.style.color = 'var(--mint)';
+            contactMsg.textContent = '✅ تم إرسال رسالتك بنجاح إلى بريد الموقع! شكراً لتواصلك.';
+            document.getElementById('contactForm').reset();
+            btn.disabled = false;
+            btn.textContent = 'إرسال الرسالة الآن';
+        }, (error) => {
+            contactMsg.style.display = 'block';
+            contactMsg.style.color = '#df252c';
+            contactMsg.textContent = '⚠️ عذراً، لم يتم إرسال الرسالة. يجدر بك التأكد من إعدادات EmailJS.';
+            btn.disabled = false;
+            btn.textContent = 'إرسال الرسالة الآن';
+        });
 }
 
 let allDocs = [];
@@ -289,16 +380,11 @@ async function fetchSources() {
 
         allSources = data;
 
-        // تجميع المصادر حسب العنوان (title) لتظهر كل موضوع بطاقة مستقلة
         const grouped = {};
         data.forEach(item => {
             const title = item.title || 'أدلة متنوعة';
             if (!grouped[title]) {
-                grouped[title] = {
-                    title: title,
-                    images: [],
-                    sampleImg: item.image_url
-                };
+                grouped[title] = { title: title, images: [], sampleImg: item.image_url };
             }
             grouped[title].images.push(item);
         });
@@ -314,10 +400,7 @@ async function fetchSources() {
                 <p style="color:var(--muted); font-size:0.88rem;">موسوعة وثائق وصور مستدلة (يحتوي على ${group.images.length} مستند)</p>
                 <span class="tag">عرض المصادر ↗</span>
             `;
-            // عند النقر على بطاقة الموضوع، تفتح النافذة المنبثقة وتعرض صوره
-            card.addEventListener('click', () => {
-                openSourceModal(title, group.images);
-            });
+            card.addEventListener('click', () => { openSourceModal(title, group.images); });
             grid.appendChild(card);
         });
 
@@ -327,7 +410,6 @@ async function fetchSources() {
     }
 }
 
-// فتح النافذة المنبثقة لعرض الصور
 function openSourceModal(title, images) {
     const modal = document.getElementById('sourceModal');
     const modalTitle = document.getElementById('modalTitle');
@@ -337,11 +419,7 @@ function openSourceModal(title, images) {
     container.innerHTML = '';
 
     images.forEach(imgData => {
-        let imgUrl = imgData.image_url || '';
-
-        // تنظيف الرابط للتأكد من المجلدات المحلية
-        imgUrl = imgUrl.trim();
-
+        let imgUrl = (imgData.image_url || '').trim();
         const div = document.createElement('div');
         div.className = 'source-img-card';
         div.innerHTML = `
@@ -356,21 +434,15 @@ function openSourceModal(title, images) {
     modal.style.display = 'flex';
 }
 
-// إغلاق النافذة المنبثقة
 function closeSourceModal() {
-    const modal = document.getElementById('sourceModal');
-    modal.style.display = 'none';
+    document.getElementById('sourceModal').style.display = 'none';
 }
 
-// إغلاق النافذة عند الضغط خارجها
 window.addEventListener('click', (e) => {
     const modal = document.getElementById('sourceModal');
-    if (e.target === modal) {
-        modal.style.display = 'none';
-    }
+    if (e.target === modal) modal.style.display = 'none';
 });
 
-// جلب الفيديوهات من جدول videos
 async function fetchLatestVideos() {
     if (!supabaseClient) return;
     const container = document.getElementById('videos-container');
