@@ -1,0 +1,26 @@
+{
+  "name": "منصة نهج الحقيقة",
+  "short_name": "نهج الحقيقة",
+  "description": "المكتبة الرقمية والأدلة المصورة من أجل معرفة أعمق ووعي أصدق",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#042c42",
+  "theme_color": "#063e42",
+  "orientation": "portrait",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "assets/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
