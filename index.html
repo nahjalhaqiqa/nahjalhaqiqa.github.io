@@ -722,7 +722,7 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 </div>
 </div>
 
-<!-- عارض PDF الداخلي المزود بزر الرجوع والتنزيل المباشر -->
+<!-- عارض PDF الداخلي المحدث لفتح العرض بالمتصفح المباشر دون التعليق -->
 <div class="modal" id="pdfModal">
 <div class="pdf-modal-content">
 <div class="modal-header-bar">
@@ -732,7 +732,7 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 <button class="back-btn" onclick="closePdfModal()">← رجوع</button>
 </div>
 </div>
-<iframe id="pdfFrame" class="pdf-viewer-frame" src=""></iframe>
+<div id="pdfViewerContainer" style="width:100%; height:100%; min-height:400px;"></div>
 </div>
 </div>
 
@@ -832,22 +832,14 @@ try {
 let activePdfUrl = '';
 let activePdfName = '';
 
-async function triggerDirectDownload(fileUrl, fileName) {
-    try {
-        const response = await fetch(fileUrl);
-        const blob = await response.blob();
-        const blobUrl = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = blobUrl;
-        a.download = fileName || 'nahj-alhaq-document';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(blobUrl);
-    } catch (err) {
-        // في حال اعتراض المتصفح، يتم التحويل لفتح وتنزيل الملف بطريقة موازية
-        window.open(fileUrl, '_blank');
-    }
+function triggerDirectDownload(fileUrl, fileName) {
+    const a = document.createElement('a');
+    a.href = fileUrl;
+    a.target = '_blank';
+    a.download = fileName || 'nahj-alhaq-document';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
 }
 
 function downloadFileDirectly() {
@@ -1084,20 +1076,23 @@ function openPdfViewer(title, fileUrl) {
     activePdfName = title;
     
     const modal = document.getElementById('pdfModal');
-    const pdfFrame = document.getElementById('pdfFrame');
     const pdfTitle = document.getElementById('pdfTitle');
+    const container = document.getElementById('pdfViewerContainer');
     
     pdfTitle.textContent = title;
     
-    // استخدام العارض التوافقي الشامل للحاسوب والهواتف
-    pdfFrame.src = `https://docs.google.com/viewer?url=${encodeURIComponent(fileUrl)}&embedded=true`;
+    // إدراج عنصر المكون المباشر للعرض المحلي مع رابط المعاينة البديلة
+    container.innerHTML = `
+        <iframe src="${fileUrl}" class="pdf-viewer-frame" style="width:100%; height:100%; border:0; border-radius:12px;"></iframe>
+    `;
+    
     modal.style.display = 'flex';
 }
 
 function closePdfModal() {
     const modal = document.getElementById('pdfModal');
-    const pdfFrame = document.getElementById('pdfFrame');
-    pdfFrame.src = '';
+    const container = document.getElementById('pdfViewerContainer');
+    container.innerHTML = '';
     modal.style.display = 'none';
     activePdfUrl = '';
     activePdfName = '';
@@ -1190,7 +1185,6 @@ function closeSourceModal() {
     document.getElementById('sourceModal').style.display = 'none';
 }
 
-// دمج زر الـ Escape للإغلاق السريع وحركات الرجوع
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeSourceModal();
