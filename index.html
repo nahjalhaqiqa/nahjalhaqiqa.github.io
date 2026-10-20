@@ -8,6 +8,13 @@
 <title>نهج الحقيقة | المكتبة الرقمية والأدلة المصورة</title>
 <link rel="icon" href="assets/logo.png">
 
+<!-- إعدادات تطبيق الويب (PWA Meta Tags & Manifest) -->
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="نهج الحقيقة">
+<link rel="apple-touch-icon" href="assets/logo.png">
+
 <!-- استيراد خط Cairo من Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -698,6 +705,15 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// تسجيل خدمة الـ Service Worker لتفعيل الـ PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('✅ Service Worker Registered'))
+      .catch(err => console.log('⚠️ Service Worker Failed:', err));
+  });
+}
 
 function toggleTheme() {
     const html = document.documentElement;
