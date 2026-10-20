@@ -84,9 +84,28 @@ header{
 .nav{min-height:75px;display:flex;align-items:center;justify-content:space-between;gap:15px}
 .brand{display:flex;align-items:center;gap:12px;font-size:1.25rem;font-weight:800;letter-spacing: -0.3px;}
 .brand img{width:46px;height:46px;object-fit:contain;filter: drop-shadow(0 2px 8px rgba(0,217,154,0.3));}
-nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 nav a{font-size:.95rem; font-weight:600; opacity:0.88;}
 nav a:hover{color:var(--mint); opacity:1; transform: translateY(-1px);}
+
+.install-btn-nav {
+    background: rgba(39, 213, 177, 0.15);
+    border: 1px solid var(--mint);
+    color: var(--mint);
+    padding: 5px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: none;
+    align-items: center;
+    gap: 6px;
+}
+.install-btn-nav:hover {
+    background: var(--mint);
+    color: #000;
+    box-shadow: var(--glow);
+}
 
 .theme-btn{
     background: rgba(243, 213, 138, 0.1);
@@ -457,6 +476,7 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 <a href="#sources-section">المصادر والأدلة</a>
 <a href="#youtube">القناة</a>
 <a href="#subscribe-section" style="color:var(--gold); font-weight:bold;">🔔 اشترك معنا</a>
+<button class="install-btn-nav" id="installPwaBtn" onclick="installPWA()">📲 تثبيت التطبيق</button>
 <a href="#contact">مراسلتنا</a>
 <a href="#admin-section" style="color: var(--mint); font-weight:700;">⚙️ الإدارة</a>
 <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙 الوضع الليلي</button>
@@ -714,6 +734,33 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.log('⚠️ Service Worker Failed:', err));
   });
 }
+
+// التحكم بأيقونة تثبيت التطبيق PWA
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    const installBtn = document.getElementById('installPwaBtn');
+    if (installBtn) installBtn.style.display = 'inline-flex';
+});
+
+function installPWA() {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+            console.log('✅ تم قبول التثبيت');
+        }
+        deferredPrompt = null;
+        const installBtn = document.getElementById('installPwaBtn');
+        if (installBtn) installBtn.style.display = 'none';
+    });
+}
+
+window.addEventListener('appinstalled', () => {
+    const installBtn = document.getElementById('installPwaBtn');
+    if (installBtn) installBtn.style.display = 'none';
+});
 
 function toggleTheme() {
     const html = document.documentElement;
