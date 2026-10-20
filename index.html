@@ -425,7 +425,7 @@ section{padding:20px 0}
 
 .source-images-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px, 1fr));gap:18px;margin-top:15px}
 .source-img-card{background:rgba(0,0,0,0.3);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
-.source-img-card img{width:100%;height:auto;border-radius:10px;cursor:pointer;}
+.source-img-card img{width:100%;height:auto;border-radius:10px;}
 
 .pdf-modal-content {
     background: var(--bg-body);
@@ -710,7 +710,7 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 </section>
 </main>
 
-<!-- نافذة منبثقة (Modal) لعرض صور الأدلة المصورة مع زر الرجوع -->
+<!-- نافذة عرض صور الأدلة المصورة المتكاملة مع زر الرجوع والتنزيل -->
 <div class="modal" id="sourceModal">
 <div class="modal-content">
 <div class="modal-header-bar">
@@ -836,7 +836,7 @@ function triggerDirectDownload(fileUrl, fileName) {
     const a = document.createElement('a');
     a.href = fileUrl;
     a.target = '_blank';
-    a.download = fileName || 'nahj-alhaq-document';
+    a.download = fileName || 'nahj_file';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -1166,9 +1166,7 @@ function openSourceModal(title, images) {
         const div = document.createElement('div');
         div.className = 'source-img-card';
         div.innerHTML = `
-            <a href="${imgUrl}" target="_blank" rel="noopener" title="انقر لفتح الصورة بحجم كامل">
-                <img src="${imgUrl}" alt="${title}" loading="lazy" style="width:100%; max-height:420px; object-fit:contain; border-radius:10px; display:block; margin:auto;" onerror="this.onerror=null; this.parentElement.innerHTML='<p style=\\'color:var(--gold);padding:20px;\\'>⚠️ لم يتم العثور على ملف الصورة على السيرفر في المسار:<br><small>${imgUrl}</small></p>';">
-            </a>
+            <img src="${imgUrl}" alt="${title}" loading="lazy" style="width:100%; max-height:420px; object-fit:contain; border-radius:10px; display:block; margin:auto;" onerror="this.onerror=null; this.parentElement.innerHTML='<p style=\\'color:var(--gold);padding:20px;\\'>⚠️ لم يتم العثور على ملف الصورة على السيرفر في المسار:<br><small>${imgUrl}</small></p>';">
             <p style="margin-top:10px; font-size:0.88rem; color:var(--muted);">${imgData.description || 'مصدر معتمد من الكتب'}</p>
             <button class="btn" onclick="triggerDirectDownload('${imgUrl}', 'nahj_source_image.jpg')" style="padding:8px 18px; font-size:0.85rem; margin-top:8px; width:100%;">⬇️ تحميل الصورة</button>
         `;
