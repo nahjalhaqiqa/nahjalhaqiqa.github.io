@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="ar" dir="rtl" data-theme="dark">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#063e42">
 <meta name="description" content="نهج الحقيقة: مكتبة وثائق وبحوث وكتب وملفات PDF، وقناة نهج الحقيقة والمصادر المصورة.">
 <title>نهج الحقيقة | المكتبة الرقمية والأدلة المصورة</title>
@@ -346,7 +347,7 @@ section{padding:20px 0}
 .video-info h4 { margin: 0; font-size: 1.02rem; font-weight: 700; line-height: 1.5; color: var(--ink);}
 .video-meta-tag { font-size: 0.78rem; color: var(--gold); font-weight: 600;}
 
-/* تصميم لوحة الأدمن الخاصة */
+/* تصميم لوحة الأدمن */
 .admin-tab-btn {
     background: rgba(255,255,255,0.06);
     border: 1px solid var(--line);
@@ -596,11 +597,12 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 <div id="adminContentBox" style="display:none; margin-top:25px;">
 <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
 <button class="admin-tab-btn active" onclick="switchAdminTab('addDoc', this)">📄 إضافة وثيقة جديدة</button>
+<button class="admin-tab-btn" onclick="switchAdminTab('addSource', this)">🖼️ إضافة مصدر مصور</button>
 <button class="admin-tab-btn" onclick="switchAdminTab('addVid', this)">🎬 إضافة فيديو للقناة</button>
 <button class="admin-tab-btn" onclick="switchAdminTab('viewSubs', this)">📧 عرض المشتركين</button>
 </div>
 
-<!-- نموذج إضافة وثيقة -->
+<!-- 1. نموذج إضافة وثيقة -->
 <form id="addDocForm" class="admin-form" onsubmit="handleAddDocument(event)">
 <input type="text" id="doc_title" placeholder="عنوان الوثيقة أو الكتاب" required>
 <input type="text" id="doc_author" placeholder="اسم المؤلف">
@@ -617,7 +619,16 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 <p id="docAdminMsg" style="font-size:0.9rem; font-weight:700;"></p>
 </form>
 
-<!-- نموذج إضافة فيديو -->
+<!-- 2. نموذج إضافة مصدر مصور جديد -->
+<form id="addSourceForm" class="admin-form" style="display:none;" onsubmit="handleAddSource(event)">
+<input type="text" id="src_title" placeholder="عنوان الموضوع (مثال: عدالة الصحابة، زواج المتعة...)" required>
+<input type="url" id="src_image_url" placeholder="رابط صورة المصدر (Image URL)" required>
+<textarea id="src_description" placeholder="وصف وتوضيح المصدر أو رقم الصفحة..."></textarea>
+<button type="submit" class="btn" style="width:fit-content;">نشر المصدر المصور</button>
+<p id="srcAdminMsg" style="font-size:0.9rem; font-weight:700;"></p>
+</form>
+
+<!-- 3. نموذج إضافة فيديو -->
 <form id="addVidForm" class="admin-form" style="display:none;" onsubmit="handleAddVideo(event)">
 <input type="text" id="vid_title" placeholder="عنوان الفيديو" required>
 <input type="text" id="vid_youtube_id" placeholder="معرّف يوتيوب (YouTube Video ID - مثال: dQw4w9WgXcQ)" required>
@@ -625,7 +636,7 @@ footer{margin-top:40px;background:rgba(2, 20, 31, 0.95);border-top:1px solid var
 <p id="vidAdminMsg" style="font-size:0.9rem; font-weight:700;"></p>
 </form>
 
-<!-- جدول وقائمة المشتركين -->
+<!-- 4. جدول وقائمة المشتركين -->
 <div id="viewSubsBox" style="display:none;">
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
 <h3 style="margin:0; color:var(--gold);">قائمة البريد المسجلة (<span id="subscribersCount">0</span>)</h3>
@@ -725,7 +736,7 @@ try {
 /* ========================================================
    برمجة ومحرك لوحة الإدارة (Admin Panel Engine)
 ======================================================== */
-const ADMIN_PIN = "123456"; // رمز الدخول للوحة الإدارة (يمكنك تغييره هنا)
+const ADMIN_PIN = "123456"; 
 let isAdminLoggedIn = false;
 let subscribersData = [];
 
@@ -755,6 +766,7 @@ function switchAdminTab(tabName, btn) {
     btn.classList.add('active');
 
     document.getElementById('addDocForm').style.display = tabName === 'addDoc' ? 'grid' : 'none';
+    document.getElementById('addSourceForm').style.display = tabName === 'addSource' ? 'grid' : 'none';
     document.getElementById('addVidForm').style.display = tabName === 'addVid' ? 'grid' : 'none';
     document.getElementById('viewSubsBox').style.display = tabName === 'viewSubs' ? 'block' : 'none';
 }
@@ -775,12 +787,35 @@ async function handleAddDocument(e) {
         const { error } = await supabaseClient.from('documents').insert([docData]);
         if (error) throw error;
         msg.style.color = 'var(--mint)';
-        msg.textContent = '✅ تم إضافات الوثيقة بنجاح للمكتبة!';
+        msg.textContent = '✅ تم إضافة الوثيقة بنجاح للمكتبة!';
         document.getElementById('addDocForm').reset();
         fetchDocuments();
     } catch (err) {
         msg.style.color = '#df252c';
         msg.textContent = '⚠️ حدث خطأ أثناء إضافة الوثيقة.';
+    }
+}
+
+async function handleAddSource(e) {
+    e.preventDefault();
+    const msg = document.getElementById('srcAdminMsg');
+    const srcData = {
+        title: document.getElementById('src_title').value,
+        image_url: document.getElementById('src_image_url').value,
+        description: document.getElementById('src_description').value,
+        created_at: new Date()
+    };
+
+    try {
+        const { error } = await supabaseClient.from('sources').insert([srcData]);
+        if (error) throw error;
+        msg.style.color = 'var(--mint)';
+        msg.textContent = '✅ تم نشر المصدر المصور بنجاح في الأدلة!';
+        document.getElementById('addSourceForm').reset();
+        fetchSources();
+    } catch (err) {
+        msg.style.color = '#df252c';
+        msg.textContent = '⚠️ حدث خطأ أثناء إضافة المصدر المصور.';
     }
 }
 
@@ -841,7 +876,6 @@ function downloadSubscribersCSV() {
     document.body.removeChild(link);
 }
 
-// دالة حفظ إيميلات المشتركين
 async function handleSubscribe(e) {
     e.preventDefault();
     const emailInput = document.getElementById('subscriberEmail');
@@ -877,7 +911,6 @@ async function handleSubscribe(e) {
     }
 }
 
-// دالة إرسال الرسائل عبر EmailJS
 function sendEmailMessage(e) {
     e.preventDefault();
     const btn = document.getElementById('sendBtn');
