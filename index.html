@@ -5,76 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#031622">
 
-<!-- SEO الأساسي والكلمات المفتاحية -->
-<title>نهج الحقيقة | موقع شيعي للمعرفة والوعي</title>
-<meta name="description" content="موقع شيعي للمعرفة والوعي. نقدم لكم أبحاثاً موثوقة، وثائق نادرة، وقناة يوتيوب لنشر الحقيقة.[span_0](start_span)"[span_0](end_span)>
+<title>نهج الحقيقة | من أجل معرفة أعمق .. لحقيقة أصدق</title>
+<meta name="description" content="منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية، وملفات PDF، وقناة يوتيوب، وبرنامج حواري.">
 <meta name="keywords" content="نهج الحقيقة, مكتبة رقمية, بحوث عقائدية, وثائق تاريخية, أدلة مصورة, كتب PDF">
 <meta name="robots" content="index, follow">
 
 <!-- كود التحقق الخاص بـ Google Search Console -->
 <meta name="google-site-verification" content="RZjQ4NkzSQqoaMhCz5x5_pr98TTxFGP3jf07urLKrzM" />
 
-<!-- Open Graph / بطاقات المعاينة للواتساب وتليجرام وفيسبوك -->
+<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nahjalhaqiqa.github.io/">
-<meta property="og:title" content="نهج الحقيقة | موقع شيعي للمعرفة والوعي">
-<meta property="og:description" content="نقدم لكم أبحاثاً موثوقة، وثائق نادرة، وقناة يوتيوب لنشر الحقيقة.[span_1](start_span)"[span_1](end_span)>
+<meta property="og:title" content="نهج الحقيقة | من أجل معرفة أعمق .. لحقيقة أصدق">
+<meta property="og:description" content="منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية.">
 <meta property="og:image" content="https://nahjalhaqiqa.github.io/assets/logo.png">
 
-<!-- Twitter Cards -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://nahjalhaqiqa.github.io/">
-<meta name="twitter:title" content="نهج الحقيقة | موقع شيعي للمعرفة والوعي">
-<meta name="twitter:description" content="نقدم لكم أبحاثاً موثوقة، وثائق نادرة، وقناة يوتيوب لنشر الحقيقة.[span_2](start_span)"[span_2](end_span)>
-<meta name="twitter:image" content="https://nahjalhaqiqa.github.io/assets/logo.png">
-
 <link rel="icon" href="assets/logo.png">
-
-<!-- إعدادات تطبيق الويب (PWA Meta Tags & Manifest) -->
 <link rel="manifest" href="manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="نهج الحقيقة">
 <link rel="apple-touch-icon" href="assets/logo.png">
 
-<!-- استيراد خط Cairo من Google Fonts -->
+<!-- خط Cairo -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<!-- مكتبة EmailJS لإرسال الإيميلات -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <style>
 :root {
     --green: #00a977; --mint: #27d5b1; --gold: #f3d58a;
-    --bg-body: #02121c; 
-    --panel: rgba(4, 30, 46, 0.85); 
-    --panel-hover: rgba(7, 42, 64, 0.95);
+    --bg-body: #031622; 
+    --panel: #041e2e; 
+    --panel-hover: #072a40;
     --ink: #f0f7f6;
-    --muted: #a3c2c7; --line: rgba(255, 255, 255, 0.1); --input-bg: rgba(2, 18, 28, 0.8);
+    --muted: #94b2b8; 
+    --line: rgba(243, 213, 138, 0.15); 
+    --input-bg: #02121c;
     --shadow: 0 10px 30px -10px rgba(0,0,0,0.6);
-    --glow: 0 0 25px rgba(39, 213, 177, 0.3);
 }
 [data-theme="light"] {
     --bg-body: #f4f8f9; 
-    --panel: rgba(255, 255, 255, 0.9); 
-    --panel-hover: rgba(255, 255, 255, 0.98);
+    --panel: #ffffff; 
+    --panel-hover: #f9fbfb;
     --ink: #0f2328;
-    --muted: #536e75; --line: rgba(0, 0, 0, 0.08); --input-bg: #ffffff;
+    --muted: #536e75; 
+    --line: rgba(0, 0, 0, 0.08); 
+    --input-bg: #f8fb9;
     --shadow: 0 10px 25px -10px rgba(0,0,0,0.08);
-    --glow: 0 0 20px rgba(0, 169, 119, 0.2);
 }
 
 *{box-sizing:border-box; transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;}
 html{scroll-behavior:smooth}
 body{
-    margin:0;
-    color:var(--ink);
+    margin:0; color:var(--ink);
     font-family: 'Cairo', Tahoma, Arial, sans-serif;
-    line-height:1.8;
-    background:var(--bg-body);
+    line-height:1.8; background:var(--bg-body);
     min-height: 100vh;
 }
 a{color:inherit;text-decoration:none}
@@ -82,119 +71,77 @@ button,input,select,textarea{font:inherit}
 
 .wrap{width:min(1240px,calc(100% - 32px));margin:auto}
 
-/* الهيدر العلوي المطابق للصورة */
+/* الهيدر العلوي المطابق تماماً للصورة */
 header{
-    position:sticky;
-    top:0;
-    z-index:100;
-    background: rgba(2, 18, 28, 0.92);
+    position:sticky; top:0; z-index:100;
+    background: #031622;
     border-bottom:1px solid var(--line);
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
 }
-[data-theme="light"] header { background: rgba(255, 255, 255, 0.9); }
-.nav{min-height:75px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-.brand{display:flex;align-items:center;gap:12px;font-size:1.15rem;font-weight:800;}
+[data-theme="light"] header { background: #ffffff; }
+.nav{min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{display:flex;align-items:center;gap:12px;font-size:1.2rem;font-weight:800;}
 .brand-text {display: flex; flex-direction: column; line-height: 1.2;}
-.brand-text span:last-child {font-size: 0.72rem; color: var(--gold); font-weight: 500;}
-.brand img{width:48px;height:48px;object-fit:contain;}
-nav{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-nav a{font-size:.9rem; font-weight:600; opacity:0.9;}
+.brand-text span:last-child {font-size: 0.7rem; color: var(--gold); font-weight: 500;}
+.brand img{width:52px;height:52px;object-fit:contain;}
+
+nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+nav a{font-size:.88rem; font-weight:600; opacity:0.9; color:var(--ink);}
 nav a:hover, nav a.active{color:var(--gold); opacity:1;}
 
-.install-btn-nav {
-    background: rgba(39, 213, 177, 0.15);
-    border: 1px solid var(--mint);
-    color: var(--mint);
-    padding: 4px 12px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    font-weight: 700;
-    display: none;
-    align-items: center;
-    gap: 6px;
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+.icon-action-btn {
+    background: none; border: none; color: var(--gold); font-size: 1.1rem; cursor: pointer; padding: 6px;
+    display: flex; align-items: center; justify-content: center;
 }
-.theme-btn{
-    background: rgba(243, 213, 138, 0.1);
-    border:1px solid var(--gold);
-    color:var(--gold);
-    padding:5px 12px;
-    border-radius:20px;
-    cursor:pointer;
-    font-size:.8rem;
-    font-weight:700;
+.install-btn-nav {
+    background: rgba(39, 213, 177, 0.15); border: 1px solid var(--mint); color: var(--mint);
+    padding: 4px 12px; border-radius: 20px; cursor: pointer; font-size: 0.78rem; font-weight: 700; display: none;
 }
 
-/* قسم الهيرو البانر العلوي الفخم مع صورة الضريح والخلفية الغامقة */
+/* قسم الهيرو البانر الفخم المطابق للصورة */
 .hero-banner {
-    position: relative;
-    width: 100%;
-    min-height: 440px;
-    background: linear-gradient(180deg, rgba(2, 18, 28, 0.7), rgba(2, 18, 28, 0.95)), url('assets/hero-bg.jpg') center/cover no-repeat;
-    background-color: #031b28;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 50px 16px;
-    border-bottom: 1px solid var(--line);
-    overflow: hidden;
+    position: relative; width: 100%; min-height: 480px;
+    background: linear-gradient(180deg, rgba(3, 22, 34, 0.75), rgba(3, 22, 34, 0.95)), url('assets/hero-bg.jpg') center/cover no-repeat;
+    background-color: #031622;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 50px 16px; border-bottom: 1px solid var(--line); overflow: hidden;
 }
-/* إذا لم تتوفر صورة خلفية، دمجنا تصميماً جمالياً متقناً يحاكي الصورة */
-.hero-banner::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 30%, rgba(243, 213, 138, 0.12) 0%, transparent 70%);
-    pointer-events: none;
-}
-.hero-logo-wrap {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 12px;
-    position: relative;
-    z-index: 2;
-}
-.hero-logo-wrap img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 5px 15px rgba(243, 213, 138, 0.3));
+.hero-content {
+    max-width: 800px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px;
 }
 .hero-banner h1 {
-    font-size: clamp(2.2rem, 5vw, 3.8rem);
-    font-weight: 900;
-    margin: 0 0 8px;
-    color: #fff;
-    letter-spacing: -0.5px;
-    position: relative;
-    z-index: 2;
+    font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; margin: 0; color: #fff;
+    letter-spacing: -0.5px; text-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 .hero-subtitle {
-    font-size: 1.15rem;
-    color: var(--gold);
-    font-weight: 700;
-    margin-bottom: 12px;
-    position: relative;
-    z-index: 2;
+    font-size: 1.1rem; color: var(--gold); font-weight: 700; margin: 0;
 }
 .hero-desc {
-    font-size: 0.98rem;
-    color: var(--muted);
-    max-width: 600px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
+    font-size: 0.95rem; color: var(--muted); max-width: 600px; margin: 0; line-height: 1.7;
 }
 
-/* الكروت الثلاثة السريعة تحت الهيرو مباشرة */
+/* شريط البحث داخل الهيرو */
+.hero-search-box {
+    margin-top: 15px; width: min(520px, 100%); position: relative;
+}
+.hero-search-box input {
+    width: 100%; padding: 14px 20px 14px 50px; border-radius: 30px;
+    border: 1px solid var(--line); background: rgba(2, 18, 28, 0.85); color: #fff;
+    outline: none; font-size: 0.95rem; box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+.hero-search-box input:focus { border-color: var(--gold); }
+.hero-search-box button {
+    position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
+    background: var(--gold); border: none; width: 38px; height: 38px; border-radius: 50%;
+    color: #031622; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem;
+}
+
+/* الكروت الستة السريعة البارزة تحت الهيرو */
 .quick-cards-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-    margin: -30px auto 30px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 14px;
+    margin: -35px auto 30px;
     position: relative;
     z-index: 10;
 }
@@ -202,129 +149,94 @@ nav a:hover, nav a.active{color:var(--gold); opacity:1;}
     background: var(--panel);
     border: 1px solid var(--line);
     border-radius: 16px;
-    padding: 22px;
-    text-align: right;
+    padding: 20px 12px;
+    text-align: center;
     box-shadow: var(--shadow);
-    backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
-    gap: 8px;
-}
-.quick-card:hover { border-color: var(--mint); transform: translateY(-3px); }
-.quick-card .q-icon { font-size: 2rem; margin-bottom: 4px; }
-.quick-card h3 { margin: 0; font-size: 1.15rem; font-weight: 800; color: var(--ink); }
-.quick-card p { margin: 0; font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
-.quick-card a.q-link {
-    margin-top: 8px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--mint);
-    display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+    cursor: pointer;
 }
+.quick-card:hover { border-color: var(--mint); transform: translateY(-4px); background: var(--panel-hover); }
+.quick-card .q-icon { font-size: 1.8rem; color: var(--gold); margin-bottom: 2px; }
+.quick-card h3 { margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--ink); }
+.quick-card p { margin: 0; font-size: 0.75rem; color: var(--muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-section{padding:20px 0}
+section{padding:15px 0}
 
-.head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin:18px 0 14px}
-.head h2{margin:0;font-size:1.5rem; font-weight:800; border-right: 4px solid var(--gold); padding-right: 12px;}
-.head small{color:var(--muted); font-weight:600; cursor:pointer;}
-.head small:hover { color: var(--mint); }
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin:20px 0 14px}
+.head h2{margin:0;font-size:1.4rem; font-weight:800; color:var(--ink);}
+.head small{color:var(--gold); font-weight:700; cursor:pointer; font-size:0.9rem;}
+.head small:hover { text-decoration: underline; }
 
-/* تخطيط الأقسام الوسطى (أحدث الأبحاث - وثائق مصورة - قناة اليوتيوب) */
+/* تخطيط الأقسام الوسطى (أحدث المقالات والأبحاث و آية اليوم) */
 .main-content-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 340px;
+    grid-template-columns: 1fr 360px;
     gap: 20px;
     align-items: start;
 }
 
-/* بطون الأبحاث والوثائق */
-.content-box-card {
-    background: var(--panel);
+/* بطاقة آية اليوم الجانبية المطابقة للصورة */
+.verse-side-card {
+    background: linear-gradient(135deg, #041e2e, #02121c);
     border: 1px solid var(--line);
     border-radius: 18px;
-    padding: 18px;
+    padding: 24px;
     box-shadow: var(--shadow);
-}
-.sub-item-card {
-    background: rgba(2, 18, 28, 0.4);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 14px;
-    margin-bottom: 12px;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    cursor: pointer;
-}
-.sub-item-card:hover { border-color: var(--mint); background: var(--panel-hover); }
-.sub-item-img {
-    width: 85px; height: 65px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: #000;
-}
-.sub-item-info h4 { margin: 0 0 4px; font-size: 0.95rem; font-weight: 700; line-height: 1.4; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.sub-item-info p { margin: 0; font-size: 0.78rem; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
-.sub-item-date { font-size: 0.72rem; color: var(--gold); margin-top: 4px; display: block; }
-
-/* وثائق مصورة شبكة مصغرة */
-.sources-mini-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-.source-mini-card {
-    background: rgba(2, 18, 28, 0.4);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 10px;
     text-align: center;
-    cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
-.source-mini-card:hover { border-color: var(--gold); }
-.source-mini-card img {
-    width: 100%; height: 110px; object-fit: cover; border-radius: 8px; margin-bottom: 6px; background: #000;
+.verse-side-card h3 { color: var(--gold); font-size: 1.1rem; margin: 0 0 15px; font-weight: 800; }
+.verse-text { font-size: 1.15rem; font-weight: 700; color: #fff; line-height: 1.9; margin-bottom: 12px; }
+.verse-source { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
+.sidebar-menu-list {
+    border-top: 1px solid var(--line); padding-top: 12px; text-align: right;
 }
-.source-mini-card h5 { margin: 0; font-size: 0.85rem; font-weight: 700; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.source-mini-card span { font-size: 0.72rem; color: var(--muted); }
+.sidebar-menu-title { font-size: 0.9rem; font-weight: 800; color: var(--gold); margin-bottom: 10px; }
+.sidebar-menu-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 0.85rem; font-weight: 600; color: var(--ink);
+}
+.sidebar-menu-item:hover { color: var(--mint); }
 
-/* بطاقة اليوتيوب الجانبية */
-.youtube-side-card {
+/* شبكة الأبحاث والمقالات الكبرى وسط الشاشة */
+.research-grid-main {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+}
+.research-card-item {
     background: var(--panel);
-    border: 1px solid rgba(223, 37, 44, 0.3);
-    border-radius: 18px;
-    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
     box-shadow: var(--shadow);
 }
-.yt-player-wrap {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #000;
-    margin-bottom: 12px;
+.research-card-item:hover { border-color: var(--mint); transform: translateY(-3px); }
+.research-card-img {
+    width: 100%; height: 130px; object-fit: cover; background: #000; position: relative;
 }
-.yt-player-wrap iframe {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+.research-card-badge {
+    position: absolute; top: 10px; right: 10px; background: rgba(3, 22, 34, 0.85); color: var(--gold);
+    padding: 2px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; border: 1px solid var(--line);
 }
-.yt-channel-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px dashed var(--line);
-}
-.yt-avatar { width: 42px; height: 42px; border-radius: 50%; object-fit: contain; }
-.yt-details h4 { margin: 0; font-size: 0.95rem; font-weight: 700; }
-.yt-details p { margin: 0; font-size: 0.78rem; color: var(--muted); }
+.research-card-body { padding: 14px; display: flex; flex-direction: column; flex: 1; }
+.research-card-body h4 { margin: 0 0 6px; font-size: 0.95rem; font-weight: 800; color: var(--ink); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.research-card-body p { margin: 0 0 12px; font-size: 0.78rem; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex: 1; }
+.research-card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
 
-/* بانر أسفل الأقسام العرضي المتموج */
+/* بانر أسفل المقالات المطابق للصورة */
 .bottom-banner-cta {
-    background: linear-gradient(135deg, #031b28, #052c3e);
-    border: 1px solid rgba(243, 213, 138, 0.3);
-    border-radius: 20px;
-    padding: 30px;
+    background: linear-gradient(135deg, #041e2e, #031622);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px 30px;
     margin: 30px 0;
     display: flex;
     align-items: center;
@@ -333,87 +245,105 @@ section{padding:20px 0}
     flex-wrap: wrap;
     box-shadow: var(--shadow);
 }
-.bottom-banner-cta img { width: 180px; height: auto; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); }
-.bottom-banner-cta .cta-text { flex: 1; min-width: 280px; text-align: right; }
-.bottom-banner-cta h3 { margin: 0 0 6px; font-size: 1.35rem; color: var(--gold); font-weight: 800; }
-.bottom-banner-cta p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.bottom-banner-cta .cta-text { flex: 1; min-width: 260px; text-align: right; }
+.bottom-banner-cta h3 { margin: 0 0 4px; font-size: 1.15rem; color: var(--gold); font-weight: 800; }
+.bottom-banner-cta p { margin: 0; color: var(--muted); font-size: 0.85rem; }
+.cta-btn {
+    background: var(--gold); color: #031622; padding: 10px 22px; border-radius: 25px; font-weight: 800; font-size: 0.85rem; border: none; cursor: pointer;
+}
+.cta-btn:hover { opacity: 0.9; }
 
-/* أدوات البحث الكاملة ومكتبة الملفات الكبرى */
+/* أدوات البحث والمكتبة الكاملة */
 .tools{display:grid;grid-template-columns:1fr 200px 160px;gap:12px;margin:16px 0 12px}
 .tools input,.tools select, .admin-form input, .admin-form select, .admin-form textarea, .contact-form input, .contact-form textarea{
-    width:100%;
-    padding:13px 16px;
-    border-radius:12px;
-    border:1px solid var(--line);
-    background:var(--input-bg);
-    color:var(--ink);
-    outline:none;
-    font-size: 0.92rem;
+    width:100%; padding:12px 16px; border-radius:12px; border:1px solid var(--line);
+    background:var(--input-bg); color:var(--ink); outline:none; font-size: 0.9rem;
 }
-.tools input:focus, .tools select:focus, .admin-form input:focus, .contact-form input:focus { border-color: var(--mint); }
 .quick-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
 .tag-btn {
-    background: rgba(255,255,255,0.05); border: 1px solid var(--line); color: var(--muted);
-    padding: 5px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; cursor: pointer;
+    background: var(--panel); border: 1px solid var(--line); color: var(--muted);
+    padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer;
 }
-.tag-btn:hover, .tag-btn.active { background: rgba(39, 213, 177, 0.15); border-color: var(--mint); color: var(--mint); }
+.tag-btn:hover, .tag-btn.active { border-color: var(--mint); color: var(--mint); background: var(--panel-hover); }
 
 .doc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .doc-card{
-    padding:20px; border:1px solid var(--line); border-radius:18px; background:var(--panel);
+    padding:18px; border:1px solid var(--line); border-radius:16px; background:var(--panel);
     display:flex; flex-direction:column; cursor:pointer; box-shadow: var(--shadow);
 }
-.doc-card:hover{ border-color: var(--mint); transform: translateY(-4px); background: var(--panel-hover); }
-.doc-card .symbol{font-size:2rem; margin-bottom: 6px;}
-.doc-card h3{margin:6px 0;font-size:1.1rem; font-weight:700; line-height: 1.4;}
-.doc-card p{color:var(--muted);font-size:.88rem;margin:6px 0 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex: 1;}
+.doc-card:hover{ border-color: var(--mint); transform: translateY(-3px); }
+.doc-card .symbol{font-size:1.8rem; margin-bottom: 6px;}
+.doc-card h3{margin:6px 0;font-size:1.05rem; font-weight:800; line-height: 1.4;}
+.doc-card p{color:var(--muted);font-size:0.85rem;margin:6px 0 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex: 1;}
 .tag{
-    display:inline-block; padding:3px 10px; border-radius:20px; background:rgba(0, 169, 119, 0.15);
-    border:1px solid rgba(0, 217, 154, 0.3); color:var(--mint); font-size:.78rem; font-weight:700;
+    display:inline-block; padding:2px 10px; border-radius:20px; background:rgba(39, 213, 177, 0.1);
+    border:1px solid var(--mint); color:var(--mint); font-size:0.75rem; font-weight:700; width: fit-content;
 }
-.doc-meta{font-size:.78rem;color:var(--muted);margin-bottom:10px; opacity:0.8;}
+.doc-meta{font-size:0.75rem;color:var(--muted);margin-bottom:8px;}
 
-.share-bar { display: flex; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); }
-.share-btn {
-    background: rgba(255,255,255,0.05); border: 1px solid var(--line); color: var(--ink);
-    padding: 3px 8px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; font-weight: 600;
+.btn{
+    display:inline-flex; justify-content:center; align-items:center; padding:8px 18px; border:0; border-radius:22px;
+    background: var(--green); color:white; font-weight:700; cursor:pointer; font-size: 0.88rem;
 }
-.share-btn:hover { background: var(--mint); color: #000; }
+.btn:hover{ opacity: 0.9; }
+.btn.ghost{background:rgba(255,255,255,0.05); border:1px solid var(--line); color: var(--ink);}
 
 .empty{padding:30px;text-align:center;border:1px dashed var(--line);border-radius:16px;color:var(--muted);display:none}
 
-.btn{
-    display:inline-flex; justify-content:center; align-items:center; padding:9px 20px; border:0; border-radius:25px;
-    background: linear-gradient(135deg, var(--green), #00875e); color:white; font-weight:700; cursor:pointer; font-size: 0.9rem;
-    box-shadow: 0 4px 15px rgba(0, 169, 119, 0.3);
-}
-.btn:hover{ transform: translateY(-1px); opacity: 0.95; }
-.btn.red{background: linear-gradient(135deg, #df252c, #b0181e); box-shadow: 0 4px 15px rgba(223, 37, 44, 0.3);}
-.btn.ghost{background:rgba(255,255,255,0.06);border:1px solid var(--line); color: var(--ink); box-shadow:none;}
-
 /* النوافذ المنبثقة ولوحة الإدارة */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:200;padding:12px;backdrop-filter:blur(8px)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:200;padding:12px;backdrop-filter:blur(6px)}
 .modal-header-bar { display: flex; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 10px; border-bottom: 1px solid var(--line); margin-bottom: 12px; }
-.modal-content{background:var(--bg-body);border:1px solid var(--mint);border-radius:20px;width:min(900px, 100%);max-height:90vh;overflow-y:auto;padding:20px; position:relative;}
-.pdf-modal-content { background: var(--bg-body); border: 1px solid var(--mint); border-radius: 20px; width: min(1050px, 100%); height: 90vh; display: flex; flex-direction: column; padding: 16px; }
-.back-btn{ background: rgba(223, 37, 44, 0.2); border: 1px solid #df252c; color: #ff6b6b; padding: 5px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+.modal-content{background:var(--bg-body);border:1px solid var(--mint);border-radius:18px;width:min(900px, 100%);max-height:90vh;overflow-y:auto;padding:20px;}
+.pdf-modal-content { background: var(--bg-body); border: 1px solid var(--mint); border-radius: 18px; width: min(1050px, 100%); height: 90vh; display: flex; flex-direction: column; padding: 16px; }
+.back-btn{ background: rgba(223, 37, 44, 0.2); border: 1px solid #df252c; color: #ff6b6b; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
 
-footer{margin-top:40px;background:rgba(2, 14, 22, 0.95);border-top:1px solid var(--line);padding:30px 0;color:var(--muted); font-size: 0.88rem;}
-.foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+/* الفوتر المطابق للصورة */
+footer{
+    margin-top:40px; background:#02121c; border-top:1px solid var(--line); padding:35px 0 25px; color:var(--muted); font-size: 0.85rem;
+}
+.footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 30px; margin-bottom: 30px;
+}
+.footer-col h4 { color: var(--gold); font-size: 1rem; margin: 0 0 12px; font-weight: 800; }
+.footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.footer-col ul li a:hover { color: var(--mint); }
+.footer-bottom {
+    border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+}
 .social-icons{display:flex;gap:10px}
 .social-icons a{
-    display:inline-flex; align-items:center; justify-content:center; padding:6px 14px; border-radius:20px;
-    background:rgba(255,255,255,0.05); border:1px solid var(--line); color:var(--ink); font-weight:600; font-size:0.85rem;
+    display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%;
+    background:rgba(255,255,255,0.05); border:1px solid var(--line); color:var(--ink); font-size:0.85rem;
 }
 .social-icons a:hover{background:var(--green); color:#fff; border-color:var(--green);}
 
+/* شريط التنقل السفلي للهاتف المحمول (Mobile Bottom Navigation) */
+.mobile-bottom-nav {
+    display: none; position: fixed; bottom: 0; left: 0; right: 0; height: 65px;
+    background: #031622; border-top: 1px solid var(--line); z-index: 150;
+    justify-content: space-around; align-items: center; padding: 0 5px;
+}
+.mobile-nav-item {
+    display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--muted); font-size: 0.7rem; font-weight: 700;
+}
+.mobile-nav-item.active, .mobile-nav-item:hover { color: var(--gold); }
+.mobile-nav-item span:first-child { font-size: 1.2rem; }
+
 @media(max-width:1024px){
     .main-content-grid { grid-template-columns: 1fr; }
-    .quick-cards-grid { grid-template-columns: 1fr; margin-top: 10px; }
+    .quick-cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .research-grid-main { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media(max-width:768px){
-    .doc-grid{grid-template-columns:1fr}
+    .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .research-grid-main { grid-template-columns: 1fr; }
     .tools{grid-template-columns:1fr}
+    .doc-grid{grid-template-columns:1fr}
+    .footer-grid { grid-template-columns: 1fr; }
+    .mobile-bottom-nav { display: flex; }
+    body { padding-bottom: 60px; }
+    nav { display: none; } /* إخفاء القوائم العلوية للاكتفاء بالقائمة السفلية في الموبايل */
 }
 </style>
 </head>
@@ -426,121 +356,125 @@ footer{margin-top:40px;background:rgba(2, 14, 22, 0.95);border-top:1px solid var
     <img src="assets/logo.png" alt="شعار نهج الحقيقة">
     <div class="brand-text">
         <span>نـهـج الـحـقـيـقـة</span>
-        <span>موقع شيعي للمعرفة والوعي</span>
+        <span>من أجل معرفة أعمق .. لحقيقة أصدق</span>
     </div>
 </a>
 <nav>
 <a href="#top" class="active">الرئيسية</a>
-<a href="#library">الأبحاث والمكتبة</a>
-<a href="#sources-section">الوثائق المصورة</a>
-<a href="#youtube">قناة اليوتيوب</a>
-<a href="#about">حول الموقع</a>
-<a href="#contact">اتصل بنا</a>
-<button class="install-btn-nav" id="installPwaBtn" onclick="installPWA()">📲 تثبيت التطبيق</button>
-<a href="#admin-section" style="color:var(--mint);">⚙️ الإدارة</a>
-<button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙 الوضع الليلي</button>
+<a href="#library">المكتبة</a>
+<a href="#sources-section">الوثائق</a>
+<a href="#library">ملفات PDF</a>
+<a href="#youtube">قناة يوتيوب</a>
+<a href="#about">من نحن</a>
+<a href="#contact">تواصل معنا</a>
 </nav>
+<div class="nav-actions">
+<button class="install-btn-nav" id="installPwaBtn" onclick="installPWA()">📲 تثبيت</button>
+<button class="icon-action-btn" onclick="toggleTheme()" id="themeToggle" title="تبديل الوضع">🌙</button>
+<button class="icon-action-btn" onclick="location.href='#library'" title="بحث">🔍</button>
+</div>
 </div>
 </header>
 
 <main id="top">
 
-<!-- الهيرو البانر الفخم (يحاكي الصورة بدقة عالية) -->
+<!-- الهيرو البانر الفخم المطابق للصورة تماماً -->
 <div class="hero-banner">
-    <div class="hero-logo-wrap">
-        <img src="assets/logo.png" alt="لوغو نهج الحقيقة">
+    <div class="hero-content">
+        <h1>نـهـج الـحـقـيـقـة</h1>
+        <div class="hero-subtitle">من أجل معرفة أعمق .. لحقيقة أصدق</div>
+        <div class="hero-desc">منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية، وملفات PDF، وقناة يوتيوب، وبرنامج حواري.</div>
+        <div class="hero-search-box">
+            <input type="text" id="heroSearchInput" placeholder="ابحث في الموقع..." oninput="syncHeroSearch(this.value)">
+            <button onclick="location.href='#library'">🔍</button>
+        </div>
     </div>
-    <h1>نـهـج الـحـقـيـقـة</h1>
-    <div class="hero-subtitle">موقع شيعي للمعرفة والوعي</div>
-    <div class="hero-desc">نقدم لكم أبحاثاً موثوقة .. ووثائق نادرة .. وقناة يوتيوب لنشر الحقيقة</div>
 </div>
 
-<!-- الكروت الثلاثة السريعة البارزة تحت الهيرو -->
+<!-- الكروت الستة السريعة البارزة تحت الهيرو -->
 <div class="wrap">
 <div class="quick-cards-grid">
-    <article class="quick-card">
-        <div class="q-icon">📖</div>
-        <h3>الأبحاث</h3>
-        <p>دراسات وبحوث في الفكر الإسلامي الشيعي.</p>
-        <a class="q-link" href="#library">استعراض الأبحاث ←</a>
+    <article class="quick-card" onclick="location.href='#library'">
+        <div class="q-icon">🔍</div>
+        <h3>البحث المتقدم</h3>
+        <p>ابحث في كل محتوى الموقع</p>
     </article>
-    <article class="quick-card">
+    <article class="quick-card" onclick="location.href='#library'">
+        <div class="q-icon">📚</div>
+        <h3>المكتبة</h3>
+        <p>أبحاث ومقالات وبحوث</p>
+    </article>
+    <article class="quick-card" onclick="location.href='#sources-section'">
         <div class="q-icon">📜</div>
         <h3>الوثائق</h3>
-        <p>وثائق تاريخية ودينية نادر ومؤصلة.</p>
-        <a class="q-link" href="#sources-section">استعراض الوثائق ←</a>
+        <p>مخطوطات ووثائق نادرة</p>
     </article>
-    <article class="quick-card">
-        <div class="q-icon" style="color:#df252c;">▶</div>
-        <h3>قناة اليوتيوب</h3>
-        <p>مقاطع مرئية وحوارات وبرامج مميزة.</p>
-        <a class="q-link" href="#youtube" style="color:#df252c;">مشاهدة القناة ←</a>
+    <article class="quick-card" onclick="location.href='#library'">
+        <div class="q-icon">📁</div>
+        <h3>ملفات PDF</h3>
+        <p>كتب ودراسات قابلة للتحميل</p>
+    </article>
+    <article class="quick-card" onclick="location.href='#youtube'">
+        <div class="q-icon">🎙️</div>
+        <h3>برنامج على طاولة الحقيقة</h3>
+        <p>حوار .. فكر .. دليل</p>
+    </article>
+    <article class="quick-card" onclick="location.href='#youtube'">
+        <div class="q-icon">▶</div>
+        <h3>قناة يوتيوب</h3>
+        <p>مقاطع ومحاضرات مميزة</p>
     </article>
 </div>
 </div>
 
-<!-- الأقسام الثلاثة الرئيسية جنباً إلى جنب (مطابق لصورة التصميم) -->
+<!-- الأقسام الوسطى الرئيسية (أحدث المقالات + آية اليوم والقائمة الجانبية) -->
 <div class="wrap" style="margin-top: 10px;">
 <div class="main-content-grid">
 
-    <!-- 1. أحدث الأبحاث -->
-    <div class="content-box-card">
+    <!-- القسم الأيمن: أحدث المقالات والأبحاث -->
+    <div>
         <div class="head" style="margin-top:0;">
-            <h2>📚 أحدث الأبحاث</h2>
-            <small onclick="location.href='#library'">عرض جميع الأبحاث ←</small>
+            <h2>أحدث المقالات والأبحاث</h2>
+            <small onclick="location.href='#library'">عرض الكل ←</small>
         </div>
-        <div id="latest-research-container">
-            <p style="color:var(--muted); font-size:0.88rem; text-align:center;">جاري جلب أحدث الأبحاث...</p>
+        <div class="research-grid-main" id="latest-research-container">
+            <p style="color:var(--muted); font-size:0.85rem;">جاري جلب أحدث الأبحاث...</p>
         </div>
     </div>
 
-    <!-- 2. وثائق مصورة -->
-    <div class="content-box-card">
-        <div class="head" style="margin-top:0;">
-            <h2>📜 وثائق مصورة</h2>
-            <small onclick="location.href='#sources-section'">عرض جميع الوثائق ←</small>
-        </div>
-        <div class="sources-mini-grid" id="sources-mini-container">
-            <p style="color:var(--muted); font-size:0.88rem; text-align:center; grid-column:1/-1;">جاري جلب الوثائق المصورة...</p>
-        </div>
-    </div>
-
-    <!-- 3. قناة اليوتيوب البارزة -->
-    <div class="youtube-side-card">
-        <div class="head" style="margin-top:0;">
-            <h2>▶ قناة اليوتيوب</h2>
-            <small onclick="location.href='#youtube'">زيارة القناة ←</small>
-        </div>
-        <div class="yt-player-wrap" id="side-yt-player">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="قناة نهج الحقيقة" allowfullscreen></iframe>
-        </div>
-        <div class="yt-channel-row">
-            <img class="yt-avatar" src="assets/logo.png" alt="نهج الحقيقة">
-            <div class="yt-details">
-                <h4>نهج الحقيقة</h4>
-                <p>قناة تهتم بنشر المحتوى الهادف من الحوارات والبرامج الدينية والثقافية.</p>
+    <!-- القسم الأيسر: آية اليوم وأقسام الموقع الجانبية -->
+    <aside>
+        <div class="verse-side-card">
+            <h3>آية اليوم</h3>
+            <div class="verse-text">«وَمَا كَانَ لِنَبِيٍّ أَنْ يَكُونَ لَهُ أَحِيد»<br><span style="font-size:0.95rem; font-weight:normal;">{وَإِنْ أَدْرِي لَعَلَّهُ فِتْنَةٌ لَكُمْ وَمَتَاعٌ إِلَى حِينٍ}</span></div>
+            <div class="verse-source">(الأنبياء: 111)</div>
+            
+            <div class="sidebar-menu-list">
+                <div class="sidebar-menu-title">أقسام الموقع</div>
+                <a href="#library" class="sidebar-menu-item"><span>المكتبة</span> <span>📚</span></a>
+                <a href="#sources-section" class="sidebar-menu-item"><span>الوثائق</span> <span>📜</span></a>
+                <a href="#library" class="sidebar-menu-item"><span>ملفات PDF</span> <span>📁</span></a>
+                <a href="#youtube" class="sidebar-menu-item"><span>قناة يوتيوب</span> <span>▶</span></a>
+                <a href="#youtube" class="sidebar-menu-item"><span>برنامج على طاولة الحقيقة</span> <span>🎙️</span></a>
             </div>
         </div>
-        <a class="btn red" href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener" style="width:100%; margin-top:12px; gap:6px;">
-            <span>اشترك في القناة ↗</span>
-        </a>
-    </div>
+    </aside>
 
 </div>
 </div>
 
-<!-- بانر دعوي عرضي أسفل الأقسام -->
+<!-- بانر عرضي أسفل الأقسام -->
 <div class="wrap">
 <div class="bottom-banner-cta">
     <div class="cta-text">
-        <h3>« المعرفة هي النور الذي يضيء دروب الحق »</h3>
-        <p>نهج الحقيقة .. حيث تلتقي المعلومة بالوعي وتنجلي الحقائق.</p>
+        <h3>المعرفة طريق إلى الحق .. فكن جزءاً من رحلتنا</h3>
+        <p>استكشف آلاف الوثائق والكتب والبحوث الموثقة بكل سهولة.</p>
     </div>
-    <a class="btn ghost" href="#library" style="border-color:var(--gold); color:var(--gold);">استكشف المزيد ←</a>
+    <button class="cta-btn" onclick="location.href='#library'">استكشف المكتبة الآن ←</button>
 </div>
 </div>
 
-<!-- المكتبة الشاملة والبحث المتقدم -->
+<!-- مكتبة الوثائق والأبحاث الكاملة (البحث المتقدم) -->
 <section class="wrap" id="library" style="margin-top: 10px;">
 <div class="head">
 <h2>مكتبة الوثائق والأبحاث الكاملة</h2>
@@ -548,17 +482,16 @@ footer{margin-top:40px;background:rgba(2, 14, 22, 0.95);border-top:1px solid var
 </div>
 
 <div class="tools">
-<input id="q" type="search" placeholder="ابحث باسم الوثيقة، المؤلف، أو الكلمات المفتاحية..." aria-label="بحث في المكتبة">
-<select id="category" aria-label="تصفية حسب التصنيف">
+<input id="q" type="search" placeholder="ابحث باسم الوثيقة، المؤلف، أو الكلمات المفتاحية..." aria-label="بحث">
+<select id="category" aria-label="التصنيف">
 <option value="">✨ كل التصنيفات</option>
 <option value="وثائق تاريخية">📜 وثائق تاريخية</option>
 <option value="بحوث عقائدية">💡 بحوث عقائدية</option>
 <option value="كتب ومراجع">📖 كتب ومراجع</option>
 <option value="مقالات ودراسات">📝 مقالات ودراسات</option>
-<option value="متنوع">📁 متنوع</option>
 </select>
-<select id="sortBy" aria-label="ترتيب حسب">
-<option value="newest">📅 الأحدث إضافتاً</option>
+<select id="sortBy" aria-label="الترتيب">
+<option value="newest">📅 الأحدث</option>
 <option value="title">🔤 الترتيب الأبجدي</option>
 </select>
 </div>
@@ -568,177 +501,139 @@ footer{margin-top:40px;background:rgba(2, 14, 22, 0.95);border-top:1px solid var
 <button class="tag-btn" onclick="filterByTag('بحوث عقائدية', this)">💡 بحوث عقائدية</button>
 <button class="tag-btn" onclick="filterByTag('وثائق تاريخية', this)">📜 وثائق تاريخية</button>
 <button class="tag-btn" onclick="filterByTag('كتب ومراجع', this)">📖 كتب ومراجع</button>
-<button class="tag-btn" onclick="filterByTag('مقالات ودراسات', this)">📝 مقالات ودراسات</button>
 </div>
 
 <div class="doc-grid" id="docs"></div>
-<div class="empty" id="empty" style="display:none;">لا توجد نتائج مطابقة. جرّب كلمة أخرى أو اختر تصنيفاً مختلفاً.</div>
+<div class="empty" id="empty">لا توجد نتائج مطابقة.</div>
 </section>
 
 <!-- موسوعة الأدلة والمصادر المصورة -->
 <section class="wrap" id="sources-section" style="margin-top: 25px;">
 <div class="head">
 <h2>موسوعة الأدلة والمصادر المصورة</h2>
-<small>انقر على أي موضوع لعرض الوثائق المرتبطة به</small>
+<small>انقر لعرض المستندات</small>
 </div>
 <div class="doc-grid" id="sources-grid">
-<p style="color:var(--muted);">جاري تحميل المواضيع والأدلة...</p>
+<p style="color:var(--muted);">جاري التحميل...</p>
 </div>
 </section>
 
-<!-- قسم القناة الموسع -->
+<!-- قناة يوتيوب -->
 <section class="wrap" id="youtube" style="margin-top: 25px;">
 <div class="head">
-<h2>أحدث الحوارات والمقاطع المصورة</h2>
-<small>قناة نهج الحقيقة على يوتيوب</small>
+<h2>أحدث الفيديوهات والحوارات</h2>
+<small>قناة نهج الحقيقة</small>
 </div>
 <div class="videos-grid" id="videos-container" style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px;">
-<p style="color:var(--muted); grid-column:1/-1;">جاري جلب الفيديوهات...</p>
+<p style="color:var(--muted); grid-column:1/-1;">جاري التحميل...</p>
 </div>
 </section>
 
-<!-- قسم التواصل وإرسال رسالة مباشرة لبريدك الإلكتروني -->
+<!-- قسم اتصل بنا -->
 <section class="wrap" id="contact" style="margin-top: 25px;">
-<div class="panel" style="background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:24px;">
-<h2 style="margin-top: 0; color:var(--gold);">تواصل معنا وإرسال رسالة</h2>
-<p style="margin-bottom:20px; color: var(--muted); font-size:0.95rem;">نرحب بمقترحاتكم أو استفساراتكم. أرسل رسالة وسيتم إرسالها مباشرة إلى بريد المنصة:</p>
-<form class="contact-form" id="contactForm" onsubmit="sendEmailMessage(event)" style="display:grid; gap:12px; max-width:650px;">
+<div style="background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:24px;">
+<h2 style="margin-top:0; color:var(--gold);">تواصل معنا</h2>
+<form class="contact-form" id="contactForm" onsubmit="sendEmailMessage(event)" style="display:grid; gap:12px; max-width:600px; margin-top:14px;">
 <input type="text" id="from_name" placeholder="اسمك الكريم" required>
 <input type="email" id="from_email" placeholder="بريدك الإلكتروني" required>
-<input type="text" id="subject" placeholder="عنوان الرسالة أو الموضوع" required>
-<textarea id="message" placeholder="اكتب رسالتك هنا..." required style="resize:vertical; min-height:120px;"></textarea>
-<button type="submit" id="sendBtn" class="btn" style="width:fit-content">إرسال الرسالة الآن</button>
+<input type="text" id="subject" placeholder="الموضوع" required>
+<textarea id="message" placeholder="رسالتك..." required style="resize:vertical; min-height:100px;"></textarea>
+<button type="submit" id="sendBtn" class="btn" style="width:fit-content">إرسال الرسالة</button>
 </form>
-<p id="contactMsg" style="margin-top: 14px; font-size: 0.95rem; display: none; font-weight:700;"></p>
-</div>
-</section>
-
-<!-- قسم لوحة التحكم والمشرفين (Admin Panel) -->
-<section class="wrap" id="admin-section" style="margin-top: 25px;">
-<div class="panel" style="background:var(--panel); border: 1px solid var(--mint); border-radius:20px; padding:24px;">
-<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-<h2 style="margin:0; color:var(--mint);">⚙️ لوحة إدارة نهج الحقيقة</h2>
-<span id="adminStatusBadge" style="background:rgba(223,37,44,0.2); color:#df252c; padding:4px 12px; border-radius:20px; font-size:0.85rem; font-weight:700;">🔒 غير مسجّل</span>
-</div>
-
-<!-- واجهة إدخال الرمز الدخولي -->
-<div id="adminLoginBox" style="margin-top: 20px; text-align: center;">
-<p style="color:var(--muted);">الرجاء إدخال رمز الدخول الخاص بالمشرف لإدارة الموقع:</p>
-<form onsubmit="handleAdminLogin(event)" style="display:flex; gap:10px; justify-content:center; max-width:400px; margin:auto;">
-<input type="password" id="adminPinInput" placeholder="أدخل رمز الدخول..." required style="padding:10px 16px; border-radius:12px; border:1px solid var(--line); background:var(--input-bg); color:var(--ink); outline:none; text-align:center;">
-<button type="submit" class="btn">دخول</button>
-</form>
-<p id="loginErrorMsg" style="color:#df252c; font-size:0.88rem; margin-top:10px; display:none;"></p>
-</div>
-
-<!-- محتوى اللوحة بعد تسجيل الدخول الصحيح -->
-<div id="adminContentBox" style="display:none; margin-top:20px;">
-<div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;">
-<button class="tag-btn active" onclick="switchAdminTab('addDoc', this)">📄 إضافة وثيقة أو بحث</button>
-<button class="tag-btn" onclick="switchAdminTab('addSource', this)">🖼️ إضافة مصدر مصور</button>
-<button class="tag-btn" onclick="switchAdminTab('addVid', this)">🎬 إضافة فيديو للقناة</button>
-<button class="tag-btn" onclick="switchAdminTab('viewSubs', this)">📧 عرض المشتركين</button>
-</div>
-
-<!-- 1. نموذج إضافة وثيقة -->
-<form id="addDocForm" class="admin-form" onsubmit="handleAddDocument(event)" style="display:grid; gap:12px; max-width:600px;">
-<input type="text" id="doc_title" placeholder="عنوان الوثيقة أو البحث" required>
-<input type="text" id="doc_author" placeholder="اسم المؤلف أو الباحث">
-<select id="doc_category" required>
-<option value="بحوث عقائدية">💡 بحوث عقائدية</option>
-<option value="وثائق تاريخية">📜 وثائق تاريخية</option>
-<option value="كتب ومراجع">📖 كتب ومراجع</option>
-<option value="مقالات ودراسات">📝 مقالات ودراسات</option>
-<option value="متنوع">📁 متنوع</option>
-</select>
-<input type="url" id="doc_file_url" placeholder="رابط ملف PDF أو المستند (URL)" required>
-<textarea id="doc_description" placeholder="وصف مختصر..."></textarea>
-<button type="submit" class="btn" style="width:fit-content;">نشر الوثيقة الآن</button>
-<p id="docAdminMsg" style="font-size:0.9rem; font-weight:700;"></p>
-</form>
-
-<!-- 2. نموذج إضافة مصدر مصور -->
-<form id="addSourceForm" class="admin-form" style="display:none; display:grid; gap:12px; max-width:600px;" onsubmit="handleAddSource(event)">
-<input type="text" id="src_title" placeholder="عنوان الموضوع (مثال: وثائق ثورة العشرين)" required>
-<input type="url" id="src_image_url" placeholder="رابط صورة المصدر (Image URL)" required>
-<textarea id="src_description" placeholder="وصف وتوضيح المصدر أو رقم الصفحة..."></textarea>
-<button type="submit" class="btn" style="width:fit-content;">نشر المصدر المصور</button>
-<p id="srcAdminMsg" style="font-size:0.9rem; font-weight:700;"></p>
-</form>
-
-<!-- 3. نموذج إضافة فيديو -->
-<form id="addVidForm" class="admin-form" style="display:none; display:grid; gap:12px; max-width:600px;" onsubmit="handleAddVideo(event)">
-<input type="text" id="vid_title" placeholder="عنوان الفيديو" required>
-<input type="text" id="vid_youtube_id" placeholder="معرّف يوتيوب (YouTube Video ID - مثال: dQw4w9WgXcQ)" required>
-<button type="submit" class="btn" style="width:fit-content;">نشر الفيديو للقناة</button>
-<p id="vidAdminMsg" style="font-size:0.9rem; font-weight:700;"></p>
-</form>
-
-<!-- 4. جدول المشتركين -->
-<div id="viewSubsBox" style="display:none;">
-<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-<h3 style="margin:0; color:var(--gold);">قائمة المشتركين (<span id="subscribersCount">0</span>)</h3>
-<button class="btn" onclick="downloadSubscribersCSV()" style="font-size:0.8rem; padding:5px 12px;">📥 تنزيل CSV</button>
-</div>
-<div style="max-height:250px; overflow-y:auto; border:1px solid var(--line); border-radius:10px; padding:8px; background:rgba(0,0,0,0.2);">
-<ul id="subscribersList" style="list-style:none; padding:0; margin:0;">
-<li style="color:var(--muted);">جاري التحميل...</li>
-</ul>
-</div>
-</div>
-</div>
+<p id="contactMsg" style="margin-top:10px; font-size:0.85rem; display:none; font-weight:700;"></p>
 </div>
 </section>
 
 <!-- قسم حول الموقع -->
 <section class="wrap" id="about" style="margin-top: 25px;">
-<div class="panel" style="background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:20px;">
-<h2 style="margin-top: 0;">عن نهج الحقيقة</h2>
-<p style="color: var(--muted); margin: 0;">موقع شيعي للمعرفة والوعي[span_3](start_span)[span_3](end_span). نقدم أبحاثاً موثوقة، وثائق تاريخية ودينية نادرة، ومقاطع ومحتوى هادف لخدمة الباحثين وطلاب المعرفة.</p>
+<div style="background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px;">
+<h2 style="margin-top:0;">عن نهج الحقيقة</h2>
+<p style="color:var(--muted); margin:0; font-size:0.9rem;">منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية وملفات PDF وقناة يوتيوب وبرنامج حواري.</p>
 </div>
 </section>
 </main>
 
-<!-- نافذة عرض صور الأدلة المصورة -->
+<!-- الفوتر المطابق للصورة تماماً -->
+<footer>
+<div class="wrap">
+<div class="footer-grid">
+    <div class="footer-col">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <img src="assets/logo.png" alt="" style="width:40px; height:40px; object-fit:contain;">
+            <strong style="color:var(--ink); font-size:1.1rem;">نهج الحقيقة</strong>
+        </div>
+        <p style="margin:0; font-size:0.85rem; color:var(--muted); line-height:1.7;">من أجل معرفة أعمق .. لحقيقة أصدق. منصة متخصصة في نشر الفكر والوثائق.</p>
+    </div>
+    <div class="footer-col">
+        <h4>معلومات</h4>
+        <ul>
+            <li><a href="#about">من نحن</a></li>
+            <li><a href="#">سياسة الخصوصية</a></li>
+            <li><a href="#">شروط الاستخدام</a></li>
+        </ul>
+    </div>
+    <div class="footer-col">
+        <h4>خدمات الموقع</h4>
+        <ul>
+            <li><a href="#library">البحث المتقدم</a></li>
+            <li><a href="#youtube">قناة يوتيوب</a></li>
+            <li><a href="#sources-section">الوثائق</a></li>
+            <li><a href="#library">ملفات PDF</a></li>
+        </ul>
+    </div>
+    <div class="footer-col">
+        <h4>روابط سريعة</h4>
+        <ul>
+            <li><a href="#top">الرئيسية</a></li>
+            <li><a href="#library">المكتبة</a></li>
+            <li><a href="#sources-section">الوثائق</a></li>
+            <li><a href="#contact">تواصل معنا</a></li>
+        </ul>
+    </div>
+</div>
+<div class="footer-bottom">
+    <div class="social-icons">
+        <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank">▶</a>
+        <a href="https://x.com/raf88idi" target="_blank">𝕏</a>
+        <a href="https://www.tiktok.com/@ha_no_88" target="_blank">🎵</a>
+    </div>
+    <span style="font-size:0.8rem;">© <span id="year"></span> نهج الحقيقة، جميع الحقوق محفوظة.</span>
+</div>
+</div>
+</footer>
+
+<!-- شريط التنقل السفلي للموبايل (Mobile Bottom Navigation) -->
+<div class="mobile-bottom-nav">
+<a href="#top" class="mobile-nav-item active"><span>🏠</span><span>الرئيسية</span></a>
+<a href="#library" class="mobile-nav-item"><span>📚</span><span>المكتبة</span></a>
+<a href="#library" class="mobile-nav-item"><span>📁</span><span>ملفات PDF</span></a>
+<a href="#youtube" class="mobile-nav-item"><span>▶</span><span>يوتيوب</span></a>
+<a href="#sources-section" class="mobile-nav-item"><span>📜</span><span>الوثائق</span></a>
+</div>
+
+<!-- النوافذ المنبثقة -->
 <div class="modal" id="sourceModal">
 <div class="modal-content">
 <div class="modal-header-bar">
-<h2 id="modalTitle" style="margin:0; color:var(--gold); font-size:1.1rem;">عنوان الموضوع</h2>
+<h2 id="modalTitle" style="margin:0; color:var(--gold); font-size:1rem;">عنوان</h2>
 <button class="back-btn" onclick="closeSourceModal()">← رجوع</button>
 </div>
-<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:12px;" id="modalImagesContainer"></div>
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;" id="modalImagesContainer"></div>
 </div>
 </div>
 
-<!-- عارض PDF الداخلي -->
 <div class="modal" id="pdfModal">
 <div class="pdf-modal-content">
 <div class="modal-header-bar">
-<h3 id="pdfTitle" style="margin:0; color:var(--gold); font-size:1rem; max-width:50%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">عرض الوثيقة</h3>
+<h3 id="pdfTitle" style="margin:0; color:var(--gold); font-size:0.95rem; max-width:50%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">عرض المستند</h3>
 <div style="display:flex; gap:8px;">
-<button class="btn" onclick="downloadFileDirectly()" style="padding:5px 12px; font-size:0.8rem;">⬇️ تحميل</button>
+<button class="btn" onclick="downloadFileDirectly()" style="padding:4px 10px; font-size:0.75rem;">⬇️ تحميل</button>
 <button class="back-btn" onclick="closePdfModal()">← رجوع</button>
 </div>
 </div>
 <div id="pdfViewerContainer" style="width:100%; height:100%;"></div>
 </div>
 </div>
-
-<footer>
-<div class="wrap foot">
-<div style="display:flex; align-items:center; gap:10px;">
-<img src="assets/logo.png" alt="" style="width:36px; height:36px; object-fit:contain;">
-<strong style="color: var(--ink);">نهج الحقيقة</strong>
-</div>
-<span>موقع شيعي للمعرفة والوعي[span_4](start_span)[span_4](end_span)</span>
-<div class="social-icons">
-<a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank">يوتيوب</a>
-<a href="https://x.com/raf88idi" target="_blank">إكس</a>
-<a href="https://www.tiktok.com/@ha_no_88?is_from_webapp=1&sender_device=pc" target="_blank">تيك توك</a>
-</div>
-<small>© <span id="year"></span> نهج الحقيقة</small>
-</div>
-</footer>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -764,11 +659,11 @@ function toggleTheme() {
     const btn = document.getElementById('themeToggle');
     if (html.getAttribute('data-theme') === 'dark') {
         html.setAttribute('data-theme', 'light');
-        btn.textContent = '☀️ النهاري';
+        btn.textContent = '☀️';
         localStorage.setItem('theme', 'light');
     } else {
         html.setAttribute('data-theme', 'dark');
-        btn.textContent = '🌙 الليلي';
+        btn.textContent = '🌙';
         localStorage.setItem('theme', 'dark');
     }
 }
@@ -776,13 +671,12 @@ function toggleTheme() {
 window.addEventListener('DOMContentLoaded', () => {
     const saved = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', saved);
-    document.getElementById('themeToggle').textContent = saved === 'dark' ? '🌙 الليلي' : '☀️ النهاري';
+    document.getElementById('themeToggle').textContent = saved === 'dark' ? '🌙' : '☀️';
     try { emailjs.init("xd1Jo81I__MsksgB9"); } catch(e){}
 });
 
 const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co'; 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4c3h4a2F1eG91eW5lYWFtZWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MjQxMjMsImV4cCI6MjEwNzMwMDEyM30.wvVWq3TXd83mJ2FtViIwWO7O_hN1OazD91MkmiWZdh0'; 
-
 let supabaseClient = null;
 try { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch(e){}
 
@@ -793,102 +687,9 @@ function triggerDirectDownload(url, name) {
 }
 function downloadFileDirectly() { if (activePdfUrl) triggerDirectDownload(activePdfUrl, activePdfName + '.pdf'); }
 
-/* دوام لوحة الإدارة */
-const ADMIN_PIN = "123456"; 
-let subscribersData = [];
-
-function handleAdminLogin(e) {
-    e.preventDefault();
-    const pin = document.getElementById('adminPinInput').value;
-    const errorMsg = document.getElementById('loginErrorMsg');
-    if (pin === ADMIN_PIN) {
-        document.getElementById('adminLoginBox').style.display = 'none';
-        document.getElementById('adminContentBox').style.display = 'block';
-        const badge = document.getElementById('adminStatusBadge');
-        badge.textContent = '🔓 مسجّل'; badge.style.color = 'var(--mint)';
-        errorMsg.style.display = 'none';
-        fetchSubscribersList();
-    } else {
-        errorMsg.style.display = 'block'; errorMsg.textContent = '⚠️ رمز الدخول غير صحيح!';
-    }
-}
-
-function switchAdminTab(name, btn) {
-    document.querySelectorAll('#adminContentBox .tag-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('addDocForm').style.display = name === 'addDoc' ? 'grid' : 'none';
-    document.getElementById('addSourceForm').style.display = name === 'addSource' ? 'grid' : 'none';
-    document.getElementById('addVidForm').style.display = name === 'addVid' ? 'grid' : 'none';
-    document.getElementById('viewSubsBox').style.display = name === 'viewSubs' ? 'block' : 'none';
-}
-
-async function handleAddDocument(e) {
-    e.preventDefault();
-    const msg = document.getElementById('docAdminMsg');
-    const data = {
-        title: document.getElementById('doc_title').value,
-        author: document.getElementById('doc_author').value || 'غير معروف',
-        category: document.getElementById('doc_category').value,
-        file_url: document.getElementById('doc_file_url').value,
-        description: document.getElementById('doc_description').value,
-        date: new Date().toLocaleDateString('ar-EG')
-    };
-    try {
-        const { error } = await supabaseClient.from('documents').insert([data]);
-        if (error) throw error;
-        msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم الإضافة بنجاح!';
-        document.getElementById('addDocForm').reset(); fetchDocuments();
-    } catch(err) { msg.style.color = '#df252c'; msg.textContent = '⚠️ حدث خطأ.'; }
-}
-
-async function handleAddSource(e) {
-    e.preventDefault();
-    const msg = document.getElementById('srcAdminMsg');
-    const data = { title: document.getElementById('src_title').value, image_url: document.getElementById('src_image_url').value, description: document.getElementById('src_description').value };
-    try {
-        const { error } = await supabaseClient.from('sources').insert([data]);
-        if (error) throw error;
-        msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم نشر المصدر المصور!';
-        document.getElementById('addSourceForm').reset(); fetchSources();
-    } catch(err) { msg.style.color = '#df252c'; msg.textContent = '⚠️ خطأ.'; }
-}
-
-async function handleAddVideo(e) {
-    e.preventDefault();
-    const msg = document.getElementById('vidAdminMsg');
-    const data = { title: document.getElementById('vid_title').value, youtube_id: document.getElementById('vid_youtube_id').value.trim() };
-    try {
-        const { error } = await supabaseClient.from('videos').insert([data]);
-        if (error) throw error;
-        msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم نشر الفيديو!';
-        document.getElementById('addVidForm').reset(); fetchLatestVideos();
-    } catch(err) { msg.style.color = '#df252c'; msg.textContent = '⚠️ خطأ.'; }
-}
-
-async function fetchSubscribersList() {
-    if (!supabaseClient) return;
-    try {
-        const { data } = await supabaseClient.from('subscribers').select('*');
-        if (!data) return;
-        subscribersData = data;
-        document.getElementById('subscribersCount').textContent = data.length;
-        const list = document.getElementById('subscribersList');
-        list.innerHTML = '';
-        data.forEach((s, i) => {
-            const li = document.createElement('li');
-            li.style.cssText = 'padding:6px 0; border-bottom:1px solid var(--line); font-size:0.85rem;';
-            li.innerHTML = `<strong>${i+1}.</strong> ${s.email}`;
-            list.appendChild(li);
-        });
-    } catch(e){}
-}
-
-function downloadSubscribersCSV() {
-    if (!subscribersData.length) return alert('لا يوجد مشتركين.');
-    let csv = "data:text/csv;charset=utf-8,البريد\n";
-    subscribersData.forEach(s => csv += `${s.email}\n`);
-    const link = document.createElement("a"); link.href = encodeURI(csv); link.download = "subscribers.csv";
-    document.body.appendChild(link); link.click(); document.body.removeChild(link);
+function syncHeroSearch(val) {
+    const mainSearch = document.getElementById('q');
+    if (mainSearch) { mainSearch.value = val; filterAndRenderDocs(); }
 }
 
 function sendEmailMessage(e) {
@@ -902,10 +703,10 @@ function sendEmailMessage(e) {
         message: document.getElementById('message').value
     }).then(() => {
         msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم إرسال رسالتك بنجاح!';
-        document.getElementById('contactForm').reset(); btn.disabled = false; btn.textContent = 'إرسال الرسالة الآن';
+        document.getElementById('contactForm').reset(); btn.disabled = false; btn.textContent = 'إرسال الرسالة';
     }).catch(() => {
         msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ تعذر الإرسال.';
-        btn.disabled = false; btn.textContent = 'إرسال الرسالة الآن';
+        btn.disabled = false; btn.textContent = 'إرسال الرسالة';
     });
 }
 
@@ -930,18 +731,29 @@ function renderLatestResearchMini(docs) {
     
     container.innerHTML = '';
     latest.forEach(doc => {
-        const div = document.createElement('div');
-        div.className = 'sub-item-card';
-        div.innerHTML = `
-            <div style="font-size:2rem; width:50px; text-align:center;">📚</div>
-            <div class="sub-item-info">
+        let badgeText = 'أبحاث';
+        if (doc.category === 'كتب ومراجع') badgeText = 'كتب';
+        else if (doc.category === 'وثائق تاريخية') badgeText = 'وثائق';
+        else if (doc.category === 'مقالات ودراسات') badgeText = 'مقالات';
+
+        const card = document.createElement('article');
+        card.className = 'research-card-item';
+        card.innerHTML = `
+            <div class="research-card-img">
+                <span class="research-card-badge">${badgeText}</span>
+                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:2.5rem; background:rgba(0,0,0,0.3);">📖</div>
+            </div>
+            <div class="research-card-body">
                 <h4>${doc.title}</h4>
                 <p>${doc.description || doc.author || ''}</p>
-                <span class="sub-item-date">${doc.date || ''}</span>
+                <div class="research-card-footer">
+                    <span>${doc.date || ''}</span>
+                    <span style="color:var(--mint); font-weight:700;">قراءة ←</span>
+                </div>
             </div>
         `;
-        div.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url));
-        container.appendChild(div);
+        card.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url));
+        container.appendChild(card);
     });
 }
 
@@ -950,29 +762,8 @@ async function fetchSources() {
     try {
         const { data } = await supabaseClient.from('sources').select('*');
         allSources = data || [];
-        renderSourcesMini(allSources);
         renderSourcesMain(allSources);
     } catch(e){}
-}
-
-function renderSourcesMini(sources) {
-    const container = document.getElementById('sources-mini-container');
-    if (!container) return;
-    const mini = sources.slice(0, 4);
-    if (!mini.length) { container.innerHTML = '<p style="color:var(--muted); font-size:0.85rem; grid-column:1/-1;">لا توجد وثائق مصورة.</p>'; return; }
-
-    container.innerHTML = '';
-    mini.forEach(src => {
-        const div = document.createElement('div');
-        div.className = 'source-mini-card';
-        div.innerHTML = `
-            <img src="${src.image_url}" alt="${src.title}" loading="lazy" onerror="this.src='assets/logo.png'">
-            <h5>${src.title}</h5>
-            <span>وثيقة نادرة</span>
-        `;
-        div.addEventListener('click', () => openSourceModal(src.title, [src]));
-        container.appendChild(div);
-    });
 }
 
 function renderSourcesMain(data) {
@@ -995,7 +786,7 @@ function renderSourcesMain(data) {
         card.innerHTML = `
             <div class="symbol">📜</div>
             <h3>${title}</h3>
-            <p style="color:var(--muted); font-size:0.85rem;">يحتوي على ${group.length} مستند وصورة مصدّقة.</p>
+            <p style="color:var(--muted); font-size:0.8rem;">يحتوي على ${group.length} مستند مصدق.</p>
             <span class="tag">استعراض المصادر ↗</span>
         `;
         card.addEventListener('click', () => openSourceModal(title, group));
@@ -1009,12 +800,6 @@ async function fetchLatestVideos() {
         const { data } = await supabaseClient.from('videos').select('*');
         if (!data || !data.length) return;
         
-        // تحديث الفيديو الجانبي البارز أولاً
-        const sidePlayer = document.getElementById('side-yt-player');
-        if (sidePlayer && data[0].youtube_id) {
-            sidePlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${data[0].youtube_id}" title="${data[0].title}" allowfullscreen></iframe>`;
-        }
-
         const container = document.getElementById('videos-container');
         if (container) {
             container.innerHTML = '';
@@ -1023,10 +808,10 @@ async function fetchLatestVideos() {
                     const card = document.createElement('div');
                     card.className = 'doc-card';
                     card.innerHTML = `
-                        <div style="position:relative; width:100%; padding-bottom:56.25%; background:#000; border-radius:10px; overflow:hidden; margin-bottom:10px;">
+                        <div style="position:relative; width:100%; padding-bottom:56.25%; background:#000; border-radius:10px; overflow:hidden; margin-bottom:8px;">
                             <iframe src="https://www.youtube.com/embed/${vid.youtube_id}" title="${vid.title}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
                         </div>
-                        <h4 style="margin:0; font-size:0.95rem; font-weight:700;">${vid.title}</h4>
+                        <h4 style="margin:0; font-size:0.9rem; font-weight:800;">${vid.title}</h4>
                     `;
                     container.appendChild(card);
                 }
@@ -1051,21 +836,14 @@ function openSourceModal(title, images) {
         const div = document.createElement('div');
         div.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:10px; padding:10px; text-align:center;';
         div.innerHTML = `
-            <img src="${img.image_url}" alt="${title}" style="width:100%; max-height:350px; object-fit:contain; border-radius:8px;" onerror="this.src='assets/logo.png'">
-            <p style="font-size:0.8rem; color:var(--muted); margin:8px 0;">${img.description || ''}</p>
-            <a class="btn" href="${img.image_url}" target="_blank" style="padding:4px 12px; font-size:0.75rem;">فتح الصورة ↗</a>
+            <img src="${img.image_url}" alt="${title}" style="width:100%; max-height:300px; object-fit:contain; border-radius:8px;" onerror="this.src='assets/logo.png'">
+            <p style="font-size:0.75rem; color:var(--muted); margin:6px 0;">${img.description || ''}</p>
         `;
         container.appendChild(div);
     });
     document.getElementById('sourceModal').style.display = 'flex';
 }
 function closeSourceModal() { document.getElementById('sourceModal').style.display = 'none'; }
-
-function shareDocument(platform, title, url) {
-    const text = encodeURIComponent(`💡 من نهج الحقيقة:\n*${title}*\n\n`);
-    let link = platform === 'whatsapp' ? `https://api.whatsapp.com/send?text=${text}${url}` : `https://t.me/share/url?url=${url}&text=${text}`;
-    window.open(link, '_blank');
-}
 
 function renderDocs(docs) {
     const grid = document.getElementById('docs');
@@ -1092,16 +870,11 @@ function renderDocs(docs) {
             <span class="tag">${doc.category || 'متنوع'}</span>
             <div class="symbol">${sym}</div>
             <h3>${doc.title}</h3>
-            <div class="doc-meta">المؤلف: ${doc.author || 'غير معروف'} · التاريخ: ${doc.date || ''}</div>
+            <div class="doc-meta">المؤلف: ${doc.author || 'غير معروف'} · ${doc.date || ''}</div>
             <p>${doc.description || ''}</p>
             <div style="display:flex; gap:6px; margin-top:auto;">
-                <button class="btn" style="flex:1; padding:6px 10px; font-size:0.8rem;" onclick="openPdfViewer('${doc.title.replace(/'/g, "\\'")}', '${doc.file_url}')">📖 قراءة</button>
-                <button class="btn ghost" onclick="triggerDirectDownload('${doc.file_url}', '${doc.title}.pdf')" style="padding:6px 10px; font-size:0.8rem;">⬇️</button>
-            </div>
-            <div class="share-bar">
-                <span style="font-size:0.75rem; color:var(--muted);">مشاركة:</span>
-                <button class="share-btn" onclick="shareDocument('whatsapp', '${doc.title}', '${doc.file_url}')">واتساب</button>
-                <button class="share-btn" onclick="shareDocument('telegram', '${doc.title}', '${doc.file_url}')">تليجرام</button>
+                <button class="btn" style="flex:1; padding:6px 10px; font-size:0.78rem;" onclick="openPdfViewer('${doc.title.replace(/'/g, "\\'")}', '${doc.file_url}')">📖 قراءة</button>
+                <button class="btn ghost" onclick="triggerDirectDownload('${doc.file_url}', '${doc.title}.pdf')" style="padding:6px 10px; font-size:0.78rem;">⬇️</button>
             </div>
         `;
         grid.appendChild(card);
