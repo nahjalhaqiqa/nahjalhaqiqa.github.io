@@ -628,7 +628,7 @@ footer{
     </div>
 </div>
 
-<!-- نافذة عرض ملفات PDF المتوافقة تماماً مع الهواتف والكمبيوتر مع إمكانية القراءة والتحميل -->
+<!-- نافذة عرض ملفات PDF المتوافقة تماماً مع الهواتف والكمبيوتر مع إمكانية القراءة والتحميل المباشر -->
 <div class="modal" id="pdfModal">
 <div class="pdf-modal-content">
 <div class="sticky-close-bar">
@@ -833,15 +833,20 @@ window.addEventListener('popstate', function() {
     document.getElementById('pdfModal').style.display = 'none';
 });
 
-/* فتح ملف الـ PDF عبر عارض جوجل ليعمل بشكل مذهل وصحيح على الهواتف والكمبيوتر معاً */
+/* عرض ملف الـ PDF مباشرةً باستخدام عنصر embed / object المدعوم في كافة الهواتف والكمبيوتر مع بديل للتحميل المباشر */
 function openPdfViewer(title, url) {
     activePdfUrl = url; activePdfName = title;
     document.getElementById('pdfTitle').textContent = title;
     
-    // استخدام Google Docs Viewer لضمان عرض ملف الـ PDF داخل الهواتف والكمبيوتر بدون مشاكل
-    const viewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(url)}&embedded=true`;
-    
-    document.getElementById('pdfViewerContainer').innerHTML = `<iframe src="${viewerUrl}" style="width:100%; height:100%; border:0; border-radius:10px; background:#fff;" allowfullscreen></iframe>`;
+    document.getElementById('pdfViewerContainer').innerHTML = `
+        <object data="${url}#view=FitH" type="application/pdf" width="100%" height="100%" style="border-radius:10px; background:#fff;">
+            <embed src="${url}#view=FitH" type="application/pdf" width="100%" height="100%" />
+            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:15px; color:var(--ink); padding:20px; text-align:center;">
+                <p>عذراً، متصفح هاتفك لا يدعم العرض المباشر للملفات داخل الصفحة.</p>
+                <button class="btn" onclick="triggerDirectDownload('${url}', '${title}.pdf')">⬇️ اضغط هنا لتحميل الملف وقراءته</button>
+            </div>
+        </object>
+    `;
     document.getElementById('pdfModal').style.display = 'flex';
     history.pushState({ modalOpen: true }, "");
 }
