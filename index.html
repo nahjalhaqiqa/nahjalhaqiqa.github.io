@@ -31,6 +31,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- مكتبة PDF.js لضمان فتح ملفات PDF على كافة الأجهزة -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <style>
@@ -109,8 +111,12 @@ nav a:hover, nav a.active{color:var(--gold); opacity:1;}
     font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; margin: 0; color: #fff;
     letter-spacing: -0.5px; text-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
-.hero-subtitle { font-size: 1.1rem; color: var(--gold); font-weight: 700; margin: 0; }
-.hero-desc { font-size: 0.95rem; color: var(--muted); max-width: 600px; margin: 0; line-height: 1.7; }
+.hero-subtitle {
+    font-size: 1.1rem; color: var(--gold); font-weight: 700; margin: 0;
+}
+.hero-desc {
+    font-size: 0.95rem; color: var(--muted); max-width: 600px; margin: 0; line-height: 1.7;
+}
 
 .hero-search-box {
     margin-top: 15px; width: min(520px, 100%); position: relative;
@@ -128,13 +134,25 @@ nav a:hover, nav a.active{color:var(--gold); opacity:1;}
 }
 
 .quick-cards-grid {
-    display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px;
-    margin: -35px auto 30px; position: relative; z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 14px;
+    margin: -35px auto 30px;
+    position: relative;
+    z-index: 10;
 }
 .quick-card {
-    background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
-    padding: 20px 12px; text-align: center; box-shadow: var(--shadow);
-    display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 12px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
 }
 .quick-card:hover { border-color: var(--mint); transform: translateY(-4px); background: var(--panel-hover); }
 .quick-card .q-icon { font-size: 1.8rem; color: var(--gold); margin-bottom: 2px; }
@@ -142,33 +160,61 @@ nav a:hover, nav a.active{color:var(--gold); opacity:1;}
 .quick-card p { margin: 0; font-size: 0.75rem; color: var(--muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
 section{padding:15px 0}
+
 .head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin:20px 0 14px}
 .head h2{margin:0;font-size:1.4rem; font-weight:800; color:var(--ink);}
 .head small{color:var(--gold); font-weight:700; cursor:pointer; font-size:0.9rem;}
+.head small:hover { text-decoration: underline; }
 
 .main-content-grid {
-    display: grid; grid-template-columns: 1fr 360px; gap: 20px; align-items: start;
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 20px;
+    align-items: start;
 }
+
 .verse-side-card {
-    background: linear-gradient(135deg, #041e2e, #02121c); border: 1px solid var(--line);
-    border-radius: 18px; padding: 24px; box-shadow: var(--shadow); text-align: center;
+    background: linear-gradient(135deg, #041e2e, #02121c);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 .verse-side-card h3 { color: var(--gold); font-size: 1.1rem; margin: 0 0 15px; font-weight: 800; }
 .verse-text { font-size: 1.15rem; font-weight: 700; color: #fff; line-height: 1.9; margin-bottom: 12px; }
 .verse-source { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
-.sidebar-menu-list { border-top: 1px solid var(--line); padding-top: 12px; text-align: right; }
+.sidebar-menu-list {
+    border-top: 1px solid var(--line); padding-top: 12px; text-align: right;
+}
 .sidebar-menu-title { font-size: 0.9rem; font-weight: 800; color: var(--gold); margin-bottom: 10px; }
 .sidebar-menu-item {
     display: flex; align-items: center; justify-content: space-between;
     padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 0.85rem; font-weight: 600; color: var(--ink);
 }
+.sidebar-menu-item:hover { color: var(--mint); }
 
-.research-grid-main { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.research-card-item {
-    background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
-    overflow: hidden; display: flex; flex-direction: column; cursor: pointer; box-shadow: var(--shadow);
+.research-grid-main {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
 }
-.research-card-img { width: 100%; height: 130px; object-fit: cover; background: #000; position: relative; }
+.research-card-item {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}
+.research-card-item:hover { border-color: var(--mint); transform: translateY(-3px); }
+.research-card-img {
+    width: 100%; height: 130px; object-fit: cover; background: #000; position: relative;
+}
 .research-card-badge {
     position: absolute; top: 10px; right: 10px; background: rgba(3, 22, 34, 0.85); color: var(--gold);
     padding: 2px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; border: 1px solid var(--line);
@@ -179,10 +225,25 @@ section{padding:15px 0}
 .research-card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
 
 .bottom-banner-cta {
-    background: linear-gradient(135deg, #041e2e, #031622); border: 1px solid var(--line); border-radius: 18px;
-    padding: 22px 30px; margin: 30px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; box-shadow: var(--shadow);
+    background: linear-gradient(135deg, #041e2e, #031622);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px 30px;
+    margin: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    box-shadow: var(--shadow);
 }
-.cta-btn { background: var(--gold); color: #031622; padding: 10px 22px; border-radius: 25px; font-weight: 800; font-size: 0.85rem; border: none; cursor: pointer; }
+.bottom-banner-cta .cta-text { flex: 1; min-width: 260px; text-align: right; }
+.bottom-banner-cta h3 { margin: 0 0 4px; font-size: 1.15rem; color: var(--gold); font-weight: 800; }
+.bottom-banner-cta p { margin: 0; color: var(--muted); font-size: 0.85rem; }
+.cta-btn {
+    background: var(--gold); color: #031622; padding: 10px 22px; border-radius: 25px; font-weight: 800; font-size: 0.85rem; border: none; cursor: pointer;
+}
+.cta-btn:hover { opacity: 0.9; }
 
 .tools{display:grid;grid-template-columns:1fr 200px 160px;gap:12px;margin:16px 0 12px}
 .tools input,.tools select, .admin-form input, .admin-form select, .admin-form textarea, .contact-form input, .contact-form textarea{
@@ -194,7 +255,7 @@ section{padding:15px 0}
     background: var(--panel); border: 1px solid var(--line); color: var(--muted);
     padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer;
 }
-.tag-btn.active { border-color: var(--mint); color: var(--mint); background: var(--panel-hover); }
+.tag-btn:hover, .tag-btn.active { border-color: var(--mint); color: var(--mint); background: var(--panel-hover); }
 
 .doc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .doc-card{
@@ -215,37 +276,96 @@ section{padding:15px 0}
     display:inline-flex; justify-content:center; align-items:center; padding:8px 18px; border:0; border-radius:22px;
     background: var(--green); color:white; font-weight:700; cursor:pointer; font-size: 0.88rem; text-decoration: none;
 }
+.btn:hover{ opacity: 0.9; }
 .btn.ghost{background:rgba(255,255,255,0.05); border:1px solid var(--line); color: var(--ink);}
+.btn.shrink{background: rgba(243, 213, 138, 0.15); border: 1px solid var(--gold); color: var(--gold);}
 .btn.red{background: linear-gradient(135deg, #df252c, #b0181e); color: white;}
+
 .empty{padding:30px;text-align:center;border:1px dashed var(--line);border-radius:16px;color:var(--muted);display:none}
 
 .modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);display:none;align-items:center;justify-content:center;z-index:200;padding:12px;backdrop-filter:blur(8px)}
 .modal-content{background:var(--bg-body);border:1px solid var(--mint);border-radius:18px;width:min(900px, 100%);max-height:90vh;overflow-y:auto;padding:16px 20px; position: relative;}
 .pdf-modal-content { background: var(--bg-body); border: 1px solid var(--mint); border-radius: 18px; width: min(1050px, 100%); height: 90vh; display: flex; flex-direction: column; padding: 16px; }
 .back-btn{ background: linear-gradient(135deg, #df252c, #b0181e); border: none; color: #fff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 12px rgba(223,37,44,0.3); }
-.sticky-close-bar { position: sticky; top: 0; z-index: 100; background: var(--bg-body); display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); margin-bottom: 12px; }
 
-footer{ margin-top:40px; background:#02121c; border-top:1px solid var(--line); padding:35px 0 25px; color:var(--muted); font-size: 0.85rem; }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 30px; margin-bottom: 30px; }
+.sticky-close-bar {
+    position: sticky; top: 0; z-index: 100; background: var(--bg-body);
+    display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); margin-bottom: 12px;
+}
+
+#imageZoomModal {
+    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); z-index: 400; display: none;
+    flex-direction: column; align-items: center; justify-content: space-between; padding: 15px;
+}
+.zoom-header {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(3, 22, 34, 0.95); padding: 10px 16px; border-radius: 14px; border: 1px solid var(--line);
+    z-index: 410;
+}
+.zoom-body {
+    flex: 1; width: 100%; display: flex; justify-content: center; align-items: center; overflow: auto; padding: 10px 0; cursor: pointer;
+}
+.zoom-body img {
+    max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); cursor: default;
+}
+
+footer{
+    margin-top:40px; background:#02121c; border-top:1px solid var(--line); padding:35px 0 25px; color:var(--muted); font-size: 0.85rem;
+}
+.footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 30px; margin-bottom: 30px;
+}
 .footer-col h4 { color: var(--gold); font-size: 1rem; margin: 0 0 12px; font-weight: 800; }
 .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-.footer-bottom { border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+.footer-col ul li a:hover { color: var(--mint); }
+.footer-bottom {
+    border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+}
 .social-icons{display:flex;gap:10px}
-.social-icons a{ display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,0.05); border:1px solid var(--line); color:var(--ink); font-size:0.85rem; }
+.social-icons a{
+    display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%;
+    background:rgba(255,255,255,0.05); border:1px solid var(--line); color:var(--ink); font-size:0.85rem;
+}
+.social-icons a:hover{background:var(--green); color:#fff; border-color:var(--green);}
 
-.mobile-bottom-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; height: 65px; background: #031622; border-top: 1px solid var(--line); z-index: 150; justify-content: space-around; align-items: center; padding: 0 5px; }
-.mobile-nav-item { display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--muted); font-size: 0.7rem; font-weight: 700; }
-.mobile-nav-item.active { color: var(--gold); }
+.mobile-bottom-nav {
+    display: none; position: fixed; bottom: 0; left: 0; right: 0; height: 65px;
+    background: #031622; border-top: 1px solid var(--line); z-index: 150;
+    justify-content: space-around; align-items: center; padding: 0 5px;
+}
+.mobile-nav-item {
+    display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--muted); font-size: 0.7rem; font-weight: 700;
+}
+.mobile-nav-item.active, .mobile-nav-item:hover { color: var(--gold); }
+.mobile-nav-item span:first-child { font-size: 1.2rem; }
 
-#pdfCanvasContainer { flex: 1; width: 100%; overflow-y: auto; text-align: center; background: #010a10; border-radius: 12px; padding: 10px 0; }
-#pdfCanvasContainer canvas { max-width: 98%; height: auto !important; margin: 0 auto 12px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+#pdfCanvasContainer {
+    flex: 1; width: 100%; overflow-y: auto; text-align: center; background: #010a10; border-radius: 12px; padding: 10px 0;
+}
+#pdfCanvasContainer canvas {
+    max-width: 98%; height: auto !important; margin: 0 auto 12px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
 
-.admin-tab-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-weight: 700; cursor: pointer; }
-.admin-tab-btn.active { background: var(--gold); color: #031622; border-color: var(--gold); }
-.perm-checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line); }
+.admin-tab-btn {
+    padding: 8px 16px; border-radius: 20px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-weight: 700; cursor: pointer;
+}
+.admin-tab-btn.active {
+    background: var(--gold); color: #031622; border-color: var(--gold);
+}
 
+.perm-checkbox-item {
+    display: flex; align-items: center; gap: 8px; font-size: 0.85rem; background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line);
+}
+
+@media(max-width:1024px){
+    .main-content-grid { grid-template-columns: 1fr; }
+    .quick-cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .research-grid-main { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+}
 @media(max-width:768px){
     .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .research-grid-main { grid-template-columns: 1fr; }
     .tools{grid-template-columns:1fr}
     .doc-grid{grid-template-columns:1fr}
     .footer-grid { grid-template-columns: 1fr; }
@@ -272,6 +392,7 @@ footer{ margin-top:40px; background:#02121c; border-top:1px solid var(--line); p
 <a href="#sources-section">الوثائق</a>
 <a href="#library">ملفات PDF</a>
 <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank">قناة يوتيوب</a>
+<a href="#about">من نحن</a>
 <a href="#contact">تواصل معنا</a>
 </nav>
 <div class="nav-actions">
@@ -288,7 +409,7 @@ footer{ margin-top:40px; background:#02121c; border-top:1px solid var(--line); p
     <div class="hero-content">
         <h1>نـهـج الـحـقـيـقـة</h1>
         <div class="hero-subtitle">من أجل معرفة أعمق .. لحقيقة أصدق</div>
-        <div class="hero-desc">منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية، وملفات PDF، وقناة يوتيوب.</div>
+        <div class="hero-desc">منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية، وملفات PDF، وقناة يوتيوب، وبرنامج حواري.</div>
         <div class="hero-search-box">
             <input type="text" id="heroSearchInput" placeholder="ابحث في الموقع..." oninput="syncHeroSearch(this.value)">
             <button onclick="location.href='#library'">🔍</button>
@@ -298,17 +419,42 @@ footer{ margin-top:40px; background:#02121c; border-top:1px solid var(--line); p
 
 <div class="wrap">
 <div class="quick-cards-grid">
-    <article class="quick-card" onclick="location.href='#library'"><div class="q-icon">🔍</div><h3>البحث المتقدم</h3><p>ابحث في كل محتوى الموقع</p></article>
-    <article class="quick-card" onclick="location.href='#library'"><div class="q-icon">📚</div><h3>المكتبة</h3><p>أبحاث ومقالات وبحوث</p></article>
-    <article class="quick-card" onclick="location.href='#sources-section'"><div class="q-icon">📜</div><h3>الوثائق</h3><p>مخطوطات ووثائق نادرة</p></article>
-    <article class="quick-card" onclick="location.href='#library'"><div class="q-icon">📁</div><h3>ملفات PDF</h3><p>كتب ودراسات قابلة للتحميل</p></article>
-    <article class="quick-card" onclick="location.href='#youtube'"><div class="q-icon">🎙️</div><h3>برنامج الحقيقة</h3><p>حوار .. فكر .. دليل</p></article>
-    <article class="quick-card" onclick="window.open('https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K', '_blank')"><div class="q-icon">▶</div><h3>قناة يوتيوب</h3><p>مقاطع ومحاضرات مميزة</p></article>
+    <article class="quick-card" onclick="location.href='#library'">
+        <div class="q-icon">🔍</div>
+        <h3>البحث المتقدم</h3>
+        <p>ابحث في كل محتوى الموقع</p>
+    </article>
+    <article class="quick-card" onclick="location.href='#library'">
+        <div class="q-icon">📚</div>
+        <h3>المكتبة</h3>
+        <p>أبحاث ومقالات وبحوث</p>
+    </article>
+    <article class="quick-card" onclick="location.href='#sources-section'">
+        <div class="q-icon">📜</div>
+        <h3>الوثائق</h3>
+        <p>مخطوطات ووثائق نادرة</p>
+    </article>
+    <article class="quick-card" onclick="location.href='#library'">
+        <div class="q-icon">📁</div>
+        <h3>ملفات PDF</h3>
+        <p>كتب ودراسات قابلة للتحميل</p>
+    </article>
+    <article class="quick-card" onclick="location.href='#youtube'">
+        <div class="q-icon">🎙️</div>
+        <h3>برنامج على طاولة الحقيقة</h3>
+        <p>حوار .. فكر .. دليل</p>
+    </article>
+    <article class="quick-card" onclick="window.open('https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K', '_blank')">
+        <div class="q-icon">▶</div>
+        <h3>قناة يوتيوب</h3>
+        <p>مقاطع ومحاضرات مميزة</p>
+    </article>
 </div>
 </div>
 
 <div class="wrap" style="margin-top: 10px;">
 <div class="main-content-grid">
+
     <div>
         <div class="head" style="margin-top:0;">
             <h2>أحدث المقالات والأبحاث</h2>
@@ -318,20 +464,34 @@ footer{ margin-top:40px; background:#02121c; border-top:1px solid var(--line); p
             <p style="color:var(--muted); font-size:0.85rem;">جاري جلب أحدث الأبحاث...</p>
         </div>
     </div>
+
     <aside>
         <div class="verse-side-card">
             <h3>آية اليوم</h3>
             <div class="verse-text">«وَمَا كَانَ لِنَبِيٍّ أَنْ يَكُونَ لَهُ أَحِيد»<br><span style="font-size:0.95rem; font-weight:normal;">{وَإِنْ أَدْرِي لَعَلَّهُ فِتْنَةٌ لَكُمْ وَمَتَاعٌ إِلَى حِينٍ}</span></div>
             <div class="verse-source">(الأنبياء: 111)</div>
+            
             <div class="sidebar-menu-list">
                 <div class="sidebar-menu-title">أقسام الموقع</div>
                 <a href="#library" class="sidebar-menu-item"><span>المكتبة</span> <span>📚</span></a>
                 <a href="#sources-section" class="sidebar-menu-item"><span>الوثائق</span> <span>📜</span></a>
                 <a href="#library" class="sidebar-menu-item"><span>ملفات PDF</span> <span>📁</span></a>
                 <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" class="sidebar-menu-item"><span>قناة يوتيوب</span> <span>▶</span></a>
+                <a href="#youtube" class="sidebar-menu-item"><span>برنامج على طاولة الحقيقة</span> <span>🎙️</span></a>
             </div>
         </div>
     </aside>
+
+</div>
+</div>
+
+<div class="wrap">
+<div class="bottom-banner-cta">
+    <div class="cta-text">
+        <h3>المعرفة طريق إلى الحق .. فكن جزءاً من رحلتنا</h3>
+        <p>استكشف آلاف الوثائق والكتب والبحوث الموثقة بكل سهولة.</p>
+    </div>
+    <button class="cta-btn" onclick="location.href='#library'">استكشف المكتبة الآن ←</button>
 </div>
 </div>
 
@@ -401,12 +561,58 @@ footer{ margin-top:40px; background:#02121c; border-top:1px solid var(--line); p
 </div>
 </section>
 
+<section class="wrap" id="about" style="margin-top: 25px;">
+<div style="background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px;">
+<h2 style="margin-top:0;">عن نهج الحقيقة</h2>
+<p style="color:var(--muted); margin:0; font-size:0.9rem;">منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية وملفات PDF وقناة يوتيوب وبرنامج حواري.</p>
+</div>
+</section>
 </main>
 
 <footer>
 <div class="wrap">
+<div class="footer-grid">
+    <div class="footer-col">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <img src="assets/logo.png" alt="" style="width:40px; height:40px; object-fit:contain;">
+            <strong style="color:var(--ink); font-size:1.1rem;">نهج الحقيقة</strong>
+        </div>
+        <p style="margin:0; font-size:0.85rem; color:var(--muted); line-height:1.7;">من أجل معرفة أعمق .. لحقيقة أصدق. منصة متخصصة في نشر الفكر والوثائق.</p>
+    </div>
+    <div class="footer-col">
+        <h4>معلومات</h4>
+        <ul>
+            <li><a href="#about">من نحن</a></li>
+            <li><a href="#">سياسة الخصوصية</a></li>
+            <li><a href="#">شروط الاستخدام</a></li>
+        </ul>
+    </div>
+    <div class="footer-col">
+        <h4>خدمات الموقع</h4>
+        <ul>
+            <li><a href="#library">البحث المتقدم</a></li>
+            <li><a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank">قناة يوتيوب</a></li>
+            <li><a href="#sources-section">الوثائق</a></li>
+            <li><a href="#library">ملفات PDF</a></li>
+        </ul>
+    </div>
+    <div class="footer-col">
+        <h4>روابط سريعة</h4>
+        <ul>
+            <li><a href="#top">الرئيسية</a></li>
+            <li><a href="#library">المكتبة</a></li>
+            <li><a href="#sources-section">الوثائق</a></li>
+            <li><a href="#contact">تواصل معنا</a></li>
+        </ul>
+    </div>
+</div>
 <div class="footer-bottom">
-    <span style="font-size:0.8rem;">© <span id="year"></span> نهج الحقيقة. <a href="javascript:void(0)" onclick="openAdminModal()" style="color:var(--muted); margin-right:10px;">⚙️ دخول الإدارة</a></span>
+    <div class="social-icons">
+        <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank">▶</a>
+        <a href="https://x.com/raf88idi" target="_blank">𝕏</a>
+        <a href="https://www.tiktok.com/@ha_no_88" target="_blank">🎵</a>
+    </div>
+    <span style="font-size:0.8rem;">© <span id="year"></span> نهج الحقيقة، جميع الحقوق محفوظة. <a href="javascript:void(0)" onclick="openAdminModal()" style="color:var(--muted); margin-right:10px;">⚙️ دخول الإدارة والموظفين</a></span>
 </div>
 </div>
 </footer>
@@ -414,21 +620,22 @@ footer{ margin-top:40px; background:#02121c; border-top:1px solid var(--line); p
 <div class="mobile-bottom-nav">
 <a href="#top" class="mobile-nav-item active"><span>🏠</span><span>الرئيسية</span></a>
 <a href="#library" class="mobile-nav-item"><span>📚</span><span>المكتبة</span></a>
-<a href="#sources-section" class="mobile-nav-item"><span>📜</span><span>الوثائق</span></a>
+<a href="#library" class="mobile-nav-item"><span>📁</span><span>ملفات PDF</span></a>
 <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" class="mobile-nav-item"><span>▶</span><span>يوتيوب</span></a>
+<a href="#sources-section" class="mobile-nav-item"><span>📜</span><span>الوثائق</span></a>
 </div>
 
-<!-- نافذة لوحة التحكم المضمونة والآمنة تماماً -->
+<!-- نافذة لوحة التحكم الإدارية والديناميكية لإدارة الموظفين والصلاحيات -->
 <div class="modal" id="adminModal">
 <div class="modal-content" style="max-width:780px;">
 <div class="sticky-close-bar">
-    <h3 style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة والصلاحيات</h3>
+    <h3 id="adminModalTitle" style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة والصلاحيات</h3>
     <button class="back-btn" onclick="closeAdminModal()">✕ إغلاق</button>
 </div>
 
 <!-- تسجيل الدخول -->
 <div id="adminLoginSec" style="display:flex; flex-direction:column; gap:12px; margin-top:15px;">
-    <p style="font-size:0.88rem; color:var(--muted); margin:0;">ادخل كلمة المرور (افتراضي: admin123):</p>
+    <p style="font-size:0.88rem; color:var(--muted); margin:0;">ادخل كلمة المرور الخاصة بحسابك الوصول للوحة التحكم:</p>
     <input type="password" id="adminPassInput" placeholder="كلمة المرور..." style="padding:10px 14px; border-radius:10px; border:1px solid var(--line); background:var(--input-bg); color:#fff;">
     <button class="btn" onclick="loginAdmin()">تسجيل الدخول</button>
 </div>
@@ -444,7 +651,7 @@ footer{ margin-top:40px; background:#02121c; border-top:1px solid var(--line); p
         <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 إضافة كتب / PDF</button>
         <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 إضافة وثيقة مصورة</button>
         <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ إضافة فيديو</button>
-        <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين</button>
+        <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين والصلاحيات</button>
     </div>
 
     <!-- 1. نموذج إضافة PDF -->
@@ -466,36 +673,39 @@ footer{ margin-top:40px; background:#02121c; border-top:1px solid var(--line); p
     <!-- 2. نموذج إضافة وثيقة مصورة -->
     <form id="addSourceForm" class="admin-form" onsubmit="saveNewSource(event)" style="display:none; flex-direction:column; gap:10px;">
         <h4 style="margin:0; color:var(--gold);">إضافة وثيقة مصورة نادرة</h4>
-        <input type="text" id="source_title" placeholder="عنوان مجموعة الوثيقة" required>
+        <input type="text" id="source_title" placeholder="عنوان مجموعة الوثيقة (مثل: فدك وشواهدها)" required>
         <input type="text" id="source_img_url" placeholder="رابط الصورة المباشر (Image URL)" required>
-        <textarea id="source_desc" placeholder="شرح تفصيلي..."></textarea>
+        <textarea id="source_desc" placeholder="شرح تفصيلي للوثيقة المصورة..."></textarea>
         <button type="submit" id="saveSourceBtn" class="btn">💾 حفظ الوثيقة المصورة</button>
     </form>
 
     <!-- 3. نموذج إضافة فيديو -->
     <form id="addVidForm" class="admin-form" onsubmit="saveNewVid(event)" style="display:none; flex-direction:column; gap:10px;">
         <h4 style="margin:0; color:var(--gold);">إضافة فيديو يوتيوب جديد</h4>
-        <input type="text" id="vid_title" placeholder="عنوان الفيديو" required>
+        <input type="text" id="vid_title" placeholder="عنوان الفيديو / الحلقة" required>
         <input type="text" id="vid_yt_id" placeholder="معرف اليوتيوب YouTube Video ID" required>
         <button type="submit" id="saveVidBtn" class="btn">💾 حفظ الفيديو</button>
     </form>
 
-    <!-- 4. تبويب إدارة الموظفين والصلاحيات (مع حماية آمنة لا توقف الموقع إن لم يكن الجدول موجوداً) -->
+    <!-- 4. تبويب خاص بالأدمن لإضافة الموظفين وتحديد صلاحياتهم -->
     <div id="manageUsersSec" style="display:none; flex-direction:column; gap:15px;">
         <h4 style="margin:0; color:var(--gold);">إضافة موظف جديد وتحديد المهام</h4>
         <form class="admin-form" onsubmit="saveEmployee(event)" style="display:flex; flex-direction:column; gap:10px;">
-            <input type="text" id="emp_name" placeholder="اسم الموظف" required>
+            <input type="text" id="emp_name" placeholder="اسم الموظف أو المحرر" required>
             <input type="text" id="emp_pass" placeholder="كلمة المرور الخاصة به" required>
-            <div style="font-size:0.85rem; font-weight:700; color:var(--mint);">اختر الصلاحيات المسموحة له:</div>
+            <div style="font-size:0.85rem; font-weight:700; color:var(--mint);">اختر الصلاحيات والمهام المسموحة له:</div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                <label class="perm-checkbox-item"><input type="checkbox" id="p_docs" value="docs"> 📚 كتب/PDF</label>
-                <label class="perm-checkbox-item"><input type="checkbox" id="p_sources" value="sources"> 📜 وثائق</label>
-                <label class="perm-checkbox-item"><input type="checkbox" id="p_videos" value="videos"> ▶ فيديوهات</label>
+                <label class="perm-checkbox-item"><input type="checkbox" id="p_docs" value="docs"> 📚 إضافة وتعديل الكتب/PDF</label>
+                <label class="perm-checkbox-item"><input type="checkbox" id="p_sources" value="sources"> 📜 إضافة وثائق مصورة</label>
+                <label class="perm-checkbox-item"><input type="checkbox" id="p_videos" value="videos"> ▶ إضافة فيديوهات يوتيوب</label>
             </div>
             <button type="submit" id="saveEmpBtn" class="btn">➕ إضافة الموظف واعتماد صلاحياته</button>
         </form>
-        <h4 style="margin:10px 0 0; color:var(--gold);">قائمة الموظفين:</h4>
-        <div id="employeesList" style="display:flex; flex-direction:column; gap:8px;"><p style="color:var(--muted); font-size:0.8rem;">جاري التحميل...</p></div>
+
+        <h4 style="margin:15px 0 0; color:var(--gold);">قائمة الموظفين المسجلين وصلاحياتهم:</h4>
+        <div id="employeesList" style="display:flex; flex-direction:column; gap:8px;">
+            <p style="color:var(--muted); font-size:0.8rem;">جاري جلب قائمة الموظفين...</p>
+        </div>
     </div>
 
     <p id="adminStatusMsg" style="font-size:0.85rem; font-weight:700; display:none; margin:0;"></p>
@@ -507,7 +717,7 @@ footer{ margin-top:40px; background:#02121c; border-top:1px solid var(--line); p
 <div class="modal-content">
 <div class="sticky-close-bar">
     <h2 id="modalTitle" style="margin:0; color:var(--gold); font-size:1rem; flex:1;">عنوان الوثيقة</h2>
-    <button class="back-btn" onclick="closeSourceModal()">✕ إغلاق</button>
+    <button class="back-btn" onclick="closeSourceModal()">✕ إغلاق / رجوع</button>
 </div>
 <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-top:10px;" id="modalImagesContainer"></div>
 </div>
@@ -515,25 +725,53 @@ footer{ margin-top:40px; background:#02121c; border-top:1px solid var(--line); p
 
 <div id="imageZoomModal">
     <div class="zoom-header">
-        <h3 id="zoomTitle" style="margin:0; color:var(--gold); font-size:0.92rem;">عرض الصورة</h3>
-        <button class="back-btn" onclick="closeZoomModal()">✕ إغلاق</button>
+        <h3 id="zoomTitle" style="margin:0; color:var(--gold); font-size:0.92rem; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; max-width:50%;">عرض الصورة</h3>
+        <div style="display:flex; gap:8px;">
+            <button class="btn shrink" onclick="closeZoomModal()" style="padding:5px 14px; font-size:0.8rem; gap:4px;">🔍- تصغير الصورة</button>
+            <button class="btn" id="zoomDownloadBtn" style="padding:5px 14px; font-size:0.8rem;">⬇️ تحميل</button>
+            <button class="back-btn" onclick="closeZoomModal()">✕ إغلاق</button>
+        </div>
     </div>
-    <div class="zoom-body" onclick="closeZoomModal()"><img id="zoomedImg" src="" alt="" onclick="event.stopPropagation()"></div>
+    <div class="zoom-body" onclick="closeZoomModal()">
+        <img id="zoomedImg" src="" alt="وثيقة مكبرة" onclick="event.stopPropagation()">
+    </div>
 </div>
 
 <div class="modal" id="pdfModal">
 <div class="pdf-modal-content">
 <div class="sticky-close-bar">
-    <h3 id="pdfTitle" style="margin:0; color:var(--gold); font-size:0.95rem;">عرض المستند</h3>
-    <button class="btn red" onclick="closePdfModal()">✕ إغلاق</button>
+    <h3 id="pdfTitle" style="margin:0; color:var(--gold); font-size:0.95rem; max-width:40%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">عرض المستند</h3>
+    <div style="display:flex; gap:8px;">
+        <button class="btn red" onclick="closePdfModal()" style="padding:5px 14px; font-size:0.8rem;">✕ إغلاق</button>
+        <button class="btn" onclick="downloadFileDirectly()" style="padding:5px 14px; font-size:0.8rem;">⬇️ تحميل</button>
+    </div>
 </div>
-<div id="pdfCanvasContainer"><p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل الصفحات...</p></div>
+<div id="pdfCanvasContainer">
+    <p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري معالجة وتجهيز صفحات المستند للفتح...</p>
+</div>
 </div>
 </div>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(()=>{}); });
+}
+
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault(); deferredPrompt = e;
+    const btn = document.getElementById('installPwaBtn');
+    if (btn) btn.style.display = 'inline-flex';
+});
+function installPWA() {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => { deferredPrompt = null; document.getElementById('installPwaBtn').style.display = 'none'; });
+}
 
 function toggleTheme() {
     const html = document.documentElement;
@@ -556,13 +794,43 @@ window.addEventListener('DOMContentLoaded', () => {
     try { emailjs.init("xd1Jo81I__MsksgB9"); } catch(e){}
 });
 
-// مفاتيح الاتصال الصحيحة بقاعدة البيانات
 const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co'; 
-const SUPABASE_ANON_KEY = 'Sb_publishable_pPCiacTE_YN4mehS8xgK1w_q7ecBMWN'; 
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4c3h4a2F1eG91eW5lYWFtZWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MjQxMjMsImV4cCI6MjEwNzMwMDEyM30.wvVWq3TXd83mJ2FtViIwWO7O_hN1OazD91MkmiWZdh0'; 
 let supabaseClient = null;
 try { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch(e){}
 
-let allDocs = [], allSources = [];
+let activePdfUrl = '', activePdfName = '';
+function triggerDirectDownload(url, name) {
+    const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.download = name || 'file';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+function downloadFileDirectly() { if (activePdfUrl) triggerDirectDownload(activePdfUrl, activePdfName + '.pdf'); }
+
+function syncHeroSearch(val) {
+    const mainSearch = document.getElementById('q');
+    if (mainSearch) { mainSearch.value = val; filterAndRenderDocs(); }
+}
+
+function sendEmailMessage(e) {
+    e.preventDefault();
+    const btn = document.getElementById('sendBtn'), msg = document.getElementById('contactMsg');
+    btn.disabled = true; btn.textContent = 'جاري الإرسال...';
+    emailjs.send('service_bwh87m7', 'template_ogee95s', {
+        from_name: document.getElementById('from_name').value,
+        from_email: document.getElementById('from_email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+    }).then(() => {
+        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم إرسال رسالتك بنجاح!';
+        document.getElementById('contactForm').reset(); btn.disabled = false; btn.textContent = 'إرسال الرسالة';
+    }).catch(() => {
+        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ تعذر الإرسال.';
+        btn.disabled = false; btn.textContent = 'إرسال الرسالة';
+    });
+}
+
+let allDocs = [];
+let allSources = [];
 
 async function fetchDocuments() {
     if (!supabaseClient) return;
@@ -582,11 +850,16 @@ function renderLatestResearchMini(docs) {
     
     container.innerHTML = '';
     latest.forEach(doc => {
+        let badgeText = 'أبحاث';
+        if (doc.category === 'كتب ومراجع') badgeText = 'كتب';
+        else if (doc.category === 'وثائق تاريخية') badgeText = 'وثائق';
+        else if (doc.category === 'مقالات ودراسات') badgeText = 'مقالات';
+
         const card = document.createElement('article');
         card.className = 'research-card-item';
         card.innerHTML = `
             <div class="research-card-img">
-                <span class="research-card-badge">${doc.category || 'بحث'}</span>
+                <span class="research-card-badge">${badgeText}</span>
                 <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:2.5rem; background:rgba(0,0,0,0.3);">📖</div>
             </div>
             <div class="research-card-body">
@@ -645,6 +918,7 @@ async function fetchLatestVideos() {
     try {
         const { data } = await supabaseClient.from('videos').select('*');
         if (!data || !data.length) return;
+        
         const container = document.getElementById('videos-container');
         if (container) {
             container.innerHTML = '';
@@ -665,30 +939,52 @@ async function fetchLatestVideos() {
     } catch(e){}
 }
 
+window.addEventListener('popstate', function() {
+    document.getElementById('imageZoomModal').style.display = 'none';
+    document.getElementById('sourceModal').style.display = 'none';
+    document.getElementById('pdfModal').style.display = 'none';
+    document.getElementById('adminModal').style.display = 'none';
+});
+
 async function openPdfViewer(title, url) {
+    activePdfUrl = url; activePdfName = title;
     document.getElementById('pdfTitle').textContent = title;
+    
     const container = document.getElementById('pdfCanvasContainer');
-    container.innerHTML = '<p style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل وسحب صفحات المستند...</p>';
+    container.innerHTML = '<p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل وسحب صفحات المستند لقراءته مباشرة...</p>';
     document.getElementById('pdfModal').style.display = 'flex';
+    history.pushState({ modalOpen: true }, "");
 
     try {
         const pdf = await pdfjsLib.getDocument(url).promise;
         container.innerHTML = ''; 
+        
         for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
             const page = await pdf.getPage(pageNum);
             const viewport = page.getViewport({ scale: 1.3 });
             const canvas = document.createElement('canvas');
             const context = canvas.getContext('2d');
+            
             canvas.height = viewport.height;
             canvas.width = viewport.width;
+            
             await page.render({ canvasContext: context, viewport: viewport }).promise;
             container.appendChild(canvas);
         }
     } catch (error) {
-        container.innerHTML = `<p style="color:#df252c; margin-top:30px;">⚠️ تعذر عرض معاينة PDF، يمكنك تحميله مباشرة.</p>`;
+        container.innerHTML = `
+            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:15px; color:var(--ink); padding:20px; text-align:center;">
+                <p>يتعذر عرض معاينة هذا الملف مباشرة داخل الهاتف لربما لكونه مقيداً أو بحجم كبير.</p>
+                <button class="btn" onclick="triggerDirectDownload('${url}', '${title}.pdf')">⬇️ اضغط هنا لتنزيل الملف وقراءته فوراً</button>
+            </div>
+        `;
     }
 }
-function closePdfModal() { document.getElementById('pdfModal').style.display = 'none'; }
+
+function closePdfModal() { 
+    document.getElementById('pdfModal').style.display = 'none';
+    if (history.state && history.state.modalOpen) history.back();
+}
 
 function openSourceModal(title, images) {
     document.getElementById('modalTitle').textContent = title;
@@ -698,56 +994,64 @@ function openSourceModal(title, images) {
         const div = document.createElement('div');
         div.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:12px; padding:12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:8px;';
         div.innerHTML = `
-            <img src="${img.image_url}" alt="${title}" style="width:100%; max-height:350px; object-fit:contain; border-radius:8px; cursor:pointer;" onclick="zoomImage('${img.image_url}', '${title}')">
-            <p style="font-size:0.8rem; color:var(--muted); margin:0;">${img.description || ''}</p>
+            <img src="${img.image_url}" alt="${title}" style="width:100%; max-height:350px; object-fit:contain; border-radius:8px; cursor:pointer;" onclick="zoomImage('${img.image_url}', '${title}')" onerror="this.src='assets/logo.png'">
+            <p style="font-size:0.8rem; color:var(--muted); margin:0; line-height:1.5;">${img.description || ''}</p>
+            <div style="display:flex; gap:8px; width:100%; justify-content:center; margin-top: auto;">
+                <button class="btn" style="padding:6px 14px; font-size:0.78rem;" onclick="triggerDirectDownload('${img.image_url}', '${title}')">⬇️ تحميل الصورة</button>
+                <button class="btn ghost" style="padding:6px 14px; font-size:0.78rem;" onclick="zoomImage('${img.image_url}', '${title}')">🔍 تكبير الصورة</button>
+            </div>
         `;
         container.appendChild(div);
     });
     document.getElementById('sourceModal').style.display = 'flex';
+    history.pushState({ modalOpen: true }, "");
 }
-function closeSourceModal() { document.getElementById('sourceModal').style.display = 'none'; }
+
+function closeSourceModal() { 
+    document.getElementById('sourceModal').style.display = 'none';
+    if (history.state && history.state.modalOpen) history.back();
+}
 
 function zoomImage(url, title) {
     document.getElementById('zoomTitle').textContent = title;
     document.getElementById('zoomedImg').src = url;
+    document.getElementById('zoomDownloadBtn').onclick = function() { triggerDirectDownload(url, title); };
     document.getElementById('imageZoomModal').style.display = 'flex';
 }
-function closeZoomModal() { document.getElementById('imageZoomModal').style.display = 'none'; }
+function closeZoomModal() {
+    document.getElementById('imageZoomModal').style.display = 'none';
+}
 
-/* نظام الإدارة والصلاحيات مع الحماية التامة */
+/* نظام إدارة الموظفين والصلاحيات المباشر عبر Supabase */
 let currentLoggedInUser = null;
 
-function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
-function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
+function openAdminModal() {
+    document.getElementById('adminModal').style.display = 'flex';
+}
+function closeAdminModal() {
+    document.getElementById('adminModal').style.display = 'none';
+}
 
 async function loginAdmin() {
     const pass = document.getElementById('adminPassInput').value.trim();
     if (!pass) return;
 
-    // حساب طوارئ افتراضي إن لم يكن جدول employees جاهزاً
-    if (pass === 'admin123') {
-        currentLoggedInUser = { name: 'مدير النظام العام', permissions: ['docs', 'sources', 'videos', 'manage_users'] };
-        showAdminDashboard();
-        return;
-    }
-
     if (supabaseClient) {
-        try {
-            const { data } = await supabaseClient.from('employees').select('*').eq('password', pass).single();
-            if (data) {
-                currentLoggedInUser = data;
-                showAdminDashboard();
-                return;
-            }
-        } catch(e){}
+        // التحقق من الحساب وكلمة المرور من Supabase
+        const { data, error } = await supabaseClient.from('employees').select('*').eq('password', pass).single();
+        if (data && !error) {
+            currentLoggedInUser = data;
+            showAdminDashboard();
+        } else {
+            alert('كلمة المرور غير صحيحة أو الحساب غير موجود!');
+        }
     }
-    alert('كلمة المرور غير صحيحة!');
 }
 
 function showAdminDashboard() {
     document.getElementById('adminLoginSec').style.display = 'none';
     document.getElementById('adminPanelSec').style.display = 'flex';
-    document.getElementById('currentUserRole').textContent = 'المستخدم: ' + currentLoggedInUser.name;
+    document.getElementById('currentUserRole').textContent = 'المستخدم الحالي: ' + currentLoggedInUser.name;
     applyUserPermissions();
 }
 
@@ -759,7 +1063,8 @@ function logoutAdmin() {
 }
 
 function applyUserPermissions() {
-    const perms = currentLoggedInUser.permissions || ['docs', 'sources', 'videos', 'manage_users'];
+    const perms = currentLoggedInUser.permissions || [];
+    
     document.getElementById('tabBtnDocs').style.display = perms.includes('docs') ? 'inline-block' : 'none';
     document.getElementById('tabBtnSources').style.display = perms.includes('sources') ? 'inline-block' : 'none';
     document.getElementById('tabBtnVideos').style.display = perms.includes('videos') ? 'inline-block' : 'none';
@@ -792,47 +1097,79 @@ async function saveEmployee(e) {
     const name = document.getElementById('emp_name').value.trim();
     const pass = document.getElementById('emp_pass').value.trim();
     const perms = [];
+    
     if (document.getElementById('p_docs').checked) perms.push('docs');
     if (document.getElementById('p_sources').checked) perms.push('sources');
     if (document.getElementById('p_videos').checked) perms.push('videos');
 
-    if (!perms.length) { alert('اختر صلاحية واحدة على الأقل!'); return; }
+    if (!perms.length) { alert('يرجى تحديد صلاحية واحدة على الأقل للموظف!'); return; }
 
-    const { error } = await supabaseClient.from('employees').insert([{ name, password: pass, permissions: perms }]);
+    const btn = document.getElementById('saveEmpBtn');
+    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
+
+    const { error } = await supabaseClient.from('employees').insert([{
+        name: name,
+        password: pass,
+        permissions: perms
+    }]);
+
+    btn.disabled = false; btn.textContent = '➕ إضافة الموظف واعتماد صلاحياته';
+
     if (!error) {
-        alert('✅ تمت إضافة الموظف بنجاح!');
+        alert('✅ تم إتاحة ورسالة حساب الموظف بنجاح!');
         document.getElementById('emp_name').value = '';
         document.getElementById('emp_pass').value = '';
+        document.querySelectorAll('.perm-checkbox-item input').forEach(c => c.checked = false);
         fetchEmployeesList();
     } else {
-        alert('⚠️ حدث خطأ أو كلمة المرور مستخدمة.');
+        alert('⚠️ تعذر الحفظ، ربما كلمة المرور مستخدمة لموظف آخر.');
     }
 }
 
 async function fetchEmployeesList() {
     const listContainer = document.getElementById('employeesList');
     if (!supabaseClient || !listContainer) return;
-    try {
-        const { data } = await supabaseClient.from('employees').select('*');
-        if (!data || !data.length) { listContainer.innerHTML = '<p style="color:var(--muted);">لا يوجد موظفين.</p>'; return; }
-        listContainer.innerHTML = '';
-        data.forEach(emp => {
-            const item = document.createElement('div');
-            item.style.cssText = 'background:rgba(0,0,0,0.3); padding:8px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;';
-            item.innerHTML = `<span>👤 ${emp.name}</span> <button class="btn red" style="padding:2px 8px; font-size:0.75rem;" onclick="deleteEmp(${emp.id})">حذف</button>`;
-            listContainer.appendChild(item);
-        });
-    } catch(e) { listContainer.innerHTML = '<p style="color:var(--muted);">جدول الموظفين غير مفعل.</p>'; }
+    
+    const { data } = await supabaseClient.from('employees').select('*');
+    if (!data || !data.length) { listContainer.innerHTML = '<p style="color:var(--muted);">لا يوجد موظفين حالياً.</p>'; return; }
+
+    listContainer.innerHTML = '';
+    data.forEach(emp => {
+        const item = document.createElement('div');
+        item.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); padding:10px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;';
+        
+        let permText = (emp.permissions || []).map(p => {
+            if (p === 'docs') return 'كتب/PDF';
+            if (p === 'sources') return 'وثائق';
+            if (p === 'videos') return 'فيديوهات';
+            if (p === 'manage_users') return 'مدير عام';
+            return p;
+        }).join(' ، ');
+
+        item.innerHTML = `
+            <div>
+                <strong style="color:var(--gold); font-size:0.9rem;">${emp.name}</strong>
+                <div style="font-size:0.75rem; color:var(--muted);">الصلاحيات: ${permText}</div>
+            </div>
+            ${emp.permissions.includes('manage_users') ? '<span style="font-size:0.75rem; color:var(--mint); font-weight:700;">[مدير]</span>' : `<button class="btn red" style="padding:3px 8px; font-size:0.72rem;" onclick="deleteEmployee(${emp.id})">حذف</button>`}
+        `;
+        listContainer.appendChild(item);
+    });
 }
 
-async function deleteEmp(id) {
-    await supabaseClient.from('employees').delete().eq('id', id);
-    fetchEmployeesList();
+async function deleteEmployee(id) {
+    if (confirm('هل أنت تأكد من حذف هذا الموظف؟')) {
+        await supabaseClient.from('employees').delete().eq('id', id);
+        fetchEmployeesList();
+    }
 }
 
 async function saveNewDoc(e) {
     e.preventDefault();
-    await supabaseClient.from('documents').insert([{
+    const btn = document.getElementById('saveDocBtn'), msg = document.getElementById('adminStatusMsg');
+    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
+    
+    const { error } = await supabaseClient.from('documents').insert([{
         title: document.getElementById('doc_title').value,
         author: document.getElementById('doc_author').value,
         category: document.getElementById('doc_cat').value,
@@ -840,32 +1177,56 @@ async function saveNewDoc(e) {
         description: document.getElementById('doc_desc').value,
         date: new Date().toISOString().split('T')[0]
     }]);
-    alert('✅ تم نشر الكتاب/البحث بنجاح!');
-    document.getElementById('addDocForm').reset();
-    fetchDocuments();
+
+    btn.disabled = false; btn.textContent = '💾 حفظ ونشر الملف';
+    if (!error) {
+        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم نشر البحث/الملف بنجاح!';
+        document.getElementById('addDocForm').reset();
+        fetchDocuments();
+    } else {
+        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ حدث خطأ أثناء الحفظ.';
+    }
 }
 
 async function saveNewSource(e) {
     e.preventDefault();
-    await supabaseClient.from('sources').insert([{
+    const btn = document.getElementById('saveSourceBtn'), msg = document.getElementById('adminStatusMsg');
+    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
+    
+    const { error } = await supabaseClient.from('sources').insert([{
         title: document.getElementById('source_title').value,
         image_url: document.getElementById('source_img_url').value,
         description: document.getElementById('source_desc').value
     }]);
-    alert('✅ تم نشر الوثيقة المصورة بنجاح!');
-    document.getElementById('addSourceForm').reset();
-    fetchSources();
+
+    btn.disabled = false; btn.textContent = '💾 حفظ الوثيقة المصورة';
+    if (!error) {
+        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم نشر الوثيقة المصورة بنجاح!';
+        document.getElementById('addSourceForm').reset();
+        fetchSources();
+    } else {
+        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ حدث خطأ أثناء الحفظ.';
+    }
 }
 
 async function saveNewVid(e) {
     e.preventDefault();
-    await supabaseClient.from('videos').insert([{
+    const btn = document.getElementById('saveVidBtn'), msg = document.getElementById('adminStatusMsg');
+    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
+    
+    const { error } = await supabaseClient.from('videos').insert([{
         title: document.getElementById('vid_title').value,
         youtube_id: document.getElementById('vid_yt_id').value
     }]);
-    alert('✅ تم نشر الفيديو بنجاح!');
-    document.getElementById('addVidForm').reset();
-    fetchLatestVideos();
+
+    btn.disabled = false; btn.textContent = '💾 حفظ الفيديو';
+    if (!error) {
+        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم نشر الفيديو بنجاح!';
+        document.getElementById('addVidForm').reset();
+        fetchLatestVideos();
+    } else {
+        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ حدث خطأ أثناء الحفظ.';
+    }
 }
 
 function renderDocs(docs) {
@@ -881,15 +1242,24 @@ function renderDocs(docs) {
     document.getElementById('count').textContent = docs.length + ' ملفات';
 
     docs.forEach(doc => {
+        let sym = '📕';
+        if (doc.category === 'بحوث عقائدية') sym = '💡';
+        else if (doc.category === 'كتب ومراجع') sym = '📖';
+        else if (doc.category === 'مقالات ودراسات') sym = '📝';
+        else if (doc.category === 'وثائق تاريخية') sym = '📜';
+
         const card = document.createElement('article');
         card.className = 'doc-card';
         card.innerHTML = `
             <span class="tag">${doc.category || 'متنوع'}</span>
-            <div class="symbol">📖</div>
+            <div class="symbol">${sym}</div>
             <h3>${doc.title}</h3>
             <div class="doc-meta">المؤلف: ${doc.author || 'غير معروف'} · ${doc.date || ''}</div>
             <p>${doc.description || ''}</p>
-            <button class="btn" style="width:100%; margin-top:auto;" onclick="openPdfViewer('${doc.title.replace(/'/g, "\\'")}', '${doc.file_url}')">📖 قراءة المستند</button>
+            <div style="display:flex; gap:6px; margin-top:auto;">
+                <button class="btn" style="flex:1; padding:6px 10px; font-size:0.78rem;" onclick="openPdfViewer('${doc.title.replace(/'/g, "\\'")}', '${doc.file_url}')">📖 قراءة</button>
+                <button class="btn ghost" onclick="triggerDirectDownload('${doc.file_url}', '${doc.title}.pdf')" style="padding:6px 10px; font-size:0.78rem;">⬇️</button>
+            </div>
         `;
         grid.appendChild(card);
     });
@@ -923,7 +1293,6 @@ if (q) q.addEventListener('input', filterAndRenderDocs);
 if (cat) cat.addEventListener('change', filterAndRenderDocs);
 if (sortBy) sortBy.addEventListener('change', filterAndRenderDocs);
 
-// تشغيل جلب البيانات فوراً
 fetchDocuments();
 fetchSources();
 fetchLatestVideos();
