@@ -287,6 +287,7 @@ section{padding:15px 0}
 }
 .btn:hover{ opacity: 0.9; }
 .btn.ghost{background:rgba(255,255,255,0.05); border:1px solid var(--line); color: var(--ink);}
+.btn.shrink{background: rgba(243, 213, 138, 0.15); border: 1px solid var(--gold); color: var(--gold);}
 
 .empty{padding:30px;text-align:center;border:1px dashed var(--line);border-radius:16px;color:var(--muted);display:none}
 
@@ -302,20 +303,21 @@ section{padding:15px 0}
     display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); margin-bottom: 12px;
 }
 
-/* نافذة العرض المكبر الشاملة للصور (Full Image Lightbox) مع أزرار التحكم المثالية */
+/* نافذة العرض المكبر الشاملة للصور مع أزرار التحكم المصممة خصيصاً للتصغير والتحميل */
 #imageZoomModal {
     position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); z-index: 300; display: none;
     flex-direction: column; align-items: center; justify-content: space-between; padding: 15px;
 }
 .zoom-header {
     width: 100%; display: flex; justify-content: space-between; align-items: center;
-    background: rgba(3, 22, 34, 0.85); padding: 10px 16px; border-radius: 14px; border: 1px solid var(--line);
+    background: rgba(3, 22, 34, 0.95); padding: 10px 16px; border-radius: 14px; border: 1px solid var(--line);
+    z-index: 310;
 }
 .zoom-body {
-    flex: 1; width: 100%; display: flex; justify-content: center; align-items: center; overflow: auto; padding: 10px 0;
+    flex: 1; width: 100%; display: flex; justify-content: center; align-items: center; overflow: auto; padding: 10px 0; cursor: pointer;
 }
 .zoom-body img {
-    max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); cursor: default;
 }
 
 /* الفوتر */
@@ -623,7 +625,7 @@ footer{
 </div>
 </footer>
 
-<!-- شريط التنقل السفلي للموبايل -->
+<!-- شريط التنقل السفلي للهاتف المحمول -->
 <div class="mobile-bottom-nav">
 <a href="#top" class="mobile-nav-item active"><span>🏠</span><span>الرئيسية</span></a>
 <a href="#library" class="mobile-nav-item"><span>📚</span><span>المكتبة</span></a>
@@ -643,17 +645,18 @@ footer{
 </div>
 </div>
 
-<!-- نافذة التكبير الكلي والعرض المباشر للصورة مع زر الرجوع الثابت والتحميل -->
+<!-- نافذة العرض المكبر مع زر تصغير واضح جداً بالإضافة لزر التحميل -->
 <div id="imageZoomModal">
     <div class="zoom-header">
-        <h3 id="zoomTitle" style="margin:0; color:var(--gold); font-size:0.95rem; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; max-width:60%;">عرض الصورة</h3>
+        <h3 id="zoomTitle" style="margin:0; color:var(--gold); font-size:0.92rem; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; max-width:50%;">عرض الصورة</h3>
         <div style="display:flex; gap:8px;">
-            <button class="btn" id="zoomDownloadBtn" style="padding:4px 12px; font-size:0.75rem;">⬇️ تحميل</button>
+            <button class="btn shrink" onclick="closeZoomModal()" style="padding:5px 14px; font-size:0.8rem; gap:4px;">🔍- تصغير الصورة</button>
+            <button class="btn" id="zoomDownloadBtn" style="padding:5px 14px; font-size:0.8rem;">⬇️ تحميل</button>
             <button class="back-btn" onclick="closeZoomModal()">✕ رجوع</button>
         </div>
     </div>
-    <div class="zoom-body">
-        <img id="zoomedImg" src="" alt="وثيقة مكبرة">
+    <div class="zoom-body" onclick="closeZoomModal()">
+        <img id="zoomedImg" src="" alt="وثيقة مكبرة" onclick="event.stopPropagation()">
     </div>
 </div>
 
@@ -855,7 +858,7 @@ async function fetchLatestVideos() {
     } catch(e){}
 }
 
-/* ربط أزرار الرجوع بنظام التصفح لمنع الخروج نهائياً عند استخدام زر رجوع الهاتف */
+/* التزامن مع نظام التصفح والرجوع بالهاتف */
 window.addEventListener('popstate', function() {
     document.getElementById('imageZoomModal').style.display = 'none';
     document.getElementById('sourceModal').style.display = 'none';
@@ -900,7 +903,7 @@ function closeSourceModal() {
     if (history.state && history.state.modalOpen) history.back();
 }
 
-/* التكبير المباشر للصورة داخل الموقع بدون الخروج */
+/* تكبير الصورة وتوفير زر التصغير والتفاعل السريع */
 function zoomImage(url, title) {
     document.getElementById('zoomTitle').textContent = title;
     document.getElementById('zoomedImg').src = url;
