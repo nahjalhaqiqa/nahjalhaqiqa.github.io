@@ -303,15 +303,15 @@ section{padding:15px 0}
     display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); margin-bottom: 12px;
 }
 
-/* نافذة العرض المكبر الشاملة للصور مع أزرار التحكم المصممة خصيصاً للتصغير والتحميل */
+/* نافذة العرض المكبر الشاملة للصور */
 #imageZoomModal {
-    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); z-index: 300; display: none;
+    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); z-index: 400; display: none;
     flex-direction: column; align-items: center; justify-content: space-between; padding: 15px;
 }
 .zoom-header {
     width: 100%; display: flex; justify-content: space-between; align-items: center;
     background: rgba(3, 22, 34, 0.95); padding: 10px 16px; border-radius: 14px; border: 1px solid var(--line);
-    z-index: 310;
+    z-index: 410;
 }
 .zoom-body {
     flex: 1; width: 100%; display: flex; justify-content: center; align-items: center; overflow: auto; padding: 10px 0; cursor: pointer;
@@ -625,7 +625,7 @@ footer{
 </div>
 </footer>
 
-<!-- شريط التنقل السفلي للهاتف المحمول -->
+<!-- شريط التنقل السفلي للموبايل -->
 <div class="mobile-bottom-nav">
 <a href="#top" class="mobile-nav-item active"><span>🏠</span><span>الرئيسية</span></a>
 <a href="#library" class="mobile-nav-item"><span>📚</span><span>المكتبة</span></a>
@@ -645,14 +645,14 @@ footer{
 </div>
 </div>
 
-<!-- نافذة العرض المكبر مع زر تصغير واضح جداً بالإضافة لزر التحميل -->
+<!-- نافذة العرض المكبر (عند التصغير هنا يتم العودة لملف الوثائق الحالي مباشرة دون الخروج منه) -->
 <div id="imageZoomModal">
     <div class="zoom-header">
         <h3 id="zoomTitle" style="margin:0; color:var(--gold); font-size:0.92rem; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; max-width:50%;">عرض الصورة</h3>
         <div style="display:flex; gap:8px;">
             <button class="btn shrink" onclick="closeZoomModal()" style="padding:5px 14px; font-size:0.8rem; gap:4px;">🔍- تصغير الصورة</button>
             <button class="btn" id="zoomDownloadBtn" style="padding:5px 14px; font-size:0.8rem;">⬇️ تحميل</button>
-            <button class="back-btn" onclick="closeZoomModal()">✕ رجوع</button>
+            <button class="back-btn" onclick="closeZoomModal()">✕ إغلاق</button>
         </div>
     </div>
     <div class="zoom-body" onclick="closeZoomModal()">
@@ -858,8 +858,9 @@ async function fetchLatestVideos() {
     } catch(e){}
 }
 
-/* التزامن مع نظام التصفح والرجوع بالهاتف */
+/* إدارة نوافذ العرض والتحكم بسجل المتصفح للزر الرئيسي للوثائق فقط */
 window.addEventListener('popstate', function() {
+    // إغلاق النافذة الكبرى عند الرجوع بالهاتف
     document.getElementById('imageZoomModal').style.display = 'none';
     document.getElementById('sourceModal').style.display = 'none';
     document.getElementById('pdfModal').style.display = 'none';
@@ -903,17 +904,15 @@ function closeSourceModal() {
     if (history.state && history.state.modalOpen) history.back();
 }
 
-/* تكبير الصورة وتوفير زر التصغير والتفاعل السريع */
+/* التكبير والتصغير يتم محلياً تماماً دون التأثير على ملف الوثائق المفتوح خلفه */
 function zoomImage(url, title) {
     document.getElementById('zoomTitle').textContent = title;
     document.getElementById('zoomedImg').src = url;
     document.getElementById('zoomDownloadBtn').onclick = function() { triggerDirectDownload(url, title); };
     document.getElementById('imageZoomModal').style.display = 'flex';
-    history.pushState({ modalOpen: true }, "");
 }
 function closeZoomModal() {
     document.getElementById('imageZoomModal').style.display = 'none';
-    if (history.state && history.state.modalOpen) history.back();
 }
 
 function renderDocs(docs) {
