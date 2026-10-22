@@ -291,19 +291,31 @@ section{padding:15px 0}
 .empty{padding:30px;text-align:center;border:1px dashed var(--line);border-radius:16px;color:var(--muted);display:none}
 
 /* النوافذ المنبثقة ولوحة الإدارة */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.88);display:none;align-items:center;justify-content:center;z-index:200;padding:12px;backdrop-filter:blur(8px)}
-.modal-header-bar { 
-    position: sticky; top: 0; background: var(--bg-body); z-index: 10;
-    display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 10px 0; border-bottom: 1px solid var(--line); margin-bottom: 12px; 
-}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);display:none;align-items:center;justify-content:center;z-index:200;padding:12px;backdrop-filter:blur(8px)}
 .modal-content{background:var(--bg-body);border:1px solid var(--mint);border-radius:18px;width:min(900px, 100%);max-height:90vh;overflow-y:auto;padding:16px 20px; position: relative;}
 .pdf-modal-content { background: var(--bg-body); border: 1px solid var(--mint); border-radius: 18px; width: min(1050px, 100%); height: 90vh; display: flex; flex-direction: column; padding: 16px; }
 .back-btn{ background: linear-gradient(135deg, #df252c, #b0181e); border: none; color: #fff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 12px rgba(223,37,44,0.3); }
 
-/* زر الرجوع العائم في الهواتف والنافذة المنبثقة */
+/* زر الرجوع العائم في النافذة */
 .sticky-close-bar {
     position: sticky; top: 0; z-index: 100; background: var(--bg-body);
     display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); margin-bottom: 12px;
+}
+
+/* نافذة العرض المكبر الشاملة للصور (Full Image Lightbox) مع أزرار التحكم المثالية */
+#imageZoomModal {
+    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); z-index: 300; display: none;
+    flex-direction: column; align-items: center; justify-content: space-between; padding: 15px;
+}
+.zoom-header {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(3, 22, 34, 0.85); padding: 10px 16px; border-radius: 14px; border: 1px solid var(--line);
+}
+.zoom-body {
+    flex: 1; width: 100%; display: flex; justify-content: center; align-items: center; overflow: auto; padding: 10px 0;
+}
+.zoom-body img {
+    max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
 }
 
 /* الفوتر */
@@ -620,7 +632,7 @@ footer{
 <a href="#sources-section" class="mobile-nav-item"><span>📜</span><span>الوثائق</span></a>
 </div>
 
-<!-- نافذة عرض الوثائق المصورة المحدثة بزر رجوع ثابت ومثالي للهاتف -->
+<!-- نافذة عرض قائمة الوثائق المصورة -->
 <div class="modal" id="sourceModal">
 <div class="modal-content">
 <div class="sticky-close-bar">
@@ -629,6 +641,20 @@ footer{
 </div>
 <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-top:10px;" id="modalImagesContainer"></div>
 </div>
+</div>
+
+<!-- نافذة التكبير الكلي والعرض المباشر للصورة مع زر الرجوع الثابت والتحميل -->
+<div id="imageZoomModal">
+    <div class="zoom-header">
+        <h3 id="zoomTitle" style="margin:0; color:var(--gold); font-size:0.95rem; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; max-width:60%;">عرض الصورة</h3>
+        <div style="display:flex; gap:8px;">
+            <button class="btn" id="zoomDownloadBtn" style="padding:4px 12px; font-size:0.75rem;">⬇️ تحميل</button>
+            <button class="back-btn" onclick="closeZoomModal()">✕ رجوع</button>
+        </div>
+    </div>
+    <div class="zoom-body">
+        <img id="zoomedImg" src="" alt="وثيقة مكبرة">
+    </div>
 </div>
 
 <div class="modal" id="pdfModal">
@@ -829,8 +855,9 @@ async function fetchLatestVideos() {
     } catch(e){}
 }
 
-/* ربط فتح وإغلاق النوافذ بحالة المتصفح لمنع الخروج من الصفحة عند الرجوع بالهاتف */
+/* ربط أزرار الرجوع بنظام التصفح لمنع الخروج نهائياً عند استخدام زر رجوع الهاتف */
 window.addEventListener('popstate', function() {
+    document.getElementById('imageZoomModal').style.display = 'none';
     document.getElementById('sourceModal').style.display = 'none';
     document.getElementById('pdfModal').style.display = 'none';
 });
@@ -855,11 +882,11 @@ function openSourceModal(title, images) {
         const div = document.createElement('div');
         div.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:12px; padding:12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:8px;';
         div.innerHTML = `
-            <img src="${img.image_url}" alt="${title}" style="width:100%; max-height:380px; object-fit:contain; border-radius:8px;" onerror="this.src='assets/logo.png'">
+            <img src="${img.image_url}" alt="${title}" style="width:100%; max-height:350px; object-fit:contain; border-radius:8px; cursor:pointer;" onclick="zoomImage('${img.image_url}', '${title}')" onerror="this.src='assets/logo.png'">
             <p style="font-size:0.8rem; color:var(--muted); margin:0; line-height:1.5;">${img.description || ''}</p>
             <div style="display:flex; gap:8px; width:100%; justify-content:center; margin-top: auto;">
                 <button class="btn" style="padding:6px 14px; font-size:0.78rem;" onclick="triggerDirectDownload('${img.image_url}', '${title}')">⬇️ تحميل الصورة</button>
-                <a class="btn ghost" href="${img.image_url}" target="_blank" style="padding:6px 14px; font-size:0.78rem;">↗ فتح الصورة</a>
+                <button class="btn ghost" style="padding:6px 14px; font-size:0.78rem;" onclick="zoomImage('${img.image_url}', '${title}')">🔍 تكبير الصورة</button>
             </div>
         `;
         container.appendChild(div);
@@ -870,6 +897,19 @@ function openSourceModal(title, images) {
 
 function closeSourceModal() { 
     document.getElementById('sourceModal').style.display = 'none';
+    if (history.state && history.state.modalOpen) history.back();
+}
+
+/* التكبير المباشر للصورة داخل الموقع بدون الخروج */
+function zoomImage(url, title) {
+    document.getElementById('zoomTitle').textContent = title;
+    document.getElementById('zoomedImg').src = url;
+    document.getElementById('zoomDownloadBtn').onclick = function() { triggerDirectDownload(url, title); };
+    document.getElementById('imageZoomModal').style.display = 'flex';
+    history.pushState({ modalOpen: true }, "");
+}
+function closeZoomModal() {
+    document.getElementById('imageZoomModal').style.display = 'none';
     if (history.state && history.state.modalOpen) history.back();
 }
 
