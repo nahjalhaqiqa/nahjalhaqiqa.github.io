@@ -71,7 +71,7 @@ button,input,select,textarea{font:inherit}
 
 .wrap{width:min(1240px,calc(100% - 32px));margin:auto}
 
-/* الهيدر العلوي المطابق تماماً للصورة */
+/* الهيدر العلوي */
 header{
     position:sticky; top:0; z-index:100;
     background: #031622;
@@ -98,7 +98,7 @@ nav a:hover, nav a.active{color:var(--gold); opacity:1;}
     padding: 4px 12px; border-radius: 20px; cursor: pointer; font-size: 0.78rem; font-weight: 700; display: none;
 }
 
-/* قسم الهيرو البانر الفخم المطابق للصورة */
+/* قسم الهيرو البانر الفخم */
 .hero-banner {
     position: relative; width: 100%; min-height: 480px;
     background: linear-gradient(180deg, rgba(3, 22, 34, 0.75), rgba(3, 22, 34, 0.95)), url('assets/hero-bg.jpg') center/cover no-repeat;
@@ -136,7 +136,7 @@ nav a:hover, nav a.active{color:var(--gold); opacity:1;}
     color: #031622; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem;
 }
 
-/* الكروت الستة السريعة البارزة تحت الهيرو */
+/* الكروت الستة السريعة */
 .quick-cards-grid {
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -170,7 +170,7 @@ section{padding:15px 0}
 .head small{color:var(--gold); font-weight:700; cursor:pointer; font-size:0.9rem;}
 .head small:hover { text-decoration: underline; }
 
-/* تخطيط الأقسام الوسطى (أحدث المقالات والأبحاث و آية اليوم) */
+/* تخطيط الأقسام الوسطى */
 .main-content-grid {
     display: grid;
     grid-template-columns: 1fr 360px;
@@ -178,7 +178,7 @@ section{padding:15px 0}
     align-items: start;
 }
 
-/* بطاقة آية اليوم الجانبية المطابقة للصورة */
+/* بطاقة آية اليوم */
 .verse-side-card {
     background: linear-gradient(135deg, #041e2e, #02121c);
     border: 1px solid var(--line);
@@ -202,7 +202,7 @@ section{padding:15px 0}
 }
 .sidebar-menu-item:hover { color: var(--mint); }
 
-/* شبكة الأبحاث والمقالات الكبرى وسط الشاشة */
+/* شبكة الأبحاث والمقالات الكبرى */
 .research-grid-main {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -231,7 +231,7 @@ section{padding:15px 0}
 .research-card-body p { margin: 0 0 12px; font-size: 0.78rem; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex: 1; }
 .research-card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
 
-/* بانر أسفل المقالات المطابق للصورة */
+/* بانر أسفل المقالات */
 .bottom-banner-cta {
     background: linear-gradient(135deg, #041e2e, #031622);
     border: 1px solid var(--line);
@@ -283,7 +283,7 @@ section{padding:15px 0}
 
 .btn{
     display:inline-flex; justify-content:center; align-items:center; padding:8px 18px; border:0; border-radius:22px;
-    background: var(--green); color:white; font-weight:700; cursor:pointer; font-size: 0.88rem;
+    background: var(--green); color:white; font-weight:700; cursor:pointer; font-size: 0.88rem; text-decoration: none;
 }
 .btn:hover{ opacity: 0.9; }
 .btn.ghost{background:rgba(255,255,255,0.05); border:1px solid var(--line); color: var(--ink);}
@@ -297,7 +297,7 @@ section{padding:15px 0}
 .pdf-modal-content { background: var(--bg-body); border: 1px solid var(--mint); border-radius: 18px; width: min(1050px, 100%); height: 90vh; display: flex; flex-direction: column; padding: 16px; }
 .back-btn{ background: rgba(223, 37, 44, 0.2); border: 1px solid #df252c; color: #ff6b6b; padding: 4px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
 
-/* الفوتر المطابق للصورة */
+/* الفوتر */
 footer{
     margin-top:40px; background:#02121c; border-top:1px solid var(--line); padding:35px 0 25px; color:var(--muted); font-size: 0.85rem;
 }
@@ -317,7 +317,7 @@ footer{
 }
 .social-icons a:hover{background:var(--green); color:#fff; border-color:var(--green);}
 
-/* شريط التنقل السفلي للهاتف المحمول (Mobile Bottom Navigation) */
+/* شريط التنقل السفلي للهاتف المحمول */
 .mobile-bottom-nav {
     display: none; position: fixed; bottom: 0; left: 0; right: 0; height: 65px;
     background: #031622; border-top: 1px solid var(--line); z-index: 150;
@@ -343,7 +343,7 @@ footer{
     .footer-grid { grid-template-columns: 1fr; }
     .mobile-bottom-nav { display: flex; }
     body { padding-bottom: 60px; }
-    nav { display: none; } /* إخفاء القوائم العلوية للاكتفاء بالقائمة السفلية في الموبايل */
+    nav { display: none; }
 }
 </style>
 </head>
@@ -378,7 +378,7 @@ footer{
 
 <main id="top">
 
-<!-- الهيرو البانر الفخم المطابق للصورة تماماً -->
+<!-- الهيرو البانر الفخم -->
 <div class="hero-banner">
     <div class="hero-content">
         <h1>نـهـج الـحـقـيـقـة</h1>
@@ -391,7 +391,7 @@ footer{
     </div>
 </div>
 
-<!-- الكروت الستة السريعة البارزة تحت الهيرو -->
+<!-- الكروت الستة السريعة البارزة -->
 <div class="wrap">
 <div class="quick-cards-grid">
     <article class="quick-card" onclick="location.href='#library'">
@@ -427,11 +427,11 @@ footer{
 </div>
 </div>
 
-<!-- الأقسام الوسطى الرئيسية (أحدث المقالات + آية اليوم والقائمة الجانبية) -->
+<!-- الأقسام الوسطى الرئيسية -->
 <div class="wrap" style="margin-top: 10px;">
 <div class="main-content-grid">
 
-    <!-- القسم الأيمن: أحدث المقالات والأبحاث -->
+    <!-- أحدث المقالات والأبحاث -->
     <div>
         <div class="head" style="margin-top:0;">
             <h2>أحدث المقالات والأبحاث</h2>
@@ -442,7 +442,7 @@ footer{
         </div>
     </div>
 
-    <!-- القسم الأيسر: آية اليوم وأقسام الموقع الجانبية -->
+    <!-- آية اليوم وأقسام الموقع الجانبية -->
     <aside>
         <div class="verse-side-card">
             <h3>آية اليوم</h3>
@@ -474,7 +474,7 @@ footer{
 </div>
 </div>
 
-<!-- مكتبة الوثائق والأبحاث الكاملة (البحث المتقدم) -->
+<!-- مكتبة الوثائق والأبحاث الكاملة -->
 <section class="wrap" id="library" style="margin-top: 10px;">
 <div class="head">
 <h2>مكتبة الوثائق والأبحاث الكاملة</h2>
@@ -553,7 +553,7 @@ footer{
 </section>
 </main>
 
-<!-- الفوتر المطابق للصورة تماماً -->
+<!-- الفوتر -->
 <footer>
 <div class="wrap">
 <div class="footer-grid">
@@ -602,7 +602,7 @@ footer{
 </div>
 </footer>
 
-<!-- شريط التنقل السفلي للموبايل (Mobile Bottom Navigation) -->
+<!-- شريط التنقل السفلي للموبايل -->
 <div class="mobile-bottom-nav">
 <a href="#top" class="mobile-nav-item active"><span>🏠</span><span>الرئيسية</span></a>
 <a href="#library" class="mobile-nav-item"><span>📚</span><span>المكتبة</span></a>
@@ -611,14 +611,14 @@ footer{
 <a href="#sources-section" class="mobile-nav-item"><span>📜</span><span>الوثائق</span></a>
 </div>
 
-<!-- النوافذ المنبثقة -->
+<!-- نافذة عرض صور الوثائق المصورة المحدثة مع زر التحميل المباشر -->
 <div class="modal" id="sourceModal">
 <div class="modal-content">
 <div class="modal-header-bar">
 <h2 id="modalTitle" style="margin:0; color:var(--gold); font-size:1rem;">عنوان</h2>
 <button class="back-btn" onclick="closeSourceModal()">← رجوع</button>
 </div>
-<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;" id="modalImagesContainer"></div>
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px;" id="modalImagesContainer"></div>
 </div>
 </div>
 
@@ -828,16 +828,21 @@ function openPdfViewer(title, url) {
 }
 function closePdfModal() { document.getElementById('pdfModal').style.display = 'none'; }
 
+/* فتح الوثائق المصورة مع خيار التحميل المباشر للصور */
 function openSourceModal(title, images) {
     document.getElementById('modalTitle').textContent = title;
     const container = document.getElementById('modalImagesContainer');
     container.innerHTML = '';
     images.forEach(img => {
         const div = document.createElement('div');
-        div.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:10px; padding:10px; text-align:center;';
+        div.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:10px; padding:12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:8px;';
         div.innerHTML = `
             <img src="${img.image_url}" alt="${title}" style="width:100%; max-height:300px; object-fit:contain; border-radius:8px;" onerror="this.src='assets/logo.png'">
-            <p style="font-size:0.75rem; color:var(--muted); margin:6px 0;">${img.description || ''}</p>
+            <p style="font-size:0.78rem; color:var(--muted); margin:0;">${img.description || ''}</p>
+            <div style="display:flex; gap:8px; width:100%; justify-content:center; margin-top: auto;">
+                <button class="btn" style="padding:4px 12px; font-size:0.75rem;" onclick="triggerDirectDownload('${img.image_url}', '${title}')">⬇️ تحميل الصورة</button>
+                <a class="btn ghost" href="${img.image_url}" target="_blank" style="padding:4px 12px; font-size:0.75rem;">↗ فتح الصورة</a>
+            </div>
         `;
         container.appendChild(div);
     });
