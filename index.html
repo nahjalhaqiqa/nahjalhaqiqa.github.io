@@ -353,6 +353,10 @@ footer{
     background: var(--gold); color: #031622; border-color: var(--gold);
 }
 
+.perm-checkbox-item {
+    display: flex; align-items: center; gap: 8px; font-size: 0.85rem; background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line);
+}
+
 @media(max-width:1024px){
     .main-content-grid { grid-template-columns: 1fr; }
     .quick-cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -621,43 +625,33 @@ footer{
 <a href="#sources-section" class="mobile-nav-item"><span>📜</span><span>الوثائق</span></a>
 </div>
 
-<!-- نافذة لوحة التحكم المتقدمة للأدمن والموظفين -->
+<!-- نافذة لوحة التحكم الإدارية والديناميكية لإدارة الموظفين والصلاحيات -->
 <div class="modal" id="adminModal">
-<div class="modal-content" style="max-width:750px;">
+<div class="modal-content" style="max-width:780px;">
 <div class="sticky-close-bar">
     <h3 id="adminModalTitle" style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة والصلاحيات</h3>
     <button class="back-btn" onclick="closeAdminModal()">✕ إغلاق</button>
 </div>
 
-<!-- شاشة تسجيل الدخول -->
+<!-- تسجيل الدخول -->
 <div id="adminLoginSec" style="display:flex; flex-direction:column; gap:12px; margin-top:15px;">
-    <p style="font-size:0.88rem; color:var(--muted); margin:0;">ادخل كلمة المرور الخاصة بك للوصول للوحة التحكم:</p>
+    <p style="font-size:0.88rem; color:var(--muted); margin:0;">ادخل كلمة المرور الخاصة بحسابك الوصول للوحة التحكم:</p>
     <input type="password" id="adminPassInput" placeholder="كلمة المرور..." style="padding:10px 14px; border-radius:10px; border:1px solid var(--line); background:var(--input-bg); color:#fff;">
     <button class="btn" onclick="loginAdmin()">تسجيل الدخول</button>
-    <div style="font-size:0.75rem; color:var(--muted); margin-top:10px; border-top:1px dashed var(--line); padding-top:8px;">
-        📌 <b>دليل الحسابات وكلمات المرور:</b><br>
-        • <b>المدير العام (Admin):</b> admin123 (صلاحية كاملة شامِلة)<br>
-        • <b>الموظف 1 (محرر الكتب والأبحاث):</b> emp1 (إضافة PDF فقط)<br>
-        • <b>الموظف 2 (محرر الوثائق المصورة):</b> emp2 (إضافة وثائق مصورة فقط)<br>
-        • <b>الموظف 3 (محرر الفيديوهات):</b> emp3 (إضافة فيديو يوتيوب فقط)<br>
-        • <b>الموظف 4 (مسؤول التواصل):</b> emp4 (قراءة وتصفح الرسائل فقط)<br>
-        • <b>الموظف 5 (مشرف عام / مراجع):</b> emp5 (استعراض وتدقيق المحتوى)
-    </div>
 </div>
 
-<!-- شاشة لوحة التحكم عند الدخول -->
+<!-- لوحة التحكم بعد الدخول -->
 <div id="adminPanelSec" style="display:none; flex-direction:column; gap:15px; margin-top:10px;">
     <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(39, 213, 177, 0.1); padding:8px 14px; border-radius:12px; border:1px solid var(--mint);">
-        <span id="currentUserRole" style="font-size:0.85rem; font-weight:800; color:var(--mint);">المستخدم: مدير النظام</span>
+        <span id="currentUserRole" style="font-size:0.85rem; font-weight:800; color:var(--mint);">المستخدم الحالي</span>
         <button class="btn red" onclick="logoutAdmin()" style="padding:3px 10px; font-size:0.75rem;">تسجيل خروج</button>
     </div>
 
-    <!-- أزرار الأقسام بحسب الصلاحيات -->
     <div id="adminTabsNav" style="display:flex; gap:8px; border-bottom:1px solid var(--line); padding-bottom:10px; flex-wrap:wrap;">
         <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 إضافة كتب / PDF</button>
         <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 إضافة وثيقة مصورة</button>
         <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ إضافة فيديو</button>
-        <button id="tabBtnMessages" class="admin-tab-btn" onclick="switchAdminTab('messages')">📩 الرسائل الواردة</button>
+        <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين والصلاحيات</button>
     </div>
 
     <!-- 1. نموذج إضافة PDF -->
@@ -693,11 +687,24 @@ footer{
         <button type="submit" id="saveVidBtn" class="btn">💾 حفظ الفيديو</button>
     </form>
 
-    <!-- 4. قسم عرض الرسائل الواردة -->
-    <div id="messagesPanelSec" style="display:none; flex-direction:column; gap:10px;">
-        <h4 style="margin:0; color:var(--gold);">الرسائل والاستفسارات الواردة من اتصل بنا</h4>
-        <div id="adminMessagesList" style="display:flex; flex-direction:column; gap:10px; max-height:300px; overflow-y:auto;">
-            <p style="color:var(--muted); font-size:0.85rem;">لا توجد رسائل مسجلة حالياً.</p>
+    <!-- 4. تبويب خاص بالأدمن لإضافة الموظفين وتحديد صلاحياتهم -->
+    <div id="manageUsersSec" style="display:none; flex-direction:column; gap:15px;">
+        <h4 style="margin:0; color:var(--gold);">إضافة موظف جديد وتحديد المهام</h4>
+        <form class="admin-form" onsubmit="saveEmployee(event)" style="display:flex; flex-direction:column; gap:10px;">
+            <input type="text" id="emp_name" placeholder="اسم الموظف أو المحرر" required>
+            <input type="text" id="emp_pass" placeholder="كلمة المرور الخاصة به" required>
+            <div style="font-size:0.85rem; font-weight:700; color:var(--mint);">اختر الصلاحيات والمهام المسموحة له:</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                <label class="perm-checkbox-item"><input type="checkbox" id="p_docs" value="docs"> 📚 إضافة وتعديل الكتب/PDF</label>
+                <label class="perm-checkbox-item"><input type="checkbox" id="p_sources" value="sources"> 📜 إضافة وثائق مصورة</label>
+                <label class="perm-checkbox-item"><input type="checkbox" id="p_videos" value="videos"> ▶ إضافة فيديوهات يوتيوب</label>
+            </div>
+            <button type="submit" id="saveEmpBtn" class="btn">➕ إضافة الموظف واعتماد صلاحياته</button>
+        </form>
+
+        <h4 style="margin:15px 0 0; color:var(--gold);">قائمة الموظفين المسجلين وصلاحياتهم:</h4>
+        <div id="employeesList" style="display:flex; flex-direction:column; gap:8px;">
+            <p style="color:var(--muted); font-size:0.8rem;">جاري جلب قائمة الموظفين...</p>
         </div>
     </div>
 
@@ -787,10 +794,8 @@ window.addEventListener('DOMContentLoaded', () => {
     try { emailjs.init("xd1Jo81I__MsksgB9"); } catch(e){}
 });
 
-// مفاتيح الاتصال الصحيحة بقاعدة البيانات Supabase
 const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co'; 
-const SUPABASE_ANON_KEY = 'Sb_publishable_pPCiacTE_YN4mehS8xgK1w_q7ecBMWN'; 
-
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4c3h4a2F1eG91eW5lYWFtZWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MjQxMjMsImV4cCI6MjEwNzMwMDEyM30.wvVWq3TXd83mJ2FtViIwWO7O_hN1OazD91MkmiWZdh0'; 
 let supabaseClient = null;
 try { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch(e){}
 
@@ -1017,15 +1022,7 @@ function closeZoomModal() {
     document.getElementById('imageZoomModal').style.display = 'none';
 }
 
-const USER_ROLES = {
-    'admin123': { name: 'مدير النظام (Admin)', permissions: ['docs', 'sources', 'videos', 'messages'] },
-    'emp1':     { name: 'الموظف 1 (محرر الكتب والأبحاث)', permissions: ['docs'] },
-    'emp2':     { name: 'الموظف 2 (محرر الوثائق المصورة)', permissions: ['sources'] },
-    'emp3':     { name: 'الموظف 3 (محرر الفيديوهات)', permissions: ['videos'] },
-    'emp4':     { name: 'الموظف 4 (مسؤول التواصل والرسائل)', permissions: ['messages'] },
-    'emp5':     { name: 'الموظف 5 (مشرف عام ومراجع)', permissions: ['docs', 'sources', 'videos'] }
-};
-
+/* نظام إدارة الموظفين والصلاحيات المباشر عبر Supabase */
 let currentLoggedInUser = null;
 
 function openAdminModal() {
@@ -1035,18 +1032,27 @@ function closeAdminModal() {
     document.getElementById('adminModal').style.display = 'none';
 }
 
-function loginAdmin() {
+async function loginAdmin() {
     const pass = document.getElementById('adminPassInput').value.trim();
-    if (USER_ROLES[pass]) {
-        currentLoggedInUser = USER_ROLES[pass];
-        document.getElementById('adminLoginSec').style.display = 'none';
-        document.getElementById('adminPanelSec').style.display = 'flex';
-        document.getElementById('currentUserRole').textContent = 'المستخدم الحالي: ' + currentLoggedInUser.name;
-        
-        applyUserPermissions();
-    } else {
-        alert('كلمة المرور غير صحيحة!');
+    if (!pass) return;
+
+    if (supabaseClient) {
+        // التحقق من الحساب وكلمة المرور من Supabase
+        const { data, error } = await supabaseClient.from('employees').select('*').eq('password', pass).single();
+        if (data && !error) {
+            currentLoggedInUser = data;
+            showAdminDashboard();
+        } else {
+            alert('كلمة المرور غير صحيحة أو الحساب غير موجود!');
+        }
     }
+}
+
+function showAdminDashboard() {
+    document.getElementById('adminLoginSec').style.display = 'none';
+    document.getElementById('adminPanelSec').style.display = 'flex';
+    document.getElementById('currentUserRole').textContent = 'المستخدم الحالي: ' + currentLoggedInUser.name;
+    applyUserPermissions();
 }
 
 function logoutAdmin() {
@@ -1057,17 +1063,17 @@ function logoutAdmin() {
 }
 
 function applyUserPermissions() {
-    const perms = currentLoggedInUser.permissions;
+    const perms = currentLoggedInUser.permissions || [];
     
     document.getElementById('tabBtnDocs').style.display = perms.includes('docs') ? 'inline-block' : 'none';
     document.getElementById('tabBtnSources').style.display = perms.includes('sources') ? 'inline-block' : 'none';
     document.getElementById('tabBtnVideos').style.display = perms.includes('videos') ? 'inline-block' : 'none';
-    document.getElementById('tabBtnMessages').style.display = perms.includes('messages') ? 'inline-block' : 'none';
+    document.getElementById('tabBtnManageUsers').style.display = perms.includes('manage_users') ? 'inline-block' : 'none';
 
     if (perms.includes('docs')) switchAdminTab('docs');
     else if (perms.includes('sources')) switchAdminTab('sources');
     else if (perms.includes('videos')) switchAdminTab('videos');
-    else if (perms.includes('messages')) switchAdminTab('messages');
+    else if (perms.includes('manage_users')) switchAdminTab('manage_users');
 }
 
 function switchAdminTab(type) {
@@ -1075,12 +1081,87 @@ function switchAdminTab(type) {
     document.getElementById('addDocForm').style.display = type === 'docs' ? 'flex' : 'none';
     document.getElementById('addSourceForm').style.display = type === 'sources' ? 'flex' : 'none';
     document.getElementById('addVidForm').style.display = type === 'videos' ? 'flex' : 'none';
-    document.getElementById('messagesPanelSec').style.display = type === 'messages' ? 'flex' : 'none';
+    document.getElementById('manageUsersSec').style.display = type === 'manage_users' ? 'flex' : 'none';
     
     if (type === 'docs' && document.getElementById('tabBtnDocs')) document.getElementById('tabBtnDocs').classList.add('active');
     if (type === 'sources' && document.getElementById('tabBtnSources')) document.getElementById('tabBtnSources').classList.add('active');
     if (type === 'videos' && document.getElementById('tabBtnVideos')) document.getElementById('tabBtnVideos').classList.add('active');
-    if (type === 'messages' && document.getElementById('tabBtnMessages')) document.getElementById('tabBtnMessages').classList.add('active');
+    if (type === 'manage_users' && document.getElementById('tabBtnManageUsers')) {
+        document.getElementById('tabBtnManageUsers').classList.add('active');
+        fetchEmployeesList();
+    }
+}
+
+async function saveEmployee(e) {
+    e.preventDefault();
+    const name = document.getElementById('emp_name').value.trim();
+    const pass = document.getElementById('emp_pass').value.trim();
+    const perms = [];
+    
+    if (document.getElementById('p_docs').checked) perms.push('docs');
+    if (document.getElementById('p_sources').checked) perms.push('sources');
+    if (document.getElementById('p_videos').checked) perms.push('videos');
+
+    if (!perms.length) { alert('يرجى تحديد صلاحية واحدة على الأقل للموظف!'); return; }
+
+    const btn = document.getElementById('saveEmpBtn');
+    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
+
+    const { error } = await supabaseClient.from('employees').insert([{
+        name: name,
+        password: pass,
+        permissions: perms
+    }]);
+
+    btn.disabled = false; btn.textContent = '➕ إضافة الموظف واعتماد صلاحياته';
+
+    if (!error) {
+        alert('✅ تم إتاحة ورسالة حساب الموظف بنجاح!');
+        document.getElementById('emp_name').value = '';
+        document.getElementById('emp_pass').value = '';
+        document.querySelectorAll('.perm-checkbox-item input').forEach(c => c.checked = false);
+        fetchEmployeesList();
+    } else {
+        alert('⚠️ تعذر الحفظ، ربما كلمة المرور مستخدمة لموظف آخر.');
+    }
+}
+
+async function fetchEmployeesList() {
+    const listContainer = document.getElementById('employeesList');
+    if (!supabaseClient || !listContainer) return;
+    
+    const { data } = await supabaseClient.from('employees').select('*');
+    if (!data || !data.length) { listContainer.innerHTML = '<p style="color:var(--muted);">لا يوجد موظفين حالياً.</p>'; return; }
+
+    listContainer.innerHTML = '';
+    data.forEach(emp => {
+        const item = document.createElement('div');
+        item.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); padding:10px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;';
+        
+        let permText = (emp.permissions || []).map(p => {
+            if (p === 'docs') return 'كتب/PDF';
+            if (p === 'sources') return 'وثائق';
+            if (p === 'videos') return 'فيديوهات';
+            if (p === 'manage_users') return 'مدير عام';
+            return p;
+        }).join(' ، ');
+
+        item.innerHTML = `
+            <div>
+                <strong style="color:var(--gold); font-size:0.9rem;">${emp.name}</strong>
+                <div style="font-size:0.75rem; color:var(--muted);">الصلاحيات: ${permText}</div>
+            </div>
+            ${emp.permissions.includes('manage_users') ? '<span style="font-size:0.75rem; color:var(--mint); font-weight:700;">[مدير]</span>' : `<button class="btn red" style="padding:3px 8px; font-size:0.72rem;" onclick="deleteEmployee(${emp.id})">حذف</button>`}
+        `;
+        listContainer.appendChild(item);
+    });
+}
+
+async function deleteEmployee(id) {
+    if (confirm('هل أنت تأكد من حذف هذا الموظف؟')) {
+        await supabaseClient.from('employees').delete().eq('id', id);
+        fetchEmployeesList();
+    }
 }
 
 async function saveNewDoc(e) {
