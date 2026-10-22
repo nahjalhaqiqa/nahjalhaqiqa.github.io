@@ -32,7 +32,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-<!-- مكتبة PDF.js لضمان فتح ملفات PDF على كافة هواتف الأندرويد والآيفون والكمبيوتر -->
+<!-- مكتبة PDF.js لضمان فتح ملفات PDF على كافة الأجهزة -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <style>
@@ -339,12 +339,22 @@ footer{
 .mobile-nav-item.active, .mobile-nav-item:hover { color: var(--gold); }
 .mobile-nav-item span:first-child { font-size: 1.2rem; }
 
-/* حاوي استعراض PDF المطور للجوال والكمبيوتر */
 #pdfCanvasContainer {
     flex: 1; width: 100%; overflow-y: auto; text-align: center; background: #010a10; border-radius: 12px; padding: 10px 0;
 }
 #pdfCanvasContainer canvas {
     max-width: 98%; height: auto !important; margin: 0 auto 12px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.admin-tab-btn {
+    padding: 8px 16px; border-radius: 20px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-weight: 700; cursor: pointer;
+}
+.admin-tab-btn.active {
+    background: var(--gold); color: #031622; border-color: var(--gold);
+}
+
+.perm-checkbox-item {
+    display: flex; align-items: center; gap: 8px; font-size: 0.85rem; background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line);
 }
 
 @media(max-width:1024px){
@@ -388,7 +398,7 @@ footer{
 <div class="nav-actions">
 <button class="install-btn-nav" id="installPwaBtn" onclick="installPWA()">📲 تثبيت</button>
 <button class="icon-action-btn" onclick="toggleTheme()" id="themeToggle" title="تبديل الوضع">🌙</button>
-<button class="icon-action-btn" onclick="location.href='#library'" title="بحث">🔍</button>
+<button class="icon-action-btn" onclick="openAdminModal()" title="لوحة التحكم الإدارية" style="color:var(--mint);">⚙️</button>
 </div>
 </div>
 </header>
@@ -602,7 +612,7 @@ footer{
         <a href="https://x.com/raf88idi" target="_blank">𝕏</a>
         <a href="https://www.tiktok.com/@ha_no_88" target="_blank">🎵</a>
     </div>
-    <span style="font-size:0.8rem;">© <span id="year"></span> نهج الحقيقة، جميع الحقوق محفوظة.</span>
+    <span style="font-size:0.8rem;">© <span id="year"></span> نهج الحقيقة، جميع الحقوق محفوظة. <a href="javascript:void(0)" onclick="openAdminModal()" style="color:var(--muted); margin-right:10px;">⚙️ دخول الإدارة والموظفين</a></span>
 </div>
 </div>
 </footer>
@@ -613,6 +623,94 @@ footer{
 <a href="#library" class="mobile-nav-item"><span>📁</span><span>ملفات PDF</span></a>
 <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" class="mobile-nav-item"><span>▶</span><span>يوتيوب</span></a>
 <a href="#sources-section" class="mobile-nav-item"><span>📜</span><span>الوثائق</span></a>
+</div>
+
+<!-- نافذة لوحة التحكم الإدارية والديناميكية لإدارة الموظفين والصلاحيات -->
+<div class="modal" id="adminModal">
+<div class="modal-content" style="max-width:780px;">
+<div class="sticky-close-bar">
+    <h3 id="adminModalTitle" style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة والصلاحيات</h3>
+    <button class="back-btn" onclick="closeAdminModal()">✕ إغلاق</button>
+</div>
+
+<!-- تسجيل الدخول -->
+<div id="adminLoginSec" style="display:flex; flex-direction:column; gap:12px; margin-top:15px;">
+    <p style="font-size:0.88rem; color:var(--muted); margin:0;">ادخل كلمة المرور الخاصة بحسابك الوصول للوحة التحكم:</p>
+    <input type="password" id="adminPassInput" placeholder="كلمة المرور..." style="padding:10px 14px; border-radius:10px; border:1px solid var(--line); background:var(--input-bg); color:#fff;">
+    <button class="btn" onclick="loginAdmin()">تسجيل الدخول</button>
+</div>
+
+<!-- لوحة التحكم بعد الدخول -->
+<div id="adminPanelSec" style="display:none; flex-direction:column; gap:15px; margin-top:10px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(39, 213, 177, 0.1); padding:8px 14px; border-radius:12px; border:1px solid var(--mint);">
+        <span id="currentUserRole" style="font-size:0.85rem; font-weight:800; color:var(--mint);">المستخدم الحالي</span>
+        <button class="btn red" onclick="logoutAdmin()" style="padding:3px 10px; font-size:0.75rem;">تسجيل خروج</button>
+    </div>
+
+    <div id="adminTabsNav" style="display:flex; gap:8px; border-bottom:1px solid var(--line); padding-bottom:10px; flex-wrap:wrap;">
+        <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 إضافة كتب / PDF</button>
+        <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 إضافة وثيقة مصورة</button>
+        <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ إضافة فيديو</button>
+        <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين والصلاحيات</button>
+    </div>
+
+    <!-- 1. نموذج إضافة PDF -->
+    <form id="addDocForm" class="admin-form" onsubmit="saveNewDoc(event)" style="display:flex; flex-direction:column; gap:10px;">
+        <h4 style="margin:0; color:var(--gold);">إضافة بحث / كتاب جديد</h4>
+        <input type="text" id="doc_title" placeholder="عنوان البحث / الكتاب" required>
+        <input type="text" id="doc_author" placeholder="المؤلف / الباحث">
+        <select id="doc_cat" required>
+            <option value="بحوث عقائدية">💡 بحوث عقائدية</option>
+            <option value="وثائق تاريخية">📜 وثائق تاريخية</option>
+            <option value="كتب ومراجع">📖 كتب ومراجع</option>
+            <option value="مقالات ودراسات">📝 مقالات ودراسات</option>
+        </select>
+        <input type="text" id="doc_url" placeholder="رابط الملف المباشر (PDF Direct URL)" required>
+        <textarea id="doc_desc" placeholder="نبذة مختصرة عن المستند..."></textarea>
+        <button type="submit" id="saveDocBtn" class="btn">💾 حفظ ونشر الملف</button>
+    </form>
+
+    <!-- 2. نموذج إضافة وثيقة مصورة -->
+    <form id="addSourceForm" class="admin-form" onsubmit="saveNewSource(event)" style="display:none; flex-direction:column; gap:10px;">
+        <h4 style="margin:0; color:var(--gold);">إضافة وثيقة مصورة نادرة</h4>
+        <input type="text" id="source_title" placeholder="عنوان مجموعة الوثيقة (مثل: فدك وشواهدها)" required>
+        <input type="text" id="source_img_url" placeholder="رابط الصورة المباشر (Image URL)" required>
+        <textarea id="source_desc" placeholder="شرح تفصيلي للوثيقة المصورة..."></textarea>
+        <button type="submit" id="saveSourceBtn" class="btn">💾 حفظ الوثيقة المصورة</button>
+    </form>
+
+    <!-- 3. نموذج إضافة فيديو -->
+    <form id="addVidForm" class="admin-form" onsubmit="saveNewVid(event)" style="display:none; flex-direction:column; gap:10px;">
+        <h4 style="margin:0; color:var(--gold);">إضافة فيديو يوتيوب جديد</h4>
+        <input type="text" id="vid_title" placeholder="عنوان الفيديو / الحلقة" required>
+        <input type="text" id="vid_yt_id" placeholder="معرف اليوتيوب YouTube Video ID" required>
+        <button type="submit" id="saveVidBtn" class="btn">💾 حفظ الفيديو</button>
+    </form>
+
+    <!-- 4. تبويب خاص بالأدمن لإضافة الموظفين وتحديد صلاحياتهم -->
+    <div id="manageUsersSec" style="display:none; flex-direction:column; gap:15px;">
+        <h4 style="margin:0; color:var(--gold);">إضافة موظف جديد وتحديد المهام</h4>
+        <form class="admin-form" onsubmit="saveEmployee(event)" style="display:flex; flex-direction:column; gap:10px;">
+            <input type="text" id="emp_name" placeholder="اسم الموظف أو المحرر" required>
+            <input type="text" id="emp_pass" placeholder="كلمة المرور الخاصة به" required>
+            <div style="font-size:0.85rem; font-weight:700; color:var(--mint);">اختر الصلاحيات والمهام المسموحة له:</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                <label class="perm-checkbox-item"><input type="checkbox" id="p_docs" value="docs"> 📚 إضافة وتعديل الكتب/PDF</label>
+                <label class="perm-checkbox-item"><input type="checkbox" id="p_sources" value="sources"> 📜 إضافة وثائق مصورة</label>
+                <label class="perm-checkbox-item"><input type="checkbox" id="p_videos" value="videos"> ▶ إضافة فيديوهات يوتيوب</label>
+            </div>
+            <button type="submit" id="saveEmpBtn" class="btn">➕ إضافة الموظف واعتماد صلاحياته</button>
+        </form>
+
+        <h4 style="margin:15px 0 0; color:var(--gold);">قائمة الموظفين المسجلين وصلاحياتهم:</h4>
+        <div id="employeesList" style="display:flex; flex-direction:column; gap:8px;">
+            <p style="color:var(--muted); font-size:0.8rem;">جاري جلب قائمة الموظفين...</p>
+        </div>
+    </div>
+
+    <p id="adminStatusMsg" style="font-size:0.85rem; font-weight:700; display:none; margin:0;"></p>
+</div>
+</div>
 </div>
 
 <div class="modal" id="sourceModal">
@@ -639,7 +737,6 @@ footer{
     </div>
 </div>
 
-<!-- نافذة العرض العالية الأداء لملفات PDF وتعمل بامتياز على الأجهزة الذكية والكمبيوتر دون حظر -->
 <div class="modal" id="pdfModal">
 <div class="pdf-modal-content">
 <div class="sticky-close-bar">
@@ -658,7 +755,6 @@ footer{
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// إعداد محرك PDF.js المباشر
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
 if ('serviceWorker' in navigator) {
@@ -847,9 +943,9 @@ window.addEventListener('popstate', function() {
     document.getElementById('imageZoomModal').style.display = 'none';
     document.getElementById('sourceModal').style.display = 'none';
     document.getElementById('pdfModal').style.display = 'none';
+    document.getElementById('adminModal').style.display = 'none';
 });
 
-/* فتح ورسم ملفات PDF بدقة ووضوح عالي ليعمل 100% داخل كافة هواتف الأندرويد والآيفون */
 async function openPdfViewer(title, url) {
     activePdfUrl = url; activePdfName = title;
     document.getElementById('pdfTitle').textContent = title;
@@ -924,6 +1020,213 @@ function zoomImage(url, title) {
 }
 function closeZoomModal() {
     document.getElementById('imageZoomModal').style.display = 'none';
+}
+
+/* نظام إدارة الموظفين والصلاحيات المباشر عبر Supabase */
+let currentLoggedInUser = null;
+
+function openAdminModal() {
+    document.getElementById('adminModal').style.display = 'flex';
+}
+function closeAdminModal() {
+    document.getElementById('adminModal').style.display = 'none';
+}
+
+async function loginAdmin() {
+    const pass = document.getElementById('adminPassInput').value.trim();
+    if (!pass) return;
+
+    if (supabaseClient) {
+        // التحقق من الحساب وكلمة المرور من Supabase
+        const { data, error } = await supabaseClient.from('employees').select('*').eq('password', pass).single();
+        if (data && !error) {
+            currentLoggedInUser = data;
+            showAdminDashboard();
+        } else {
+            alert('كلمة المرور غير صحيحة أو الحساب غير موجود!');
+        }
+    }
+}
+
+function showAdminDashboard() {
+    document.getElementById('adminLoginSec').style.display = 'none';
+    document.getElementById('adminPanelSec').style.display = 'flex';
+    document.getElementById('currentUserRole').textContent = 'المستخدم الحالي: ' + currentLoggedInUser.name;
+    applyUserPermissions();
+}
+
+function logoutAdmin() {
+    currentLoggedInUser = null;
+    document.getElementById('adminPassInput').value = '';
+    document.getElementById('adminLoginSec').style.display = 'flex';
+    document.getElementById('adminPanelSec').style.display = 'none';
+}
+
+function applyUserPermissions() {
+    const perms = currentLoggedInUser.permissions || [];
+    
+    document.getElementById('tabBtnDocs').style.display = perms.includes('docs') ? 'inline-block' : 'none';
+    document.getElementById('tabBtnSources').style.display = perms.includes('sources') ? 'inline-block' : 'none';
+    document.getElementById('tabBtnVideos').style.display = perms.includes('videos') ? 'inline-block' : 'none';
+    document.getElementById('tabBtnManageUsers').style.display = perms.includes('manage_users') ? 'inline-block' : 'none';
+
+    if (perms.includes('docs')) switchAdminTab('docs');
+    else if (perms.includes('sources')) switchAdminTab('sources');
+    else if (perms.includes('videos')) switchAdminTab('videos');
+    else if (perms.includes('manage_users')) switchAdminTab('manage_users');
+}
+
+function switchAdminTab(type) {
+    document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('addDocForm').style.display = type === 'docs' ? 'flex' : 'none';
+    document.getElementById('addSourceForm').style.display = type === 'sources' ? 'flex' : 'none';
+    document.getElementById('addVidForm').style.display = type === 'videos' ? 'flex' : 'none';
+    document.getElementById('manageUsersSec').style.display = type === 'manage_users' ? 'flex' : 'none';
+    
+    if (type === 'docs' && document.getElementById('tabBtnDocs')) document.getElementById('tabBtnDocs').classList.add('active');
+    if (type === 'sources' && document.getElementById('tabBtnSources')) document.getElementById('tabBtnSources').classList.add('active');
+    if (type === 'videos' && document.getElementById('tabBtnVideos')) document.getElementById('tabBtnVideos').classList.add('active');
+    if (type === 'manage_users' && document.getElementById('tabBtnManageUsers')) {
+        document.getElementById('tabBtnManageUsers').classList.add('active');
+        fetchEmployeesList();
+    }
+}
+
+async function saveEmployee(e) {
+    e.preventDefault();
+    const name = document.getElementById('emp_name').value.trim();
+    const pass = document.getElementById('emp_pass').value.trim();
+    const perms = [];
+    
+    if (document.getElementById('p_docs').checked) perms.push('docs');
+    if (document.getElementById('p_sources').checked) perms.push('sources');
+    if (document.getElementById('p_videos').checked) perms.push('videos');
+
+    if (!perms.length) { alert('يرجى تحديد صلاحية واحدة على الأقل للموظف!'); return; }
+
+    const btn = document.getElementById('saveEmpBtn');
+    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
+
+    const { error } = await supabaseClient.from('employees').insert([{
+        name: name,
+        password: pass,
+        permissions: perms
+    }]);
+
+    btn.disabled = false; btn.textContent = '➕ إضافة الموظف واعتماد صلاحياته';
+
+    if (!error) {
+        alert('✅ تم إتاحة ورسالة حساب الموظف بنجاح!');
+        document.getElementById('emp_name').value = '';
+        document.getElementById('emp_pass').value = '';
+        document.querySelectorAll('.perm-checkbox-item input').forEach(c => c.checked = false);
+        fetchEmployeesList();
+    } else {
+        alert('⚠️ تعذر الحفظ، ربما كلمة المرور مستخدمة لموظف آخر.');
+    }
+}
+
+async function fetchEmployeesList() {
+    const listContainer = document.getElementById('employeesList');
+    if (!supabaseClient || !listContainer) return;
+    
+    const { data } = await supabaseClient.from('employees').select('*');
+    if (!data || !data.length) { listContainer.innerHTML = '<p style="color:var(--muted);">لا يوجد موظفين حالياً.</p>'; return; }
+
+    listContainer.innerHTML = '';
+    data.forEach(emp => {
+        const item = document.createElement('div');
+        item.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); padding:10px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;';
+        
+        let permText = (emp.permissions || []).map(p => {
+            if (p === 'docs') return 'كتب/PDF';
+            if (p === 'sources') return 'وثائق';
+            if (p === 'videos') return 'فيديوهات';
+            if (p === 'manage_users') return 'مدير عام';
+            return p;
+        }).join(' ، ');
+
+        item.innerHTML = `
+            <div>
+                <strong style="color:var(--gold); font-size:0.9rem;">${emp.name}</strong>
+                <div style="font-size:0.75rem; color:var(--muted);">الصلاحيات: ${permText}</div>
+            </div>
+            ${emp.permissions.includes('manage_users') ? '<span style="font-size:0.75rem; color:var(--mint); font-weight:700;">[مدير]</span>' : `<button class="btn red" style="padding:3px 8px; font-size:0.72rem;" onclick="deleteEmployee(${emp.id})">حذف</button>`}
+        `;
+        listContainer.appendChild(item);
+    });
+}
+
+async function deleteEmployee(id) {
+    if (confirm('هل أنت تأكد من حذف هذا الموظف؟')) {
+        await supabaseClient.from('employees').delete().eq('id', id);
+        fetchEmployeesList();
+    }
+}
+
+async function saveNewDoc(e) {
+    e.preventDefault();
+    const btn = document.getElementById('saveDocBtn'), msg = document.getElementById('adminStatusMsg');
+    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
+    
+    const { error } = await supabaseClient.from('documents').insert([{
+        title: document.getElementById('doc_title').value,
+        author: document.getElementById('doc_author').value,
+        category: document.getElementById('doc_cat').value,
+        file_url: document.getElementById('doc_url').value,
+        description: document.getElementById('doc_desc').value,
+        date: new Date().toISOString().split('T')[0]
+    }]);
+
+    btn.disabled = false; btn.textContent = '💾 حفظ ونشر الملف';
+    if (!error) {
+        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم نشر البحث/الملف بنجاح!';
+        document.getElementById('addDocForm').reset();
+        fetchDocuments();
+    } else {
+        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ حدث خطأ أثناء الحفظ.';
+    }
+}
+
+async function saveNewSource(e) {
+    e.preventDefault();
+    const btn = document.getElementById('saveSourceBtn'), msg = document.getElementById('adminStatusMsg');
+    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
+    
+    const { error } = await supabaseClient.from('sources').insert([{
+        title: document.getElementById('source_title').value,
+        image_url: document.getElementById('source_img_url').value,
+        description: document.getElementById('source_desc').value
+    }]);
+
+    btn.disabled = false; btn.textContent = '💾 حفظ الوثيقة المصورة';
+    if (!error) {
+        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم نشر الوثيقة المصورة بنجاح!';
+        document.getElementById('addSourceForm').reset();
+        fetchSources();
+    } else {
+        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ حدث خطأ أثناء الحفظ.';
+    }
+}
+
+async function saveNewVid(e) {
+    e.preventDefault();
+    const btn = document.getElementById('saveVidBtn'), msg = document.getElementById('adminStatusMsg');
+    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
+    
+    const { error } = await supabaseClient.from('videos').insert([{
+        title: document.getElementById('vid_title').value,
+        youtube_id: document.getElementById('vid_yt_id').value
+    }]);
+
+    btn.disabled = false; btn.textContent = '💾 حفظ الفيديو';
+    if (!error) {
+        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم نشر الفيديو بنجاح!';
+        document.getElementById('addVidForm').reset();
+        fetchLatestVideos();
+    } else {
+        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ حدث خطأ أثناء الحفظ.';
+    }
 }
 
 function renderDocs(docs) {
