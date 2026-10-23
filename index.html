@@ -133,31 +133,61 @@ nav a:hover, nav a.active{color:var(--gold); opacity:1;}
     color: #031622; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem;
 }
 
-.quick-cards-grid {
+/* ========================================================== */
+/* تصميم البطاقات الفنية التفاعلية الجديدة (مستوحاة من الطلب) */
+/* ========================================================== */
+.creative-cards-grid {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 14px;
-    margin: -35px auto 30px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    margin: -35px auto 35px;
     position: relative;
     z-index: 10;
 }
-.quick-card {
-    background: var(--panel);
+.creative-card {
+    background: linear-gradient(135deg, var(--panel), var(--panel-hover));
     border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 20px 12px;
+    border-radius: 22px;
+    padding: 24px 18px;
     text-align: center;
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
 }
-.quick-card:hover { border-color: var(--mint); transform: translateY(-4px); background: var(--panel-hover); }
-.quick-card .q-icon { font-size: 1.8rem; color: var(--gold); margin-bottom: 2px; }
-.quick-card h3 { margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--ink); }
-.quick-card p { margin: 0; font-size: 0.75rem; color: var(--muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.creative-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; width: 100%; height: 4px;
+    background: linear-gradient(90deg, var(--mint), var(--gold));
+    opacity: 0.8;
+}
+.creative-card:hover {
+    border-color: var(--mint);
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(39, 213, 177, 0.15);
+}
+.c-card-icon-wrap {
+    width: 65px; height: 65px;
+    border-radius: 50%;
+    background: rgba(243, 213, 138, 0.08);
+    border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 2px;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.3);
+}
+.creative-card h3 {
+    margin: 0; font-size: 1.15rem; font-weight: 800; color: var(--gold);
+}
+.creative-card p {
+    margin: 0; font-size: 0.82rem; color: var(--muted); line-height: 1.5;
+}
 
 section{padding:15px 0}
 
@@ -186,6 +216,17 @@ section{padding:15px 0}
 .verse-side-card h3 { color: var(--gold); font-size: 1.1rem; margin: 0 0 15px; font-weight: 800; }
 .verse-text { font-size: 1.15rem; font-weight: 700; color: #fff; line-height: 1.9; margin-bottom: 12px; }
 .verse-source { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
+
+.verse-day-topline{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold);font-size:.82rem;font-weight:800;letter-spacing:.5px;margin-bottom:5px}
+.verse-day-icon{font-size:1.15rem;opacity:.8}
+.verse-side-card h3{margin-bottom:12px}
+.verse-text{padding:14px 8px;border-top:1px solid rgba(243,213,138,.2);border-bottom:1px solid rgba(243,213,138,.2);text-shadow:0 2px 14px rgba(243,213,138,.08);min-height:100px;display:flex;align-items:center;justify-content:center}
+.verse-datetime{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 8px}
+.verse-time-box{background:rgba(243,213,138,.07);border:1px solid var(--line);border-radius:12px;padding:9px 6px;display:flex;flex-direction:column;gap:2px}
+.verse-time-label{font-size:.72rem;color:var(--muted)}
+.verse-time-box strong{font-size:.88rem;color:var(--gold);font-weight:800;direction:rtl}
+#siteClock{font-variant-numeric:tabular-nums;direction:ltr}
+.verse-day-note{font-size:.72rem;color:var(--muted);margin:7px 0 16px}
 .sidebar-menu-list {
     border-top: 1px solid var(--line); padding-top: 12px; text-align: right;
 }
@@ -272,107 +313,7 @@ section{padding:15px 0}
 }
 .doc-meta{font-size:0.75rem;color:var(--muted);margin-bottom:8px;}
 
-/* ============================================== */
-/* تصميم قسم "الوثائق المصورة" الفخم (أشكال جديدة)  */
-/* ============================================== */
-.sources-grid-modern {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
-}
-.source-card-luxury {
-    background: linear-gradient(145deg, var(--panel), var(--panel-hover));
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--shadow);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-}
-.source-card-luxury:hover {
-    border-color: var(--gold);
-    transform: translateY(-6px);
-    box-shadow: 0 15px 35px rgba(243, 213, 138, 0.12);
-}
-.source-img-wrapper {
-    position: relative;
-    width: 100%;
-    height: 210px;
-    background: #000;
-    overflow: hidden;
-    cursor: pointer;
-}
-.source-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-.source-card-luxury:hover .source-img-wrapper img {
-    transform: scale(1.06);
-}
-.source-badge-overlay {
-    position: absolute;
-    top: 12px; right: 12px;
-    background: rgba(3, 22, 34, 0.85);
-    backdrop-filter: blur(4px);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.72rem;
-    font-weight: 800;
-}
-.source-body-luxury {
-    padding: 18px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-.source-body-luxury h3 {
-    margin: 0 0 8px;
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: var(--ink);
-    line-height: 1.4;
-}
-.source-body-luxury p {
-    margin: 0 0 15px;
-    font-size: 0.85rem;
-    color: var(--muted);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    flex: 1;
-}
-.source-footer-luxury {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid var(--line);
-    padding-top: 12px;
-    font-size: 0.78rem;
-    color: var(--muted);
-}
-.view-source-btn {
-    background: rgba(243, 213, 138, 0.1);
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 6px 14px;
-    border-radius: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 0.78rem;
-}
-.view-source-btn:hover {
-    background: var(--gold);
-    color: #031622;
-}
-
-/* تنسيق أزرار الحذف والتعديل داخل لوحة التحكم */
+/* أزرار الحذف والتعديل داخل لوحة التحكم */
 .admin-item-row {
     background: rgba(0,0,0,0.2);
     border: 1px solid var(--line);
@@ -385,13 +326,8 @@ section{padding:15px 0}
     gap: 10px;
 }
 .admin-item-title {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--ink);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 60%;
+    font-size: 0.88rem; font-weight: 700; color: var(--ink);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 60%;
 }
 .admin-actions-btns { display: flex; gap: 6px; }
 .btn-edit-sm { background: rgba(39, 213, 177, 0.15); border: 1px solid var(--mint); color: var(--mint); padding: 3px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
@@ -484,15 +420,13 @@ footer{
 
 @media(max-width:1024px){
     .main-content-grid { grid-template-columns: 1fr; }
-    .quick-cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .creative-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .research-grid-main { grid-template-columns: 1fr 1fr; }
-    .sources-grid-modern { grid-template-columns: 1fr 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media(max-width:768px){
-    .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .creative-cards-grid { grid-template-columns: 1fr; }
     .research-grid-main { grid-template-columns: 1fr; }
-    .sources-grid-modern { grid-template-columns: 1fr; }
     .tools{grid-template-columns:1fr}
     .doc-grid{grid-template-columns:1fr}
     .footer-grid { grid-template-columns: 1fr; }
@@ -544,37 +478,23 @@ footer{
     </div>
 </div>
 
+<!-- الأقسام الفنية التفاعلية الجديدة المستوحاة من طلبك -->
 <div class="wrap">
-<div class="quick-cards-grid">
-    <article class="quick-card" onclick="location.href='#library'">
-        <div class="q-icon">🔍</div>
-        <h3>البحث المتقدم</h3>
-        <p>ابحث في كل محتوى الموقع</p>
+<div class="creative-cards-grid">
+    <article class="creative-card" onclick="location.href='#library'">
+        <div class="c-card-icon-wrap" style="color: var(--gold);">📖</div>
+        <h3>دوحة القرآن والأبحاث</h3>
+        <p>استكشف أعمق البحوث العقائدية والقرآنية بدقة وموثوقية.</p>
     </article>
-    <article class="quick-card" onclick="location.href='#library'">
-        <div class="q-icon">📚</div>
-        <h3>المكتبة</h3>
-        <p>أبحاث ومقالات وبحوث</p>
+    <article class="creative-card" onclick="location.href='#sources-section'">
+        <div class="c-card-icon-wrap" style="color: var(--mint);">📜</div>
+        <h3>موسوعة الوثائق</h3>
+        <p>مخطوطات وأدلة تاريخية نادرة ومصورة بعناية فائقة.</p>
     </article>
-    <article class="quick-card" onclick="location.href='#sources-section'">
-        <div class="q-icon">📜</div>
-        <h3>الوثائق</h3>
-        <p>مخطوطات ووثائق نادرة</p>
-    </article>
-    <article class="quick-card" onclick="location.href='#library'">
-        <div class="q-icon">📁</div>
-        <h3>ملفات PDF</h3>
-        <p>كتب ودراسات قابلة للتحميل</p>
-    </article>
-    <article class="quick-card" onclick="location.href='#youtube'">
-        <div class="q-icon">🎙️</div>
-        <h3>برنامج على طاولة الحقيقة</h3>
-        <p>حوار .. فكر .. دليل</p>
-    </article>
-    <article class="quick-card" onclick="window.open('https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K', '_blank')">
-        <div class="q-icon">▶</div>
-        <h3>قناة يوتيوب</h3>
-        <p>مقاطع ومحاضرات مميزة</p>
+    <article class="creative-card" onclick="location.href='#youtube'">
+        <div class="c-card-icon-wrap" style="color: #f38ab8;">🎙️</div>
+        <h3>برامج وحوارات</h3>
+        <p>مقاطع مرئية وحوارات فكرية متخصصة على طاولة الحقيقة.</p>
     </article>
 </div>
 </div>
@@ -594,9 +514,15 @@ footer{
 
     <aside>
         <div class="verse-side-card">
+            <div class="verse-day-topline"><span class="verse-day-icon">۞</span><span>نورٌ من القرآن</span><span class="verse-day-icon">۞</span></div>
             <h3>آية اليوم</h3>
-            <div class="verse-text">«وَمَا كَانَ لِنَبِيٍّ أَنْ يَكُونَ لَهُ أَحِيد»<br><span style="font-size:0.95rem; font-weight:normal;">{وَإِنْ أَدْرِي لَعَلَّهُ فِتْنَةٌ لَكُمْ وَمَتَاعٌ إِلَى حِينٍ}</span></div>
-            <div class="verse-source">(الأنبياء: 111)</div>
+            <div class="verse-text" id="dailyVerseText">﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾</div>
+            <div class="verse-source" id="dailyVerseSource">سورة الشرح · الآية 6</div>
+            <div class="verse-datetime">
+                <div class="verse-time-box"><span class="verse-time-label">الوقت الآن</span><strong id="siteClock">--:--:--</strong></div>
+                <div class="verse-time-box"><span class="verse-time-label">التاريخ</span><strong id="siteDate">جاري التحميل...</strong></div>
+            </div>
+            <div class="verse-day-note">تتجدد آية اليوم تلقائيًا كل يوم</div>
             
             <div class="sidebar-menu-list">
                 <div class="sidebar-menu-title">أقسام الموقع</div>
@@ -654,13 +580,12 @@ footer{
 <div class="empty" id="empty">لا توجد نتائج مطابقة.</div>
 </section>
 
-<!-- القسم المحدث: موسوعة الأدلة والمصادر المصورة بالأشكال الجديدة -->
 <section class="wrap" id="sources-section" style="margin-top: 25px;">
 <div class="head">
 <h2>موسوعة الأدلة والمصادر المصورة</h2>
-<small>انقر لعرض المستندات والمعاينة</small>
+<small>انقر لعرض المستندات</small>
 </div>
-<div class="sources-grid-modern" id="sources-grid">
+<div class="doc-grid" id="sources-grid">
 <p style="color:var(--muted);">جاري التحميل...</p>
 </div>
 </section>
@@ -753,7 +678,7 @@ footer{
 <a href="#sources-section" class="mobile-nav-item"><span>📜</span><span>الوثائق</span></a>
 </div>
 
-<!-- نافذة لوحة التحكم الإدارية والديناميكية لإدارة المحتوى والصلاحيات (مع أزرار الحذف والتعديل) -->
+<!-- نافذة لوحة التحكم الإدارية (مع أزرار الحذف والتعديل والإضافة الكاملة) -->
 <div class="modal" id="adminModal">
 <div class="modal-content" style="max-width:780px;">
 <div class="sticky-close-bar">
@@ -782,7 +707,7 @@ footer{
         <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين</button>
     </div>
 
-    <!-- 1. نموذج إضافة وتعديل PDF -->
+    <!-- 1. نموذج إضافة وتعديل الكتب/PDF -->
     <div id="addDocForm" class="admin-form" style="display:flex; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_doc_id">
         <h4 id="docFormHeading" style="margin:0; color:var(--gold);">إضافة بحث / كتاب جديد</h4>
@@ -805,11 +730,11 @@ footer{
         <div id="adminDocsList" style="max-height:180px; overflow-y:auto;"></div>
     </div>
 
-    <!-- 2. نموذج إضافة وتعديل وثيقة مصورة -->
+    <!-- 2. نموذج إضافة وتعديل الوثائق المصورة -->
     <div id="addSourceForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_source_id">
         <h4 id="sourceFormHeading" style="margin:0; color:var(--gold);">إضافة وثيقة مصورة نادرة</h4>
-        <input type="text" id="source_title" placeholder="عنوان مجموعة الوثيقة (مثل: فدك وشواهدها)" required>
+        <input type="text" id="source_title" placeholder="عنوان مجموعة الوثيقة..." required>
         <input type="text" id="source_img_url" placeholder="رابط الصورة المباشر (Image URL)" required>
         <textarea id="source_desc" placeholder="شرح تفصيلي للوثيقة المصورة..."></textarea>
         <div style="display:flex; gap:8px;">
@@ -817,11 +742,11 @@ footer{
             <button type="button" id="cancelSourceEditBtn" class="btn red" style="display:none;" onclick="cancelSourceEdit()">إلغاء التعديل</button>
         </div>
         <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
-        <h5 style="margin:0; color:var(--gold);">قائمة الوثائق المصورة المنشورة (للحذف والتعديل):</h5>
+        <h5 style="margin:0; color:var(--gold);">قائمة الوثائق المصورة (للحذف والتعديل):</h5>
         <div id="adminSourcesList" style="max-height:180px; overflow-y:auto;"></div>
     </div>
 
-    <!-- 3. نموذج إضافة وتعديل فيديو -->
+    <!-- 3. نموذج إضافة وتعديل الفيديوهات -->
     <div id="addVidForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_vid_id">
         <h4 id="vidFormHeading" style="margin:0; color:var(--gold);">إضافة فيديو يوتيوب جديد</h4>
@@ -832,7 +757,7 @@ footer{
             <button type="button" id="cancelVidEditBtn" class="btn red" style="display:none;" onclick="cancelVidEdit()">إلغاء التعديل</button>
         </div>
         <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
-        <h5 style="margin:0; color:var(--gold);">قائمة الفيديوهات المنشورة (للحذف والتعديل):</h5>
+        <h5 style="margin:0; color:var(--gold);">قائمة الفيديوهات (للحذف والتعديل):</h5>
         <div id="adminVidsList" style="max-height:180px; overflow-y:auto;"></div>
     </div>
 
@@ -903,6 +828,40 @@ footer{
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+const dailyQuranVerses = [
+  { text: '﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾', source: 'سورة الشرح · الآية 6' },
+  { text: '﴿وَهُوَ مَعَكُمْ أَيْنَ مَا كُنْتُمْ﴾', source: 'سورة الحديد · الآية 4' },
+  { text: '﴿وَقُلْ رَبِّ زِدْنِي عِلْمًا﴾', source: 'سورة طه · الآية 114' },
+  { text: '﴿إِنَّ اللَّهَ مَعَ الصَّابِرِينَ﴾', source: 'سورة البقرة · الآية 153' },
+  { text: '﴿وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ﴾', source: 'سورة الطلاق · الآية 3' },
+  { text: '﴿فَاذْكُرُونِي أَذْكُرْكُمْ﴾', source: 'سورة البقرة · الآية 152' },
+  { text: '﴿وَلَا تَيْأَسُوا مِن رَّوْحِ اللَّهِ﴾', source: 'سورة يوسف · الآية 87' },
+  { text: '﴿إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ﴾', source: 'سورة التوبة · الآية 120' },
+  { text: '﴿أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ﴾', source: 'سورة الرعد · الآية 28' },
+  { text: '﴿وَقُلِ الْحَقُّ مِن رَّبِّكُمْ﴾', source: 'سورة الكهف · الآية 29' },
+  { text: '﴿إِنَّ اللَّهَ يُحِبُّ الْمُتَوَكِّلِينَ﴾', source: 'سورة آل عمران · الآية 159' },
+  { text: '﴿وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ﴾', source: 'سورة هود · الآية 88' },
+  { text: '﴿إِنَّ اللَّهَ غَفُورٌ رَّحِيمٌ﴾', source: 'سورة البقرة · الآية 173' },
+  { text: '﴿وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ﴾', source: 'سورة البقرة · الآية 45' }
+];
+function updateDailyVerseAndClock() {
+  const now = new Date();
+  const baghdadNow = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Baghdad' }));
+  const start = new Date(baghdadNow.getFullYear(), 0, 0);
+  const dayOfYear = Math.floor((baghdadNow - start) / 86400000);
+  const verse = dailyQuranVerses[(dayOfYear - 1) % dailyQuranVerses.length];
+  const verseText = document.getElementById('dailyVerseText');
+  const verseSource = document.getElementById('dailyVerseSource');
+  const clock = document.getElementById('siteClock');
+  const date = document.getElementById('siteDate');
+  if (verseText) verseText.textContent = verse.text;
+  if (verseSource) verseSource.textContent = verse.source;
+  if (clock) clock.textContent = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Baghdad', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
+  if (date) date.textContent = new Intl.DateTimeFormat('ar-IQ', { timeZone: 'Asia/Baghdad', year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' }).format(now);
+}
+updateDailyVerseAndClock();
+setInterval(updateDailyVerseAndClock, 1000);
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
@@ -1037,7 +996,6 @@ async function fetchSources() {
     } catch(e){}
 }
 
-/* تحديث قسم الوثائق المصورة بأشكال فخمة وجديدة (Luxury Cards) */
 function renderSourcesMain(data) {
     const grid = document.getElementById('sources-grid');
     if (!grid) return;
@@ -1046,20 +1004,12 @@ function renderSourcesMain(data) {
     grid.innerHTML = '';
     data.forEach(item => {
         const card = document.createElement('article');
-        card.className = 'source-card-luxury';
+        card.className = 'doc-card';
         card.innerHTML = `
-            <div class="source-img-wrapper" onclick="zoomImage('${item.image_url}', '${item.title}')">
-                <img src="${item.image_url}" alt="${item.title}" loading="lazy" onerror="this.src='assets/logo.png'">
-                <span class="source-badge-overlay">وثيقة مصورة</span>
-            </div>
-            <div class="source-body-luxury">
-                <h3>${item.title}</h3>
-                <p>${item.description || ''}</p>
-                <div class="source-footer-luxury">
-                    <span>موسوعة الأدلة</span>
-                    <button class="view-source-btn" onclick="zoomImage('${item.image_url}', '${item.title}')">🔍 تكبير المعاينة</button>
-                </div>
-            </div>
+            <div class="symbol">📜</div>
+            <h3>${item.title}</h3>
+            <p>${item.description || ''}</p>
+            <span class="tag" onclick="zoomImage('${item.image_url}', '${item.title}')">🔍 معاينة الوثيقة</span>
         `;
         grid.appendChild(card);
     });
@@ -1137,32 +1087,6 @@ async function openPdfViewer(title, url) {
 
 function closePdfModal() { 
     document.getElementById('pdfModal').style.display = 'none';
-    if (history.state && history.state.modalOpen) history.back();
-}
-
-function openSourceModal(title, images) {
-    document.getElementById('modalTitle').textContent = title;
-    const container = document.getElementById('modalImagesContainer');
-    container.innerHTML = '';
-    images.forEach(img => {
-        const div = document.createElement('div');
-        div.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:12px; padding:12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:8px;';
-        div.innerHTML = `
-            <img src="${img.image_url}" alt="${title}" style="width:100%; max-height:350px; object-fit:contain; border-radius:8px; cursor:pointer;" onclick="zoomImage('${img.image_url}', '${title}')" onerror="this.src='assets/logo.png'">
-            <p style="font-size:0.8rem; color:var(--muted); margin:0; line-height:1.5;">${img.description || ''}</p>
-            <div style="display:flex; gap:8px; width:100%; justify-content:center; margin-top: auto;">
-                <button class="btn" style="padding:6px 14px; font-size:0.78rem;" onclick="triggerDirectDownload('${img.image_url}', '${title}')">⬇️ تحميل الصورة</button>
-                <button class="btn ghost" style="padding:6px 14px; font-size:0.78rem;" onclick="zoomImage('${img.image_url}', '${title}')">🔍 تكبير الصورة</button>
-            </div>
-        `;
-        container.appendChild(div);
-    });
-    document.getElementById('sourceModal').style.display = 'flex';
-    history.pushState({ modalOpen: true }, "");
-}
-
-function closeSourceModal() { 
-    document.getElementById('sourceModal').style.display = 'none';
     if (history.state && history.state.modalOpen) history.back();
 }
 
@@ -1247,7 +1171,6 @@ function switchAdminTab(type) {
 }
 
 function populateAdminLists() {
-    // قائمة الكتب/PDF
     const docsList = document.getElementById('adminDocsList');
     if (docsList) {
         docsList.innerHTML = allDocs.map(d => `
@@ -1261,7 +1184,6 @@ function populateAdminLists() {
         `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد كتب مضافة.</p>';
     }
 
-    // قائمة الوثائق المصورة
     const sourcesList = document.getElementById('adminSourcesList');
     if (sourcesList) {
         sourcesList.innerHTML = allSources.map(s => `
@@ -1272,10 +1194,9 @@ function populateAdminLists() {
                     <button class="btn-del-sm" onclick="deleteSource(${s.id})">🗑️ حذف</button>
                 </div>
             </div>
-        `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد وثائق مصورة مضافة.</p>';
+        `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد وثائق مضافة.</p>';
     }
 
-    // قائمة الفيديوهات
     const vidsList = document.getElementById('adminVidsList');
     if (vidsList) {
         vidsList.innerHTML = allVideos.map(v => `
@@ -1290,7 +1211,6 @@ function populateAdminLists() {
     }
 }
 
-/* دوال تعديل وحذف الكتب / PDF */
 function editDoc(id) {
     const doc = allDocs.find(d => d.id === id);
     if (!doc) return;
@@ -1320,7 +1240,6 @@ async function deleteDoc(id) {
     }
 }
 
-/* دوال تعديل وحذف الوثائق المصورة */
 function editSource(id) {
     const src = allSources.find(s => s.id === id);
     if (!src) return;
@@ -1342,13 +1261,12 @@ function cancelSourceEdit() {
 }
 
 async function deleteSource(id) {
-    if (confirm('هل أنت متأكد من حذف هذه الوثيقة المصورة؟')) {
+    if (confirm('هل أنت متأكد من حذف هذه الوثيقة؟')) {
         const { error } = await supabaseClient.from('sources').delete().eq('id', id);
         if (!error) { fetchSources(); } else { alert('حدث خطأ أثناء الحذف.'); }
     }
 }
 
-/* دوال تعديل وحذف الفيديوهات */
 function editVid(id) {
     const vid = allVideos.find(v => v.id === id);
     if (!vid) return;
@@ -1504,7 +1422,7 @@ async function saveNewSource(e) {
 
     btn.disabled = false; btn.textContent = editId ? '💾 تحديث الوثيقة' : '💾 حفظ الوثيقة المصورة';
     if (!error) {
-        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم حفظ ونشر الوثيقة المصورة بنجاح!';
+        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم حفظ ونشر الوثيقة بنجاح!';
         cancelSourceEdit();
         fetchSources();
     } else {
