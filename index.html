@@ -196,7 +196,43 @@ section{padding:15px 0}
 .verse-time-label{font-size:.72rem;color:var(--muted)}
 .verse-time-box strong{font-size:.88rem;color:var(--gold);font-weight:800;direction:rtl}
 #siteClock{font-variant-numeric:tabular-nums;direction:ltr}
-.verse-day-note{font-size:.72rem;color:var(--muted);margin:7px 0 16px}
+
+/* تصميم قسم مواقيت الصلاة تحت الوقت */
+.prayer-times-box {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    text-align: right;
+}
+.prayer-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--gold);
+    margin-bottom: 10px;
+    text-align: center;
+}
+.prayer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+}
+.prayer-item {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 6px 4px;
+    text-align: center;
+    font-size: 0.75rem;
+}
+.prayer-item.active {
+    border-color: var(--mint);
+    background: rgba(39, 213, 177, 0.15);
+    color: var(--mint);
+}
+.prayer-item span { display: block; color: var(--muted); font-size: 0.68rem; }
+.prayer-item strong { color: #fff; font-size: 0.78rem; font-weight: 700; }
+
+.verse-day-note{font-size:.72rem;color:var(--muted);margin:12px 0 16px}
 .sidebar-menu-list {
     border-top: 1px solid var(--line); padding-top: 12px; text-align: right;
 }
@@ -268,22 +304,164 @@ section{padding:15px 0}
 }
 .tag-btn:hover, .tag-btn.active { border-color: var(--mint); color: var(--mint); background: var(--panel-hover); }
 
-.doc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.doc-card{
-    padding:18px; border:1px solid var(--line); border-radius:16px; background:var(--panel);
-    display:flex; flex-direction:column; cursor:pointer; box-shadow: var(--shadow);
-}
-.doc-card:hover{ border-color: var(--mint); transform: translateY(-3px); }
-.doc-card .symbol{font-size:1.8rem; margin-bottom: 6px;}
-.doc-card h3{margin:6px 0;font-size:1.05rem; font-weight:800; line-height: 1.4;}
-.doc-card p{color:var(--muted);font-size:0.85rem;margin:6px 0 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex: 1;}
-.tag{
-    display:inline-block; padding:2px 10px; border-radius:20px; background:rgba(39, 213, 177, 0.1);
-    border:1px solid var(--mint); color:var(--mint); font-size:0.75rem; font-weight:700; width: fit-content;
-}
-.doc-meta{font-size:0.75rem;color:var(--muted);margin-bottom:8px;}
+/* شبكة البطاقات المصممة كإيقونة غلاف إسلامية من الصورة */
+.doc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 
-/* أزرار الحذف والتعديل داخل لوحة التحكم */
+.book-cover-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1.5;
+    background: #020b10;
+    border-radius: 12px;
+    border: 3px solid #d4af37;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.7);
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.book-cover-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 18px 36px rgba(0,0,0,0.85);
+}
+
+/* إطار زخرفي خارجي من الصورة */
+.book-cover-frame {
+    position: absolute; inset: 4px;
+    border: 2px solid #b89230;
+    border-radius: 8px;
+    pointer-events: none;
+    background-image: 
+        radial-gradient(circle at top left, #d4af37 2px, transparent 0),
+        radial-gradient(circle at top right, #d4af37 2px, transparent 0),
+        radial-gradient(circle at bottom left, #d4af37 2px, transparent 0),
+        radial-gradient(circle at bottom right, #d4af37 2px, transparent 0);
+    background-size: 100% 100%;
+}
+
+/* المربع الأحمر/العنابي العلوي لاسم التصنيف */
+.cover-box-category {
+    background: #681518;
+    border: 2px solid #dfb85b;
+    border-radius: 20px;
+    padding: 6px 10px;
+    text-align: center;
+    color: #fce8ad;
+    font-size: 0.82rem;
+    font-weight: 800;
+    margin-top: 10px;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.5);
+    position: relative; z-index: 2;
+}
+
+/* المربع الأحمر/العنابي الثاني لعنوان الوثيقة */
+.cover-box-title {
+    background: #681518;
+    border: 2px solid #dfb85b;
+    border-radius: 20px;
+    padding: 12px 10px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 0.98rem;
+    font-weight: 900;
+    margin-top: 8px;
+    line-height: 1.4;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.6);
+    position: relative; z-index: 2;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+
+/* المربع الأسود الشفاف في الوسط لوصف الوثيقة والمؤلف */
+.cover-box-desc {
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px dashed rgba(212, 175, 55, 0.4);
+    border-radius: 12px;
+    padding: 10px;
+    margin: 8px 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: #d1e2e5;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    position: relative; z-index: 2;
+    overflow: hidden;
+}
+
+.cover-box-desc p {
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* الشريط السفلي العنابي لزر التفاعل والملاحظة */
+.cover-box-footer {
+    background: #681518;
+    border: 1.5px solid #dfb85b;
+    border-radius: 14px;
+    padding: 4px 10px;
+    text-align: center;
+    color: #fce8ad;
+    font-size: 0.72rem;
+    font-weight: 700;
+    position: relative; z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* تغير ألوان الغلاف ديناميكياً بحسب كل تصنيف */
+/* 1. وثائق تاريخية (العنابي والذهبي والأسود من الصورة) */
+.book-cover-card[data-category="وثائق تاريخية"] {
+    background: #020a0f; border-color: #d4af37;
+}
+.book-cover-card[data-category="وثائق تاريخية"] .cover-box-category,
+.book-cover-card[data-category="وثائق تاريخية"] .cover-box-title,
+.book-cover-card[data-category="وثائق تاريخية"] .cover-box-footer {
+    background: #6c1417; border-color: #f1cd72; color: #fff3ce;
+}
+
+/* 2. بحوث عقائدية (الكحلي الأزرق والزمردي والذهبي) */
+.book-cover-card[data-category="بحوث عقائدية"] {
+    background: #031320; border-color: #27d5b1;
+}
+.book-cover-card[data-category="بحوث عقائدية"] .cover-box-category,
+.book-cover-card[data-category="بحوث عقائدية"] .cover-box-title,
+.book-cover-card[data-category="بحوث عقائدية"] .cover-box-footer {
+    background: #0a3a52; border-color: #27d5b1; color: #d6faff;
+}
+
+/* 3. كتب ومراجع (اللون البني الداكن والنحاسي) */
+.book-cover-card[data-category="كتب ومراجع"] {
+    background: #110a04; border-color: #d9933d;
+}
+.book-cover-card[data-category="كتب ومراجع"] .cover-box-category,
+.book-cover-card[data-category="كتب ومراجع"] .cover-box-title,
+.book-cover-card[data-category="كتب ومراجع"] .cover-box-footer {
+    background: #4a280e; border-color: #e0a353; color: #fcecd2;
+}
+
+/* 4. مقالات ودراسات / منوع (الأخضر الزيتوني والذهبي) */
+.book-cover-card[data-category="مقالات ودراسات"],
+.book-cover-card[data-category="منوع"] {
+    background: #02120b; border-color: #00a977;
+}
+.book-cover-card[data-category="مقالات ودراسات"] .cover-box-category,
+.book-cover-card[data-category="مقالات ودراسات"] .cover-box-title,
+.book-cover-card[data-category="مقالات ودراسات"] .cover-box-footer,
+.book-cover-card[data-category="منوع"] .cover-box-category,
+.book-cover-card[data-category="منوع"] .cover-box-title,
+.book-cover-card[data-category="منوع"] .cover-box-footer {
+    background: #0f402b; border-color: #00a977; color: #e1fbf2;
+}
+
 .admin-item-row {
     background: rgba(0,0,0,0.25);
     border: 1px solid var(--line);
@@ -395,6 +573,7 @@ footer{
     .main-content-grid { grid-template-columns: 1fr; }
     .quick-cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .research-grid-main { grid-template-columns: 1fr 1fr; }
+    .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
     .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media(max-width:768px){
@@ -509,7 +688,21 @@ footer{
                 <div class="verse-time-box"><span class="verse-time-label">الوقت الآن</span><strong id="siteClock">--:--:--</strong></div>
                 <div class="verse-time-box"><span class="verse-time-label">التاريخ</span><strong id="siteDate">جاري التحميل...</strong></div>
             </div>
-            <div class="verse-day-note">تتجدد آية اليوم تلقائيًا كل يوم</div>
+            
+            <!-- إضافة مواقيت الصلاة تحت الوقت -->
+            <div class="prayer-times-box">
+                <div class="prayer-title">🕌 مواقيت الصلاة (توقيت بغداد)</div>
+                <div class="prayer-grid">
+                    <div class="prayer-item" id="p_fajr"><span>الفجر</span><strong>04:52</strong></div>
+                    <div class="prayer-item" id="p_shuruq"><span>الشروق</span><strong>06:15</strong></div>
+                    <div class="prayer-item" id="p_dhuhr"><span>الظهر</span><strong>11:55</strong></div>
+                    <div class="prayer-item" id="p_asr"><span>العصر</span><strong>03:02</strong></div>
+                    <div class="prayer-item" id="p_maghrib"><span>المغرب</span><strong>05:38</strong></div>
+                    <div class="prayer-item" id="p_isha"><span>العشاء</span><strong>06:58</strong></div>
+                </div>
+            </div>
+
+            <div class="verse-day-note">تتجدد آية اليوم ومواقيت الصلاة تلقائيًا كل يوم</div>
             
             <div class="sidebar-menu-list">
                 <div class="sidebar-menu-title">أقسام الموقع</div>
@@ -549,6 +742,7 @@ footer{
 <option value="بحوث عقائدية">💡 بحوث عقائدية</option>
 <option value="كتب ومراجع">📖 كتب ومراجع</option>
 <option value="مقالات ودراسات">📝 مقالات ودراسات</option>
+<option value="منوع">🎨 منوع</option>
 </select>
 <select id="sortBy" aria-label="الترتيب">
 <option value="newest">📅 الأحدث</option>
@@ -561,6 +755,7 @@ footer{
 <button class="tag-btn" onclick="filterByTag('بحوث عقائدية', this)">💡 بحوث عقائدية</button>
 <button class="tag-btn" onclick="filterByTag('وثائق تاريخية', this)">📜 وثائق تاريخية</button>
 <button class="tag-btn" onclick="filterByTag('كتب ومراجع', this)">📖 كتب ومراجع</button>
+<button class="tag-btn" onclick="filterByTag('منوع', this)">🎨 منوع</button>
 </div>
 
 <div class="doc-grid" id="docs"></div>
@@ -710,6 +905,7 @@ footer{
                 <option value="وثائق تاريخية">📜 قسم: وثائق تاريخية</option>
                 <option value="كتب ومراجع">📖 قسم: كتب ومراجع</option>
                 <option value="مقالات ودراسات">📝 قسم: مقالات ودراسات</option>
+                <option value="منوع">🎨 قسم: منوع</option>
             </select>
             <input type="text" id="doc_url" placeholder="رابط الملف المباشر (PDF Direct URL)" required>
         </div>
@@ -732,6 +928,7 @@ footer{
                 <option value="وثائق تاريخية">📜 وثائق تاريخية</option>
                 <option value="كتب ومراجع">📖 كتب ومراجع</option>
                 <option value="مقالات ودراسات">📝 مقالات ودراسات</option>
+                <option value="منوع">🎨 منوع</option>
             </select>
         </div>
         
@@ -858,6 +1055,7 @@ const dailyQuranVerses = [
   { text: '﴿إِنَّ اللَّهَ غَفُورٌ رَّحِيمٌ﴾', source: 'سورة البقرة · الآية 173' },
   { text: '﴿وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ﴾', source: 'سورة البقرة · الآية 45' }
 ];
+
 function updateDailyVerseAndClock() {
   const now = new Date();
   const baghdadNow = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Baghdad' }));
@@ -872,7 +1070,32 @@ function updateDailyVerseAndClock() {
   if (verseSource) verseSource.textContent = verse.source;
   if (clock) clock.textContent = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Baghdad', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
   if (date) date.textContent = new Intl.DateTimeFormat('ar-IQ', { timeZone: 'Asia/Baghdad', year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' }).format(now);
+  
+  updateActivePrayerTime(baghdadNow);
 }
+
+// تحديث الصلاة الحالية القادمة تلقائياً
+function updateActivePrayerTime(now) {
+    const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+    const prayers = [
+        { id: 'p_fajr', time: '04:52' },
+        { id: 'p_shuruq', time: '06:15' },
+        { id: 'p_dhuhr', time: '11:55' },
+        { id: 'p_asr', time: '15:02' },
+        { id: 'p_maghrib', time: '17:38' },
+        { id: 'p_isha', time: '18:58' }
+    ];
+    
+    document.querySelectorAll('.prayer-item').forEach(el => el.classList.remove('active'));
+    for (let p of prayers) {
+        if (timeStr < p.time) {
+            const activeEl = document.getElementById(p.id);
+            if (activeEl) activeEl.classList.add('active');
+            break;
+        }
+    }
+}
+
 updateDailyVerseAndClock();
 setInterval(updateDailyVerseAndClock, 1000);
 
@@ -1220,7 +1443,6 @@ function switchAdminTab(type) {
 
 /* عرض قوائم الأقسام لعمليات التعديل والحذف */
 function populateAdminLists() {
-    // 1. قائمة الكتب وحسب القسم
     const docsList = document.getElementById('adminDocsList');
     const filterCat = document.getElementById('filterAdminCategory') ? document.getElementById('filterAdminCategory').value : '';
     if (docsList) {
@@ -1240,7 +1462,6 @@ function populateAdminLists() {
         `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد عناصر مضافة بهذا القسم.</p>';
     }
 
-    // 2. قائمة الوثائق المصورة
     const sourcesList = document.getElementById('adminSourcesList');
     if (sourcesList) {
         sourcesList.innerHTML = allSources.map(s => `
@@ -1254,7 +1475,6 @@ function populateAdminLists() {
         `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد وثائق مضافة.</p>';
     }
 
-    // 3. قائمة الفيديوهات
     const vidsList = document.getElementById('adminVidsList');
     if (vidsList) {
         vidsList.innerHTML = allVideos.map(v => `
@@ -1269,14 +1489,13 @@ function populateAdminLists() {
     }
 }
 
-/* دوال التعديل والحذف للكتب والأقسام */
 function editDoc(id) {
     const doc = allDocs.find(d => d.id === id);
     if (!doc) return;
     document.getElementById('edit_doc_id').value = doc.id;
     document.getElementById('doc_title').value = doc.title;
     document.getElementById('doc_author').value = doc.author || '';
-    document.getElementById('doc_cat').value = doc.category;
+    document.getElementById('doc_cat').value = doc.category || 'بحوث عقائدية';
     document.getElementById('doc_url').value = doc.file_url;
     document.getElementById('doc_desc').value = doc.description || '';
     document.getElementById('docFormHeading').textContent = '✏️ تعديل بيانات الكتاب / البحث';
@@ -1302,7 +1521,6 @@ async function deleteDoc(id) {
     }
 }
 
-/* دوال التعديل والحذف للوثائق المصورة */
 function editSource(id) {
     const src = allSources.find(s => s.id === id);
     if (!src) return;
@@ -1332,7 +1550,6 @@ async function deleteSource(id) {
     }
 }
 
-/* دوال التعديل والحذف للفيديوهات */
 function editVid(id) {
     const vid = allVideos.find(v => v.id === id);
     if (!vid) return;
@@ -1384,7 +1601,7 @@ async function saveEmployee(e) {
     btn.disabled = false; btn.textContent = '➕ إضافة الموظف واعتماد صلاحياته';
 
     if (!error) {
-        alert('✅ تم إتاحة ورسالة حساب الموظف بنجاح!');
+        alert('✅ تم إتاحة حساب الموظف بنجاح!');
         document.getElementById('emp_name').value = '';
         document.getElementById('emp_pass').value = '';
         document.querySelectorAll('.perm-checkbox-item input').forEach(c => c.checked = false);
@@ -1527,6 +1744,7 @@ async function saveNewVid(e) {
     }
 }
 
+/* عرض بطاقات الوثائق بتصميم الغلاف الإسلامي المماثل للصورة Mapped Dynamically */
 function renderDocs(docs) {
     const grid = document.getElementById('docs');
     if (!grid) return;
@@ -1540,25 +1758,41 @@ function renderDocs(docs) {
     document.getElementById('count').textContent = docs.length + ' ملفات';
 
     docs.forEach(doc => {
-        let sym = '📕';
-        if (doc.category === 'بحوث عقائدية') sym = '💡';
-        else if (doc.category === 'كتب ومراجع') sym = '📖';
-        else if (doc.category === 'مقالات ودراسات') sym = '📝';
-        else if (doc.category === 'وثائق تاريخية') sym = '📜';
+        const catName = doc.category || 'منوع';
 
         const card = document.createElement('article');
-        card.className = 'doc-card';
+        card.className = 'book-cover-card';
+        card.setAttribute('data-category', catName);
+        
         card.innerHTML = `
-            <span class="tag">${doc.category || 'متنوع'}</span>
-            <div class="symbol">${sym}</div>
-            <h3>${doc.title}</h3>
-            <div class="doc-meta">المؤلف: ${doc.author || 'غير معروف'} · ${doc.date || ''}</div>
-            <p>${doc.description || ''}</p>
-            <div style="display:flex; gap:6px; margin-top:auto;">
-                <button class="btn" style="flex:1; padding:6px 10px; font-size:0.78rem;" onclick="openPdfViewer('${doc.title.replace(/'/g, "\\'")}', '${doc.file_url}')">📖 قراءة</button>
-                <button class="btn ghost" onclick="triggerDirectDownload('${doc.file_url}', '${doc.title}.pdf')" style="padding:6px 10px; font-size:0.78rem;">⬇️</button>
+            <div class="book-cover-frame"></div>
+            
+            <!-- المربع الأول: التصنيف -->
+            <div class="cover-box-category">
+                ${catName}
+            </div>
+
+            <!-- المربع الثاني: عنوان الوثيقة / الكتاب -->
+            <div class="cover-box-title">
+                ${doc.title}
+            </div>
+
+            <!-- المربع الأسود في الوسط: وصف الوثيقة / المؤلف -->
+            <div class="cover-box-desc">
+                <p>${doc.description || 'وثيقة ومستند علمي موثق صادر عن منصة نهج الحقيقة.'}</p>
+                <div style="font-size:0.72rem; color:var(--gold); margin-top:6px; font-weight:700;">
+                    ${doc.author ? '✍️ ' + doc.author : ''}
+                </div>
+            </div>
+
+            <!-- المربع السفلي التفاعلي -->
+            <div class="cover-box-footer">
+                <span>📖 استعراض الوثيقة</span>
+                <span style="opacity:0.8;">⬇️ تحميل PDF</span>
             </div>
         `;
+        
+        card.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url));
         grid.appendChild(card);
     });
 }
