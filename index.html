@@ -32,7 +32,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-<!-- مكتبة PDF.js لضمان فتح ملفات PDF على كافة الأجهزة -->
+<!-- مكتبة PDF.js لفتح ملفات PDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <style>
@@ -197,7 +197,7 @@ section{padding:15px 0}
 .verse-time-box strong{font-size:.88rem;color:var(--gold);font-weight:800;direction:rtl}
 #siteClock{font-variant-numeric:tabular-nums;direction:ltr}
 
-/* تصميم قسم مواقيت الصلاة تحت الوقت */
+/* مواقيت الصلاة تحت الوقت */
 .prayer-times-box {
     margin-top: 14px;
     padding-top: 12px;
@@ -304,7 +304,7 @@ section{padding:15px 0}
 }
 .tag-btn:hover, .tag-btn.active { border-color: var(--mint); color: var(--mint); background: var(--panel-hover); }
 
-/* شبكة البطاقات المصغرة المصممة كإيقونة غلاف إسلامية */
+/* شبكة البطاقات المصغرة المطابقة لغلاف الكتاب بالصورة */
 .doc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 
 .book-cover-card {
@@ -313,7 +313,7 @@ section{padding:15px 0}
     aspect-ratio: 1 / 1.38;
     background: #020b10;
     border-radius: 10px;
-    border: 2px solid #d4af37;
+    border: 2.5px solid #d4af37;
     padding: 6px;
     display: flex;
     flex-direction: column;
@@ -328,23 +328,29 @@ section{padding:15px 0}
     box-shadow: 0 12px 25px rgba(0,0,0,0.8);
 }
 
-/* إطار زخرفي مصغر من الصورة */
+/* إطار زخرفي خارجي مطابق للصورة المرفقة */
 .book-cover-frame {
     position: absolute; inset: 3px;
     border: 1.5px solid #b89230;
     border-radius: 6px;
     pointer-events: none;
+    background-image: 
+        radial-gradient(circle at top left, #d4af37 1.5px, transparent 0),
+        radial-gradient(circle at top right, #d4af37 1.5px, transparent 0),
+        radial-gradient(circle at bottom left, #d4af37 1.5px, transparent 0),
+        radial-gradient(circle at bottom right, #d4af37 1.5px, transparent 0);
+    background-size: 100% 100%;
 }
 
-/* المربع العلوي المصغر للتصنيف */
+/* المربع العلوي المصغر الأول للتصنيف */
 .cover-box-category {
     background: #681518;
-    border: 1px solid #dfb85b;
+    border: 1.5px solid #dfb85b;
     border-radius: 14px;
-    padding: 3px 6px;
+    padding: 2px 6px;
     text-align: center;
     color: #fce8ad;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 800;
     margin-top: 4px;
     box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
@@ -352,38 +358,38 @@ section{padding:15px 0}
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
-/* المربع الثاني المصغر لعنوان الوثيقة */
+/* المربع الثاني المصغر الأوسط لعنوان الوثيقة أو الكتاب */
 .cover-box-title {
     background: #681518;
-    border: 1px solid #dfb85b;
+    border: 1.5px solid #dfb85b;
     border-radius: 12px;
-    padding: 6px 6px;
+    padding: 5px 6px;
     text-align: center;
     color: #ffffff;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 900;
-    margin-top: 5px;
+    margin-top: 4px;
     line-height: 1.3;
     box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
     position: relative; z-index: 2;
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 
-/* المربع الأسود المصغر لوصف الوثيقة والمؤلف */
+/* المربع الأسود الشفاف في الوسط للوصف والمؤلف */
 .cover-box-desc {
     background: rgba(0, 0, 0, 0.88);
     border: 1px dashed rgba(212, 175, 55, 0.35);
     border-radius: 8px;
-    padding: 6px;
-    margin: 5px 0;
+    padding: 5px;
+    margin: 4px 0;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
     color: #d1e2e5;
-    font-size: 0.7rem;
-    line-height: 1.4;
+    font-size: 0.68rem;
+    line-height: 1.35;
     position: relative; z-index: 2;
     overflow: hidden;
 }
@@ -399,12 +405,12 @@ section{padding:15px 0}
 /* الشريط السفلي المصغر */
 .cover-box-footer {
     background: #681518;
-    border: 1px solid #dfb85b;
+    border: 1.2px solid #dfb85b;
     border-radius: 10px;
-    padding: 3px 6px;
+    padding: 2px 6px;
     text-align: center;
     color: #fce8ad;
-    font-size: 0.65rem;
+    font-size: 0.63rem;
     font-weight: 700;
     position: relative; z-index: 2;
     display: flex;
@@ -412,15 +418,15 @@ section{padding:15px 0}
     justify-content: space-between;
 }
 
-/* ألوان التصنيفات المختلفة للكتب والوثائق المصورة */
-/* 1. وثائق تاريخية (العنابي والذهبي) */
+/* تنوع ألوان التصنيفات */
+/* 1. وثائق تاريخية (العنابي والذهبي الكلاسيكي) */
 .book-cover-card[data-category="وثائق تاريخية"] .cover-box-category,
 .book-cover-card[data-category="وثائق تاريخية"] .cover-box-title,
 .book-cover-card[data-category="وثائق تاريخية"] .cover-box-footer {
     background: #6c1417; border-color: #f1cd72; color: #fff3ce;
 }
 
-/* 2. بحوث عقائدية (الكحلي الأزرق والزمردي) */
+/* 2. بحوث عقائدية (الكحلي الأزرق والزمردي الملكي) */
 .book-cover-card[data-category="بحوث عقائدية"] { border-color: #27d5b1; }
 .book-cover-card[data-category="بحوث عقائدية"] .cover-box-category,
 .book-cover-card[data-category="بحوث عقائدية"] .cover-box-title,
@@ -428,7 +434,7 @@ section{padding:15px 0}
     background: #0a3a52; border-color: #27d5b1; color: #d6faff;
 }
 
-/* 3. كتب ومراجع (اللون البني الداكن والنحاسي) */
+/* 3. كتب ومراجع (البني الداكن والنحاسي) */
 .book-cover-card[data-category="كتب ومراجع"] { border-color: #d9933d; }
 .book-cover-card[data-category="كتب ومراجع"] .cover-box-category,
 .book-cover-card[data-category="كتب ومراجع"] .cover-box-title,
@@ -448,7 +454,7 @@ section{padding:15px 0}
     background: #0f402b; border-color: #00a977; color: #e1fbf2;
 }
 
-/* 5. الوثائق المصورة النادرة (تم إعطاؤها اللون الذهبي الداكن والرمادي الملكي بدلاً من الأحمر) */
+/* 5. الوثائق المصورة (مصممة بنفس الطريقة المصغرة وبلوْن ذهبي ملكي دافئ بدل الأحمر) */
 .book-cover-card.source-card-theme {
     border-color: #e0b448;
 }
@@ -760,7 +766,7 @@ footer{
 <div class="empty" id="empty">لا توجد نتائج مطابقة.</div>
 </section>
 
-<!-- قسم موسوعة الوثائق المصورة مع الغلاف الإسلامي المصغر بلون ملكي آخر -->
+<!-- قسم موسوعة الوثائق المصورة بالغلاف المصغر المطابق وبألوان ملكية متميزة -->
 <section class="wrap" id="sources-section" style="margin-top: 25px;">
 <div class="head">
 <h2>موسوعة الأدلة والوثائق المصورة النادرة</h2>
@@ -888,7 +894,7 @@ footer{
         <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين والصلاحيات</button>
     </div>
 
-    <!-- 1. نموذج إضافة وتعديل وحذف قسم الكتب/PDF -->
+    <!-- 1. نموذج إدارة الكتب/PDF -->
     <div id="addDocForm" class="admin-form" style="display:flex; flex-direction:column; gap:12px;">
         <input type="hidden" id="edit_doc_id">
         <h4 id="docFormHeading" style="margin:0; color:var(--gold);">➕ إضافة بحث / كتاب جديد</h4>
@@ -918,7 +924,6 @@ footer{
 
         <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
 
-        <!-- التصفية والتعديل والحذف للأقسام الكاملة -->
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
             <h5 style="margin:0; color:var(--gold);">قائمة العناصر والأقسام المنشورة (للتعديل والحذف):</h5>
             <select id="filterAdminCategory" onchange="populateAdminLists()" style="width:auto; padding:4px 10px; font-size:0.8rem;">
@@ -934,7 +939,7 @@ footer{
         <div id="adminDocsList" style="max-height:220px; overflow-y:auto; margin-top:6px;"></div>
     </div>
 
-    <!-- 2. نموذج إضافة وتعديل وحذف الوثائق المصورة -->
+    <!-- 2. نموذج إدارة الوثائق المصورة -->
     <div id="addSourceForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
         <input type="hidden" id="edit_source_id">
         <h4 id="sourceFormHeading" style="margin:0; color:var(--gold);">➕ إضافة وثيقة مصورة نادرة</h4>
@@ -952,7 +957,7 @@ footer{
         <div id="adminSourcesList" style="max-height:220px; overflow-y:auto; margin-top:6px;"></div>
     </div>
 
-    <!-- 3. نموذج إضافة وتعديل وحذف الفيديوهات -->
+    <!-- 3. نموذج إدارة الفيديوهات -->
     <div id="addVidForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
         <input type="hidden" id="edit_vid_id">
         <h4 id="vidFormHeading" style="margin:0; color:var(--gold);">➕ إضافة فيديو يوتيوب جديد</h4>
@@ -969,7 +974,7 @@ footer{
         <div id="adminVidsList" style="max-height:220px; overflow-y:auto; margin-top:6px;"></div>
     </div>
 
-    <!-- 4. تبويب الموظفين والصلاحيات -->
+    <!-- 4. إدارة الموظفين والصلاحيات -->
     <div id="manageUsersSec" style="display:none; flex-direction:column; gap:15px;">
         <h4 style="margin:0; color:var(--gold);">إضافة موظف جديد وتحديد المهام</h4>
         <form class="admin-form" onsubmit="saveEmployee(event)" style="display:flex; flex-direction:column; gap:10px;">
@@ -1037,7 +1042,7 @@ footer{
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// آية يومية وساعة ومواقيت الصلاة
+// آيات يومية ومواقيت صلاة
 const dailyQuranVerses = [
   { text: '﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾', source: 'سورة الشرح · الآية 6' },
   { text: '﴿وَهُوَ مَعَكُمْ أَيْنَ مَا كُنْتُمْ﴾', source: 'سورة الحديد · الآية 4' },
@@ -1046,7 +1051,7 @@ const dailyQuranVerses = [
   { text: '﴿وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ﴾', source: 'سورة الطلاق · الآية 3' },
   { text: '﴿فَاذْكُرُونِي أَذْكُرْكُمْ﴾', source: 'سورة البقرة · الآية 152' },
   { text: '﴿وَلَا تَيْأَسُوا مِن رَّوْحِ اللَّهِ﴾', source: 'سورة يوسف · الآية 87' },
-  { text: '﴿إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ﴾', source: 'سورة التوبة · الآية 120' },
+  { text: '﴿إِنَّ اللَّهَ لَا يُضِيعُ أجْرَ الْمُحْسِنِينَ﴾', source: 'سورة التوبة · الآية 120' },
   { text: '﴿أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ﴾', source: 'سورة الرعد · الآية 28' },
   { text: '﴿وَقُلِ الْحَقُّ مِن رَّبِّكُمْ﴾', source: 'سورة الكهف · الآية 29' },
   { text: '﴿إِنَّ اللَّهَ يُحِبُّ الْمُتَوَكِّلِينَ﴾', source: 'سورة آل عمران · الآية 159' },
@@ -1230,7 +1235,7 @@ async function fetchSources() {
     } catch(e){}
 }
 
-/* عرض الوثائق المصورة بتصميم الغلاف المصغر بلون ذهبي ملكي متناسق (بدل الأحمر) */
+/* عرض الوثائق المصورة بتصميم الغلاف الإسلامي المصغر بلون ذهبي ملكي متناسق */
 function renderSourcesMain(data) {
     const grid = document.getElementById('sources-grid');
     if (!grid) return;
@@ -1252,24 +1257,20 @@ function renderSourcesMain(data) {
         card.innerHTML = `
             <div class="book-cover-frame"></div>
             
-            <!-- المربع الأول للتصنيف الوثائقي -->
             <div class="cover-box-category">
                 📜 وثيقة مصورة
             </div>
 
-            <!-- المربع الثاني لعنوان الوثيقة المصورة -->
             <div class="cover-box-title">
                 ${title}
             </div>
 
-            <!-- المربع الأسود الشفاف للوصف والمحتويات -->
             <div class="cover-box-desc">
                 <p>${group[0].description || 'تتضمن ' + group.length + ' وثائق ومستندات تاريخية مصدقة عالية الدقة.'}</p>
             </div>
 
-            <!-- الشريط السفلي -->
             <div class="cover-box-footer">
-                <span>🔍 استعراض الوثيقة</span>
+                <span>🔍 استعراض</span>
                 <span>${group.length} صور</span>
             </div>
         `;
@@ -1761,7 +1762,7 @@ async function saveNewVid(e) {
     }
 }
 
-/* عرض بطاقات الوثائق بتصميم الغلاف الإسلامي المصغر */
+/* عرض بطاقات الوثائق بتصميم الغلاف الإسلامي المصغر المطابق للصورة الأصلية */
 function renderDocs(docs) {
     const grid = document.getElementById('docs');
     if (!grid) return;
@@ -1794,7 +1795,7 @@ function renderDocs(docs) {
 
             <div class="cover-box-desc">
                 <p>${doc.description || 'مستند علمي موثق صادر عن منصة نهج الحقيقة.'}</p>
-                <div style="font-size:0.68rem; color:var(--gold); margin-top:4px; font-weight:700;">
+                <div style="font-size:0.65rem; color:var(--gold); margin-top:3px; font-weight:700;">
                     ${doc.author ? '✍️ ' + doc.author : ''}
                 </div>
             </div>
