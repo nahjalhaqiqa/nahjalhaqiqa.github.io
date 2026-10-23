@@ -186,6 +186,17 @@ section{padding:15px 0}
 .verse-side-card h3 { color: var(--gold); font-size: 1.1rem; margin: 0 0 15px; font-weight: 800; }
 .verse-text { font-size: 1.15rem; font-weight: 700; color: #fff; line-height: 1.9; margin-bottom: 12px; }
 .verse-source { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
+
+.verse-day-topline{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold);font-size:.82rem;font-weight:800;letter-spacing:.5px;margin-bottom:5px}
+.verse-day-icon{font-size:1.15rem;opacity:.8}
+.verse-side-card h3{margin-bottom:12px}
+.verse-text{padding:14px 8px;border-top:1px solid rgba(243,213,138,.2);border-bottom:1px solid rgba(243,213,138,.2);text-shadow:0 2px 14px rgba(243,213,138,.08);min-height:100px;display:flex;align-items:center;justify-content:center}
+.verse-datetime{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 8px}
+.verse-time-box{background:rgba(243,213,138,.07);border:1px solid var(--line);border-radius:12px;padding:9px 6px;display:flex;flex-direction:column;gap:2px}
+.verse-time-label{font-size:.72rem;color:var(--muted)}
+.verse-time-box strong{font-size:.88rem;color:var(--gold);font-weight:800;direction:rtl}
+#siteClock{font-variant-numeric:tabular-nums;direction:ltr}
+.verse-day-note{font-size:.72rem;color:var(--muted);margin:7px 0 16px}
 .sidebar-menu-list {
     border-top: 1px solid var(--line); padding-top: 12px; text-align: right;
 }
@@ -467,9 +478,15 @@ footer{
 
     <aside>
         <div class="verse-side-card">
+            <div class="verse-day-topline"><span class="verse-day-icon">۞</span><span>نورٌ من القرآن</span><span class="verse-day-icon">۞</span></div>
             <h3>آية اليوم</h3>
-            <div class="verse-text">«وَمَا كَانَ لِنَبِيٍّ أَنْ يَكُونَ لَهُ أَحِيد»<br><span style="font-size:0.95rem; font-weight:normal;">{وَإِنْ أَدْرِي لَعَلَّهُ فِتْنَةٌ لَكُمْ وَمَتَاعٌ إِلَى حِينٍ}</span></div>
-            <div class="verse-source">(الأنبياء: 111)</div>
+            <div class="verse-text" id="dailyVerseText">﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾</div>
+            <div class="verse-source" id="dailyVerseSource">سورة الشرح · الآية 6</div>
+            <div class="verse-datetime">
+                <div class="verse-time-box"><span class="verse-time-label">الوقت الآن</span><strong id="siteClock">--:--:--</strong></div>
+                <div class="verse-time-box"><span class="verse-time-label">التاريخ</span><strong id="siteDate">جاري التحميل...</strong></div>
+            </div>
+            <div class="verse-day-note">تتجدد آية اليوم تلقائيًا كل يوم</div>
             
             <div class="sidebar-menu-list">
                 <div class="sidebar-menu-title">أقسام الموقع</div>
@@ -754,6 +771,42 @@ footer{
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// آية يومية بالتناوب حسب تاريخ بغداد، مع ساعة وتاريخ يتحدثان تلقائيًا.
+const dailyQuranVerses = [
+  { text: '﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾', source: 'سورة الشرح · الآية 6' },
+  { text: '﴿وَهُوَ مَعَكُمْ أَيْنَ مَا كُنْتُمْ﴾', source: 'سورة الحديد · الآية 4' },
+  { text: '﴿وَقُلْ رَبِّ زِدْنِي عِلْمًا﴾', source: 'سورة طه · الآية 114' },
+  { text: '﴿إِنَّ اللَّهَ مَعَ الصَّابِرِينَ﴾', source: 'سورة البقرة · الآية 153' },
+  { text: '﴿وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ﴾', source: 'سورة الطلاق · الآية 3' },
+  { text: '﴿فَاذْكُرُونِي أَذْكُرْكُمْ﴾', source: 'سورة البقرة · الآية 152' },
+  { text: '﴿وَلَا تَيْأَسُوا مِن رَّوْحِ اللَّهِ﴾', source: 'سورة يوسف · الآية 87' },
+  { text: '﴿إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ﴾', source: 'سورة التوبة · الآية 120' },
+  { text: '﴿أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ﴾', source: 'سورة الرعد · الآية 28' },
+  { text: '﴿وَقُلِ الْحَقُّ مِن رَّبِّكُمْ﴾', source: 'سورة الكهف · الآية 29' },
+  { text: '﴿إِنَّ اللَّهَ يُحِبُّ الْمُتَوَكِّلِينَ﴾', source: 'سورة آل عمران · الآية 159' },
+  { text: '﴿وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ﴾', source: 'سورة هود · الآية 88' },
+  { text: '﴿إِنَّ اللَّهَ غَفُورٌ رَّحِيمٌ﴾', source: 'سورة البقرة · الآية 173' },
+  { text: '﴿وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ﴾', source: 'سورة البقرة · الآية 45' }
+];
+function updateDailyVerseAndClock() {
+  const now = new Date();
+  const baghdadNow = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Baghdad' }));
+  const start = new Date(baghdadNow.getFullYear(), 0, 0);
+  const dayOfYear = Math.floor((baghdadNow - start) / 86400000);
+  const verse = dailyQuranVerses[(dayOfYear - 1) % dailyQuranVerses.length];
+  const verseText = document.getElementById('dailyVerseText');
+  const verseSource = document.getElementById('dailyVerseSource');
+  const clock = document.getElementById('siteClock');
+  const date = document.getElementById('siteDate');
+  if (verseText) verseText.textContent = verse.text;
+  if (verseSource) verseSource.textContent = verse.source;
+  if (clock) clock.textContent = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Baghdad', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
+  if (date) date.textContent = new Intl.DateTimeFormat('ar-IQ', { timeZone: 'Asia/Baghdad', year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' }).format(now);
+}
+updateDailyVerseAndClock();
+setInterval(updateDailyVerseAndClock, 1000);
+
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
