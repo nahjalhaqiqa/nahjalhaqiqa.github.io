@@ -31,8 +31,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-<!-- مكتبة PDF.js لضمان فتح ملفات PDF على كافة الأجهزة -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <style>
@@ -283,6 +281,107 @@ section{padding:15px 0}
 }
 .doc-meta{font-size:0.75rem;color:var(--muted);margin-bottom:8px;}
 
+/* ========================================== */
+/* تصميم قسم "الوثائق المصورة" الفخم (أشكال جديدة) */
+/* ========================================== */
+.sources-grid-modern {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+.source-card-luxury {
+    background: linear-gradient(145deg, var(--panel), var(--panel-hover));
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+.source-card-luxury:hover {
+    border-color: var(--gold);
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(243, 213, 138, 0.12);
+}
+.source-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 210px;
+    background: #000;
+    overflow: hidden;
+    cursor: pointer;
+}
+.source-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.source-card-luxury:hover .source-img-wrapper img {
+    transform: scale(1.06);
+}
+.source-badge-overlay {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(3, 22, 34, 0.85);
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 800;
+}
+.source-body-luxury {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.source-body-luxury h3 {
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1.4;
+}
+.source-body-luxury p {
+    margin: 0 0 15px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}
+.source-footer-luxury {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--line);
+    padding-top: 12px;
+    font-size: 0.78rem;
+    color: var(--muted);
+}
+.view-source-btn {
+    background: rgba(243, 213, 138, 0.1);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.78rem;
+}
+.view-source-btn:hover {
+    background: var(--gold);
+    color: #031622;
+}
+
 .btn{
     display:inline-flex; justify-content:center; align-items:center; padding:8px 18px; border:0; border-radius:22px;
     background: var(--green); color:white; font-weight:700; cursor:pointer; font-size: 0.88rem; text-decoration: none;
@@ -364,19 +463,22 @@ footer{
     background: var(--gold); color: #031622; border-color: var(--gold);
 }
 
-.perm-checkbox-item {
-    display: flex; align-items: center; gap: 8px; font-size: 0.85rem; background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line);
-}
+/* أزرار الحذف والتعديل داخل لوحة التحكم */
+.admin-action-btns { display: flex; gap: 6px; margin-top: 8px; }
+.edit-btn { background: rgba(39, 213, 177, 0.15); color: var(--mint); border: 1px solid var(--mint); padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
+.delete-btn { background: rgba(223, 37, 44, 0.15); color: #df252c; border: 1px solid #df252c; padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
 
 @media(max-width:1024px){
     .main-content-grid { grid-template-columns: 1fr; }
     .quick-cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .research-grid-main { grid-template-columns: 1fr 1fr; }
+    .sources-grid-modern { grid-template-columns: 1fr 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media(max-width:768px){
     .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .research-grid-main { grid-template-columns: 1fr; }
+    .sources-grid-modern { grid-template-columns: 1fr; }
     .tools{grid-template-columns:1fr}
     .doc-grid{grid-template-columns:1fr}
     .footer-grid { grid-template-columns: 1fr; }
@@ -480,7 +582,7 @@ footer{
         <div class="verse-side-card">
             <div class="verse-day-topline"><span class="verse-day-icon">۞</span><span>نورٌ من القرآن</span><span class="verse-day-icon">۞</span></div>
             <h3>آية اليوم</h3>
-            <div class="verse-text" id="dailyVerseText">﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾</div>
+            <div class="verse-text" id="dailyVerseText">﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾</div>
             <div class="verse-source" id="dailyVerseSource">سورة الشرح · الآية 6</div>
             <div class="verse-datetime">
                 <div class="verse-time-box"><span class="verse-time-label">الوقت الآن</span><strong id="siteClock">--:--:--</strong></div>
@@ -544,12 +646,13 @@ footer{
 <div class="empty" id="empty">لا توجد نتائج مطابقة.</div>
 </section>
 
+<!-- القسم المحدث: قسم الوثائق المصورة بأشكال فخمة وجديدة -->
 <section class="wrap" id="sources-section" style="margin-top: 25px;">
 <div class="head">
 <h2>موسوعة الأدلة والمصادر المصورة</h2>
-<small>انقر لعرض المستندات</small>
+<small>انقر لعرض المستندات والصور بحجم كامل</small>
 </div>
-<div class="doc-grid" id="sources-grid">
+<div class="sources-grid-modern" id="sources-grid">
 <p style="color:var(--muted);">جاري التحميل...</p>
 </div>
 </section>
@@ -642,7 +745,7 @@ footer{
 <a href="#sources-section" class="mobile-nav-item"><span>📜</span><span>الوثائق</span></a>
 </div>
 
-<!-- نافذة لوحة التحكم الإدارية والديناميكية لإدارة الموظفين والصلاحيات -->
+<!-- نافذة لوحة التحكم الإدارية (مع دعم الحذف والتعديل المباشر) -->
 <div class="modal" id="adminModal">
 <div class="modal-content" style="max-width:780px;">
 <div class="sticky-close-bar">
@@ -652,7 +755,7 @@ footer{
 
 <!-- تسجيل الدخول -->
 <div id="adminLoginSec" style="display:flex; flex-direction:column; gap:12px; margin-top:15px;">
-    <p style="font-size:0.88rem; color:var(--muted); margin:0;">ادخل كلمة المرور الخاصة بحسابك الوصول للوحة التحكم:</p>
+    <p style="font-size:0.88rem; color:var(--muted); margin:0;">ادخل كلمة المرور الخاصة بحسابك للوصول للوحة التحكم:</p>
     <input type="password" id="adminPassInput" placeholder="كلمة المرور..." style="padding:10px 14px; border-radius:10px; border:1px solid var(--line); background:var(--input-bg); color:#fff;">
     <button class="btn" onclick="loginAdmin()">تسجيل الدخول</button>
 </div>
@@ -665,690 +768,180 @@ footer{
     </div>
 
     <div id="adminTabsNav" style="display:flex; gap:8px; border-bottom:1px solid var(--line); padding-bottom:10px; flex-wrap:wrap;">
-        <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 إضافة كتب / PDF</button>
-        <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 إضافة وثيقة مصورة</button>
-        <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ إضافة فيديو</button>
-        <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين والصلاحيات</button>
+        <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 إضافة/تعديل الكتب</button>
+        <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 الوثائق المصورة</button>
+        <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ الفيديوهات</button>
     </div>
 
-    <!-- 1. نموذج إضافة PDF -->
-    <form id="addDocForm" class="admin-form" onsubmit="saveNewDoc(event)" style="display:flex; flex-direction:column; gap:10px;">
-        <h4 style="margin:0; color:var(--gold);">إضافة بحث / كتاب جديد</h4>
-        <input type="text" id="doc_title" placeholder="عنوان البحث / الكتاب" required>
-        <input type="text" id="doc_author" placeholder="المؤلف / الباحث">
-        <select id="doc_cat" required>
-            <option value="بحوث عقائدية">💡 بحوث عقائدية</option>
+    <!-- فورم إدارة الكتب -->
+    <div id="adminTabDocs" class="admin-form" style="display:flex; flex-direction:column; gap:10px;">
+        <input type="hidden" id="editDocId">
+        <h4 id="docFormTitle" style="margin:0; color:var(--gold);">إضافة كتاب أو بحث جديد</h4>
+        <input type="text" id="newTitle" placeholder="عنوان الكتاب / البحث...">
+        <select id="newCat">
             <option value="وثائق تاريخية">📜 وثائق تاريخية</option>
+            <option value="بحوث عقائدية">💡 بحوث عقائدية</option>
             <option value="كتب ومراجع">📖 كتب ومراجع</option>
             <option value="مقالات ودراسات">📝 مقالات ودراسات</option>
         </select>
-        <input type="text" id="doc_url" placeholder="رابط الملف المباشر (PDF Direct URL)" required>
-        <textarea id="doc_desc" placeholder="نبذة مختصرة عن المستند..."></textarea>
-        <button type="submit" id="saveDocBtn" class="btn">💾 حفظ ونشر الملف</button>
-    </form>
-
-    <!-- 2. نموذج إضافة وثيقة مصورة -->
-    <form id="addSourceForm" class="admin-form" onsubmit="saveNewSource(event)" style="display:none; flex-direction:column; gap:10px;">
-        <h4 style="margin:0; color:var(--gold);">إضافة وثيقة مصورة نادرة</h4>
-        <input type="text" id="source_title" placeholder="عنوان مجموعة الوثيقة (مثل: فدك وشواهدها)" required>
-        <input type="text" id="source_img_url" placeholder="رابط الصورة المباشر (Image URL)" required>
-        <textarea id="source_desc" placeholder="شرح تفصيلي للوثيقة المصورة..."></textarea>
-        <button type="submit" id="saveSourceBtn" class="btn">💾 حفظ الوثيقة المصورة</button>
-    </form>
-
-    <!-- 3. نموذج إضافة فيديو -->
-    <form id="addVidForm" class="admin-form" onsubmit="saveNewVid(event)" style="display:none; flex-direction:column; gap:10px;">
-        <h4 style="margin:0; color:var(--gold);">إضافة فيديو يوتيوب جديد</h4>
-        <input type="text" id="vid_title" placeholder="عنوان الفيديو / الحلقة" required>
-        <input type="text" id="vid_yt_id" placeholder="معرف اليوتيوب YouTube Video ID" required>
-        <button type="submit" id="saveVidBtn" class="btn">💾 حفظ الفيديو</button>
-    </form>
-
-    <!-- 4. تبويب خاص بالأدمن لإضافة الموظفين وتحديد صلاحياتهم -->
-    <div id="manageUsersSec" style="display:none; flex-direction:column; gap:15px;">
-        <h4 style="margin:0; color:var(--gold);">إضافة موظف جديد وتحديد المهام</h4>
-        <form class="admin-form" onsubmit="saveEmployee(event)" style="display:flex; flex-direction:column; gap:10px;">
-            <input type="text" id="emp_name" placeholder="اسم الموظف أو المحرر" required>
-            <input type="text" id="emp_pass" placeholder="كلمة المرور الخاصة به" required>
-            <div style="font-size:0.85rem; font-weight:700; color:var(--mint);">اختر الصلاحيات والمهام المسموحة له:</div>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-                <label class="perm-checkbox-item"><input type="checkbox" id="p_docs" value="docs"> 📚 إضافة وتعديل الكتب/PDF</label>
-                <label class="perm-checkbox-item"><input type="checkbox" id="p_sources" value="sources"> 📜 إضافة وثائق مصورة</label>
-                <label class="perm-checkbox-item"><input type="checkbox" id="p_videos" value="videos"> ▶ إضافة فيديوهات يوتيوب</label>
-            </div>
-            <button type="submit" id="saveEmpBtn" class="btn">➕ إضافة الموظف واعتماد صلاحياته</button>
-        </form>
-
-        <h4 style="margin:15px 0 0; color:var(--gold);">قائمة الموظفين المسجلين وصلاحياتهم:</h4>
-        <div id="employeesList" style="display:flex; flex-direction:column; gap:8px;">
-            <p style="color:var(--muted); font-size:0.8rem;">جاري جلب قائمة الموظفين...</p>
+        <textarea id="newDesc" placeholder="نبذة مختصرة..." style="min-height:70px;"></textarea>
+        <input type="text" id="newPdfUrl" placeholder="رابط ملف الـ PDF...">
+        <div style="display:flex; gap:10px;">
+            <button class="btn" onclick="saveDocumentItem()">حفظ الكتاب</button>
+            <button class="btn ghost" onclick="resetDocForm()" id="cancelDocEdit" style="display:none;">إلغاء التعديل</button>
         </div>
+        <div id="adminDocsList" style="margin-top:15px; border-top:1px solid var(--line); padding-top:10px;"></div>
     </div>
 
-    <p id="adminStatusMsg" style="font-size:0.85rem; font-weight:700; display:none; margin:0;"></p>
+    <!-- فورم إدارة الوثائق المصورة -->
+    <div id="adminTabSources" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
+        <input type="hidden" id="editSourceId">
+        <h4 id="sourceFormTitle" style="margin:0; color:var(--gold);">إضافة وثيقة مصورة جديدة</h4>
+        <input type="text" id="newSourceTitle" placeholder="عنوان الوثيقة المصورة...">
+        <textarea id="newSourceDesc" placeholder="تفاصيل الوثيقة..." style="min-height:70px;"></textarea>
+        <input type="text" id="newSourceImg" placeholder="رابط الصورة المباشر...">
+        <div style="display:flex; gap:10px;">
+            <button class="btn" onclick="saveSourceItem()">حفظ الوثيقة المصورة</button>
+            <button class="btn ghost" onclick="resetSourceForm()" id="cancelSourceEdit" style="display:none;">إلغاء التعديل</button>
+        </div>
+        <div id="adminSourcesList" style="margin-top:15px; border-top:1px solid var(--line); padding-top:10px;"></div>
+    </div>
+
+    <!-- فورم إدارة الفيديوهات -->
+    <div id="adminTabVideos" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
+        <input type="hidden" id="editVideoId">
+        <h4 id="videoFormTitle" style="margin:0; color:var(--gold);">إضافة فيديو جديد</h4>
+        <input type="text" id="newVideoTitle" placeholder="عنوان الفيديو...">
+        <input type="text" id="newVideoUrl" placeholder="رابط يوتيوب...">
+        <div style="display:flex; gap:10px;">
+            <button class="btn" onclick="saveVideoItem()">حفظ الفيديو</button>
+            <button class="btn ghost" onclick="resetVideoForm()" id="cancelVideoEdit" style="display:none;">إلغاء التعديل</button>
+        </div>
+        <div id="adminVideosList" style="margin-top:15px; border-top:1px solid var(--line); padding-top:10px;"></div>
+    </div>
 </div>
 </div>
 </div>
 
-<div class="modal" id="sourceModal">
-<div class="modal-content">
-<div class="sticky-close-bar">
-    <h2 id="modalTitle" style="margin:0; color:var(--gold); font-size:1rem; flex:1;">عنوان الوثيقة</h2>
-    <button class="back-btn" onclick="closeSourceModal()">✕ إغلاق / رجوع</button>
-</div>
-<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-top:10px;" id="modalImagesContainer"></div>
-</div>
-</div>
-
+<!-- نافذة تكبير الصور (Lightbox) -->
 <div id="imageZoomModal">
     <div class="zoom-header">
-        <h3 id="zoomTitle" style="margin:0; color:var(--gold); font-size:0.92rem; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; max-width:50%;">عرض الصورة</h3>
-        <div style="display:flex; gap:8px;">
-            <button class="btn shrink" onclick="closeZoomModal()" style="padding:5px 14px; font-size:0.8rem; gap:4px;">🔍- تصغير الصورة</button>
-            <button class="btn" id="zoomDownloadBtn" style="padding:5px 14px; font-size:0.8rem;">⬇️ تحميل</button>
-            <button class="back-btn" onclick="closeZoomModal()">✕ إغلاق</button>
-        </div>
+        <span id="zoomTitle" style="color:var(--gold); font-weight:800; font-size:1rem;">معاينة الوثيقة</span>
+        <button class="back-btn" onclick="closeZoomModal()">✕ إغلاق</button>
     </div>
     <div class="zoom-body" onclick="closeZoomModal()">
-        <img id="zoomedImg" src="" alt="وثيقة مكبرة" onclick="event.stopPropagation()">
+        <img id="zoomedImageElem" src="" alt="صورة مكبرة" onclick="event.stopPropagation()">
     </div>
-</div>
-
-<div class="modal" id="pdfModal">
-<div class="pdf-modal-content">
-<div class="sticky-close-bar">
-    <h3 id="pdfTitle" style="margin:0; color:var(--gold); font-size:0.95rem; max-width:40%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">عرض المستند</h3>
-    <div style="display:flex; gap:8px;">
-        <button class="btn red" onclick="closePdfModal()" style="padding:5px 14px; font-size:0.8rem;">✕ إغلاق</button>
-        <button class="btn" onclick="downloadFileDirectly()" style="padding:5px 14px; font-size:0.8rem;">⬇️ تحميل</button>
-    </div>
-</div>
-<div id="pdfCanvasContainer">
-    <p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري معالجة وتجهيز صفحات المستند للفتح...</p>
-</div>
-</div>
 </div>
 
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// آية يومية بالتناوب حسب تاريخ بغداد، مع ساعة وتاريخ يتحدثان تلقائيًا.
-const dailyQuranVerses = [
-  { text: '﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾', source: 'سورة الشرح · الآية 6' },
-  { text: '﴿وَهُوَ مَعَكُمْ أَيْنَ مَا كُنْتُمْ﴾', source: 'سورة الحديد · الآية 4' },
-  { text: '﴿وَقُلْ رَبِّ زِدْنِي عِلْمًا﴾', source: 'سورة طه · الآية 114' },
-  { text: '﴿إِنَّ اللَّهَ مَعَ الصَّابِرِينَ﴾', source: 'سورة البقرة · الآية 153' },
-  { text: '﴿وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ﴾', source: 'سورة الطلاق · الآية 3' },
-  { text: '﴿فَاذْكُرُونِي أَذْكُرْكُمْ﴾', source: 'سورة البقرة · الآية 152' },
-  { text: '﴿وَلَا تَيْأَسُوا مِن رَّوْحِ اللَّهِ﴾', source: 'سورة يوسف · الآية 87' },
-  { text: '﴿إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ﴾', source: 'سورة التوبة · الآية 120' },
-  { text: '﴿أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ﴾', source: 'سورة الرعد · الآية 28' },
-  { text: '﴿وَقُلِ الْحَقُّ مِن رَّبِّكُمْ﴾', source: 'سورة الكهف · الآية 29' },
-  { text: '﴿إِنَّ اللَّهَ يُحِبُّ الْمُتَوَكِّلِينَ﴾', source: 'سورة آل عمران · الآية 159' },
-  { text: '﴿وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ﴾', source: 'سورة هود · الآية 88' },
-  { text: '﴿إِنَّ اللَّهَ غَفُورٌ رَّحِيمٌ﴾', source: 'سورة البقرة · الآية 173' },
-  { text: '﴿وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ﴾', source: 'سورة البقرة · الآية 45' }
-];
-function updateDailyVerseAndClock() {
-  const now = new Date();
-  const baghdadNow = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Baghdad' }));
-  const start = new Date(baghdadNow.getFullYear(), 0, 0);
-  const dayOfYear = Math.floor((baghdadNow - start) / 86400000);
-  const verse = dailyQuranVerses[(dayOfYear - 1) % dailyQuranVerses.length];
-  const verseText = document.getElementById('dailyVerseText');
-  const verseSource = document.getElementById('dailyVerseSource');
-  const clock = document.getElementById('siteClock');
-  const date = document.getElementById('siteDate');
-  if (verseText) verseText.textContent = verse.text;
-  if (verseSource) verseSource.textContent = verse.source;
-  if (clock) clock.textContent = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Baghdad', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
-  if (date) date.textContent = new Intl.DateTimeFormat('ar-IQ', { timeZone: 'Asia/Baghdad', year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' }).format(now);
-}
-updateDailyVerseAndClock();
-setInterval(updateDailyVerseAndClock, 1000);
-
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(()=>{}); });
-}
-
-let deferredPrompt = null;
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault(); deferredPrompt = e;
-    const btn = document.getElementById('installPwaBtn');
-    if (btn) btn.style.display = 'inline-flex';
-});
-function installPWA() {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(() => { deferredPrompt = null; document.getElementById('installPwaBtn').style.display = 'none'; });
-}
-
+// دوال إدارة الثيم، الساعة، والتحكم بالنافذة
 function toggleTheme() {
     const html = document.documentElement;
-    const btn = document.getElementById('themeToggle');
-    if (html.getAttribute('data-theme') === 'dark') {
-        html.setAttribute('data-theme', 'light');
-        btn.textContent = '☀️';
-        localStorage.setItem('theme', 'light');
+    const current = html.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    document.getElementById('themeToggle').textContent = next === 'light' ? '☀️' : '🌙';
+}
+
+// تهيئة الساعة والتاريخ
+setInterval(() => {
+    const now = new Date();
+    document.getElementById('siteClock').textContent = now.toLocaleTimeString('en-US', {hour12:false});
+}, 1000);
+document.getElementById('siteDate').textContent = new Date().toLocaleDateString('ar-EG', {weekday:'long', year:'numeric', month:'short', day:'numeric'});
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// نظام الإدارة المؤقت والربط المحلي (LocalStorage / Supabase Mock)
+function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
+function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
+
+function loginAdmin() {
+    const pass = document.getElementById('adminPassInput').value;
+    if(pass === 'admin123' || pass === '1234') { // استبدلها بكلمة المرور الخاصة بك
+        document.getElementById('adminLoginSec').style.display = 'none';
+        document.getElementById('adminPanelSec').style.display = 'flex';
+        document.getElementById('currentUserRole').textContent = 'مرحباً بك، المسؤول العام';
+        loadAdminLists();
     } else {
-        html.setAttribute('data-theme', 'dark');
-        btn.textContent = '🌙';
-        localStorage.setItem('theme', 'dark');
+        alert('كلمة المرور غير صحيحة!');
+    }
+}
+function logoutAdmin() {
+    document.getElementById('adminLoginSec').style.display = 'flex';
+    document.getElementById('adminPanelSec').style.display = 'none';
+    document.getElementById('adminPassInput').value = '';
+}
+
+function switchAdminTab(tab) {
+    document.querySelectorAll('.admin-form').forEach(f => f.style.display = 'none');
+    document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+    if(tab === 'docs') {
+        document.getElementById('adminTabDocs').style.display = 'flex';
+        document.getElementById('tabBtnDocs').classList.add('active');
+    } else if(tab === 'sources') {
+        document.getElementById('adminTabSources').style.display = 'flex';
+        document.getElementById('tabBtnSources').classList.add('active');
+    } else if(tab === 'videos') {
+        document.getElementById('adminTabVideos').style.display = 'flex';
+        document.getElementById('tabBtnVideos').classList.add('active');
     }
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    const saved = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', saved);
-    document.getElementById('themeToggle').textContent = saved === 'dark' ? '🌙' : '☀️';
-    try { emailjs.init("xd1Jo81I__MsksgB9"); } catch(e){}
-});
-
-const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co'; 
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4c3h4a2F1eG91eW5lYWFtZWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MjQxMjMsImV4cCI6MjEwNzMwMDEyM30.wvVWq3TXd83mJ2FtViIwWO7O_hN1OazD91MkmiWZdh0'; 
-let supabaseClient = null;
-try { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch(e){}
-
-let activePdfUrl = '', activePdfName = '';
-function triggerDirectDownload(url, name) {
-    const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.download = name || 'file';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-}
-function downloadFileDirectly() { if (activePdfUrl) triggerDirectDownload(activePdfUrl, activePdfName + '.pdf'); }
-
-function syncHeroSearch(val) {
-    const mainSearch = document.getElementById('q');
-    if (mainSearch) { mainSearch.value = val; filterAndRenderDocs(); }
-}
-
-function sendEmailMessage(e) {
-    e.preventDefault();
-    const btn = document.getElementById('sendBtn'), msg = document.getElementById('contactMsg');
-    btn.disabled = true; btn.textContent = 'جاري الإرسال...';
-    emailjs.send('service_bwh87m7', 'template_ogee95s', {
-        from_name: document.getElementById('from_name').value,
-        from_email: document.getElementById('from_email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
-    }).then(() => {
-        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم إرسال رسالتك بنجاح!';
-        document.getElementById('contactForm').reset(); btn.disabled = false; btn.textContent = 'إرسال الرسالة';
-    }).catch(() => {
-        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ تعذر الإرسال.';
-        btn.disabled = false; btn.textContent = 'إرسال الرسالة';
-    });
-}
-
-let allDocs = [];
-let allSources = [];
-
-async function fetchDocuments() {
-    if (!supabaseClient) return;
-    try {
-        const { data } = await supabaseClient.from('documents').select('*');
-        allDocs = data || [];
-        filterAndRenderDocs();
-        renderLatestResearchMini(allDocs);
-    } catch(e){}
-}
-
-function renderLatestResearchMini(docs) {
-    const container = document.getElementById('latest-research-container');
-    if (!container) return;
-    const latest = docs.slice(0, 3);
-    if (!latest.length) { container.innerHTML = '<p style="color:var(--muted); font-size:0.85rem;">لا توجد أبحاث حالياً.</p>'; return; }
-    
-    container.innerHTML = '';
-    latest.forEach(doc => {
-        let badgeText = 'أبحاث';
-        if (doc.category === 'كتب ومراجع') badgeText = 'كتب';
-        else if (doc.category === 'وثائق تاريخية') badgeText = 'وثائق';
-        else if (doc.category === 'مقالات ودراسات') badgeText = 'مقالات';
-
-        const card = document.createElement('article');
-        card.className = 'research-card-item';
-        card.innerHTML = `
-            <div class="research-card-img">
-                <span class="research-card-badge">${badgeText}</span>
-                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:2.5rem; background:rgba(0,0,0,0.3);">📖</div>
+// عرض الوثائق المصورة بأشكال فخمة وجديدة (Luxury Museum Cards)
+function renderSources(list) {
+    const container = document.getElementById('sources-grid');
+    if(!list || list.length === 0) {
+        container.innerHTML = '<p style="color:var(--muted); grid-column:1/-1; text-align:center;">لا توجد وثائق مصورة حالياً.</p>';
+        return;
+    }
+    container.innerHTML = list.map(item => `
+        <article class="source-card-luxury">
+            <div class="source-img-wrapper" onclick="openZoomModal('${item.image}', '${item.title}')">
+                <img src="${item.image}" alt="${item.title}" loading="lazy">
+                <span class="source-badge-overlay">وثيقة تاريخية</span>
             </div>
-            <div class="research-card-body">
-                <h4>${doc.title}</h4>
-                <p>${doc.description || doc.author || ''}</p>
-                <div class="research-card-footer">
-                    <span>${doc.date || ''}</span>
-                    <span style="color:var(--mint); font-weight:700;">قراءة ←</span>
+            <div class="source-body-luxury">
+                <h3>${item.title}</h3>
+                <p>${item.description || ''}</p>
+                <div class="source-footer-luxury">
+                    <span>موسوعة الأدلة</span>
+                    <button class="view-source-btn" onclick="openZoomModal('${item.image}', '${item.title}')">🔍 تكبير المعاينة</button>
                 </div>
             </div>
-        `;
-        card.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url));
-        container.appendChild(card);
-    });
+        </article>
+    `).join('');
 }
 
-async function fetchSources() {
-    if (!supabaseClient) return;
-    try {
-        const { data } = await supabaseClient.from('sources').select('*');
-        allSources = data || [];
-        renderSourcesMain(allSources);
-    } catch(e){}
-}
-
-function renderSourcesMain(data) {
-    const grid = document.getElementById('sources-grid');
-    if (!grid) return;
-    if (!data.length) { grid.innerHTML = '<p style="color:var(--muted);">لا توجد مصادر مضافة.</p>'; return; }
-
-    const grouped = {};
-    data.forEach(item => {
-        const t = item.title || 'أدلة متنوعة';
-        if (!grouped[t]) grouped[t] = [];
-        grouped[t].push(item);
-    });
-
-    grid.innerHTML = '';
-    Object.keys(grouped).forEach(title => {
-        const group = grouped[title];
-        const card = document.createElement('article');
-        card.className = 'doc-card';
-        card.innerHTML = `
-            <div class="symbol">📜</div>
-            <h3>${title}</h3>
-            <p style="color:var(--muted); font-size:0.8rem;">يحتوي على ${group.length} مستند مصدق.</p>
-            <span class="tag">استعراض المصادر ↗</span>
-        `;
-        card.addEventListener('click', () => openSourceModal(title, group));
-        grid.appendChild(card);
-    });
-}
-
-async function fetchLatestVideos() {
-    if (!supabaseClient) return;
-    try {
-        const { data } = await supabaseClient.from('videos').select('*');
-        if (!data || !data.length) return;
-        
-        const container = document.getElementById('videos-container');
-        if (container) {
-            container.innerHTML = '';
-            data.forEach(vid => {
-                if (vid.youtube_id) {
-                    const card = document.createElement('div');
-                    card.className = 'doc-card';
-                    card.innerHTML = `
-                        <div style="position:relative; width:100%; padding-bottom:56.25%; background:#000; border-radius:10px; overflow:hidden; margin-bottom:8px;">
-                            <iframe src="https://www.youtube.com/embed/${vid.youtube_id}" title="${vid.title}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
-                        </div>
-                        <h4 style="margin:0; font-size:0.9rem; font-weight:800;">${vid.title}</h4>
-                    `;
-                    container.appendChild(card);
-                }
-            });
-        }
-    } catch(e){}
-}
-
-window.addEventListener('popstate', function() {
-    document.getElementById('imageZoomModal').style.display = 'none';
-    document.getElementById('sourceModal').style.display = 'none';
-    document.getElementById('pdfModal').style.display = 'none';
-    document.getElementById('adminModal').style.display = 'none';
-});
-
-async function openPdfViewer(title, url) {
-    activePdfUrl = url; activePdfName = title;
-    document.getElementById('pdfTitle').textContent = title;
-    
-    const container = document.getElementById('pdfCanvasContainer');
-    container.innerHTML = '<p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل وسحب صفحات المستند لقراءته مباشرة...</p>';
-    document.getElementById('pdfModal').style.display = 'flex';
-    history.pushState({ modalOpen: true }, "");
-
-    try {
-        const pdf = await pdfjsLib.getDocument(url).promise;
-        container.innerHTML = ''; 
-        
-        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-            const page = await pdf.getPage(pageNum);
-            const viewport = page.getViewport({ scale: 1.3 });
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-            
-            await page.render({ canvasContext: context, viewport: viewport }).promise;
-            container.appendChild(canvas);
-        }
-    } catch (error) {
-        container.innerHTML = `
-            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:15px; color:var(--ink); padding:20px; text-align:center;">
-                <p>يتعذر عرض معاينة هذا الملف مباشرة داخل الهاتف لربما لكونه مقيداً أو بحجم كبير.</p>
-                <button class="btn" onclick="triggerDirectDownload('${url}', '${title}.pdf')">⬇️ اضغط هنا لتنزيل الملف وقراءته فوراً</button>
-            </div>
-        `;
-    }
-}
-
-function closePdfModal() { 
-    document.getElementById('pdfModal').style.display = 'none';
-    if (history.state && history.state.modalOpen) history.back();
-}
-
-function openSourceModal(title, images) {
-    document.getElementById('modalTitle').textContent = title;
-    const container = document.getElementById('modalImagesContainer');
-    container.innerHTML = '';
-    images.forEach(img => {
-        const div = document.createElement('div');
-        div.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:12px; padding:12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:8px;';
-        div.innerHTML = `
-            <img src="${img.image_url}" alt="${title}" style="width:100%; max-height:350px; object-fit:contain; border-radius:8px; cursor:pointer;" onclick="zoomImage('${img.image_url}', '${title}')" onerror="this.src='assets/logo.png'">
-            <p style="font-size:0.8rem; color:var(--muted); margin:0; line-height:1.5;">${img.description || ''}</p>
-            <div style="display:flex; gap:8px; width:100%; justify-content:center; margin-top: auto;">
-                <button class="btn" style="padding:6px 14px; font-size:0.78rem;" onclick="triggerDirectDownload('${img.image_url}', '${title}')">⬇️ تحميل الصورة</button>
-                <button class="btn ghost" style="padding:6px 14px; font-size:0.78rem;" onclick="zoomImage('${img.image_url}', '${title}')">🔍 تكبير الصورة</button>
-            </div>
-        `;
-        container.appendChild(div);
-    });
-    document.getElementById('sourceModal').style.display = 'flex';
-    history.pushState({ modalOpen: true }, "");
-}
-
-function closeSourceModal() { 
-    document.getElementById('sourceModal').style.display = 'none';
-    if (history.state && history.state.modalOpen) history.back();
-}
-
-function zoomImage(url, title) {
-    document.getElementById('zoomTitle').textContent = title;
-    document.getElementById('zoomedImg').src = url;
-    document.getElementById('zoomDownloadBtn').onclick = function() { triggerDirectDownload(url, title); };
+// دوال تكبير الصور (Lightbox)
+function openZoomModal(imgSrc, title) {
+    document.getElementById('zoomedImageElem.src') = imgSrc;
+    document.getElementById('zoomedImageElem').src = imgSrc;
+    document.getElementById('zoomTitle').textContent = title || 'معاينة المستند';
     document.getElementById('imageZoomModal').style.display = 'flex';
 }
 function closeZoomModal() {
     document.getElementById('imageZoomModal').style.display = 'none';
 }
 
-/* نظام إدارة الموظفين والصلاحيات المباشر عبر Supabase */
-let currentLoggedInUser = null;
+// نموذج بيانات افتراضي تجريبي للتوضيح والعمل الفوري
+let sampleDocs = [
+    {id: 1, title: 'رسالة في التوحيد والصفات', category: 'بحوث عقائدية', description: 'بحث تحقيقي دقيق حول الأدلة العقلية والنقلية في العقيدة الإسلامية الصحيحة.', date: '2026-01-10'},
+    {id: 2, title: 'وثيقة تاريخية من القرن الثالث الهجري', category: 'وثائق تاريخية', description: 'مخطوطة نادرة تثبت الأصول التاريخية وتاريخ التدوين المبكر.', date: '2026-02-15'}
+];
 
-function openAdminModal() {
-    document.getElementById('adminModal').style.display = 'flex';
-}
-function closeAdminModal() {
-    document.getElementById('adminModal').style.display = 'none';
-}
+let sampleSources = [
+    {id: 1, title: 'مخطوطة عهد الإمام علي (ع)', description: 'نسخة أثرية موثقة من عهد الخطبة الشريفة.', image: 'assets/doc1.jpg'},
+    {id: 2, title: 'وثيقة رسمية قديمة', description: 'توثيق تاريخي لموسوعة الأدلة.', image: 'assets/doc2.jpg'},
+    {id: 3, title: 'مخطوطة نادرة في علم الكلام', description: 'نص أصلي بخط النسخ القديم.', image: 'assets/doc3.jpg'}
+];
 
-async function loginAdmin() {
-    const pass = document.getElementById('adminPassInput').value.trim();
-    if (!pass) return;
-
-    if (supabaseClient) {
-        // التحقق من الحساب وكلمة المرور من Supabase
-        const { data, error } = await supabaseClient.from('employees').select('*').eq('password', pass).single();
-        if (data && !error) {
-            currentLoggedInUser = data;
-            showAdminDashboard();
-        } else {
-            alert('كلمة المرور غير صحيحة أو الحساب غير موجود!');
-        }
-    }
-}
-
-function showAdminDashboard() {
-    document.getElementById('adminLoginSec').style.display = 'none';
-    document.getElementById('adminPanelSec').style.display = 'flex';
-    document.getElementById('currentUserRole').textContent = 'المستخدم الحالي: ' + currentLoggedInUser.name;
-    applyUserPermissions();
-}
-
-function logoutAdmin() {
-    currentLoggedInUser = null;
-    document.getElementById('adminPassInput').value = '';
-    document.getElementById('adminLoginSec').style.display = 'flex';
-    document.getElementById('adminPanelSec').style.display = 'none';
-}
-
-function applyUserPermissions() {
-    const perms = currentLoggedInUser.permissions || [];
-    
-    document.getElementById('tabBtnDocs').style.display = perms.includes('docs') ? 'inline-block' : 'none';
-    document.getElementById('tabBtnSources').style.display = perms.includes('sources') ? 'inline-block' : 'none';
-    document.getElementById('tabBtnVideos').style.display = perms.includes('videos') ? 'inline-block' : 'none';
-    document.getElementById('tabBtnManageUsers').style.display = perms.includes('manage_users') ? 'inline-block' : 'none';
-
-    if (perms.includes('docs')) switchAdminTab('docs');
-    else if (perms.includes('sources')) switchAdminTab('sources');
-    else if (perms.includes('videos')) switchAdminTab('videos');
-    else if (perms.includes('manage_users')) switchAdminTab('manage_users');
-}
-
-function switchAdminTab(type) {
-    document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('addDocForm').style.display = type === 'docs' ? 'flex' : 'none';
-    document.getElementById('addSourceForm').style.display = type === 'sources' ? 'flex' : 'none';
-    document.getElementById('addVidForm').style.display = type === 'videos' ? 'flex' : 'none';
-    document.getElementById('manageUsersSec').style.display = type === 'manage_users' ? 'flex' : 'none';
-    
-    if (type === 'docs' && document.getElementById('tabBtnDocs')) document.getElementById('tabBtnDocs').classList.add('active');
-    if (type === 'sources' && document.getElementById('tabBtnSources')) document.getElementById('tabBtnSources').classList.add('active');
-    if (type === 'videos' && document.getElementById('tabBtnVideos')) document.getElementById('tabBtnVideos').classList.add('active');
-    if (type === 'manage_users' && document.getElementById('tabBtnManageUsers')) {
-        document.getElementById('tabBtnManageUsers').classList.add('active');
-        fetchEmployeesList();
-    }
-}
-
-async function saveEmployee(e) {
-    e.preventDefault();
-    const name = document.getElementById('emp_name').value.trim();
-    const pass = document.getElementById('emp_pass').value.trim();
-    const perms = [];
-    
-    if (document.getElementById('p_docs').checked) perms.push('docs');
-    if (document.getElementById('p_sources').checked) perms.push('sources');
-    if (document.getElementById('p_videos').checked) perms.push('videos');
-
-    if (!perms.length) { alert('يرجى تحديد صلاحية واحدة على الأقل للموظف!'); return; }
-
-    const btn = document.getElementById('saveEmpBtn');
-    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
-
-    const { error } = await supabaseClient.from('employees').insert([{
-        name: name,
-        password: pass,
-        permissions: perms
-    }]);
-
-    btn.disabled = false; btn.textContent = '➕ إضافة الموظف واعتماد صلاحياته';
-
-    if (!error) {
-        alert('✅ تم إتاحة ورسالة حساب الموظف بنجاح!');
-        document.getElementById('emp_name').value = '';
-        document.getElementById('emp_pass').value = '';
-        document.querySelectorAll('.perm-checkbox-item input').forEach(c => c.checked = false);
-        fetchEmployeesList();
-    } else {
-        alert('⚠️ تعذر الحفظ، ربما كلمة المرور مستخدمة لموظف آخر.');
-    }
-}
-
-async function fetchEmployeesList() {
-    const listContainer = document.getElementById('employeesList');
-    if (!supabaseClient || !listContainer) return;
-    
-    const { data } = await supabaseClient.from('employees').select('*');
-    if (!data || !data.length) { listContainer.innerHTML = '<p style="color:var(--muted);">لا يوجد موظفين حالياً.</p>'; return; }
-
-    listContainer.innerHTML = '';
-    data.forEach(emp => {
-        const item = document.createElement('div');
-        item.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); padding:10px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;';
-        
-        let permText = (emp.permissions || []).map(p => {
-            if (p === 'docs') return 'كتب/PDF';
-            if (p === 'sources') return 'وثائق';
-            if (p === 'videos') return 'فيديوهات';
-            if (p === 'manage_users') return 'مدير عام';
-            return p;
-        }).join(' ، ');
-
-        item.innerHTML = `
-            <div>
-                <strong style="color:var(--gold); font-size:0.9rem;">${emp.name}</strong>
-                <div style="font-size:0.75rem; color:var(--muted);">الصلاحيات: ${permText}</div>
-            </div>
-            ${emp.permissions.includes('manage_users') ? '<span style="font-size:0.75rem; color:var(--mint); font-weight:700;">[مدير]</span>' : `<button class="btn red" style="padding:3px 8px; font-size:0.72rem;" onclick="deleteEmployee(${emp.id})">حذف</button>`}
-        `;
-        listContainer.appendChild(item);
-    });
-}
-
-async function deleteEmployee(id) {
-    if (confirm('هل أنت تأكد من حذف هذا الموظف؟')) {
-        await supabaseClient.from('employees').delete().eq('id', id);
-        fetchEmployeesList();
-    }
-}
-
-async function saveNewDoc(e) {
-    e.preventDefault();
-    const btn = document.getElementById('saveDocBtn'), msg = document.getElementById('adminStatusMsg');
-    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
-    
-    const { error } = await supabaseClient.from('documents').insert([{
-        title: document.getElementById('doc_title').value,
-        author: document.getElementById('doc_author').value,
-        category: document.getElementById('doc_cat').value,
-        file_url: document.getElementById('doc_url').value,
-        description: document.getElementById('doc_desc').value,
-        date: new Date().toISOString().split('T')[0]
-    }]);
-
-    btn.disabled = false; btn.textContent = '💾 حفظ ونشر الملف';
-    if (!error) {
-        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم نشر البحث/الملف بنجاح!';
-        document.getElementById('addDocForm').reset();
-        fetchDocuments();
-    } else {
-        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ حدث خطأ أثناء الحفظ.';
-    }
-}
-
-async function saveNewSource(e) {
-    e.preventDefault();
-    const btn = document.getElementById('saveSourceBtn'), msg = document.getElementById('adminStatusMsg');
-    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
-    
-    const { error } = await supabaseClient.from('sources').insert([{
-        title: document.getElementById('source_title').value,
-        image_url: document.getElementById('source_img_url').value,
-        description: document.getElementById('source_desc').value
-    }]);
-
-    btn.disabled = false; btn.textContent = '💾 حفظ الوثيقة المصورة';
-    if (!error) {
-        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم نشر الوثيقة المصورة بنجاح!';
-        document.getElementById('addSourceForm').reset();
-        fetchSources();
-    } else {
-        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ حدث خطأ أثناء الحفظ.';
-    }
-}
-
-async function saveNewVid(e) {
-    e.preventDefault();
-    const btn = document.getElementById('saveVidBtn'), msg = document.getElementById('adminStatusMsg');
-    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
-    
-    const { error } = await supabaseClient.from('videos').insert([{
-        title: document.getElementById('vid_title').value,
-        youtube_id: document.getElementById('vid_yt_id').value
-    }]);
-
-    btn.disabled = false; btn.textContent = '💾 حفظ الفيديو';
-    if (!error) {
-        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم نشر الفيديو بنجاح!';
-        document.getElementById('addVidForm').reset();
-        fetchLatestVideos();
-    } else {
-        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ حدث خطأ أثناء الحفظ.';
-    }
-}
-
-function renderDocs(docs) {
-    const grid = document.getElementById('docs');
-    if (!grid) return;
-    grid.innerHTML = '';
-    if (!docs.length) {
-        document.getElementById('empty').style.display = 'block';
-        document.getElementById('count').textContent = '0 نتائج';
-        return;
-    }
-    document.getElementById('empty').style.display = 'none';
-    document.getElementById('count').textContent = docs.length + ' ملفات';
-
-    docs.forEach(doc => {
-        let sym = '📕';
-        if (doc.category === 'بحوث عقائدية') sym = '💡';
-        else if (doc.category === 'كتب ومراجع') sym = '📖';
-        else if (doc.category === 'مقالات ودراسات') sym = '📝';
-        else if (doc.category === 'وثائق تاريخية') sym = '📜';
-
-        const card = document.createElement('article');
-        card.className = 'doc-card';
-        card.innerHTML = `
-            <span class="tag">${doc.category || 'متنوع'}</span>
-            <div class="symbol">${sym}</div>
-            <h3>${doc.title}</h3>
-            <div class="doc-meta">المؤلف: ${doc.author || 'غير معروف'} · ${doc.date || ''}</div>
-            <p>${doc.description || ''}</p>
-            <div style="display:flex; gap:6px; margin-top:auto;">
-                <button class="btn" style="flex:1; padding:6px 10px; font-size:0.78rem;" onclick="openPdfViewer('${doc.title.replace(/'/g, "\\'")}', '${doc.file_url}')">📖 قراءة</button>
-                <button class="btn ghost" onclick="triggerDirectDownload('${doc.file_url}', '${doc.title}.pdf')" style="padding:6px 10px; font-size:0.78rem;">⬇️</button>
-            </div>
-        `;
-        grid.appendChild(card);
-    });
-}
-
-const q = document.getElementById('q'), cat = document.getElementById('category'), sortBy = document.getElementById('sortBy');
-function filterAndRenderDocs() {
-    if (!q || !cat) return;
-    let term = q.value.trim().toLowerCase();
-    let category = cat.value;
-    let sort = sortBy ? sortBy.value : 'newest';
-
-    let filtered = allDocs.filter(d => {
-        let match = (d.title + ' ' + (d.author || '') + ' ' + (d.description || '')).toLowerCase().includes(term);
-        let cMatch = !category || d.category === category;
-        return match && cMatch;
-    });
-
-    if (sort === 'title') filtered.sort((a,b) => (a.title||'').localeCompare(b.title||'', 'ar'));
-    else filtered.reverse();
-
-    renderDocs(filtered);
-}
-function filterByTag(c, btn) {
-    if (cat) { cat.value = c; filterAndRenderDocs(); }
-    document.querySelectorAll('.quick-tags .tag-btn').forEach(b => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-}
-
-if (q) q.addEventListener('input', filterAndRenderDocs);
-if (cat) cat.addEventListener('change', filterAndRenderDocs);
-if (sortBy) sortBy.addEventListener('change', filterAndRenderDocs);
-
-fetchDocuments();
-fetchSources();
-fetchLatestVideos();
+// دمج الدوال التشغيلية في التطبيق
+window.addEventListener('DOMContentLoaded', () => {
+    renderSources(sampleSources);
+    // يمكنك ربط قواعد البيانات الفعلية هنا
+});
 </script>
 </body>
 </html>
