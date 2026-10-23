@@ -436,6 +436,7 @@ section{padding:15px 0}
 }
 
 /* تنوع ألوان الغلاف حسَب التصنيف */
+
 /* 1. وثائق تاريخية (العنابي والذهبي الكلاسيكي من الصورة) */
 .book-cover-card[data-category="وثائق تاريخية"] .cover-box-category,
 .book-cover-card[data-category="وثائق تاريخية"] .cover-box-title,
@@ -459,19 +460,20 @@ section{padding:15px 0}
     background: #3b1d07; border-color: #e0a353; color: #fcecd2;
 }
 
-/* 4. مقالات ودراسات /  (الأخضر الزيتوني والذهبي) */
+/* 4. مقالات ودراسات (الأخضر الزيتوني والذهبي) */
 .book-cover-card[data-category="مقالات ودراسات"] { border-color: #00a977; }
 .book-cover-card[data-category="مقالات ودراسات"] .cover-box-category,
 .book-cover-card[data-category="مقالات ودراسات"] .cover-box-title,
-.book-cover-card[data-category="مقالات ودراسات"] .cover-box-footer,
+.book-cover-card[data-category="مقالات ودراسات"] .cover-box-footer {
     background: #093121; border-color: #00a977; color: #e1fbf2;
 }
-/* 4. منوع / منوع (الأخضر الزيتوني والذهبي) */
+
+/* 5. منوع */
 .book-cover-card[data-category="منوع"] { border-color: #1338cf; }
 .book-cover-card[data-category="منوع"] .cover-box-category,
 .book-cover-card[data-category="منوع"] .cover-box-title,
-.book-cover-card[data-category="منوع"] .cover-box-footer,
-    background: #102c9c; border-color: #1338cf; color: #071c70;
+.book-cover-card[data-category="منوع"] .cover-box-footer {
+    background: #102c9c; border-color: #1338cf; color: #e0e8ff; /* تم تعديل لون النص ليكون فاتحاً وقابلاً للقراءة */
 }
 /* 5. قسم الوثائق المصورة (مصممة بالأخضر الداكن والذهبي الملكي بدل الأحمر) */
 .book-cover-card.source-card-theme {
