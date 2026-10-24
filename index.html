@@ -55,7 +55,7 @@
     --ink: #0f2328;
     --muted: #536e75; 
     --line: rgba(0, 0, 0, 0.12); 
-    --input-bg: #f8fb99;
+    --input-bg: #f8fb9;
     --shadow: 0 10px 25px -10px rgba(0,0,0,0.08);
 }
 
@@ -174,54 +174,25 @@ section{padding:15px 0}
     align-items: start;
 }
 
-/* ==========================================
-   تثبيت وتجميل بطاقة الآية والساعة والمواقيت
-   ========================================== */
 .verse-side-card {
-    position: sticky;
-    top: 95px; /* تثبيت البطاقة عند التصفح والنزول في الشاشة */
-    z-index: 90;
-    background: linear-gradient(145deg, #041e2e, #02121c);
-    border: 1.5px solid var(--gold);
-    border-radius: 20px;
-    padding: 22px 18px;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(212, 175, 55, 0.12);
+    background: linear-gradient(135deg, #041e2e, #02121c);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: var(--shadow);
     text-align: center;
+    position: relative;
     overflow: hidden;
 }
+.verse-side-card h3 { color: var(--gold); font-size: 1.1rem; margin: 0 0 15px; font-weight: 800; }
+.verse-text { font-size: 1.15rem; font-weight: 700; color: #fff; line-height: 1.9; margin-bottom: 12px; }
+.verse-source { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; }
 
-/* إطار زخرفي داخلي رفيع */
-.verse-side-card::before {
-    content: '';
-    position: absolute;
-    inset: 5px;
-    border: 1px dashed rgba(212, 175, 55, 0.35);
-    border-radius: 15px;
-    pointer-events: none;
-}
-
-.verse-side-card h3 { color: var(--gold); font-size: 1.1rem; margin: 0 0 12px; font-weight: 800; }
 .verse-day-topline{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold);font-size:.82rem;font-weight:800;letter-spacing:.5px;margin-bottom:5px}
 .verse-day-icon{font-size:1.15rem;opacity:.8}
-
-.verse-text { 
-    font-size: 1.15rem; 
-    font-weight: 700; 
-    color: #fff; 
-    line-height: 1.9; 
-    padding: 12px 8px;
-    border-top: 1px solid rgba(243,213,138,.2);
-    border-bottom: 1px solid rgba(243,213,138,.2);
-    text-shadow: 0 2px 14px rgba(243,213,138,.08);
-    min-height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-.verse-source { font-size: 0.8rem; color: var(--muted); margin-bottom: 16px; }
-
-.verse-datetime{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 8px}
+.verse-side-card h3{margin-bottom:12px}
+.verse-text{padding:14px 8px;border-top:1px solid rgba(243,213,138,.2);border-bottom:1px solid rgba(243,213,138,.2);text-shadow:0 2px 14px rgba(243,213,138,.08);min-height:100px;display:flex;align-items:center;justify-content:center}
+.verse-datetime{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 8px}
 .verse-time-box{background:rgba(243,213,138,.07);border:1px solid var(--line);border-radius:12px;padding:9px 6px;display:flex;flex-direction:column;gap:2px}
 .verse-time-label{font-size:.72rem;color:var(--muted)}
 .verse-time-box strong{font-size:.88rem;color:var(--gold);font-weight:800;direction:rtl}
@@ -229,8 +200,8 @@ section{padding:15px 0}
 
 /* مواقيت الصلاة */
 .prayer-times-box {
-    margin-top: 12px;
-    padding-top: 10px;
+    margin-top: 14px;
+    padding-top: 12px;
     border-top: 1px solid var(--line);
     text-align: right;
 }
@@ -238,7 +209,7 @@ section{padding:15px 0}
     font-size: 0.85rem;
     font-weight: 800;
     color: var(--gold);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     text-align: center;
 }
 .prayer-grid {
@@ -262,7 +233,7 @@ section{padding:15px 0}
 .prayer-item span { display: block; color: var(--muted); font-size: 0.68rem; }
 .prayer-item strong { color: #fff; font-size: 0.78rem; font-weight: 700; }
 
-.verse-day-note{font-size:.72rem;color:var(--muted);margin:10px 0 12px}
+.verse-day-note{font-size:.72rem;color:var(--muted);margin:12px 0 16px}
 .sidebar-menu-list {
     border-top: 1px solid var(--line); padding-top: 12px; text-align: right;
 }
@@ -322,15 +293,325 @@ section{padding:15px 0}
 }
 .cta-btn:hover { opacity: 0.9; }
 
+.tools{display:grid;grid-template-columns:1fr 200px 160px;gap:12px;margin:16px 0 12px}
+.tools input,.tools select, .admin-form input, .admin-form select, .admin-form textarea, .contact-form input, .contact-form textarea{
+    width:100%; padding:12px 16px; border-radius:12px; border:1px solid var(--line);
+    background:var(--input-bg); color:var(--ink); outline:none; font-size: 0.9rem;
+}
+.quick-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+.tag-btn {
+    background: var(--panel); border: 1px solid var(--line); color: var(--muted);
+    padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+}
+.tag-btn:hover, .tag-btn.active { border-color: var(--mint); color: var(--mint); background: var(--panel-hover); }
+
+/* ==========================================================================
+   تصميم أيقونة غلاف الكتاب التراثي المطابقة للصورة المرفقة
+   ========================================================================== */
+.doc-grid{display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:14px;}
+
+.book-cover-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1.55;
+    background: #02070a;
+    border: 2px solid #d4af37;
+    border-radius: 4px;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.9);
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.book-cover-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.95), inset 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+/* الإطار الخارجي والزخرفة من الصورة */
+.book-cover-frame {
+    position: absolute; inset: 2px;
+    border: 1px solid #d4af37;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+.book-cover-frame::before {
+    content: ''; position: absolute; inset: 2px;
+    border: 1px dashed rgba(212, 175, 55, 0.5);
+}
+
+/* 1. المربع العنابي العلوي ذو الزوايا المقوسة مقعرة داخلياً (مطابق للصورة) */
+.cover-box-category {
+    background: #5c1114;
+    border: 1.5px solid #d4af37;
+    /* زوايا محرابية مشطوفة مقعرة */
+    clip-path: polygon(
+        12px 0%, calc(100% - 12px) 0%, 
+        100% 12px, 100% calc(100% - 12px), 
+        calc(100% - 12px) 100%, 12px 100%, 
+        0% calc(100% - 12px), 0% 12px
+    );
+    border-radius: 4px;
+    padding: 4px 6px;
+    text-align: center;
+    color: #fce8ad;
+    font-size: 0.68rem;
+    font-weight: 800;
+    margin-top: 4px;
+    position: relative; z-index: 2;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+}
+
+/* 2. المربع العنابي الأوسط لعنوان الوثيقة ذو الزوايا المشطوفة للمحراب */
+.cover-box-title {
+    background: #5c1114;
+    border: 1.5px solid #d4af37;
+    clip-path: polygon(
+        14px 0%, calc(100% - 14px) 0%, 
+        100% 14px, 100% calc(100% - 14px), 
+        calc(100% - 14px) 100%, 14px 100%, 
+        0% calc(100% - 14px), 0% 14px
+    );
+    border-radius: 4px;
+    padding: 8px 6px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 900;
+    margin-top: 5px;
+    line-height: 1.35;
+    position: relative; z-index: 2;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.7);
+}
+
+/* 3. المساحة السوداء الشفافة بالوسط للوصف والكاتب */
+.cover-box-desc {
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px dashed rgba(212, 175, 55, 0.3);
+    border-radius: 4px;
+    padding: 5px;
+    margin: 5px 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: #d1e2e5;
+    font-size: 0.65rem;
+    line-height: 1.35;
+    position: relative; z-index: 2;
+    overflow: hidden;
+}
+
+.cover-box-desc p {
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 4. المستطيل السفلي الصغير جداً المصمم بنفس شكل الصورة */
+.cover-box-footer {
+    background: #5c1114;
+    border: 1px solid #d4af37;
+    border-radius: 10px;
+    padding: 2px 8px;
+    margin: 0 auto 3px;
+    width: 80%;
+    text-align: center;
+    color: #fce8ad;
+    font-size: 0.6rem;
+    font-weight: 700;
+    position: relative; z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+/* تنوع ألوان الغلاف حسَب التصنيف */
+
+/* 1. وثائق تاريخية (العنابي والذهبي الكلاسيكي من الصورة) */
+.book-cover-card[data-category="وثائق تاريخية"] .cover-box-category,
+.book-cover-card[data-category="وثائق تاريخية"] .cover-box-title,
+.book-cover-card[data-category="وثائق تاريخية"] .cover-box-footer {
+    background: #5c1114; border-color: #d4af37; color: #fce8ad;
+}
+
+/* 2. بحوث عقائدية (الكحلي الملكي والذهبي) */
+.book-cover-card[data-category="بحوث عقائدية"] { border-color: #27d5b1; }
+.book-cover-card[data-category="بحوث عقائدية"] .cover-box-category,
+.book-cover-card[data-category="بحوث عقائدية"] .cover-box-title,
+.book-cover-card[data-category="بحوث عقائدية"] .cover-box-footer {
+    background: #092c3e; border-color: #27d5b1; color: #d6faff;
+}
+
+/* 3. كتب ومراجع (البني الداكن والنحاسي) */
+.book-cover-card[data-category="كتب ومراجع"] { border-color: #d9933d; }
+.book-cover-card[data-category="كتب ومراجع"] .cover-box-category,
+.book-cover-card[data-category="كتب ومراجع"] .cover-box-title,
+.book-cover-card[data-category="كتب ومراجع"] .cover-box-footer {
+    background: #3b1d07; border-color: #e0a353; color: #fcecd2;
+}
+
+/* 4. مقالات ودراسات (الأخضر الزيتوني والذهبي) */
+.book-cover-card[data-category="مقالات ودراسات"] { border-color: #00a977; }
+.book-cover-card[data-category="مقالات ودراسات"] .cover-box-category,
+.book-cover-card[data-category="مقالات ودراسات"] .cover-box-title,
+.book-cover-card[data-category="مقالات ودراسات"] .cover-box-footer {
+    background: #093121; border-color: #00a977; color: #e1fbf2;
+}
+
+/* 5. منوع */
+.book-cover-card[data-category="منوع"] { border-color: #5392a6; }
+.book-cover-card[data-category="منوع"] .cover-box-category,
+.book-cover-card[data-category="منوع"] .cover-box-title,
+.book-cover-card[data-category="منوع"] .cover-box-footer {
+    background: #3b6f80; border-color: #5392a6; color: #ffe8a3; /* تم تعديل لون النص ليكون فاتحاً وقابلاً للقراءة */
+}
+/* 5. قسم الوثائق المصورة (مصممة بالأخضر الداكن والذهبي الملكي بدل الأحمر) */
+.book-cover-card.source-card-theme {
+    border-color: #d4af37;
+}
+.book-cover-card.source-card-theme .cover-box-category,
+.book-cover-card.source-card-theme .cover-box-title,
+.book-cover-card.source-card-theme .cover-box-footer {
+    background: #2b230c;
+    border-color: #fce28b;
+    color: #fffae8;
+}
+
+.admin-item-row {
+    background: rgba(0,0,0,0.25);
+    border: 1px solid var(--line);
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.admin-item-title {
+    font-size: 0.88rem; font-weight: 700; color: var(--ink);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 55%;
+}
+.admin-item-badge {
+    font-size: 0.72rem; padding: 2px 8px; border-radius: 10px; background: rgba(243, 213, 138, 0.15); color: var(--gold); border: 1px solid var(--line);
+}
+.admin-actions-btns { display: flex; gap: 6px; }
+.btn-edit-sm { background: rgba(39, 213, 177, 0.15); border: 1px solid var(--mint); color: var(--mint); padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
+.btn-del-sm { background: rgba(223, 37, 44, 0.15); border: 1px solid #df252c; color: #df252c; padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
+
+.btn{
+    display:inline-flex; justify-content:center; align-items:center; padding:8px 18px; border:0; border-radius:22px;
+    background: var(--green); color:white; font-weight:700; cursor:pointer; font-size: 0.88rem; text-decoration: none;
+}
+.btn:hover{ opacity: 0.9; }
+.btn.ghost{background:rgba(255,255,255,0.05); border:1px solid var(--line); color: var(--ink);}
+.btn.shrink{background: rgba(243, 213, 138, 0.15); border: 1px solid var(--gold); color: var(--gold);}
+.btn.red{background: linear-gradient(135deg, #df252c, #b0181e); color: white;}
+
+.empty{padding:30px;text-align:center;border:1px dashed var(--line);border-radius:16px;color:var(--muted);display:none}
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);display:none;align-items:center;justify-content:center;z-index:200;padding:12px;backdrop-filter:blur(8px)}
+.modal-content{background:var(--bg-body);border:1px solid var(--mint);border-radius:18px;width:min(900px, 100%);max-height:90vh;overflow-y:auto;padding:16px 20px; position: relative;}
+.pdf-modal-content { background: var(--bg-body); border: 1px solid var(--mint); border-radius: 18px; width: min(1050px, 100%); height: 90vh; display: flex; flex-direction: column; padding: 16px; }
+.back-btn{ background: linear-gradient(135deg, #df252c, #b0181e); border: none; color: #fff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 12px rgba(223,37,44,0.3); }
+
+.sticky-close-bar {
+    position: sticky; top: 0; z-index: 100; background: var(--bg-body);
+    display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); margin-bottom: 12px;
+}
+
+#imageZoomModal {
+    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); z-index: 400; display: none;
+    flex-direction: column; align-items: center; justify-content: space-between; padding: 15px;
+}
+.zoom-header {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(3, 22, 34, 0.95); padding: 10px 16px; border-radius: 14px; border: 1px solid var(--line);
+    z-index: 410;
+}
+.zoom-body {
+    flex: 1; width: 100%; display: flex; justify-content: center; align-items: center; overflow: auto; padding: 10px 0; cursor: pointer;
+}
+.zoom-body img {
+    max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); cursor: default;
+}
+
+footer{
+    margin-top:40px; background:#02121c; border-top:1px solid var(--line); padding:35px 0 25px; color:var(--muted); font-size: 0.85rem;
+}
+.footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 30px; margin-bottom: 30px;
+}
+.footer-col h4 { color: var(--gold); font-size: 1rem; margin: 0 0 12px; font-weight: 800; }
+.footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.footer-col ul li a:hover { color: var(--mint); }
+.footer-bottom {
+    border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+}
+.social-icons{display:flex;gap:10px}
+.social-icons a{
+    display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%;
+    background:rgba(255,255,255,0.05); border:1px solid var(--line); color:var(--ink); font-size:0.85rem;
+}
+.social-icons a:hover{background:var(--green); color:#fff; border-color:var(--green);}
+
+.mobile-bottom-nav {
+    display: none; position: fixed; bottom: 0; left: 0; right: 0; height: 65px;
+    background: #031622; border-top: 1px solid var(--line); z-index: 150;
+    justify-content: space-around; align-items: center; padding: 0 5px;
+}
+.mobile-nav-item {
+    display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--muted); font-size: 0.7rem; font-weight: 700;
+}
+.mobile-nav-item.active, .mobile-nav-item:hover { color: var(--gold); }
+.mobile-nav-item span:first-child { font-size: 1.2rem; }
+
+#pdfCanvasContainer {
+    flex: 1; width: 100%; overflow-y: auto; text-align: center; background: #010a10; border-radius: 12px; padding: 10px 0;
+}
+#pdfCanvasContainer canvas {
+    max-width: 98%; height: auto !important; margin: 0 auto 12px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.admin-tab-btn {
+    padding: 8px 16px; border-radius: 20px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-weight: 700; cursor: pointer;
+}
+.admin-tab-btn.active {
+    background: var(--gold); color: #031622; border-color: var(--gold);
+}
+
+.perm-checkbox-item {
+    display: flex; align-items: center; gap: 8px; font-size: 0.85rem; background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line);
+}
+
+@media(max-width:1200px){
+    .doc-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+}
 @media(max-width:992px){
     .main-content-grid { grid-template-columns: 1fr; }
     .quick-cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .research-grid-main { grid-template-columns: 1fr 1fr; }
-    .verse-side-card { position: relative; top: 0; } /* إلغاء التثبيت في الشاشات الصغيرة */
+    .doc-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+    .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media(max-width:768px){
     .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .research-grid-main { grid-template-columns: 1fr; }
+    .tools{grid-template-columns:1fr}
+    .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .footer-grid { grid-template-columns: 1fr; }
+    .mobile-bottom-nav { display: flex; }
+    body { padding-bottom: 60px; }
     nav { display: none; }
 }
 </style>
@@ -365,7 +646,7 @@ section{padding:15px 0}
 
 <main id="top">
 
-<div class="hero-banner" style="position:relative; width:100%; min-height:480px; background:linear-gradient(180deg, rgba(3, 22, 34, 0.75), rgba(3, 22, 34, 0.95)), url('assets/hero-bg.jpg') center/cover no-repeat; background-color:#031622; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:50px 16px; border-bottom:1px solid var(--line); overflow:hidden;">
+<div class="hero-banner">
     <div class="hero-content">
         <h1>نـهـج الـحـقـيـقـة</h1>
         <div class="hero-subtitle">من أجل معرفة أعمق .. لحقيقة أصدق</div>
@@ -425,12 +706,11 @@ section{padding:15px 0}
         </div>
     </div>
 
-    <!-- البطاقة الثابتة للآية والساعة ومواقيت الصلاة -->
     <aside>
         <div class="verse-side-card">
             <div class="verse-day-topline"><span class="verse-day-icon">۞</span><span>نورٌ من القرآن</span><span class="verse-day-icon">۞</span></div>
             <h3>آية اليوم</h3>
-            <div class="verse-text" id="dailyVerseText">﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾</div>
+            <div class="verse-text" id="dailyVerseText">﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾</div>
             <div class="verse-source" id="dailyVerseSource">سورة الشرح · الآية 6</div>
             <div class="verse-datetime">
                 <div class="verse-time-box"><span class="verse-time-label">الوقت الآن</span><strong id="siteClock">--:--:--</strong></div>
@@ -440,12 +720,12 @@ section{padding:15px 0}
             <div class="prayer-times-box">
                 <div class="prayer-title">🕌 مواقيت الصلاة (توقيت بغداد)</div>
                 <div class="prayer-grid">
-                    <div class="prayer-item" id="p_fajr"><span>الفجر</span><strong>--:--</strong></div>
-                    <div class="prayer-item" id="p_shuruq"><span>الشروق</span><strong>--:--</strong></div>
-                    <div class="prayer-item" id="p_dhuhr"><span>الظهر</span><strong>--:--</strong></div>
-                    <div class="prayer-item" id="p_asr"><span>العصر</span><strong>--:--</strong></div>
-                    <div class="prayer-item" id="p_maghrib"><span>المغرب</span><strong>--:--</strong></div>
-                    <div class="prayer-item" id="p_isha"><span>العشاء</span><strong>--:--</strong></div>
+                    <div class="prayer-item" id="p_fajr"><span>الفجر</span><strong>04:52</strong></div>
+                    <div class="prayer-item" id="p_shuruq"><span>الشروق</span><strong>06:15</strong></div>
+                    <div class="prayer-item" id="p_dhuhr"><span>الظهر</span><strong>11:55</strong></div>
+                    <div class="prayer-item" id="p_asr"><span>العصر</span><strong>03:02</strong></div>
+                    <div class="prayer-item" id="p_maghrib"><span>المغرب</span><strong>05:38</strong></div>
+                    <div class="prayer-item" id="p_isha"><span>العشاء</span><strong>06:58</strong></div>
                 </div>
             </div>
 
@@ -475,57 +755,1120 @@ section{padding:15px 0}
 </div>
 </div>
 
+<section class="wrap" id="library" style="margin-top: 10px;">
+<div class="head">
+<h2>مكتبة الوثائق والأبحاث الكاملة</h2>
+<small id="count">جاري التحميل...</small>
+</div>
+
+<div class="tools">
+<input id="q" type="search" placeholder="ابحث باسم الوثيقة، المؤلف، أو الكلمات المفتاحية..." aria-label="بحث">
+<select id="category" aria-label="التصنيف">
+<option value="">✨ كل التصنيفات</option>
+<option value="وثائق تاريخية">📜 وثائق تاريخية</option>
+<option value="بحوث عقائدية">💡 بحوث عقائدية</option>
+<option value="كتب ومراجع">📖 كتب ومراجع</option>
+<option value="مقالات ودراسات">📝 مقالات ودراسات</option>
+<option value="منوع">🎨 منوع</option>
+</select>
+<select id="sortBy" aria-label="الترتيب">
+<option value="newest">📅 الأحدث</option>
+<option value="title">🔤 الترتيب الأبجدي</option>
+</select>
+</div>
+
+<div class="quick-tags">
+<button class="tag-btn active" onclick="filterByTag('', this)">الكل</button>
+<button class="tag-btn" onclick="filterByTag('بحوث عقائدية', this)">💡 بحوث عقائدية</button>
+<button class="tag-btn" onclick="filterByTag('وثائق تاريخية', this)">📜 وثائق تاريخية</button>
+<button class="tag-btn" onclick="filterByTag('كتب ومراجع', this)">📖 كتب ومراجع</button>
+<button class="tag-btn" onclick="filterByTag('منوع', this)">🎨 منوع</button>
+</div>
+
+<div class="doc-grid" id="docs"></div>
+<div class="empty" id="empty">لا توجد نتائج مطابقة.</div>
+</section>
+
+<!-- موسوعة الوثائق المصورة بأيقونات الأغلفة المصغرة المتميزة -->
+<section class="wrap" id="sources-section" style="margin-top: 25px;">
+<div class="head">
+<h2>موسوعة الأدلة والوثائق المصورة النادرة</h2>
+<small>انقر لعرض المستندات والصور</small>
+</div>
+<div class="doc-grid" id="sources-grid">
+<p style="color:var(--muted);">جاري التحميل...</p>
+</div>
+</section>
+
+<section class="wrap" id="youtube" style="margin-top: 25px;">
+<div class="head">
+<h2>أحدث الفيديوهات والحوارات</h2>
+<a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" style="color:var(--gold); font-weight:700;">زيارة القناة الرسمية ↗</a>
+</div>
+<div class="videos-grid" id="videos-container" style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px;">
+<p style="color:var(--muted); grid-column:1/-1;">جاري التحميل...</p>
+</div>
+</section>
+
+<section class="wrap" id="contact" style="margin-top: 25px;">
+<div style="background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:24px;">
+<h2 style="margin-top:0; color:var(--gold);">تواصل معنا</h2>
+<form class="contact-form" id="contactForm" onsubmit="sendEmailMessage(event)" style="display:grid; gap:12px; max-width:600px; margin-top:14px;">
+<input type="text" id="from_name" placeholder="اسمك الكريم" required>
+<input type="email" id="from_email" placeholder="بريدك الإلكتروني" required>
+<input type="text" id="subject" placeholder="الموضوع" required>
+<textarea id="message" placeholder="رسالتك..." required style="resize:vertical; min-height:100px;"></textarea>
+<button type="submit" id="sendBtn" class="btn" style="width:fit-content">إرسال الرسالة</button>
+</form>
+<p id="contactMsg" style="margin-top:10px; font-size:0.85rem; display:none; font-weight:700;"></p>
+</div>
+</section>
+
+<section class="wrap" id="about" style="margin-top: 25px;">
+<div style="background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px;">
+<h2 style="margin-top:0;">عن نهج الحقيقة</h2>
+<p style="color:var(--muted); margin:0; font-size:0.9rem;">منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية وملفات PDF وقناة يوتيوب وبرنامج حواري.</p>
+</div>
+</section>
 </main>
 
-<!-- كود الـ JavaScript لتشغيل الساعة الحية وجلب مواقيت الصلاة -->
+<footer>
+<div class="wrap">
+<div class="footer-grid">
+    <div class="footer-col">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <img src="assets/logo.png" alt="" style="width:40px; height:40px; object-fit:contain;">
+            <strong style="color:var(--ink); font-size:1.1rem;">نهج الحقيقة</strong>
+        </div>
+        <p style="margin:0; font-size:0.85rem; color:var(--muted); line-height:1.7;">من أجل معرفة أعمق .. لحقيقة أصدق. منصة متخصصة في نشر الفكر والوثائق.</p>
+    </div>
+    <div class="footer-col">
+        <h4>معلومات</h4>
+        <ul>
+            <li><a href="#about">من نحن</a></li>
+            <li><a href="#">سياسة الخصوصية</a></li>
+            <li><a href="#">شروط الاستخدام</a></li>
+        </ul>
+    </div>
+    <div class="footer-col">
+        <h4>خدمات الموقع</h4>
+        <ul>
+            <li><a href="#library">البحث المتقدم</a></li>
+            <li><a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank">قناة يوتيوب</a></li>
+            <li><a href="#sources-section">الوثائق</a></li>
+            <li><a href="#library">ملفات PDF</a></li>
+        </ul>
+    </div>
+    <div class="footer-col">
+        <h4>روابط سريعة</h4>
+        <ul>
+            <li><a href="#top">الرئيسية</a></li>
+            <li><a href="#library">المكتبة</a></li>
+            <li><a href="#sources-section">الوثائق</a></li>
+            <li><a href="#contact">تواصل معنا</a></li>
+        </ul>
+    </div>
+</div>
+<div class="footer-bottom">
+    <div class="social-icons">
+        <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank">▶</a>
+        <a href="https://x.com/raf88idi" target="_blank">𝕏</a>
+        <a href="https://www.tiktok.com/@ha_no_88" target="_blank">🎵</a>
+    </div>
+    <span style="font-size:0.8rem;">© <span id="year"></span> نهج الحقيقة، جميع الحقوق محفوظة. <a href="javascript:void(0)" onclick="openAdminModal()" style="color:var(--muted); margin-right:10px;">⚙️ دخول الإدارة والموظفين</a></span>
+</div>
+</div>
+</footer>
+
+<div class="mobile-bottom-nav">
+<a href="#top" class="mobile-nav-item active"><span>🏠</span><span>الرئيسية</span></a>
+<a href="#library" class="mobile-nav-item"><span>📚</span><span>المكتبة</span></a>
+<a href="#library" class="mobile-nav-item"><span>📁</span><span>ملفات PDF</span></a>
+<a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" class="mobile-nav-item"><span>▶</span><span>يوتيوب</span></a>
+<a href="#sources-section" class="mobile-nav-item"><span>📜</span><span>الوثائق</span></a>
+</div>
+
+<!-- لوحة التحكم الإدارية -->
+<div class="modal" id="adminModal">
+<div class="modal-content" style="max-width:820px;">
+<div class="sticky-close-bar">
+    <h3 id="adminModalTitle" style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة والصلاحيات الشاملة</h3>
+    <button class="back-btn" onclick="closeAdminModal()">✕ إغلاق</button>
+</div>
+
+<div id="adminLoginSec" style="display:flex; flex-direction:column; gap:12px; margin-top:15px;">
+    <p style="font-size:0.88rem; color:var(--muted); margin:0;">ادخل كلمة المرور الخاصة بحسابك للوصول للوحة التحكم:</p>
+    <input type="password" id="adminPassInput" placeholder="كلمة المرور..." style="padding:10px 14px; border-radius:10px; border:1px solid var(--line); background:var(--input-bg); color:#fff;">
+    <button class="btn" onclick="loginAdmin()">تسجيل الدخول</button>
+</div>
+
+<div id="adminPanelSec" style="display:none; flex-direction:column; gap:15px; margin-top:10px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(39, 213, 177, 0.1); padding:8px 14px; border-radius:12px; border:1px solid var(--mint);">
+        <span id="currentUserRole" style="font-size:0.85rem; font-weight:800; color:var(--mint);">المستخدم الحالي</span>
+        <button class="btn red" onclick="logoutAdmin()" style="padding:3px 10px; font-size:0.75rem;">تسجيل خروج</button>
+    </div>
+
+    <div id="adminTabsNav" style="display:flex; gap:8px; border-bottom:1px solid var(--line); padding-bottom:10px; flex-wrap:wrap;">
+        <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 إدارة الكتب/PDF والأقسام</button>
+        <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 إدارة الوثائق المصورة</button>
+        <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ إدارة الفيديوهات</button>
+        <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين والصلاحيات</button>
+    </div>
+
+    <!-- 1. نموذج الكُتب -->
+    <div id="addDocForm" class="admin-form" style="display:flex; flex-direction:column; gap:12px;">
+        <input type="hidden" id="edit_doc_id">
+        <h4 id="docFormHeading" style="margin:0; color:var(--gold);">➕ إضافة بحث / كتاب جديد</h4>
+        
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <input type="text" id="doc_title" placeholder="عنوان البحث / الكتاب" required>
+            <input type="text" id="doc_author" placeholder="المؤلف / الباحث">
+        </div>
+        
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+            <select id="doc_cat" required>
+                <option value="بحوث عقائدية">💡 قسم: بحوث عقائدية</option>
+                <option value="وثائق تاريخية">📜 قسم: وثائق تاريخية</option>
+                <option value="كتب ومراجع">📖 قسم: كتب ومراجع</option>
+                <option value="مقالات ودراسات">📝 قسم: مقالات ودراسات</option>
+                <option value="منوع">🎨 قسم: منوع</option>
+            </select>
+            <input type="text" id="doc_url" placeholder="رابط الملف المباشر (PDF Direct URL)" required>
+        </div>
+        
+        <textarea id="doc_desc" placeholder="نبذة مختصرة عن المستند..."></textarea>
+        
+        <div style="display:flex; gap:8px;">
+            <button type="button" id="saveDocBtn" class="btn" onclick="saveNewDoc(event)">💾 حفظ ونشر الملف</button>
+            <button type="button" id="cancelDocEditBtn" class="btn red" style="display:none;" onclick="cancelDocEdit()">إلغاء التعديل</button>
+        </div>
+
+        <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <h5 style="margin:0; color:var(--gold);">قائمة العناصر والأقسام المنشورة (للتعديل والحذف):</h5>
+            <select id="filterAdminCategory" onchange="populateAdminLists()" style="width:auto; padding:4px 10px; font-size:0.8rem;">
+                <option value="">✨ كافة الأقسام</option>
+                <option value="بحوث عقائدية">💡 بحوث عقائدية</option>
+                <option value="وثائق تاريخية">📜 وثائق تاريخية</option>
+                <option value="كتب ومراجع">📖 كتب ومراجع</option>
+                <option value="مقالات ودراسات">📝 مقالات ودراسات</option>
+                <option value="منوع">🎨 منوع</option>
+            </select>
+        </div>
+        
+        <div id="adminDocsList" style="max-height:220px; overflow-y:auto; margin-top:6px;"></div>
+    </div>
+
+    <!-- 2. نموذج الوثائق -->
+    <div id="addSourceForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
+        <input type="hidden" id="edit_source_id">
+        <h4 id="sourceFormHeading" style="margin:0; color:var(--gold);">➕ إضافة وثيقة مصورة نادرة</h4>
+        <input type="text" id="source_title" placeholder="عنوان المجموعة (مثال: وثائق تاريخية / فدك وشواهدها)" required>
+        <input type="text" id="source_img_url" placeholder="رابط الصورة المباشر (Image URL)" required>
+        <textarea id="source_desc" placeholder="شرح تفصيلي للوثيقة المصورة..."></textarea>
+        
+        <div style="display:flex; gap:8px;">
+            <button type="button" id="saveSourceBtn" class="btn" onclick="saveNewSource(event)">💾 حفظ الوثيقة المصورة</button>
+            <button type="button" id="cancelSourceEditBtn" class="btn red" style="display:none;" onclick="cancelSourceEdit()">إلغاء التعديل</button>
+        </div>
+
+        <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
+        <h5 style="margin:0; color:var(--gold);">قائمة الوثائق المصورة المضافة (للتعديل والحذف):</h5>
+        <div id="adminSourcesList" style="max-height:220px; overflow-y:auto; margin-top:6px;"></div>
+    </div>
+
+    <!-- 3. نموذج الفيديوهات -->
+    <div id="addVidForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
+        <input type="hidden" id="edit_vid_id">
+        <h4 id="vidFormHeading" style="margin:0; color:var(--gold);">➕ إضافة فيديو يوتيوب جديد</h4>
+        <input type="text" id="vid_title" placeholder="عنوان الفيديو / الحلقة" required>
+        <input type="text" id="vid_yt_id" placeholder="معرف اليوتيوب YouTube Video ID" required>
+        
+        <div style="display:flex; gap:8px;">
+            <button type="button" id="saveVidBtn" class="btn" onclick="saveNewVid(event)">💾 حفظ الفيديو</button>
+            <button type="button" id="cancelVidEditBtn" class="btn red" style="display:none;" onclick="cancelVidEdit()">إلغاء التعديل</button>
+        </div>
+
+        <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
+        <h5 style="margin:0; color:var(--gold);">قائمة الفيديوهات المنشورة (للتعديل والحذف):</h5>
+        <div id="adminVidsList" style="max-height:220px; overflow-y:auto; margin-top:6px;"></div>
+    </div>
+
+    <!-- 4. الموظفين -->
+    <div id="manageUsersSec" style="display:none; flex-direction:column; gap:15px;">
+        <h4 style="margin:0; color:var(--gold);">إضافة موظف جديد وتحديد المهام</h4>
+        <form class="admin-form" onsubmit="saveEmployee(event)" style="display:flex; flex-direction:column; gap:10px;">
+            <input type="text" id="emp_name" placeholder="اسم الموظف أو المحرر" required>
+            <input type="text" id="emp_pass" placeholder="كلمة المرور الخاصة به" required>
+            <div style="font-size:0.85rem; font-weight:700; color:var(--mint);">اختر الصلاحيات والمهام المسموحة له:</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                <label class="perm-checkbox-item"><input type="checkbox" id="p_docs" value="docs"> 📚 إضافة وتعديل الكتب/PDF</label>
+                <label class="perm-checkbox-item"><input type="checkbox" id="p_sources" value="sources"> 📜 إضافة وثائق مصورة</label>
+                <label class="perm-checkbox-item"><input type="checkbox" id="p_videos" value="videos"> ▶ إضافة فيديوهات يوتيوب</label>
+            </div>
+            <button type="submit" id="saveEmpBtn" class="btn">➕ إضافة الموظف واعتماد صلاحياته</button>
+        </form>
+
+        <h4 style="margin:15px 0 0; color:var(--gold);">قائمة الموظفين المسجلين وصلاحياتهم:</h4>
+        <div id="employeesList" style="display:flex; flex-direction:column; gap:8px;">
+            <p style="color:var(--muted); font-size:0.8rem;">جاري جلب قائمة الموظفين...</p>
+        </div>
+    </div>
+
+    <p id="adminStatusMsg" style="font-size:0.85rem; font-weight:700; display:none; margin:0;"></p>
+</div>
+</div>
+</div>
+
+<div class="modal" id="sourceModal">
+<div class="modal-content">
+<div class="sticky-close-bar">
+    <h2 id="modalTitle" style="margin:0; color:var(--gold); font-size:1rem; flex:1;">عنوان الوثيقة</h2>
+    <button class="back-btn" onclick="closeSourceModal()">✕ إغلاق / رجوع</button>
+</div>
+<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-top:10px;" id="modalImagesContainer"></div>
+</div>
+</div>
+
+<div id="imageZoomModal">
+    <div class="zoom-header">
+        <h3 id="zoomTitle" style="margin:0; color:var(--gold); font-size:0.92rem; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; max-width:50%;">عرض الصورة</h3>
+        <div style="display:flex; gap:8px;">
+            <button class="btn shrink" onclick="closeZoomModal()" style="padding:5px 14px; font-size:0.8rem; gap:4px;">🔍- تصغير الصورة</button>
+            <button class="btn" id="zoomDownloadBtn" style="padding:5px 14px; font-size:0.8rem;">⬇️ تحميل</button>
+            <button class="back-btn" onclick="closeZoomModal()">✕ إغلاق</button>
+        </div>
+    </div>
+    <div class="zoom-body" onclick="closeZoomModal()">
+        <img id="zoomedImg" src="" alt="وثيقة مكبرة" onclick="event.stopPropagation()">
+    </div>
+</div>
+
+<div class="modal" id="pdfModal">
+<div class="pdf-modal-content">
+<div class="sticky-close-bar">
+    <h3 id="pdfTitle" style="margin:0; color:var(--gold); font-size:0.95rem; max-width:40%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">عرض المستند</h3>
+    <div style="display:flex; gap:8px;">
+        <button class="btn red" onclick="closePdfModal()" style="padding:5px 14px; font-size:0.8rem;">✕ إغلاق</button>
+        <button class="btn" onclick="downloadFileDirectly()" style="padding:5px 14px; font-size:0.8rem;">⬇️ تحميل</button>
+    </div>
+</div>
+<div id="pdfCanvasContainer">
+    <p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري معالجة وتجهيز صفحات المستند للفتح...</p>
+</div>
+</div>
+</div>
+
 <script>
-function startLiveClock() {
-    function update() {
-        const now = new Date();
-        const clockEl = document.getElementById('siteClock');
-        if (clockEl) {
-            clockEl.textContent = now.toLocaleTimeString('ar-IQ', { hour12: true });
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// آية يومية وساعة ومواقيت الصلاة
+const dailyQuranVerses = [
+  { text: '﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾', source: 'سورة الشرح · الآية 6' },
+  { text: '﴿وَهُوَ مَعَكُمْ أَيْنَ مَا كُنْتُمْ﴾', source: 'سورة الحديد · الآية 4' },
+  { text: '﴿وَقُلْ رَبِّ زِدْنِي عِلْمًا﴾', source: 'سورة طه · الآية 114' },
+  { text: '﴿إِنَّ اللَّهَ مَعَ الصَّابِرِينَ﴾', source: 'سورة البقرة · الآية 153' },
+  { text: '﴿وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ﴾', source: 'سورة الطلاق · الآية 3' },
+  { text: '﴿فَاذْكُرُونِي أَذْكُرْكُمْ﴾', source: 'سورة البقرة · الآية 152' },
+  { text: '﴿وَلَا تَيْأَسُوا مِن رَّوْحِ اللَّهِ﴾', source: 'سورة يوسف · الآية 87' },
+  { text: '﴿إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ﴾', source: 'سورة التوبة · الآية 120' },
+  { text: '﴿أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ﴾', source: 'سورة الرعد · الآية 28' },
+  { text: '﴿وَقُلِ الْحَقُّ مِن رَّبِّكُمْ﴾', source: 'سورة الكهف · الآية 29' },
+  { text: '﴿إِنَّ اللَّهَ يُحِبُّ الْمُتَوَكِّلِينَ﴾', source: 'سورة آل عمران · الآية 159' },
+  { text: '﴿وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ﴾', source: 'سورة هود · الآية 88' },
+  { text: '﴿إِنَّ اللَّهَ غَفُورٌ رَّحِيمٌ﴾', source: 'سورة البقرة · الآية 173' },
+  { text: '﴿وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ﴾', source: 'سورة البقرة · الآية 45' }
+];
+
+function updateDailyVerseAndClock() {
+  const now = new Date();
+  const baghdadNow = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Baghdad' }));
+  const start = new Date(baghdadNow.getFullYear(), 0, 0);
+  const dayOfYear = Math.floor((baghdadNow - start) / 86400000);
+  const verse = dailyQuranVerses[(dayOfYear - 1) % dailyQuranVerses.length];
+  const verseText = document.getElementById('dailyVerseText');
+  const verseSource = document.getElementById('dailyVerseSource');
+  const clock = document.getElementById('siteClock');
+  const date = document.getElementById('siteDate');
+  if (verseText) verseText.textContent = verse.text;
+  if (verseSource) verseSource.textContent = verse.source;
+  if (clock) clock.textContent = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Baghdad', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
+  if (date) date.textContent = new Intl.DateTimeFormat('ar-IQ', { timeZone: 'Asia/Baghdad', year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' }).format(now);
+  
+  updateActivePrayerTime(baghdadNow);
+}
+
+function updateActivePrayerTime(now) {
+    const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+    const prayers = [
+        { id: 'p_fajr', time: '04:52' },
+        { id: 'p_shuruq', time: '06:15' },
+        { id: 'p_dhuhr', time: '11:55' },
+        { id: 'p_asr', time: '15:02' },
+        { id: 'p_maghrib', time: '17:38' },
+        { id: 'p_isha', time: '18:58' }
+    ];
+    
+    document.querySelectorAll('.prayer-item').forEach(el => el.classList.remove('active'));
+    for (let p of prayers) {
+        if (timeStr < p.time) {
+            const activeEl = document.getElementById(p.id);
+            if (activeEl) activeEl.classList.add('active');
+            break;
         }
-        const dateEl = document.getElementById('siteDate');
-        if (dateEl) {
-            dateEl.textContent = now.toLocaleDateString('ar-IQ', {
-                weekday: 'short',
-                month: 'short',
-                day: 'numeric'
+    }
+}
+
+updateDailyVerseAndClock();
+setInterval(updateDailyVerseAndClock, 1000);
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(()=>{}); });
+}
+
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault(); deferredPrompt = e;
+    const btn = document.getElementById('installPwaBtn');
+    if (btn) btn.style.display = 'inline-flex';
+});
+function installPWA() {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => { deferredPrompt = null; document.getElementById('installPwaBtn').style.display = 'none'; });
+}
+
+function toggleTheme() {
+    const html = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    if (html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        btn.textContent = '☀️';
+        localStorage.setItem('theme', 'light');
+    } else {
+        html.setAttribute('data-theme', 'dark');
+        btn.textContent = '🌙';
+        localStorage.setItem('theme', 'dark');
+    }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    document.getElementById('themeToggle').textContent = saved === 'dark' ? '🌙' : '☀️';
+    try { emailjs.init("xd1Jo81I__MsksgB9"); } catch(e){}
+});
+
+const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co'; 
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4c3h4a2F1eG91eW5lYWFtZWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MjQxMjMsImV4cCI6MjEwNzMwMDEyM30.wvVWq3TXd83mJ2FtViIwWO7O_hN1OazD91MkmiWZdh0'; 
+let supabaseClient = null;
+try { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch(e){}
+
+let activePdfUrl = '', activePdfName = '';
+function triggerDirectDownload(url, name) {
+    const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.download = name || 'file';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+function downloadFileDirectly() { if (activePdfUrl) triggerDirectDownload(activePdfUrl, activePdfName + '.pdf'); }
+
+function syncHeroSearch(val) {
+    const mainSearch = document.getElementById('q');
+    if (mainSearch) { mainSearch.value = val; filterAndRenderDocs(); }
+}
+
+function sendEmailMessage(e) {
+    e.preventDefault();
+    const btn = document.getElementById('sendBtn'), msg = document.getElementById('contactMsg');
+    btn.disabled = true; btn.textContent = 'جاري الإرسال...';
+    emailjs.send('service_bwh87m7', 'template_ogee95s', {
+        from_name: document.getElementById('from_name').value,
+        from_email: document.getElementById('from_email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+    }).then(() => {
+        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم إرسال رسالتك بنجاح!';
+        document.getElementById('contactForm').reset(); btn.disabled = false; btn.textContent = 'إرسال الرسالة';
+    }).catch(() => {
+        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ تعذر الإرسال.';
+        btn.disabled = false; btn.textContent = 'إرسال الرسالة';
+    });
+}
+
+let allDocs = [];
+let allSources = [];
+let allVideos = [];
+
+async function fetchDocuments() {
+    if (!supabaseClient) return;
+    try {
+        const { data } = await supabaseClient.from('documents').select('*');
+        allDocs = data || [];
+        filterAndRenderDocs();
+        renderLatestResearchMini(allDocs);
+        if (currentLoggedInUser) populateAdminLists();
+    } catch(e){}
+}
+
+function renderLatestResearchMini(docs) {
+    const container = document.getElementById('latest-research-container');
+    if (!container) return;
+    const latest = docs.slice(0, 3);
+    if (!latest.length) { container.innerHTML = '<p style="color:var(--muted); font-size:0.85rem;">لا توجد أبحاث حالياً.</p>'; return; }
+    
+    container.innerHTML = '';
+    latest.forEach(doc => {
+        let badgeText = 'أبحاث';
+        if (doc.category === 'كتب ومراجع') badgeText = 'كتب';
+        else if (doc.category === 'وثائق تاريخية') badgeText = 'وثائق';
+        else if (doc.category === 'مقالات ودراسات') badgeText = 'مقالات';
+
+        const card = document.createElement('article');
+        card.className = 'research-card-item';
+        card.innerHTML = `
+            <div class="research-card-img">
+                <span class="research-card-badge">${badgeText}</span>
+                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:2.5rem; background:rgba(0,0,0,0.3);">📖</div>
+            </div>
+            <div class="research-card-body">
+                <h4>${doc.title}</h4>
+                <p>${doc.description || doc.author || ''}</p>
+                <div class="research-card-footer">
+                    <span>${doc.date || ''}</span>
+                    <span style="color:var(--mint); font-weight:700;">قراءة ←</span>
+                </div>
+            </div>
+        `;
+        card.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url));
+        container.appendChild(card);
+    });
+}
+
+async function fetchSources() {
+    if (!supabaseClient) return;
+    try {
+        const { data } = await supabaseClient.from('sources').select('*');
+        allSources = data || [];
+        renderSourcesMain(allSources);
+        if (currentLoggedInUser) populateAdminLists();
+    } catch(e){}
+}
+
+/* عرض الوثائق المصورة بأيقونات الأغلفة المصغرة المطابقة للصورة المرفقة بلون أخضر ملكي */
+function renderSourcesMain(data) {
+    const grid = document.getElementById('sources-grid');
+    if (!grid) return;
+    if (!data.length) { grid.innerHTML = '<p style="color:var(--muted);">لا توجد مصادر مضافة.</p>'; return; }
+
+    const grouped = {};
+    data.forEach(item => {
+        const t = item.title || 'أدلة مصورة';
+        if (!grouped[t]) grouped[t] = [];
+        grouped[t].push(item);
+    });
+
+    grid.innerHTML = '';
+    Object.keys(grouped).forEach(title => {
+        const group = grouped[title];
+        const card = document.createElement('article');
+        card.className = 'book-cover-card source-card-theme';
+        
+        card.innerHTML = `
+            <div class="book-cover-frame"></div>
+            
+            <!-- المربع العنابي/الملكي الأول المشطوف -->
+            <div class="cover-box-category">
+                📜 وثيقة مصورة
+            </div>
+
+            <!-- المربع العنابي/الملكي الأوسط العنوان -->
+            <div class="cover-box-title">
+                ${title}
+            </div>
+
+            <!-- المساحة الوسطى لبيانات الوثائق -->
+            <div class="cover-box-desc">
+                <p>${group[0].description || 'تتضمن ' + group.length + ' وثائق ومستندات تاريخية مصدقة عالية الدقة.'}</p>
+            </div>
+
+            <!-- المربع السفلي المصغر المطابق للصورة -->
+            <div class="cover-box-footer">
+                <span>🔍 استعراض (${group.length})</span>
+            </div>
+        `;
+        card.addEventListener('click', () => openSourceModal(title, group));
+        grid.appendChild(card);
+    });
+}
+
+async function fetchLatestVideos() {
+    if (!supabaseClient) return;
+    try {
+        const { data } = await supabaseClient.from('videos').select('*');
+        allVideos = data || [];
+        if (!data || !data.length) return;
+        
+        const container = document.getElementById('videos-container');
+        if (container) {
+            container.innerHTML = '';
+            data.forEach(vid => {
+                if (vid.youtube_id) {
+                    const card = document.createElement('div');
+                    card.className = 'doc-card';
+                    card.innerHTML = `
+                        <div style="position:relative; width:100%; padding-bottom:56.25%; background:#000; border-radius:10px; overflow:hidden; margin-bottom:8px;">
+                            <iframe src="https://www.youtube.com/embed/${vid.youtube_id}" title="${vid.title}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
+                        </div>
+                        <h4 style="margin:0; font-size:0.9rem; font-weight:800;">${vid.title}</h4>
+                    `;
+                    container.appendChild(card);
+                }
             });
         }
-    }
-    update();
-    setInterval(update, 1000);
+        if (currentLoggedInUser) populateAdminLists();
+    } catch(e){}
 }
 
-async function loadPrayerTimes() {
-    try {
-        const res = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Baghdad&country=Iraq&method=3');
-        const data = await res.json();
-        if (data && data.data && data.data.timings) {
-            const t = data.data.timings;
-            const setTime = (id, time) => {
-                const el = document.querySelector(`#${id} strong`);
-                if (el) el.textContent = time;
-            };
-            setTime('p_fajr', t.Fajr);
-            setTime('p_shuruq', t.Sunrise);
-            setTime('p_dhuhr', t.Dhuhr);
-            setTime('p_asr', t.Asr);
-            setTime('p_maghrib', t.Maghrib);
-            setTime('p_isha', t.Isha);
-        }
-    } catch (e) {
-        console.log("خطأ في جلب مواقيت الصلاة");
-    }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    startLiveClock();
-    loadPrayerTimes();
+window.addEventListener('popstate', function() {
+    document.getElementById('imageZoomModal').style.display = 'none';
+    document.getElementById('sourceModal').style.display = 'none';
+    document.getElementById('pdfModal').style.display = 'none';
+    document.getElementById('adminModal').style.display = 'none';
 });
-</script>
 
+async function openPdfViewer(title, url) {
+    activePdfUrl = url; activePdfName = title;
+    document.getElementById('pdfTitle').textContent = title;
+    
+    const container = document.getElementById('pdfCanvasContainer');
+    container.innerHTML = '<p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل وسحب صفحات المستند لقراءته مباشرة...</p>';
+    document.getElementById('pdfModal').style.display = 'flex';
+    history.pushState({ modalOpen: true }, "");
+
+    try {
+        const pdf = await pdfjsLib.getDocument(url).promise;
+        container.innerHTML = ''; 
+        
+        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+            const page = await pdf.getPage(pageNum);
+            const viewport = page.getViewport({ scale: 1.3 });
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            
+            await page.render({ canvasContext: context, viewport: viewport }).promise;
+            container.appendChild(canvas);
+        }
+    } catch (error) {
+        container.innerHTML = `
+            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:15px; color:var(--ink); padding:20px; text-align:center;">
+                <p>يتعذر عرض معاينة هذا الملف مباشرة داخل الهاتف لربما لكونه مقيداً أو بحجم كبير.</p>
+                <button class="btn" onclick="triggerDirectDownload('${url}', '${title}.pdf')">⬇️ اضغط هنا لتنزيل الملف وقراءته فوراً</button>
+            </div>
+        `;
+    }
+}
+
+function closePdfModal() { 
+    document.getElementById('pdfModal').style.display = 'none';
+    if (history.state && history.state.modalOpen) history.back();
+}
+
+function openSourceModal(title, images) {
+    document.getElementById('modalTitle').textContent = title;
+    const container = document.getElementById('modalImagesContainer');
+    container.innerHTML = '';
+    images.forEach(img => {
+        const div = document.createElement('div');
+        div.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:12px; padding:12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:8px;';
+        div.innerHTML = `
+            <img src="${img.image_url}" alt="${title}" style="width:100%; max-height:350px; object-fit:contain; border-radius:8px; cursor:pointer;" onclick="zoomImage('${img.image_url}', '${title}')" onerror="this.src='assets/logo.png'">
+            <p style="font-size:0.8rem; color:var(--muted); margin:0; line-height:1.5;">${img.description || ''}</p>
+            <div style="display:flex; gap:8px; width:100%; justify-content:center; margin-top: auto;">
+                <button class="btn" style="padding:6px 14px; font-size:0.78rem;" onclick="triggerDirectDownload('${img.image_url}', '${title}')">⬇️ تحميل الصورة</button>
+                <button class="btn ghost" style="padding:6px 14px; font-size:0.78rem;" onclick="zoomImage('${img.image_url}', '${title}')">🔍 تكبير الصورة</button>
+            </div>
+        `;
+        container.appendChild(div);
+    });
+    document.getElementById('sourceModal').style.display = 'flex';
+    history.pushState({ modalOpen: true }, "");
+}
+
+function closeSourceModal() { 
+    document.getElementById('sourceModal').style.display = 'none';
+    if (history.state && history.state.modalOpen) history.back();
+}
+
+function zoomImage(url, title) {
+    document.getElementById('zoomTitle').textContent = title;
+    document.getElementById('zoomedImg').src = url;
+    document.getElementById('zoomDownloadBtn').onclick = function() { triggerDirectDownload(url, title); };
+    document.getElementById('imageZoomModal').style.display = 'flex';
+}
+function closeZoomModal() {
+    document.getElementById('imageZoomModal').style.display = 'none';
+}
+
+/* نظام لوحة الإدارة والصلاحيات */
+let currentLoggedInUser = null;
+
+function openAdminModal() {
+    document.getElementById('adminModal').style.display = 'flex';
+}
+function closeAdminModal() {
+    document.getElementById('adminModal').style.display = 'none';
+}
+
+async function loginAdmin() {
+    const pass = document.getElementById('adminPassInput').value.trim();
+    if (!pass) return;
+
+    if (supabaseClient) {
+        const { data, error } = await supabaseClient.from('employees').select('*').eq('password', pass).single();
+        if (data && !error) {
+            currentLoggedInUser = data;
+            showAdminDashboard();
+        } else {
+            alert('كلمة المرور غير صحيحة أو الحساب غير موجود!');
+        }
+    }
+}
+
+function showAdminDashboard() {
+    document.getElementById('adminLoginSec').style.display = 'none';
+    document.getElementById('adminPanelSec').style.display = 'flex';
+    document.getElementById('currentUserRole').textContent = 'المستخدم الحالي: ' + currentLoggedInUser.name;
+    applyUserPermissions();
+    populateAdminLists();
+}
+
+function logoutAdmin() {
+    currentLoggedInUser = null;
+    document.getElementById('adminPassInput').value = '';
+    document.getElementById('adminLoginSec').style.display = 'flex';
+    document.getElementById('adminPanelSec').style.display = 'none';
+}
+
+function applyUserPermissions() {
+    const perms = currentLoggedInUser.permissions || [];
+    
+    document.getElementById('tabBtnDocs').style.display = perms.includes('docs') ? 'inline-block' : 'none';
+    document.getElementById('tabBtnSources').style.display = perms.includes('sources') ? 'inline-block' : 'none';
+    document.getElementById('tabBtnVideos').style.display = perms.includes('videos') ? 'inline-block' : 'none';
+    document.getElementById('tabBtnManageUsers').style.display = perms.includes('manage_users') ? 'inline-block' : 'none';
+
+    if (perms.includes('docs')) switchAdminTab('docs');
+    else if (perms.includes('sources')) switchAdminTab('sources');
+    else if (perms.includes('videos')) switchAdminTab('videos');
+    else if (perms.includes('manage_users')) switchAdminTab('manage_users');
+}
+
+function switchAdminTab(type) {
+    document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('addDocForm').style.display = type === 'docs' ? 'flex' : 'none';
+    document.getElementById('addSourceForm').style.display = type === 'sources' ? 'flex' : 'none';
+    document.getElementById('addVidForm').style.display = type === 'videos' ? 'flex' : 'none';
+    document.getElementById('manageUsersSec').style.display = type === 'manage_users' ? 'flex' : 'none';
+    
+    if (type === 'docs' && document.getElementById('tabBtnDocs')) document.getElementById('tabBtnDocs').classList.add('active');
+    if (type === 'sources' && document.getElementById('tabBtnSources')) document.getElementById('tabBtnSources').classList.add('active');
+    if (type === 'videos' && document.getElementById('tabBtnVideos')) document.getElementById('tabBtnVideos').classList.add('active');
+    if (type === 'manage_users' && document.getElementById('tabBtnManageUsers')) {
+        document.getElementById('tabBtnManageUsers').classList.add('active');
+        fetchEmployeesList();
+    }
+}
+
+function populateAdminLists() {
+    const docsList = document.getElementById('adminDocsList');
+    const filterCat = document.getElementById('filterAdminCategory') ? document.getElementById('filterAdminCategory').value : '';
+    if (docsList) {
+        let filtered = allDocs;
+        if (filterCat) {
+            filtered = allDocs.filter(d => d.category === filterCat);
+        }
+        docsList.innerHTML = filtered.map(d => `
+            <div class="admin-item-row">
+                <span class="admin-item-title">${d.title}</span>
+                <span class="admin-item-badge">${d.category || 'عام'}</span>
+                <div class="admin-actions-btns">
+                    <button class="btn-edit-sm" onclick="editDoc(${d.id})">✏️ تعديل</button>
+                    <button class="btn-del-sm" onclick="deleteDoc(${d.id})">🗑️ حذف</button>
+                </div>
+            </div>
+        `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد عناصر مضافة بهذا القسم.</p>';
+    }
+
+    const sourcesList = document.getElementById('adminSourcesList');
+    if (sourcesList) {
+        sourcesList.innerHTML = allSources.map(s => `
+            <div class="admin-item-row">
+                <span class="admin-item-title">${s.title}</span>
+                <div class="admin-actions-btns">
+                    <button class="btn-edit-sm" onclick="editSource(${s.id})">✏️ تعديل</button>
+                    <button class="btn-del-sm" onclick="deleteSource(${s.id})">🗑️ حذف</button>
+                </div>
+            </div>
+        `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد وثائق مضافة.</p>';
+    }
+
+    const vidsList = document.getElementById('adminVidsList');
+    if (vidsList) {
+        vidsList.innerHTML = allVideos.map(v => `
+            <div class="admin-item-row">
+                <span class="admin-item-title">${v.title}</span>
+                <div class="admin-actions-btns">
+                    <button class="btn-edit-sm" onclick="editVid(${v.id})">✏️ تعديل</button>
+                    <button class="btn-del-sm" onclick="deleteVid(${v.id})">🗑️ حذف</button>
+                </div>
+            </div>
+        `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد فيديوهات مضافة.</p>';
+    }
+}
+
+function editDoc(id) {
+    const doc = allDocs.find(d => d.id === id);
+    if (!doc) return;
+    document.getElementById('edit_doc_id').value = doc.id;
+    document.getElementById('doc_title').value = doc.title;
+    document.getElementById('doc_author').value = doc.author || '';
+    document.getElementById('doc_cat').value = doc.category || 'بحوث عقائدية';
+    document.getElementById('doc_url').value = doc.file_url;
+    document.getElementById('doc_desc').value = doc.description || '';
+    document.getElementById('docFormHeading').textContent = '✏️ تعديل بيانات الكتاب / البحث';
+    document.getElementById('saveDocBtn').textContent = '💾 تحديث البيانات';
+    document.getElementById('cancelDocEditBtn').style.display = 'inline-flex';
+}
+
+function cancelDocEdit() {
+    document.getElementById('edit_doc_id').value = '';
+    document.getElementById('doc_title').value = '';
+    document.getElementById('doc_author').value = '';
+    document.getElementById('doc_url').value = '';
+    document.getElementById('doc_desc').value = '';
+    document.getElementById('docFormHeading').textContent = '➕ إضافة بحث / كتاب جديد';
+    document.getElementById('saveDocBtn').textContent = '💾 حفظ ونشر الملف';
+    document.getElementById('cancelDocEditBtn').style.display = 'none';
+}
+
+async function deleteDoc(id) {
+    if (confirm('هل أنت متأكد من حذف هذا الكتاب/المستند؟')) {
+        const { error } = await supabaseClient.from('documents').delete().eq('id', id);
+        if (!error) { fetchDocuments(); } else { alert('حدث خطأ أثناء عملية الحذف.'); }
+    }
+}
+
+function editSource(id) {
+    const src = allSources.find(s => s.id === id);
+    if (!src) return;
+    document.getElementById('edit_source_id').value = src.id;
+    document.getElementById('source_title').value = src.title;
+    document.getElementById('source_img_url').value = src.image_url;
+    document.getElementById('source_desc').value = src.description || '';
+    document.getElementById('sourceFormHeading').textContent = '✏️ تعديل الوثيقة المصورة';
+    document.getElementById('saveSourceBtn').textContent = '💾 تحديث الوثيقة';
+    document.getElementById('cancelSourceEditBtn').style.display = 'inline-flex';
+}
+
+function cancelSourceEdit() {
+    document.getElementById('edit_source_id').value = '';
+    document.getElementById('source_title').value = '';
+    document.getElementById('source_img_url').value = '';
+    document.getElementById('source_desc').value = '';
+    document.getElementById('sourceFormHeading').textContent = '➕ إضافة وثيقة مصورة نادرة';
+    document.getElementById('saveSourceBtn').textContent = '💾 حفظ الوثيقة المصورة';
+    document.getElementById('cancelSourceEditBtn').style.display = 'none';
+}
+
+async function deleteSource(id) {
+    if (confirm('هل أنت متأكد من حذف هذه الوثيقة؟')) {
+        const { error } = await supabaseClient.from('sources').delete().eq('id', id);
+        if (!error) { fetchSources(); } else { alert('حدث خطأ أثناء عملية الحذف.'); }
+    }
+}
+
+function editVid(id) {
+    const vid = allVideos.find(v => v.id === id);
+    if (!vid) return;
+    document.getElementById('edit_vid_id').value = vid.id;
+    document.getElementById('vid_title').value = vid.title;
+    document.getElementById('vid_yt_id').value = vid.youtube_id;
+    document.getElementById('vidFormHeading').textContent = '✏️ تعديل الفيديو';
+    document.getElementById('saveVidBtn').textContent = '💾 تحديث الفيديو';
+    document.getElementById('cancelVidEditBtn').style.display = 'inline-flex';
+}
+
+function cancelVidEdit() {
+    document.getElementById('edit_vid_id').value = '';
+    document.getElementById('vid_title').value = '';
+    document.getElementById('vid_yt_id').value = '';
+    document.getElementById('vidFormHeading').textContent = '➕ إضافة فيديو يوتيوب جديد';
+    document.getElementById('saveVidBtn').textContent = '💾 حفظ الفيديو';
+    document.getElementById('cancelVidEditBtn').style.display = 'none';
+}
+
+async function deleteVid(id) {
+    if (confirm('هل أنت متأكد من حذف هذا الفيديو؟')) {
+        const { error } = await supabaseClient.from('videos').delete().eq('id', id);
+        if (!error) { fetchLatestVideos(); } else { alert('حدث خطأ أثناء عملية الحذف.'); }
+    }
+}
+
+async function saveEmployee(e) {
+    e.preventDefault();
+    const name = document.getElementById('emp_name').value.trim();
+    const pass = document.getElementById('emp_pass').value.trim();
+    const perms = [];
+    
+    if (document.getElementById('p_docs').checked) perms.push('docs');
+    if (document.getElementById('p_sources').checked) perms.push('sources');
+    if (document.getElementById('p_videos').checked) perms.push('videos');
+
+    if (!perms.length) { alert('يرجى تحديد صلاحية واحدة على الأقل للموظف!'); return; }
+
+    const btn = document.getElementById('saveEmpBtn');
+    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
+
+    const { error } = await supabaseClient.from('employees').insert([{
+        name: name,
+        password: pass,
+        permissions: perms
+    }]);
+
+    btn.disabled = false; btn.textContent = '➕ إضافة الموظف واعتماد صلاحياته';
+
+    if (!error) {
+        alert('✅ تم إتاحة حساب الموظف بنجاح!');
+        document.getElementById('emp_name').value = '';
+        document.getElementById('emp_pass').value = '';
+        document.querySelectorAll('.perm-checkbox-item input').forEach(c => c.checked = false);
+        fetchEmployeesList();
+    } else {
+        alert('⚠️ تعذر الحفظ، ربما كلمة المرور مستخدمة لموظف آخر.');
+    }
+}
+
+async function fetchEmployeesList() {
+    const listContainer = document.getElementById('employeesList');
+    if (!supabaseClient || !listContainer) return;
+    
+    const { data } = await supabaseClient.from('employees').select('*');
+    if (!data || !data.length) { listContainer.innerHTML = '<p style="color:var(--muted);">لا يوجد موظفين حالياً.</p>'; return; }
+
+    listContainer.innerHTML = '';
+    data.forEach(emp => {
+        const item = document.createElement('div');
+        item.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); padding:10px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;';
+        
+        let permText = (emp.permissions || []).map(p => {
+            if (p === 'docs') return 'كتب/PDF';
+            if (p === 'sources') return 'وثائق';
+            if (p === 'videos') return 'فيديوهات';
+            if (p === 'manage_users') return 'مدير عام';
+            return p;
+        }).join(' ، ');
+
+        item.innerHTML = `
+            <div>
+                <strong style="color:var(--gold); font-size:0.9rem;">${emp.name}</strong>
+                <div style="font-size:0.75rem; color:var(--muted);">الصلاحيات: ${permText}</div>
+            </div>
+            ${emp.permissions.includes('manage_users') ? '<span style="font-size:0.75rem; color:var(--mint); font-weight:700;">[مدير]</span>' : `<button class="btn red" style="padding:3px 8px; font-size:0.72rem;" onclick="deleteEmployee(${emp.id})">حذف</button>`}
+        `;
+        listContainer.appendChild(item);
+    });
+}
+
+async function deleteEmployee(id) {
+    if (confirm('هل أنت تأكد من حذف هذا الموظف؟')) {
+        await supabaseClient.from('employees').delete().eq('id', id);
+        fetchEmployeesList();
+    }
+}
+
+async function saveNewDoc(e) {
+    e.preventDefault();
+    const btn = document.getElementById('saveDocBtn'), msg = document.getElementById('adminStatusMsg');
+    const editId = document.getElementById('edit_doc_id').value;
+    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
+    
+    const docData = {
+        title: document.getElementById('doc_title').value,
+        author: document.getElementById('doc_author').value,
+        category: document.getElementById('doc_cat').value,
+        file_url: document.getElementById('doc_url').value,
+        description: document.getElementById('doc_desc').value,
+        date: new Date().toISOString().split('T')[0]
+    };
+
+    let error;
+    if (editId) {
+        const res = await supabaseClient.from('documents').update(docData).eq('id', editId);
+        error = res.error;
+    } else {
+        const res = await supabaseClient.from('documents').insert([docData]);
+        error = res.error;
+    }
+
+    btn.disabled = false; btn.textContent = editId ? '💾 تحديث البيانات' : '💾 حفظ ونشر الملف';
+    if (!error) {
+        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم حفظ ونشر المستند بنجاح!';
+        cancelDocEdit();
+        fetchDocuments();
+    } else {
+        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ حدث خطأ أثناء الحفظ.';
+    }
+}
+
+async function saveNewSource(e) {
+    e.preventDefault();
+    const btn = document.getElementById('saveSourceBtn'), msg = document.getElementById('adminStatusMsg');
+    const editId = document.getElementById('edit_source_id').value;
+    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
+    
+    const sourceData = {
+        title: document.getElementById('source_title').value,
+        image_url: document.getElementById('source_img_url').value,
+        description: document.getElementById('source_desc').value
+    };
+
+    let error;
+    if (editId) {
+        const res = await supabaseClient.from('sources').update(sourceData).eq('id', editId);
+        error = res.error;
+    } else {
+        const res = await supabaseClient.from('sources').insert([sourceData]);
+        error = res.error;
+    }
+
+    btn.disabled = false; btn.textContent = editId ? '💾 تحديث الوثيقة' : '💾 حفظ الوثيقة المصورة';
+    if (!error) {
+        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم حفظ ونشر الوثيقة المصورة بنجاح!';
+        cancelSourceEdit();
+        fetchSources();
+    } else {
+        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ حدث خطأ أثناء الحفظ.';
+    }
+}
+
+async function saveNewVid(e) {
+    e.preventDefault();
+    const btn = document.getElementById('saveVidBtn'), msg = document.getElementById('adminStatusMsg');
+    const editId = document.getElementById('edit_vid_id').value;
+    btn.disabled = true; btn.textContent = 'جاري الحفظ...';
+    
+    const vidData = {
+        title: document.getElementById('vid_title').value,
+        youtube_id: document.getElementById('vid_yt_id').value
+    };
+
+    let error;
+    if (editId) {
+        const res = await supabaseClient.from('videos').update(vidData).eq('id', editId);
+        error = res.error;
+    } else {
+        const res = await supabaseClient.from('videos').insert([vidData]);
+        error = res.error;
+    }
+
+    btn.disabled = false; btn.textContent = editId ? '💾 تحديث الفيديو' : '💾 حفظ الفيديو';
+    if (!error) {
+        msg.style.display = 'block'; msg.style.color = 'var(--mint)'; msg.textContent = '✅ تم حفظ ونشر الفيديو بنجاح!';
+        cancelVidEdit();
+        fetchLatestVideos();
+    } else {
+        msg.style.display = 'block'; msg.style.color = '#df252c'; msg.textContent = '⚠️ حدث خطأ أثناء الحفظ.';
+    }
+}
+
+/* عرض بطاقات الوثائق بتصميم الغلاف المصغر الأيقوني المطابق تماماً للصورة أسلوباً وشكلاً */
+function renderDocs(docs) {
+    const grid = document.getElementById('docs');
+    if (!grid) return;
+    grid.innerHTML = '';
+    if (!docs.length) {
+        document.getElementById('empty').style.display = 'block';
+        document.getElementById('count').textContent = '0 نتائج';
+        return;
+    }
+    document.getElementById('empty').style.display = 'none';
+    document.getElementById('count').textContent = docs.length + ' ملفات';
+
+    docs.forEach(doc => {
+        const catName = doc.category || 'منوع';
+
+        const card = document.createElement('article');
+        card.className = 'book-cover-card';
+        card.setAttribute('data-category', catName);
+        
+        card.innerHTML = `
+            <div class="book-cover-frame"></div>
+            
+            <!-- 1. المربع العنابي/الملكي المشطوف الزوايا للأعلى -->
+            <div class="cover-box-category">
+                ${catName}
+            </div>
+
+            <!-- 2. المربع العنابي الأوسط لعنوان الوثيقة والكتاب -->
+            <div class="cover-box-title">
+                ${doc.title}
+            </div>
+
+            <!-- 3. المساحة الوسطى للوصف والباحث -->
+            <div class="cover-box-desc">
+                <p>${doc.description || 'مستند علمي موثق صادر عن منصة نهج الحقيقة.'}</p>
+                <div style="font-size:0.65rem; color:var(--gold); margin-top:3px; font-weight:700;">
+                    ${doc.author ? '✍️ ' + doc.author : ''}
+                </div>
+            </div>
+
+            <!-- 4. المربع السفلي الصغير جداً المصمم بنفس شكل غلاف الصورة -->
+            <div class="cover-box-footer">
+                <span>📖 قراءة PDF</span>
+            </div>
+        `;
+        
+        card.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url));
+        grid.appendChild(card);
+    });
+}
+
+const q = document.getElementById('q'), cat = document.getElementById('category'), sortBy = document.getElementById('sortBy');
+function filterAndRenderDocs() {
+    if (!q || !cat) return;
+    let term = q.value.trim().toLowerCase();
+    let category = cat.value;
+    let sort = sortBy ? sortBy.value : 'newest';
+
+    let filtered = allDocs.filter(d => {
+        let match = (d.title + ' ' + (d.author || '') + ' ' + (d.description || '')).toLowerCase().includes(term);
+        let cMatch = !category || d.category === category;
+        return match && cMatch;
+    });
+
+    if (sort === 'title') filtered.sort((a,b) => (a.title||'').localeCompare(b.title||'', 'ar'));
+    else filtered.reverse();
+
+    renderDocs(filtered);
+}
+function filterByTag(c, btn) {
+    if (cat) { cat.value = c; filterAndRenderDocs(); }
+    document.querySelectorAll('.quick-tags .tag-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+}
+
+if (q) q.addEventListener('input', filterAndRenderDocs);
+if (cat) cat.addEventListener('change', filterAndRenderDocs);
+if (sortBy) sortBy.addEventListener('change', filterAndRenderDocs);
+
+fetchDocuments();
+fetchSources();
+fetchLatestVideos();
+</script>
 </body>
 </html>
