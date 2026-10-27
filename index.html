@@ -28,7 +28,7 @@
       gtag('js', new Date());
       gtag('config', 'G-6GEV65PB24');
     </script>
-
+      
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://nahjalhaqiqa.github.io/">
     <meta property="og:title" content="نهج الحقيقة | من أجل معرفة أعمق .. لحقيقة أصدق">
@@ -214,6 +214,7 @@
     .verse-time-box strong{font-size:.88rem;color:var(--gold);font-weight:800;direction:rtl}
     #siteClock{font-variant-numeric:tabular-nums;direction:ltr}
 
+    /* مواقيت الصلاة */
     .prayer-times-box {
         margin-top: 14px;
         padding-top: 12px;
@@ -247,6 +248,327 @@
     }
     .prayer-item span { display: block; color: var(--muted); font-size: 0.68rem; }
     .prayer-item strong { color: #fff; font-size: 0.78rem; font-weight: 700; }
+
+    .verse-day-note{font-size:.72rem;color:var(--muted);margin:12px 0 16px}
+    .sidebar-menu-list {
+        border-top: 1px solid var(--line); padding-top: 12px; text-align: right;
+    }
+    .sidebar-menu-title { font-size: 0.9rem; font-weight: 800; color: var(--gold); margin-bottom: 10px; }
+    .sidebar-menu-item {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 0.85rem; font-weight: 600; color: var(--ink);
+    }
+    .sidebar-menu-item:hover { color: var(--mint); }
+
+    .research-grid-main {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+    }
+    .research-card-item {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        box-shadow: var(--shadow);
+    }
+    .research-card-item:hover { border-color: var(--mint); transform: translateY(-3px); }
+    .research-card-img {
+        width: 100%; height: 130px; object-fit: cover; background: #000; position: relative;
+    }
+    .research-card-badge {
+        position: absolute; top: 10px; right: 10px; background: rgba(3, 22, 34, 0.85); color: var(--gold);
+        padding: 2px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 700; border: 1px solid var(--line);
+    }
+    .research-card-body { padding: 14px; display: flex; flex-direction: column; flex: 1; }
+    .research-card-body h4 { margin: 0 0 6px; font-size: 0.95rem; font-weight: 800; color: var(--ink); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .research-card-body p { margin: 0 0 12px; font-size: 0.78rem; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex: 1; }
+    .research-card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+
+    .bottom-banner-cta {
+        background: linear-gradient(135deg, #041e2e, #031622);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 22px 30px;
+        margin: 30px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        box-shadow: var(--shadow);
+    }
+    .bottom-banner-cta .cta-text { flex: 1; min-width: 260px; text-align: right; }
+    .bottom-banner-cta h3 { margin: 0 0 4px; font-size: 1.15rem; color: var(--gold); font-weight: 800; }
+    .bottom-banner-cta p { margin: 0; color: var(--muted); font-size: 0.85rem; }
+    .cta-btn {
+        background: var(--gold); color: #031622; padding: 10px 22px; border-radius: 25px; font-weight: 800; font-size: 0.85rem; border: none; cursor: pointer;
+    }
+    .cta-btn:hover { opacity: 0.9; }
+
+    .tools{display:grid;grid-template-columns:1fr 200px 160px;gap:12px;margin:16px 0 12px}
+    .tools input,.tools select, .admin-form input, .admin-form select, .admin-form textarea, .contact-form input, .contact-form textarea{
+        width:100%; padding:12px 16px; border-radius:12px; border:1px solid var(--line);
+        background:var(--input-bg); color:var(--ink); outline:none; font-size: 0.9rem;
+    }
+    .quick-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+    .tag-btn {
+        background: var(--panel); border: 1px solid var(--line); color: var(--muted);
+        padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+    }
+    .tag-btn:hover, .tag-btn.active { border-color: var(--mint); color: var(--mint); background: var(--panel-hover); }
+
+    .doc-grid{display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:14px;}
+
+    .book-cover-card {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1.55;
+        background: #02070a;
+        border: 2px solid #d4af37;
+        border-radius: 4px;
+        padding: 6px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.9);
+        cursor: pointer;
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .book-cover-card:hover {
+        transform: translateY(-5px) scale(1.03);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.95), inset 0 0 8px rgba(212, 175, 55, 0.4);
+    }
+
+    .book-cover-frame {
+        position: absolute; inset: 2px;
+        border: 1px solid #d4af37;
+        pointer-events: none;
+        box-sizing: border-box;
+    }
+    .book-cover-frame::before {
+        content: ''; position: absolute; inset: 2px;
+        border: 1px dashed rgba(212, 175, 55, 0.5);
+    }
+
+    .cover-box-category {
+        background: #5c1114;
+        border: 1.5px solid #d4af37;
+        clip-path: polygon(
+            12px 0%, calc(100% - 12px) 0%, 
+            100% 12px, 100% calc(100% - 12px), 
+            calc(100% - 12px) 100%, 12px 100%, 
+            0% calc(100% - 12px), 0% 12px
+        );
+        border-radius: 4px;
+        padding: 4px 6px;
+        text-align: center;
+        color: #fce8ad;
+        font-size: 0.68rem;
+        font-weight: 800;
+        margin-top: 4px;
+        position: relative; z-index: 2;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        box-shadow: inset 0 0 6px rgba(0,0,0,0.6);
+    }
+
+    .cover-box-title {
+        background: #5c1114;
+        border: 1.5px solid #d4af37;
+        clip-path: polygon(
+            14px 0%, calc(100% - 14px) 0%, 
+            100% 14px, 100% calc(100% - 14px), 
+            calc(100% - 14px) 100%, 14px 100%, 
+            0% calc(100% - 14px), 0% 14px
+        );
+        border-radius: 4px;
+        padding: 8px 6px;
+        text-align: center;
+        color: #ffffff;
+        font-size: 0.78rem;
+        font-weight: 900;
+        margin-top: 5px;
+        line-height: 1.35;
+        position: relative; z-index: 2;
+        display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        box-shadow: inset 0 0 8px rgba(0,0,0,0.7);
+    }
+
+    .cover-box-desc {
+        background: rgba(0, 0, 0, 0.85);
+        border: 1px dashed rgba(212, 175, 55, 0.3);
+        border-radius: 4px;
+        padding: 5px;
+        margin: 5px 0;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        color: #d1e2e5;
+        font-size: 0.65rem;
+        line-height: 1.35;
+        position: relative; z-index: 2;
+        overflow: hidden;
+    }
+
+    .cover-box-desc p {
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .cover-box-footer {
+        background: #5c1114;
+        border: 1px solid #d4af37;
+        border-radius: 10px;
+        padding: 2px 8px;
+        margin: 0 auto 3px;
+        width: 80%;
+        text-align: center;
+        color: #fce8ad;
+        font-size: 0.6rem;
+        font-weight: 700;
+        position: relative; z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+    }
+
+    .admin-item-row {
+        background: rgba(0,0,0,0.25);
+        border: 1px solid var(--line);
+        padding: 10px 14px;
+        border-radius: 10px;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+    .admin-item-title {
+        font-size: 0.88rem; font-weight: 700; color: var(--ink);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 55%;
+    }
+    .admin-item-badge {
+        font-size: 0.72rem; padding: 2px 8px; border-radius: 10px; background: rgba(243, 213, 138, 0.15); color: var(--gold); border: 1px solid var(--line);
+    }
+    .admin-actions-btns { display: flex; gap: 6px; }
+    .btn-edit-sm { background: rgba(39, 213, 177, 0.15); border: 1px solid var(--mint); color: var(--mint); padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
+    .btn-del-sm { background: rgba(223, 37, 44, 0.15); border: 1px solid #df252c; color: #df252c; padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
+
+    .btn{
+        display:inline-flex; justify-content:center; align-items:center; padding:8px 18px; border:0; border-radius:22px;
+        background: var(--green); color:white; font-weight:700; cursor:pointer; font-size: 0.88rem; text-decoration: none;
+    }
+    .btn:hover{ opacity: 0.9; }
+    .btn.ghost{background:rgba(255,255,255,0.05); border:1px solid var(--line); color: var(--ink);}
+    .btn.shrink{background: rgba(243, 213, 138, 0.15); border: 1px solid var(--gold); color: var(--gold);}
+    .btn.red{background: linear-gradient(135deg, #df252c, #b0181e); color: white;}
+
+    .empty{padding:30px;text-align:center;border:1px dashed var(--line);border-radius:16px;color:var(--muted);display:none}
+
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);display:none;align-items:center;justify-content:center;z-index:200;padding:12px;backdrop-filter:blur(8px)}
+    .modal-content{background:var(--bg-body);border:1px solid var(--mint);border-radius:18px;width:min(900px, 100%);max-height:90vh;overflow-y:auto;padding:16px 20px; position: relative;}
+    .pdf-modal-content { background: var(--bg-body); border: 1px solid var(--mint); border-radius: 18px; width: min(1050px, 100%); height: 90vh; display: flex; flex-direction: column; padding: 16px; }
+    .back-btn{ background: linear-gradient(135deg, #df252c, #b0181e); border: none; color: #fff; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 12px rgba(223,37,44,0.3); }
+
+    .sticky-close-bar {
+        position: sticky; top: 0; z-index: 100; background: var(--bg-body);
+        display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); margin-bottom: 12px;
+    }
+
+    #imageZoomModal {
+        position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); z-index: 400; display: none;
+        flex-direction: column; align-items: center; justify-content: space-between; padding: 15px;
+    }
+    .zoom-header {
+        width: 100%; display: flex; justify-content: space-between; align-items: center;
+        background: rgba(3, 22, 34, 0.95); padding: 10px 16px; border-radius: 14px; border: 1px solid var(--line);
+        z-index: 410;
+    }
+    .zoom-body {
+        flex: 1; width: 100%; display: flex; justify-content: center; align-items: center; overflow: auto; padding: 10px 0; cursor: pointer;
+    }
+    .zoom-body img {
+        max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); cursor: default;
+    }
+
+    footer{
+        margin-top:40px; background:#02121c; border-top:1px solid var(--line); padding:35px 0 25px; color:var(--muted); font-size: 0.85rem;
+    }
+    .footer-grid {
+        display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 30px; margin-bottom: 30px;
+    }
+    .footer-col h4 { color: var(--gold); font-size: 1rem; margin: 0 0 12px; font-weight: 800; }
+    .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col ul li a:hover { color: var(--mint); }
+    .footer-bottom {
+        border-top: 1px solid var(--line); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+    }
+    .social-icons{display:flex;gap:10px}
+    .social-icons a{
+        display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%;
+        background:rgba(255,255,255,0.05); border:1px solid var(--line); color:var(--ink); font-size:0.85rem;
+    }
+    .social-icons a:hover{background:var(--green); color:#fff; border-color:var(--green);}
+
+    .mobile-bottom-nav {
+        display: none; position: fixed; bottom: 0; left: 0; right: 0; height: 65px;
+        background: #031622; border-top: 1px solid var(--line); z-index: 150;
+        justify-content: space-around; align-items: center; padding: 0 5px;
+    }
+    .mobile-nav-item {
+        display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--muted); font-size: 0.7rem; font-weight: 700;
+    }
+    .mobile-nav-item.active, .mobile-nav-item:hover { color: var(--gold); }
+    .mobile-nav-item span:first-child { font-size: 1.2rem; }
+
+    #pdfCanvasContainer {
+        flex: 1; width: 100%; overflow-y: auto; text-align: center; background: #010a10; border-radius: 12px; padding: 10px 0;
+    }
+    #pdfCanvasContainer canvas {
+        max-width: 98%; height: auto !important; margin: 0 auto 12px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    .admin-tab-btn {
+        padding: 8px 16px; border-radius: 20px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-weight: 700; cursor: pointer;
+    }
+    .admin-tab-btn.active {
+        background: var(--gold); color: #031622; border-color: var(--gold);
+    }
+
+    .perm-checkbox-item {
+        display: flex; align-items: center; gap: 8px; font-size: 0.85rem; background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; border: 1px solid var(--line);
+    }
+
+    @media(max-width:1200px){
+        .doc-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+    }
+    @media(max-width:992px){
+        .main-content-grid { grid-template-columns: 1fr; }
+        .quick-cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .research-grid-main { grid-template-columns: 1fr 1fr; }
+        .doc-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+        .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:768px){
+        .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .research-grid-main { grid-template-columns: 1fr; }
+        .tools{grid-template-columns:1fr}
+        .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+        .footer-grid { grid-template-columns: 1fr; }
+        .mobile-bottom-nav { display: flex; }
+        body { padding-bottom: 60px; }
+        nav { display: none; }
+    }
     </style>
 </head>
 <body>
@@ -283,7 +605,95 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <main id="top">
-<!-- محتوى الموقع يوضع هنا -->
+
+<div class="hero-banner">
+    <div class="hero-content">
+        <h1>نـهـج الـحـقـيـقـة</h1>
+        <div class="hero-subtitle">من أجل معرفة أعمق .. لحقيقة أصدق</div>
+        <div class="hero-desc">منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية، وملفات PDF، وقناة يوتيوب، وبرنامج حواري.</div>
+        <div class="hero-search-box">
+            <input type="text" id="heroSearchInput" placeholder="ابحث في الموقع..." oninput="syncHeroSearch(this.value)">
+            <button onclick="location.href='#library'">🔍</button>
+        </div>
+    </div>
+</div>
+
+<div class="wrap">
+<div class="quick-cards-grid">
+    <article class="quick-card" onclick="location.href='#library'">
+        <div class="q-icon">🔍</div>
+        <h3>البحث المتقدم</h3>
+        <p>ابحث في كل محتوى الموقع</p>
+    </article>
+    <article class="quick-card" onclick="location.href='#library'">
+        <div class="q-icon">📚</div>
+        <h3>المكتبة</h3>
+        <p>أبحاث ومقالات وبحوث</p>
+    </article>
+    <article class="quick-card" onclick="location.href='#sources-section'">
+        <div class="q-icon">📜</div>
+        <h3>الوثائق</h3>
+        <p>مخطوطات ووثائق نادرة</p>
+    </article>
+    <article class="quick-card" onclick="location.href='#library'">
+        <div class="q-icon">📁</div>
+        <h3>ملفات PDF</h3>
+        <p>كتب ودراسات قابلة للتحميل</p>
+    </article>
+    <article class="quick-card" onclick="location.href='#youtube'">
+        <div class="q-icon">🎙️</div>
+        <h3>برنامج على طاولة الحقيقة</h3>
+        <p>حوار .. فكر .. دليل</p>
+    </article>
+    <article class="quick-card" onclick="window.open('https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K', '_blank')">
+        <div class="q-icon">▶</div>
+        <h3>قناة يوتيوب</h3>
+        <p>مقاطع ومحاضرات مميزة</p>
+    </article>
+</div>
+</div>
+
+<div class="wrap" style="margin-top: 10px;">
+<div class="main-content-grid">
+
+    <div>
+        <div class="head" style="margin-top:0;">
+            <h2>أحدث المقالات والأبحاث</h2>
+            <small onclick="location.href='#library'">عرض الكل ←</small>
+        </div>
+        <div class="research-grid-main" id="latest-research-container">
+            <p style="color:var(--muted); font-size:0.85rem;">جاري جلب أحدث الأبحاث...</p>
+        </div>
+    </div>
+
+    <aside>
+        <div class="verse-side-card">
+            <div class="verse-day-topline"><span class="verse-day-icon">۞</span><span>نورٌ من القرآن</span><span class="verse-day-icon">۞</span></div>
+            <h3>آية اليوم</h3>
+            <div class="verse-text" id="dailyVerseText">﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾</div>
+            <div class="verse-source" id="dailyVerseSource">سورة الشرح · الآية 6</div>
+            <div class="verse-datetime">
+                <div class="verse-time-box"><span class="verse-time-label">الوقت الآن</span><strong id="siteClock">--:--:--</strong></div>
+                <div class="verse-time-box"><span class="verse-time-label">التاريخ</span><strong id="siteDate">جاري التحميل...</strong></div>
+            </div>
+            
+            <div class="prayer-times-box">
+                <div class="prayer-title">🕌 مواقيت الصلاة (توقيت بغداد)</div>
+                <div class="prayer-grid">
+                    <div class="prayer-item" id="p_fajr"><span>الفجر</span><strong>04:52</strong></div>
+                    <div class="prayer-item" id="p_shuruq"><span>الشروق</span><strong>06:15</strong></div>
+                    <div class="prayer-item" id="p_dhuhr"><span>الظهر</span><strong>11:55</strong></div>
+                    <div class="prayer-item" id="p_asr"><span>العصر</span><strong>03:02</strong></div>
+                    <div class="prayer-item" id="p_maghrib"><span>المغرب</span><strong>05:38</strong></div>
+                    <div class="prayer-item" id="p_isha"><span>العشاء</span><strong>07:05</strong></div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+</div>
+</div>
+
 </main>
 
 </body>
