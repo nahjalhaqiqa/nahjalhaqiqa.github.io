@@ -126,7 +126,7 @@
 
   .install-btn-nav {
       background: rgba(39, 213, 177, 0.15); border: 1px solid var(--mint); color: var(--mint);
-      padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; font-weight: 700; display: none; align-items: center; gap: 5px;
+      padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;
   }
 
   .hero-banner {
@@ -516,7 +516,7 @@
       <a href="#contact">تواصل معنا</a>
     </nav>
     <div class="nav-actions">
-      <button class="install-btn-nav" id="installPwaBtn" onclick="installPWA()">📲 تثبيت</button>
+      <button class="install-btn-nav" id="installPwaBtn" onclick="installPWA()" style="display:inline-flex;">📲 تثبيت التطبيق</button>
       <button class="icon-action-btn" onclick="toggleBookmarksView()" title="المفضلة">⭐</button>
       <button class="icon-action-btn" onclick="toggleTheme()" id="themeToggle" title="تبديل الوضع">🌙</button>
       <button class="icon-action-btn" onclick="openAdminModal()" title="لوحة التحكم الإدارية" style="color:var(--mint);">⚙️</button>
@@ -1121,16 +1121,34 @@ setInterval(updateDailyVerseAndClock, 1000);
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
+/* --- كود التثبيت المحدث والمكيف لجميع الأجهزة والآيفون --- */
 let deferredPrompt = null;
 window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault(); deferredPrompt = e;
+    e.preventDefault(); 
+    deferredPrompt = e;
     const btn = document.getElementById('installPwaBtn');
     if (btn) btn.style.display = 'inline-flex';
 });
+
 function installPWA() {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(() => { deferredPrompt = null; document.getElementById('installPwaBtn').style.display = 'none'; });
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+    if (isIOS) {
+        alert('لتثبيت التطبيق على جهاز الآيفون الخاص بك:\n\n1. اضغط على زر المشاركة (Share) ⎋ أسفل متصفح Safari.\n2. اختر "إضافة إلى الشاشة الرئيسية" (Add to Home Screen).\n3. اضغط على "إضافة" (Add).');
+        return;
+    }
+
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                showToast('تم تثبيت التطبيق بنجاح!');
+            }
+            deferredPrompt = null;
+        });
+    } else {
+        showToast('يمكنك تثبيت الموقع من خيارات القائمة الرئيسية في متصفحك.');
+    }
 }
 
 function toggleTheme() {
@@ -1326,9 +1344,23 @@ function renderPodcastsPlaylist() {
     }).join('');
 }
 
+/* --- كود التحميل المباشر المحدث والمكيف لجميع الأجهزة والآيفون --- */
 function triggerDirectDownload(url, name) {
-    const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.download = name || 'file';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    if (!url) return;
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+    if (isIOS) {
+        window.open(url, '_blank');
+        showToast('تم فتح الملف، يمكنك حفظه من خيارات المشاركة في المتصفح.');
+    } else {
+        const a = document.createElement('a');
+        a.href = url;
+        a.target = '_blank';
+        a.download = name || 'file';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => { document.body.removeChild(a); }, 100);
+    }
 }
 function downloadFileDirectly() { if (activePdfUrl) triggerDirectDownload(activePdfUrl, activePdfName + '.pdf'); }
 
@@ -1674,7 +1706,6 @@ function logoutAdmin() {
 
 function applyUserPermissions() {
     const perms = currentLoggedInUser.permissions || [];
-    // السماح بظهور التبويبات بحسب الصلاحيات أو إذا كان المدير العام (Admin)
     const isAdmin = currentLoggedInUser.name.includes('مدير') || currentLoggedInUser.name.includes('Admin') || perms.length === 0;
 
     document.getElementById('tabBtnDocs').style.display = (isAdmin || perms.includes('docs')) ? 'inline-block' : 'none';
@@ -1683,7 +1714,6 @@ function applyUserPermissions() {
     document.getElementById('tabBtnPodcasts').style.display = (isAdmin || perms.includes('podcasts')) ? 'inline-block' : 'none';
     document.getElementById('tabBtnManageUsers').style.display = (isAdmin || perms.includes('manage_users')) ? 'inline-block' : 'none';
 
-    // افتراض فتح تبويب الصوتيات أولاً لسهولة الاختبار، أو الكتب
     switchAdminTab('podcasts');
 }
 
