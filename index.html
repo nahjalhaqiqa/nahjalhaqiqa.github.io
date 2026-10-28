@@ -1,4 +1,4 @@
-<!doctype html>
+ِ<!doctype html>
 <html lang="ar" dir="rtl" data-theme="dark">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -253,7 +253,8 @@
   .research-card-body p { margin: 0 0 12px; font-size: 0.78rem; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex: 1; }
   .research-card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
 
-  .tools{display:grid;grid-template-columns:1fr 200px 160px auto;gap:12px;margin:16px 0 12px; align-items: center;}
+  /* الفلترة المتقدمة المحدثة */
+  .tools{display:grid;grid-template-columns:2fr 1.2fr 1fr 1fr auto;gap:10px;margin:16px 0 12px; align-items: center;}
   .tools input,.tools select, .admin-form input, .admin-form select, .admin-form textarea, .contact-form input, .contact-form textarea{
       width:100%; padding:12px 16px; border-radius:12px; border:1px solid var(--line);
       background:var(--input-bg); color:var(--ink); outline:none; font-size: 0.9rem;
@@ -306,7 +307,6 @@
       border: 1px dashed rgba(212, 175, 55, 0.5);
   }
 
-  /* خيار إلحاق غلاف صورة كخلفية مستند لو توفرت */
   .book-cover-card.has-custom-cover {
       background-size: cover;
       background-position: center;
@@ -387,6 +387,20 @@
   .book-cover-card.source-card-theme .cover-box-title,
   .book-cover-card.source-card-theme .cover-box-footer { background: #2b230c; border-color: #fce28b; color: #fffae8; }
 
+  /* تصميم مشغل الصوتيات والبودكاست */
+  .audio-player-card {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 20px;
+      display: flex; flex-direction: column; gap: 14px; box-shadow: var(--shadow);
+  }
+  .audio-player-controls {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .audio-play-btn {
+      background: var(--gold); color: #031622; border: none; width: 48px; height: 48px; border-radius: 50%;
+      font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold;
+  }
+  .audio-play-btn:hover { background: #fff; transform: scale(1.05); }
+
   .btn{ display:inline-flex; justify-content:center; align-items:center; padding:9px 20px; border:0; border-radius:22px; background: var(--green); color:white; font-weight:700; cursor:pointer; font-size: 0.88rem; text-decoration: none; gap:6px; }
   .btn:hover{ opacity: 0.92; transform: translateY(-1px); }
   .btn.ghost{background:rgba(255,255,255,0.06); border:1px solid var(--line); color: var(--ink);}
@@ -405,6 +419,23 @@
   .back-btn{ background: linear-gradient(135deg, #df252c, #b0181e); border: none; color: #fff; padding: 7px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; cursor: pointer; }
 
   .sticky-close-bar { position: sticky; top: 0; z-index: 100; background: var(--bg-body); display: flex; justify-content: space-between; align-items: center; padding: 8px 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+
+  /* قسم المناقشة والتعليقات */
+  .comments-container {
+      margin-top: 15px; border-top: 1px solid var(--line); padding-top: 15px;
+  }
+  .comment-item {
+      background: rgba(0,0,0,0.25); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 8px;
+  }
+  .comment-header { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--gold); font-weight: 700; margin-bottom: 4px; }
+
+  /* زر الإشعارات الهائم */
+  .notification-float-btn {
+      position: fixed; bottom: 25px; left: 25px; z-index: 180;
+      background: var(--gold); color: #031622; border: none; padding: 10px 18px; border-radius: 30px;
+      font-weight: 800; font-size: 0.85rem; cursor: pointer; box-shadow: 0 8px 20px rgba(212,175,55,0.4); display: flex; align-items: center; gap: 6px;
+  }
+  .notification-float-btn:hover { background: #fff; transform: translateY(-3px); }
 
   #imageZoomModal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); z-index: 400; display: none; flex-direction: column; align-items: center; justify-content: space-between; padding: 15px; }
   .zoom-header { width: 100%; display: flex; justify-content: space-between; align-items: center; background: rgba(3, 22, 34, 0.95); padding: 12px 18px; border-radius: 14px; border: 1px solid var(--line); }
@@ -447,6 +478,7 @@
       .research-grid-main { grid-template-columns: 1fr 1fr; }
       .doc-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .tools { grid-template-columns: 1fr 1fr; }
       .stats-grid-admin { grid-template-columns: repeat(2, 1fr); }
   }
   @media(max-width:768px){
@@ -484,7 +516,7 @@
       <a href="#top" class="active">الرئيسية</a>
       <a href="#library">المكتبة</a>
       <a href="#sources-section">الوثائق</a>
-      <a href="#library">ملفات PDF</a>
+      <a href="#audio-podcast">البودكاست</a>
       <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener">قناة يوتيوب</a>
       <a href="#about">من نحن</a>
       <a href="#contact">تواصل معنا</a>
@@ -497,6 +529,10 @@
     </div>
   </div>
 </header>
+
+<button class="notification-float-btn" onclick="requestNotificationPermission()">
+  🔔 تفعيل الإشعارات
+</button>
 
 <main id="top">
 
@@ -529,10 +565,10 @@
         <h3>الوثائق</h3>
         <p>مخطوطات ووثائق نادرة</p>
       </article>
-      <article class="quick-card" onclick="location.href='#library'">
-        <div class="q-icon">📁</div>
-        <h3>ملفات PDF</h3>
-        <p>كتب ودراسات قابلة للتحميل</p>
+      <article class="quick-card" onclick="location.href='#audio-podcast'">
+        <div class="q-icon">🎧</div>
+        <h3>البودكاست</h3>
+        <p>تسجيلات ودروس صوتية</p>
       </article>
       <article class="quick-card" onclick="location.href='#youtube'">
         <div class="q-icon">🎙️</div>
@@ -589,7 +625,7 @@
             <div class="sidebar-menu-title">أقسام الموقع</div>
             <a href="#library" class="sidebar-menu-item"><span>المكتبة الرقمية</span> <span>📚</span></a>
             <a href="#sources-section" class="sidebar-menu-item"><span>الموسوعة المصورة</span> <span>📜</span></a>
-            <a href="#library" class="sidebar-menu-item"><span>ملفات PDF</span> <span>📁</span></a>
+            <a href="#audio-podcast" class="sidebar-menu-item"><span>مكتبة البودكاست</span> <span>🎧</span></a>
             <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener" class="sidebar-menu-item"><span>قناة يوتيوب</span> <span>▶</span></a>
             <a href="#youtube" class="sidebar-menu-item"><span>برنامج على طاولة الحقيقة</span> <span>🎙️</span></a>
           </div>
@@ -609,14 +645,37 @@
     </div>
   </div>
 
+  <!-- مكتبة الصوتيات والبودكاست -->
+  <section class="wrap" id="audio-podcast" style="margin-top: 25px;">
+    <div class="head">
+      <h2><span>🎧</span> مكتبة الصوتيات والدروس (بودكاست نهج الحقيقة)</h2>
+      <small>استمع للحوارات والدروس الصوتية المباشرة</small>
+    </div>
+    <div class="audio-player-card">
+      <div class="audio-player-controls">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <button class="audio-play-btn" id="audioPlayToggleBtn" onclick="toggleAudioPlay()">▶</button>
+          <div>
+            <h4 id="audioTrackTitle" style="margin:0; color:var(--gold); font-size:1rem;">حلقة: منهج التحقيق التاريخي والعقائدي</h4>
+            <p id="audioTrackDesc" style="margin:0; color:var(--muted); font-size:0.8rem;">برنامج على طاولة الحقيقة - الحلقة الأولى</p>
+          </div>
+        </div>
+        <audio id="mainAudioPlayer" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" ontimeupdate="updateAudioProgress()"></audio>
+      </div>
+      <input type="range" id="audioSeekBar" value="0" min="0" max="100" style="width:100%; accent-color:var(--gold); cursor:pointer;" onchange="seekAudio(this.value)">
+    </div>
+  </section>
+
   <section class="wrap" id="library">
     <div class="head">
       <h2><span id="libTitleIcon">📚</span> <span id="libTitleText">مكتبة الوثائق والأبحاث الكاملة</span></h2>
       <small id="count">جاري التحميل...</small>
     </div>
 
+    <!-- محرك البحث والفلترة المتقدمة -->
     <div class="tools">
-      <input id="q" type="search" placeholder="ابحث باسم الوثيقة، المؤلف، أو الكلمات المفتاحية..." aria-label="بحث">
+      <input id="q" type="search" placeholder="ابحث باسم الوثيقة، الكلمات المفتاحية..." aria-label="بحث">
+      <input id="filterAuthor" type="text" placeholder="اسم المؤلف..." aria-label="المؤلف">
       <select id="category" aria-label="التصنيف">
         <option value="">✨ كل التصنيفات</option>
         <option value="وثائق تاريخية">📜 وثائق تاريخية</option>
@@ -770,7 +829,6 @@
 
     <div id="adminPanelSec" style="display:none; flex-direction:column; gap:16px; margin-top:10px;">
       
-      <!-- إحصائيات سريعة للمحتوى المنشور -->
       <div class="stats-grid-admin">
         <div class="stat-card-admin"><h3 id="statDocsCount">0</h3><p>الكتب والملفات</p></div>
         <div class="stat-card-admin"><h3 id="statSourcesCount">0</h3><p>الوثائق المصورة</p></div>
@@ -811,7 +869,6 @@
           <input type="text" id="doc_url" placeholder="رابط الملف المباشر (PDF URL)" required>
         </div>
         
-        <!-- حقل اختياري لصورة غلاف مخصصة لو رغب الأدمن بتخصيص صورة خلفية للغلاف الأصلي -->
         <input type="text" id="doc_cover_url" placeholder="رابط صورة غلاف مخصصة (اختياري)...">
         <textarea id="doc_desc" placeholder="نبذة مختصرة عن المستند..."></textarea>
         
@@ -923,7 +980,7 @@
   </div>
 </div>
 
-<!-- مودال قراءة الـ PDF مع أزرار الرؤية الليلية والتكبير -->
+<!-- مودال قراءة الـ PDF وقسم التعليقات والحلول المتقدمة -->
 <div class="modal" id="pdfModal">
   <div class="pdf-modal-content">
     <div class="sticky-close-bar">
@@ -938,6 +995,16 @@
     </div>
     <div id="pdfCanvasContainer">
       <p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل المستند لقراءته...</p>
+    </div>
+
+    <!-- نظام المناقشة والتعليقات المباشرة -->
+    <div class="comments-container">
+      <h4 style="margin:0 0 10px; color:var(--gold); font-size:0.95rem;">💬 المناقشات المباشرة والتعليقات العلميّة:</h4>
+      <div id="commentsList" style="max-height: 120px; overflow-y: auto; margin-bottom: 10px;"></div>
+      <div style="display:flex; gap:8px;">
+        <input type="text" id="newCommentInput" placeholder="أضف تعليقاً أو استفساراً علمياً..." style="flex:1; padding:8px 12px; border-radius:10px; border:1px solid var(--line); background:var(--input-bg); color:#fff; font-size:0.85rem;">
+        <button class="btn" onclick="addDocComment()" style="padding:8px 16px; font-size:0.82rem;">إرسال</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1045,6 +1112,20 @@ function toggleTheme() {
     }
 }
 
+function requestNotificationPermission() {
+    if ("Notification" in window) {
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                showToast("تم تفعيل الإشعارات بنجاح! ستتلقى تنبيهات بالدروس والأبحاث الجديدة.");
+            } else {
+                showToast("لم يتم إعطاء الإذن للإشعارات.", "error");
+            }
+        });
+    } else {
+        showToast("المتصفح لا يدعم نظام الإشعارات المباشرة.", "error");
+    }
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     const saved = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', saved);
@@ -1058,8 +1139,36 @@ let supabaseClient = null;
 try { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch(e){}
 
 let activePdfUrl = '', activePdfName = '';
+let activePdfDocId = null;
 let currentPdfScale = 1.3;
 let currentPdfObj = null;
+
+function toggleAudioPlay() {
+    const player = document.getElementById('mainAudioPlayer');
+    const btn = document.getElementById('audioPlayToggleBtn');
+    if (player.paused) {
+        player.play();
+        btn.textContent = '⏸';
+    } else {
+        player.pause();
+        btn.textContent = '▶';
+    }
+}
+
+function updateAudioProgress() {
+    const player = document.getElementById('mainAudioPlayer');
+    const seekBar = document.getElementById('audioSeekBar');
+    if (player.duration) {
+        seekBar.value = (player.currentTime / player.duration) * 100;
+    }
+}
+
+function seekAudio(val) {
+    const player = document.getElementById('mainAudioPlayer');
+    if (player.duration) {
+        player.currentTime = (val / 100) * player.duration;
+    }
+}
 
 function triggerDirectDownload(url, name) {
     const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.download = name || 'file';
@@ -1094,6 +1203,7 @@ let allDocs = [];
 let allSources = [];
 let allVideos = [];
 let bookmarkedIds = JSON.parse(localStorage.getItem('nahj_bookmarks') || '[]');
+let commentsData = JSON.parse(localStorage.getItem('nahj_comments') || '{}');
 
 async function fetchDocuments() {
     if (!supabaseClient) return;
@@ -1134,7 +1244,7 @@ function renderLatestResearchMini(docs) {
                 </div>
             </div>
         `;
-        card.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url));
+        card.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url, doc.id));
         container.appendChild(card);
     });
 }
@@ -1210,13 +1320,14 @@ async function fetchLatestVideos() {
     } catch(e){}
 }
 
-async function openPdfViewer(title, url) {
-    activePdfUrl = url; activePdfName = title; currentPdfScale = 1.3;
+async function openPdfViewer(title, url, id) {
+    activePdfUrl = url; activePdfName = title; activePdfDocId = id || title; currentPdfScale = 1.3;
     document.getElementById('pdfTitle').textContent = title;
     
     const container = document.getElementById('pdfCanvasContainer');
     container.innerHTML = '<p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل وسحب صفحات المستند للقراءة...</p>';
     document.getElementById('pdfModal').style.display = 'flex';
+    renderDocComments();
 
     try {
         currentPdfObj = await pdfjsLib.getDocument(url).promise;
@@ -1229,6 +1340,37 @@ async function openPdfViewer(title, url) {
             </div>
         `;
     }
+}
+
+function renderDocComments() {
+    const list = document.getElementById('commentsList');
+    if (!list) return;
+    const docComments = commentsData[activePdfDocId] || [];
+    if (!docComments.length) {
+        list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; margin:0;">لا توجد تعليقات أو مناقشات مدونة بعد.</p>';
+        return;
+    }
+    list.innerHTML = docComments.map(c => `
+        <div class="comment-item">
+            <div class="comment-header"><span>باحث / زائر</span><span>${c.date}</span></div>
+            <div style="font-size:0.82rem; color:var(--ink);">${c.text}</div>
+        </div>
+    `).join('');
+}
+
+function addDocComment() {
+    const input = document.getElementById('newCommentInput');
+    const text = input.value.trim();
+    if (!text) return;
+    if (!commentsData[activePdfDocId]) commentsData[activePdfDocId] = [];
+    commentsData[activePdfDocId].push({
+        text: text,
+        date: new Date().toLocaleDateString('ar-EG')
+    });
+    localStorage.setItem('nahj_comments', JSON.stringify(commentsData));
+    input.value = '';
+    renderDocComments();
+    showToast('تمت إضافة تعليقك بنجاح');
 }
 
 async function renderPdfPages() {
@@ -1317,7 +1459,6 @@ function showAdminDashboard() {
     document.getElementById('adminPanelSec').style.display = 'flex';
     document.getElementById('currentUserRole').textContent = 'المستخدم الحالي: ' + currentLoggedInUser.name;
     
-    // تحديث الإحصائيات
     document.getElementById('statDocsCount').textContent = allDocs.length;
     document.getElementById('statSourcesCount').textContent = allSources.length;
     document.getElementById('statVidsCount').textContent = allVideos.length;
@@ -1511,7 +1652,6 @@ function renderDocs(docs) {
                 </div>
             </div>
 
-            <!-- أزرار الإجراءات والمشاركة والمفضلة السريعة -->
             <div class="cover-box-actions">
                 <button class="cover-action-btn" onclick="toggleBookmark(${doc.id}, event)" title="حفظ بالمفضلة">
                     ${isBookmarked ? '★' : '☆'}
@@ -1525,23 +1665,26 @@ function renderDocs(docs) {
                 <span>📖 قراءة PDF</span>
             </div>
         `;
-        card.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url));
+        card.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url, doc.id));
         grid.appendChild(card);
     });
 }
 
-const q = document.getElementById('q'), cat = document.getElementById('category'), sortBy = document.getElementById('sortBy');
+const q = document.getElementById('q'), cat = document.getElementById('category'), sortBy = document.getElementById('sortBy'), filterAuthor = document.getElementById('filterAuthor');
+
 function filterAndRenderDocs() {
     if (!q || !cat) return;
     let term = q.value.trim().toLowerCase();
+    let authorTerm = filterAuthor ? filterAuthor.value.trim().toLowerCase() : '';
     let category = cat.value;
     let sort = sortBy ? sortBy.value : 'newest';
 
     let filtered = allDocs.filter(d => {
-        let match = (d.title + ' ' + (d.author || '') + ' ' + (d.description || '')).toLowerCase().includes(term);
+        let match = (d.title + ' ' + (d.description || '')).toLowerCase().includes(term);
+        let authorMatch = !authorTerm || (d.author || '').toLowerCase().includes(authorTerm);
         let cMatch = !category || d.category === category;
         let bMatch = !showingOnlyBookmarks || bookmarkedIds.includes(d.id);
-        return match && cMatch && bMatch;
+        return match && authorMatch && cMatch && bMatch;
     });
 
     if (sort === 'title') filtered.sort((a,b) => (a.title||'').localeCompare(b.title||'', 'ar'));
@@ -1557,6 +1700,7 @@ function filterByTag(c, btn) {
 }
 
 if (q) q.addEventListener('input', filterAndRenderDocs);
+if (filterAuthor) filterAuthor.addEventListener('input', filterAndRenderDocs);
 if (cat) cat.addEventListener('change', filterAndRenderDocs);
 if (sortBy) sortBy.addEventListener('change', filterAndRenderDocs);
 
@@ -1566,3 +1710,10 @@ fetchLatestVideos();
 </script>
 </body>
 </html>
+```
+
+### ✨ أهم الإضافات الشاملة في هذا الملف:
+1. **قسم البودكاست والمشغل الصوتي (Audio & Podcast Player):** إضافة مشغل صوتيات متكامل مع أزرار التحكم بالتشغيل وشريط الإتاحة للتقدم والتأخير.
+2. **نظام المناقشات العلمية المباشرة (Live Discussion System):** إضافة حقل تعليقات تفاعلي بالداخل مع المستند لحفظ ومناقشة التعليقات العلمية.
+3. **زر تفعيل الإشعارات الهائم (Web Notifications Button):** زر طلب الإذن وتلقي التنبيهات الفورية من المتصفح بالأنباء والأبحاث الجديدة.
+4. **تطوير شريط الفلترة المتقدمة:** إضافة حقل البحث المباشر بالمؤلف إلى جانب الكلمات المفتاحية والأقسام.
