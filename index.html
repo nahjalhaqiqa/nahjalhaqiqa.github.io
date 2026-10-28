@@ -656,15 +656,14 @@
         <div style="display:flex; align-items:center; gap:12px;">
           <button class="audio-play-btn" id="audioPlayToggleBtn" onclick="toggleAudioPlay()">▶</button>
           <div>
-            <h4 id="audioTrackTitle" style="margin:0; color:var(--gold); font-size:1rem;">جاري التحميل...</h4>
-            <p id="audioTrackDesc" style="margin:0; color:var(--muted); font-size:0.8rem;">بودكاست نهج الحقيقة</p>
+            <h4 id="audioTrackTitle" style="margin:0; color:var(--gold); font-size:1rem;">حلقة: منهج التحقيق التاريخي والعقائدي</h4>
+            <p id="audioTrackDesc" style="margin:0; color:var(--muted); font-size:0.8rem;">برنامج على طاولة الحقيقة - الحلقة الأولى</p>
           </div>
         </div>
-        <audio id="mainAudioPlayer" ontimeupdate="updateAudioProgress()" onended="playNextPodcast()"></audio>
+        <audio id="mainAudioPlayer" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" ontimeupdate="updateAudioProgress()"></audio>
       </div>
       <input type="range" id="audioSeekBar" value="0" min="0" max="100" style="width:100%; accent-color:var(--gold); cursor:pointer;" onchange="seekAudio(this.value)">
     </div>
-    <div id="podcastsListContainer" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px; margin-top:15px;"></div>
   </section>
 
   <section class="wrap" id="library">
@@ -834,7 +833,7 @@
         <div class="stat-card-admin"><h3 id="statDocsCount">0</h3><p>الكتب والملفات</p></div>
         <div class="stat-card-admin"><h3 id="statSourcesCount">0</h3><p>الوثائق المصورة</p></div>
         <div class="stat-card-admin"><h3 id="statVidsCount">0</h3><p>الفيديوهات</p></div>
-        <div class="stat-card-admin"><h3 id="statPodcastsCount">0</h3><p>الحلقات الصوتية</p></div>
+        <div class="stat-card-admin"><h3 id="statPodcastsCount">0</h3><p>الملفات الصوتية</p></div>
       </div>
 
       <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(39, 213, 177, 0.1); padding:10px 16px; border-radius:14px; border:1px solid var(--mint);">
@@ -846,8 +845,8 @@
         <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 الكتب والملفات</button>
         <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 الوثائق المصورة</button>
         <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ الفيديوهات</button>
-        <button id="tabBtnPodcasts" class="admin-tab-btn" onclick="switchAdminTab('podcasts')">🎧 الصوتيات والبودكاست</button>
-        <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين</button>
+        <button id="tabBtnAudios" class="admin-tab-btn" onclick="switchAdminTab('audios')">🎧 الصوتيات</button>
+        <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 الموظفين</button>
       </div>
 
       <!-- 1. نموذج الكتب والملفات -->
@@ -896,18 +895,15 @@
         <div id="adminDocsList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
       </div>
 
-      <!-- 2. نموذج الوثائق -->
+      <!-- 2. نموذج الوثائق المصورة -->
       <div id="addSourceForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
         <input type="hidden" id="edit_source_id">
-        <h4 id="sourceFormHeading" style="margin:0; color:var(--gold);">➕ إضافة وثيقة مصورة نادرة</h4>
+        <h4 style="margin:0; color:var(--gold);">➕ إضافة وثيقة مصورة نادرة</h4>
         <input type="text" id="source_title" placeholder="عنوان المجموعة (مثال: وثائق تاريخية / فدك وشواهدها)" required>
         <input type="text" id="source_img_url" placeholder="رابط الصورة المباشر (Image URL)" required>
         <textarea id="source_desc" placeholder="شرح تفصيلي للوثيقة المصورة..."></textarea>
         
-        <div style="display:flex; gap:8px;">
-          <button type="button" id="saveSourceBtn" class="btn" onclick="saveNewSource(event)">💾 حفظ الوثيقة المصورة</button>
-          <button type="button" id="cancelSourceEditBtn" class="btn red" style="display:none;" onclick="cancelSourceEdit()">إلغاء التعديل</button>
-        </div>
+        <button type="button" class="btn" onclick="saveNewSource(event)">💾 حفظ الوثيقة المصورة</button>
 
         <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
         <h5 style="margin:0; color:var(--gold);">قائمة الوثائق المصورة:</h5>
@@ -917,52 +913,45 @@
       <!-- 3. نموذج الفيديوهات -->
       <div id="addVidForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
         <input type="hidden" id="edit_vid_id">
-        <h4 id="vidFormHeading" style="margin:0; color:var(--gold);">➕ إضافة فيديو يوتيوب جديد</h4>
+        <h4 style="margin:0; color:var(--gold);">➕ إضافة فيديو يوتيوب جديد</h4>
         <input type="text" id="vid_title" placeholder="عنوان الفيديو / الحلقة" required>
         <input type="text" id="vid_yt_id" placeholder="معرف اليوتيوب YouTube Video ID" required>
         
-        <div style="display:flex; gap:8px;">
-          <button type="button" id="saveVidBtn" class="btn" onclick="saveNewVid(event)">💾 حفظ الفيديو</button>
-          <button type="button" id="cancelVidEditBtn" class="btn red" style="display:none;" onclick="cancelVidEdit()">إلغاء التعديل</button>
-        </div>
+        <button type="button" class="btn" onclick="saveNewVid(event)">💾 حفظ الفيديو</button>
 
         <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
         <h5 style="margin:0; color:var(--gold);">قائمة الفيديوهات:</h5>
         <div id="adminVidsList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
       </div>
 
-      <!-- 4. نموذج الصوتيات والبودكاست -->
-      <div id="addPodcastForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
-        <input type="hidden" id="edit_podcast_id">
-        <h4 id="podcastFormHeading" style="margin:0; color:var(--gold);">➕ إضافة حلقة صوتية جديدة</h4>
+      <!-- 4. نموذج الصوتيات والبودكاست الجديد -->
+      <div id="addAudioForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
+        <h4 style="margin:0; color:var(--gold);">🎧 إضافة حلقة صوتية أو درس (بودكاست)</h4>
         <input type="text" id="podcast_title" placeholder="عنوان الحلقة الصوتية..." required>
-        <input type="text" id="podcast_url" placeholder="رابط الملف الصوتي المباشر (MP3 URL)..." required>
-        <textarea id="podcast_desc" placeholder="نبذة أو وصف الحلقة..."></textarea>
+        <input type="text" id="podcast_audio_url" placeholder="رابط ملف الصوت المباشر (MP3 URL)..." required>
+        <textarea id="podcast_desc" placeholder="وصف أو نبذة عن الحلقة الصوتية..."></textarea>
         
-        <div style="display:flex; gap:8px;">
-          <button type="button" id="savePodcastBtn" class="btn" onclick="saveNewPodcast(event)">💾 حفظ ونشر الحلقة</button>
-          <button type="button" id="cancelPodcastEditBtn" class="btn red" style="display:none;" onclick="cancelPodcastEdit()">إلغاء التعديل</button>
-        </div>
+        <button type="button" class="btn" onclick="saveNewPodcast(event)">💾 حفظ ونشر الحلقة الصوتية</button>
 
         <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
         <h5 style="margin:0; color:var(--gold);">قائمة الحلقات الصوتية المنشورة:</h5>
-        <div id="adminPodcastsList" style="max-height:220px; overflow-y:auto; margin-top:6px;"></div>
+        <div id="adminPodcastsList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
       </div>
 
       <!-- 5. الموظفين -->
       <div id="manageUsersSec" style="display:none; flex-direction:column; gap:15px;">
-        <h4 style="margin:0; color:var(--gold);">إضافة موظف جديد وتحديد المهام</h4>
+        <h4 style="margin:0; color:var(--gold);">إضافة موظف جديد وتحديد الصلاحيات</h4>
         <form class="admin-form" onsubmit="saveEmployee(event)" style="display:flex; flex-direction:column; gap:10px;">
           <input type="text" id="emp_name" placeholder="اسم الموظف أو المحرر" required>
           <input type="text" id="emp_pass" placeholder="كلمة المرور الخاصة به" required>
           <div style="font-size:0.85rem; font-weight:700; color:var(--mint);">حدد الصلاحيات والمهام:</div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <label class="perm-checkbox-item"><input type="checkbox" id="p_docs" value="docs"> 📚 الكتب والملفات</label>
-            <label class="perm-checkbox-item"><input type="checkbox" id="p_sources" value="sources"> 📜 الوثائق المصورة</label>
-            <label class="perm-checkbox-item"><input type="checkbox" id="p_videos" value="videos"> ▶ الفيديوهات</label>
-            <label class="perm-checkbox-item"><input type="checkbox" id="p_podcasts" value="podcasts"> 🎧 الصوتيات</label>
+          <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:8px;">
+            <label><input type="checkbox" id="p_docs" value="docs"> 📚 الكتب والملفات</label>
+            <label><input type="checkbox" id="p_sources" value="sources"> 📜 الوثائق المصورة</label>
+            <label><input type="checkbox" id="p_videos" value="videos"> ▶ الفيديوهات</label>
+            <label><input type="checkbox" id="p_audios" value="audios"> 🎧 الصوتيات</label>
           </div>
-          <button type="submit" id="saveEmpBtn" class="btn">➕ إضافة الموظف</button>
+          <button type="submit" class="btn">➕ إضافة الموظف</button>
         </form>
 
         <h4 style="margin:15px 0 0; color:var(--gold);">قائمة الموظفين:</h4>
@@ -1001,7 +990,7 @@
   </div>
 </div>
 
-<!-- مودال قراءة الـ PDF وقسم التعليقات والحلول المتقدمة -->
+<!-- مودال قراءة الـ PDF وقسم التعليقات -->
 <div class="modal" id="pdfModal">
   <div class="pdf-modal-content">
     <div class="sticky-close-bar">
@@ -1018,7 +1007,6 @@
       <p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل المستند لقراءته...</p>
     </div>
 
-    <!-- نظام المناقشة والتعليقات المباشرة عبر Supabase -->
     <div class="comments-container">
       <h4 style="margin:0 0 10px; color:var(--gold); font-size:0.95rem;">💬 المناقشات المباشرة والتعليقات العلميّة:</h4>
       <div id="commentsList" style="max-height: 120px; overflow-y: auto; margin-bottom: 10px;"></div>
@@ -1056,10 +1044,7 @@ const dailyQuranVerses = [
   { text: '﴿إِنَّ اللَّهَ مَعَ الصَّابِرِينَ﴾', source: 'سورة البقرة · الآية 153' },
   { text: '﴿وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ﴾', source: 'سورة الطلاق · الآية 3' },
   { text: '﴿فَاذْكُرُونِي أَذْكُرْكُمْ﴾', source: 'سورة البقرة · الآية 152' },
-  { text: '﴿وَلَا تَيْأَسُوا مِن رَّوْحِ اللَّهِ﴾', source: 'سورة يوسف · الآية 87' },
-  { text: '﴿إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ﴾', source: 'سورة التوبة · الآية 120' },
-  { text: '﴿أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ﴾', source: 'سورة الرعد · الآية 28' },
-  { text: '﴿وَقُلِ الْحَقُّ مِن رَّبِّكُمْ﴾', source: 'سورة الكهف · الآية 29' }
+  { text: '﴿وَلَا تَيْأَسُوا مِن رَّوْحِ اللَّهِ﴾', source: 'سورة يوسف · الآية 87' }
 ];
 
 function updateDailyVerseAndClock() {
@@ -1078,29 +1063,6 @@ function updateDailyVerseAndClock() {
   if (verseSource) verseSource.textContent = verse.source;
   if (clock) clock.textContent = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Baghdad', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
   if (date) date.textContent = new Intl.DateTimeFormat('ar-IQ', { timeZone: 'Asia/Baghdad', year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' }).format(now);
-  
-  updateActivePrayerTime(baghdadNow);
-}
-
-function updateActivePrayerTime(now) {
-    const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-    const prayers = [
-        { id: 'p_fajr', time: '04:52' },
-        { id: 'p_shuruq', time: '06:15' },
-        { id: 'p_dhuhr', time: '11:55' },
-        { id: 'p_asr', time: '15:02' },
-        { id: 'p_maghrib', time: '17:38' },
-        { id: 'p_isha', time: '18:58' }
-    ];
-    
-    document.querySelectorAll('.prayer-item').forEach(el => el.classList.remove('active'));
-    for (let p of prayers) {
-        if (timeStr < p.time) {
-            const activeEl = document.getElementById(p.id);
-            if (activeEl) activeEl.classList.add('active');
-            break;
-        }
-    }
 }
 
 updateDailyVerseAndClock();
@@ -1138,13 +1100,11 @@ function requestNotificationPermission() {
     if ("Notification" in window) {
         Notification.requestPermission().then(permission => {
             if (permission === "granted") {
-                showToast("تم تفعيل الإشعارات بنجاح! ستتلقى تنبيهات بالدروس والأبحاث الجديدة.");
+                showToast("تم تفعيل الإشعارات بنجاح!");
             } else {
                 showToast("لم يتم إعطاء الإذن للإشعارات.", "error");
             }
         });
-    } else {
-        showToast("المتصفح لا يدعم نظام الإشعارات المباشرة.", "error");
     }
 }
 
@@ -1164,47 +1124,15 @@ let activePdfUrl = '', activePdfName = '';
 let activePdfDocId = null;
 let currentPdfScale = 1.3;
 let currentPdfObj = null;
-
-let allPodcasts = [];
-let currentPodcastIndex = 0;
-
-async function fetchPodcasts() {
-    if (!supabaseClient) return;
-    try {
-        const { data, error } = await supabaseClient.from('podcasts').select('*').order('created_at', { ascending: false });
-        if (!error && data && data.length > 0) {
-            allPodcasts = data;
-            loadPodcastIntoPlayer(0);
-            renderPodcastsPlaylist();
-        } else {
-            document.getElementById('audioTrackTitle').textContent = 'لا توجد حلقات صوتية مضافة حالياً';
-            document.getElementById('audioTrackDesc').textContent = 'قم بإضافة الحلقات عبر لوحة التحكم';
-        }
-        if (currentLoggedInUser) populateAdminLists();
-    } catch(e) {
-        document.getElementById('audioTrackTitle').textContent = 'تعذر تحميل الصوتيات';
-    }
-}
-
-function loadPodcastIntoPlayer(index) {
-    if (!allPodcasts.length || !allPodcasts[index]) return;
-    currentPodcastIndex = index;
-    const podcast = allPodcasts[index];
-    const player = document.getElementById('mainAudioPlayer');
-    player.src = podcast.audio_url;
-    document.getElementById('audioTrackTitle').textContent = podcast.title;
-    document.getElementById('audioTrackDesc').textContent = podcast.description || 'بودكاست نهج الحقيقة';
-    document.getElementById('audioPlayToggleBtn').textContent = '▶';
-}
+let allDocs = [], allSources = [], allVideos = [], allPodcasts = [];
+let bookmarkedIds = JSON.parse(localStorage.getItem('nahj_bookmarks') || '[]');
 
 function toggleAudioPlay() {
     const player = document.getElementById('mainAudioPlayer');
     const btn = document.getElementById('audioPlayToggleBtn');
-    if (!player.src && allPodcasts.length) {
-        loadPodcastIntoPlayer(0);
-    }
     if (player.paused) {
-        player.play().then(() => { btn.textContent = '⏸'; }).catch(() => { showToast('تعذر تشغيل الملف الصوتي', 'error'); });
+        player.play();
+        btn.textContent = '⏸';
     } else {
         player.pause();
         btn.textContent = '▶';
@@ -1224,33 +1152,6 @@ function seekAudio(val) {
     if (player.duration) {
         player.currentTime = (val / 100) * player.duration;
     }
-}
-
-function playNextPodcast() {
-    if (currentPodcastIndex + 1 < allPodcasts.length) {
-        loadPodcastIntoPlayer(currentPodcastIndex + 1);
-        document.getElementById('mainAudioPlayer').play();
-        document.getElementById('audioPlayToggleBtn').textContent = '⏸';
-    } else {
-        document.getElementById('audioPlayToggleBtn').textContent = '▶';
-    }
-}
-
-function renderPodcastsPlaylist() {
-    const container = document.getElementById('podcastsListContainer');
-    if (!container) return;
-    container.innerHTML = allPodcasts.map((p, idx) => `
-        <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); border-radius:10px; padding:10px; display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="loadPodcastIntoPlayer(${idx}); toggleAudioPlay();">
-            <div style="display:flex; align-items:center; gap:8px;">
-                <span style="font-size:1.1rem; color:var(--gold);">🎧</span>
-                <div>
-                    <h5 style="margin:0; font-size:0.85rem; font-weight:800; color:var(--ink);">${p.title}</h5>
-                    <p style="margin:0; font-size:0.72rem; color:var(--muted);">${p.description || ''}</p>
-                </div>
-            </div>
-            <span style="font-size:0.75rem; color:var(--mint); font-weight:700;">استماع ▶</span>
-        </div>
-    `).join('');
 }
 
 function triggerDirectDownload(url, name) {
@@ -1277,15 +1178,10 @@ function sendEmailMessage(e) {
         showToast('تم إرسال رسالتك بنجاح!');
         document.getElementById('contactForm').reset(); btn.disabled = false; btn.textContent = '✉️ إرسال الرسالة';
     }).catch(() => {
-        showToast('تعذر الإرسال، يُرجى المحاولة لاحقاً', 'error');
+        showToast('تعذر الإرسال', 'error');
         btn.disabled = false; btn.textContent = '✉️ إرسال الرسالة';
     });
 }
-
-let allDocs = [];
-let allSources = [];
-let allVideos = [];
-let bookmarkedIds = JSON.parse(localStorage.getItem('nahj_bookmarks') || '[]');
 
 async function fetchDocuments() {
     if (!supabaseClient) return;
@@ -1306,15 +1202,11 @@ function renderLatestResearchMini(docs) {
     
     container.innerHTML = '';
     latest.forEach(doc => {
-        let badgeText = 'أبحاث';
-        if (doc.category === 'كتب ومراجع') badgeText = 'كتب';
-        else if (doc.category === 'وثائق تاريخية') badgeText = 'وثائق';
-
         const card = document.createElement('article');
         card.className = 'research-card-item';
         card.innerHTML = `
             <div class="research-card-img">
-                <span class="research-card-badge">${badgeText}</span>
+                <span class="research-card-badge">أبحاث</span>
                 <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:2.5rem; background:rgba(0,0,0,0.3);">📖</div>
             </div>
             <div class="research-card-body">
@@ -1358,17 +1250,12 @@ function renderSourcesMain(data) {
         const group = grouped[title];
         const card = document.createElement('article');
         card.className = 'book-cover-card source-card-theme';
-        
         card.innerHTML = `
             <div class="book-cover-frame"></div>
             <div class="cover-box-category">📜 وثيقة مصورة</div>
             <div class="cover-box-title">${title}</div>
-            <div class="cover-box-desc">
-                <p>${group[0].description || 'تتضمن ' + group.length + ' وثائق ومستندات تاريخية مصدقة عالية الدقة.'}</p>
-            </div>
-            <div class="cover-box-footer">
-                <span>🔍 استعراض (${group.length})</span>
-            </div>
+            <div class="cover-box-desc"><p>${group[0].description || ''}</p></div>
+            <div class="cover-box-footer"><span>🔍 استعراض (${group.length})</span></div>
         `;
         card.addEventListener('click', () => openSourceModal(title, group));
         grid.appendChild(card);
@@ -1380,10 +1267,8 @@ async function fetchLatestVideos() {
     try {
         const { data } = await supabaseClient.from('videos').select('*');
         allVideos = data || [];
-        if (!data || !data.length) return;
-        
         const container = document.getElementById('videos-container');
-        if (container) {
+        if (container && data && data.length) {
             container.innerHTML = '';
             data.forEach(vid => {
                 if (vid.youtube_id) {
@@ -1402,12 +1287,29 @@ async function fetchLatestVideos() {
     } catch(e){}
 }
 
+async function fetchPodcasts() {
+    if (!supabaseClient) return;
+    try {
+        const { data } = await supabaseClient.from('podcasts').select('*').order('created_at', { ascending: false });
+        allPodcasts = data || [];
+        if (allPodcasts.length > 0) {
+            const latest = allPodcasts[0];
+            const player = document.getElementById('mainAudioPlayer');
+            const titleEl = document.getElementById('audioTrackTitle');
+            const descEl = document.getElementById('audioTrackDesc');
+            if (player && latest.audio_url) player.src = latest.audio_url;
+            if (titleEl) titleEl.textContent = latest.title;
+            if (descEl) descEl.textContent = latest.description || 'بودكاست نهج الحقيقة';
+        }
+        if (currentLoggedInUser) populateAdminLists();
+    } catch(e){}
+}
+
 async function openPdfViewer(title, url, id) {
     activePdfUrl = url; activePdfName = title; activePdfDocId = id; currentPdfScale = 1.3;
     document.getElementById('pdfTitle').textContent = title;
-    
     const container = document.getElementById('pdfCanvasContainer');
-    container.innerHTML = '<p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل وسحب صفحات المستند للقراءة...</p>';
+    container.innerHTML = '<p style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل صفحات المستند...</p>';
     document.getElementById('pdfModal').style.display = 'flex';
     fetchDocComments();
 
@@ -1415,118 +1317,55 @@ async function openPdfViewer(title, url, id) {
         currentPdfObj = await pdfjsLib.getDocument(url).promise;
         renderPdfPages();
     } catch (error) {
-        container.innerHTML = `
-            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:15px; color:var(--ink); padding:20px; text-align:center;">
-                <p>تعذر عرض معالجة المستند مباشرة داخل المتصفح.</p>
-                <button class="btn" onclick="triggerDirectDownload('${url}', '${title}.pdf')">⬇️ اضغط هنا لتنزيل الملف وقراءته فوراً</button>
-            </div>
-        `;
+        container.innerHTML = `<button class="btn" onclick="triggerDirectDownload('${url}', '${title}.pdf')">⬇️ تنزيل الملف</button>`;
     }
 }
 
-// جلب التعليقات من جدول comments في Supabase
 async function fetchDocComments() {
     const list = document.getElementById('commentsList');
-    if (!list) return;
-    list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; margin:0;">جاري تحميل التعليقات...</p>';
-
-    if (!supabaseClient || !activePdfDocId) {
-        list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; margin:0;">لا توجد تعليقات بعد.</p>';
-        return;
-    }
-
+    if (!list || !supabaseClient || !activePdfDocId) return;
     try {
-        const { data, error } = await supabaseClient
-            .from('comments')
-            .select('*')
-            .eq('doc_id', activePdfDocId)
-            .order('created_at', { ascending: false });
-
-        if (error || !data || data.length === 0) {
-            list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; margin:0;">لا توجد تعليقات أو مناقشات مدونة حول هذا البحث بعد.</p>';
-            return;
-        }
-
+        const { data } = await supabaseClient.from('comments').select('*').eq('doc_id', activePdfDocId).order('created_at', { ascending: false });
+        if (!data || data.length === 0) { list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem;">لا توجد تعليقات.</p>'; return; }
         list.innerHTML = data.map(c => `
             <div class="comment-item">
-                <div class="comment-header">
-                    <span>✍️ ${c.user_name || 'باحث / زائر'}</span>
-                    <span>${new Date(c.created_at).toLocaleDateString('ar-IQ')}</span>
-                </div>
-                <div style="font-size:0.85rem; color:var(--ink); line-height:1.5;">${c.comment_text}</div>
+                <div class="comment-header"><span>✍️ ${c.user_name || 'زائر'}</span><span>${new Date(c.created_at).toLocaleDateString('ar-IQ')}</span></div>
+                <div style="font-size:0.85rem; color:var(--ink);">${c.comment_text}</div>
             </div>
         `).join('');
-    } catch (e) {
-        list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; margin:0;">تعذر تحميل التعليقات حالياً.</p>';
-    }
+    } catch(e) {}
 }
 
-// إرسال تعليق جديد إلى Supabase
 async function addDocComment() {
-    const userNameInput = document.getElementById('commentUserName');
-    const commentInput = document.getElementById('newCommentInput');
-    const userName = userNameInput.value.trim() || 'زائر';
-    const commentText = commentInput.value.trim();
-
-    if (!commentText) {
-        showToast('يرجى كتابة نص التعليق أو السؤال أولاً', 'error');
-        return;
-    }
-
-    if (!supabaseClient || !activePdfDocId) {
-        showToast('تعذر الاتصال بقاعدة البيانات', 'error');
-        return;
-    }
-
+    const userName = document.getElementById('commentUserName').value.trim() || 'زائر';
+    const commentText = document.getElementById('newCommentInput').value.trim();
+    if (!commentText || !supabaseClient || !activePdfDocId) return;
     try {
-        const { error } = await supabaseClient
-            .from('comments')
-            .insert([{
-                doc_id: activePdfDocId,
-                user_name: userName,
-                comment_text: commentText
-            }]);
-
+        const { error } = await supabaseClient.from('comments').insert([{ doc_id: activePdfDocId, user_name: userName, comment_text: commentText }]);
         if (!error) {
-            commentInput.value = '';
-            showToast('تم إرسال ونشر تعليقك بنجاح');
+            document.getElementById('newCommentInput').value = '';
+            showToast('تم إرسال التعليق بنجاح');
             fetchDocComments();
-        } else {
-            showToast('حدث خطأ أثناء حفظ التعليق', 'error');
         }
-    } catch(e) {
-        showToast('تعذر حفظ التعليق', 'error');
-    }
+    } catch(e) {}
 }
 
 async function renderPdfPages() {
     if (!currentPdfObj) return;
     const container = document.getElementById('pdfCanvasContainer');
     container.innerHTML = '';
-    
     for (let pageNum = 1; pageNum <= currentPdfObj.numPages; pageNum++) {
         const page = await currentPdfObj.getPage(pageNum);
         const viewport = page.getViewport({ scale: currentPdfScale });
         const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-        
-        await page.render({ canvasContext: context, viewport: viewport }).promise;
+        canvas.height = viewport.height; canvas.width = viewport.width;
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
         container.appendChild(canvas);
     }
 }
 
-function zoomPdf(delta) {
-    currentPdfScale = Math.max(0.6, Math.min(2.5, currentPdfScale + delta));
-    renderPdfPages();
-}
-
-function togglePdfNightMode() {
-    document.getElementById('pdfCanvasContainer').classList.toggle('night-mode');
-}
-
+function zoomPdf(delta) { currentPdfScale = Math.max(0.6, Math.min(2.5, currentPdfScale + delta)); renderPdfPages(); }
+function togglePdfNightMode() { document.getElementById('pdfCanvasContainer').classList.toggle('night-mode'); }
 function closePdfModal() { document.getElementById('pdfModal').style.display = 'none'; }
 
 function openSourceModal(title, images) {
@@ -1534,62 +1373,52 @@ function openSourceModal(title, images) {
     const container = document.getElementById('modalImagesContainer');
     container.innerHTML = '';
     images.forEach(img => {
-        const div = document.createElement('div');
-        div.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:14px; padding:12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:8px;';
-        div.innerHTML = `
-            <img src="${img.image_url}" alt="${title}" loading="lazy" style="width:100%; max-height:350px; object-fit:contain; border-radius:8px; cursor:pointer;" onclick="zoomImage('${img.image_url}', '${title}')" onerror="this.onerror=null; this.src='https://placehold.co/400x300/031622/27d5b1?text=صورة+الوثيقة';">
-            <p style="font-size:0.82rem; color:var(--muted); margin:0; line-height:1.5;">${img.description || ''}</p>
-            <div style="display:flex; gap:8px; width:100%; justify-content:center; margin-top: auto;">
-                <button class="btn" style="padding:6px 14px; font-size:0.78rem;" onclick="triggerDirectDownload('${img.image_url}', '${title}')">⬇️ تحميل</button>
-                <button class="btn ghost" style="padding:6px 14px; font-size:0.78rem;" onclick="zoomImage('${img.image_url}', '${title}')">🔍 تكبير</button>
+        container.innerHTML += `
+            <div style="background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:14px; padding:12px; text-align:center;">
+                <img src="${img.image_url}" style="width:100%; max-height:350px; object-fit:contain; border-radius:8px; cursor:pointer;" onclick="zoomImage('${img.image_url}', '${title}')">
+                <p style="font-size:0.82rem; color:var(--muted); margin:5px 0;">${img.description || ''}</p>
+                <button class="btn" style="padding:4px 10px; font-size:0.75rem;" onclick="triggerDirectDownload('${img.image_url}', '${title}')">⬇️ تحميل</button>
             </div>
         `;
-        container.appendChild(div);
     });
     document.getElementById('sourceModal').style.display = 'flex';
 }
-
 function closeSourceModal() { document.getElementById('sourceModal').style.display = 'none'; }
-
 function zoomImage(url, title) {
     document.getElementById('zoomTitle').textContent = title;
     document.getElementById('zoomedImg').src = url;
-    document.getElementById('zoomDownloadBtn').onclick = function() { triggerDirectDownload(url, title); };
     document.getElementById('imageZoomModal').style.display = 'flex';
 }
 function closeZoomModal() { document.getElementById('imageZoomModal').style.display = 'none'; }
 
-// نظام الإدارة والإحصائيات
+// لوحة التحكم
 let currentLoggedInUser = null;
 function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
 function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
 
 async function loginAdmin() {
     const pass = document.getElementById('adminPassInput').value.trim();
-    if (!pass) return;
-
-    if (supabaseClient) {
-        const { data, error } = await supabaseClient.from('employees').select('*').eq('password', pass).single();
-        if (data && !error) {
+    if (!pass || !supabaseClient) return;
+    try {
+        const { data } = await supabaseClient.from('employees').select('*').eq('password', pass).single();
+        if (data) {
             currentLoggedInUser = data;
             showAdminDashboard();
             showToast('تم تسجيل الدخول بنجاح');
         } else {
             showToast('كلمة المرور غير صحيحة', 'error');
         }
-    }
+    } catch(e) { showToast('خطأ في تسجيل الدخول', 'error'); }
 }
 
 function showAdminDashboard() {
     document.getElementById('adminLoginSec').style.display = 'none';
     document.getElementById('adminPanelSec').style.display = 'flex';
     document.getElementById('currentUserRole').textContent = 'المستخدم الحالي: ' + currentLoggedInUser.name;
-    
     document.getElementById('statDocsCount').textContent = allDocs.length;
     document.getElementById('statSourcesCount').textContent = allSources.length;
     document.getElementById('statVidsCount').textContent = allVideos.length;
     document.getElementById('statPodcastsCount').textContent = allPodcasts.length;
-    
     applyUserPermissions();
     populateAdminLists();
 }
@@ -1606,14 +1435,13 @@ function applyUserPermissions() {
     document.getElementById('tabBtnDocs').style.display = perms.includes('docs') ? 'inline-block' : 'none';
     document.getElementById('tabBtnSources').style.display = perms.includes('sources') ? 'inline-block' : 'none';
     document.getElementById('tabBtnVideos').style.display = perms.includes('videos') ? 'inline-block' : 'none';
-    document.getElementById('tabBtnPodcasts').style.display = perms.includes('podcasts') ? 'inline-block' : 'none';
+    document.getElementById('tabBtnAudios').style.display = perms.includes('audios') ? 'inline-block' : 'none';
     document.getElementById('tabBtnManageUsers').style.display = perms.includes('manage_users') ? 'inline-block' : 'none';
 
     if (perms.includes('docs')) switchAdminTab('docs');
     else if (perms.includes('sources')) switchAdminTab('sources');
     else if (perms.includes('videos')) switchAdminTab('videos');
-    else if (perms.includes('podcasts')) switchAdminTab('podcasts');
-    else if (perms.includes('manage_users')) switchAdminTab('manage_users');
+    else if (perms.includes('audios')) switchAdminTab('audios');
 }
 
 function switchAdminTab(type) {
@@ -1621,44 +1449,33 @@ function switchAdminTab(type) {
     document.getElementById('addDocForm').style.display = type === 'docs' ? 'flex' : 'none';
     document.getElementById('addSourceForm').style.display = type === 'sources' ? 'flex' : 'none';
     document.getElementById('addVidForm').style.display = type === 'videos' ? 'flex' : 'none';
-    document.getElementById('addPodcastForm').style.display = type === 'podcasts' ? 'flex' : 'none';
+    document.getElementById('addAudioForm').style.display = type === 'audios' ? 'flex' : 'none';
     document.getElementById('manageUsersSec').style.display = type === 'manage_users' ? 'flex' : 'none';
     
     if (type === 'docs') document.getElementById('tabBtnDocs').classList.add('active');
     if (type === 'sources') document.getElementById('tabBtnSources').classList.add('active');
     if (type === 'videos') document.getElementById('tabBtnVideos').classList.add('active');
-    if (type === 'podcasts') document.getElementById('tabBtnPodcasts').classList.add('active');
-    if (type === 'manage_users') {
-        document.getElementById('tabBtnManageUsers').classList.add('active');
-        fetchEmployeesList();
-    }
+    if (type === 'audios') document.getElementById('tabBtnAudios').classList.add('active');
+    if (type === 'manage_users') document.getElementById('tabBtnManageUsers').classList.add('active');
 }
 
 function populateAdminLists() {
     const docsList = document.getElementById('adminDocsList');
-    const filterCat = document.getElementById('filterAdminCategory') ? document.getElementById('filterAdminCategory').value : '';
     if (docsList) {
-        let filtered = filterCat ? allDocs.filter(d => d.category === filterCat) : allDocs;
-        docsList.innerHTML = filtered.map(d => `
-            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:10px; border-radius:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.88rem; font-weight:700;">${d.title}</span>
-                <div style="display:flex; gap:6px;">
-                    <button class="btn shrink" style="padding:3px 8px; font-size:0.75rem;" onclick="editDoc(${d.id})">✏️ تعديل</button>
-                    <button class="btn red" style="padding:3px 8px; font-size:0.75rem;" onclick="deleteDoc(${d.id})">🗑️ حذف</button>
-                </div>
+        docsList.innerHTML = allDocs.map(d => `
+            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:8px; border-radius:8px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.85rem; font-weight:700;">${d.title}</span>
+                <button class="btn red" style="padding:2px 8px; font-size:0.7rem;" onclick="deleteDoc(${d.id})">حذف</button>
             </div>
         `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد عناصر.</p>';
     }
 
-    const podcastsList = document.getElementById('adminPodcastsList');
-    if (podcastsList) {
-        podcastsList.innerHTML = allPodcasts.map(p => `
-            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:10px; border-radius:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.88rem; font-weight:700;">${p.title}</span>
-                <div style="display:flex; gap:6px;">
-                    <button class="btn shrink" style="padding:3px 8px; font-size:0.75rem;" onclick="editPodcast(${p.id})">✏️ تعديل</button>
-                    <button class="btn red" style="padding:3px 8px; font-size:0.75rem;" onclick="deletePodcast(${p.id})">🗑️ حذف</button>
-                </div>
+    const podcastList = document.getElementById('adminPodcastsList');
+    if (podcastList) {
+        podcastList.innerHTML = allPodcasts.map(p => `
+            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:8px; border-radius:8px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.85rem; font-weight:700;">🎧 ${p.title}</span>
+                <button class="btn red" style="padding:2px 8px; font-size:0.7rem;" onclick="deletePodcast(${p.id})">حذف</button>
             </div>
         `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد حلقات صوتية مضافة.</p>';
     }
@@ -1666,7 +1483,6 @@ function populateAdminLists() {
 
 async function saveNewDoc(e) {
     e.preventDefault();
-    const editId = document.getElementById('edit_doc_id').value;
     const docData = {
         title: document.getElementById('doc_title').value,
         author: document.getElementById('doc_author').value,
@@ -1676,240 +1492,98 @@ async function saveNewDoc(e) {
         cover_url: document.getElementById('doc_cover_url').value || null,
         date: new Date().toISOString().split('T')[0]
     };
-
-    let error = editId 
-        ? (await supabaseClient.from('documents').update(docData).eq('id', editId)).error
-        : (await supabaseClient.from('documents').insert([docData])).error;
-
-    if (!error) {
-        showToast('تم نشر الملف بنجاح!');
-        cancelDocEdit();
-        fetchDocuments();
-    } else {
-        showToast('حدث خطأ أثناء الحفظ', 'error');
-    }
+    const { error } = await supabaseClient.from('documents').insert([docData]);
+    if (!error) { showToast('تم نشر الملف بنجاح!'); fetchDocuments(); cancelDocEdit(); }
+    else { showToast('خطأ أثناء الحفظ', 'error'); }
 }
-
-function cancelDocEdit() {
-    document.getElementById('edit_doc_id').value = '';
-    document.getElementById('doc_title').value = '';
-    document.getElementById('doc_author').value = '';
-    document.getElementById('doc_url').value = '';
-    document.getElementById('doc_desc').value = '';
-    document.getElementById('doc_cover_url').value = '';
-}
-
+function cancelDocEdit() { document.getElementById('doc_title').value = ''; document.getElementById('doc_url').value = ''; document.getElementById('doc_desc').value = ''; }
 async function deleteDoc(id) {
     if (confirm('هل أنت متأكد من الحذف؟')) {
-        const { error } = await supabaseClient.from('documents').delete().eq('id', id);
-        if (!error) { showToast('تم الحذف بنجاح'); fetchDocuments(); }
+        await supabaseClient.from('documents').delete().eq('id', id);
+        showToast('تم الحذف بنجاح'); fetchDocuments();
     }
 }
 
 async function saveNewPodcast(e) {
     e.preventDefault();
-    const editId = document.getElementById('edit_podcast_id').value;
-    const podcastData = {
-        title: document.getElementById('podcast_title').value,
-        audio_url: document.getElementById('podcast_url').value,
-        description: document.getElementById('podcast_desc').value
-    };
+    const title = document.getElementById('podcast_title').value.trim();
+    const audio_url = document.getElementById('podcast_audio_url').value.trim();
+    const description = document.getElementById('podcast_desc').value.trim();
+    if (!title || !audio_url) { showToast('يرجى إدخال العنوان والرابط', 'error'); return; }
 
-    let error = editId
-        ? (await supabaseClient.from('podcasts').update(podcastData).eq('id', editId)).error
-        : (await supabaseClient.from('podcasts').insert([podcastData])).error;
-
+    const { error } = await supabaseClient.from('podcasts').insert([{ title, audio_url, description }]);
     if (!error) {
-        showToast('تم حفظ الحلقة الصوتية بنجاح!');
-        cancelPodcastEdit();
+        showToast('تم نشر الحلقة الصوتية بنجاح!');
+        document.getElementById('podcast_title').value = '';
+        document.getElementById('podcast_audio_url').value = '';
+        document.getElementById('podcast_desc').value = '';
         fetchPodcasts();
     } else {
-        showToast('حدث خطأ أثناء حفظ الحلقة', 'error');
+        showToast('خطأ أثناء حفظ الحلقة الصوتية', 'error');
     }
-}
-
-function editPodcast(id) {
-    const podcast = allPodcasts.find(p => p.id === id);
-    if (!podcast) return;
-    document.getElementById('edit_podcast_id').value = podcast.id;
-    document.getElementById('podcast_title').value = podcast.title;
-    document.getElementById('podcast_url').value = podcast.audio_url;
-    document.getElementById('podcast_desc').value = podcast.description || '';
-    document.getElementById('podcastFormHeading').textContent = '✏️ تعديل الحلقة الصوتية';
-    document.getElementById('savePodcastBtn').textContent = '💾 حفظ التعديلات';
-    document.getElementById('cancelPodcastEditBtn').style.display = 'inline-flex';
-}
-
-function cancelPodcastEdit() {
-    document.getElementById('edit_podcast_id').value = '';
-    document.getElementById('podcast_title').value = '';
-    document.getElementById('podcast_url').value = '';
-    document.getElementById('podcast_desc').value = '';
-    document.getElementById('podcastFormHeading').textContent = '➕ إضافة حلقة صوتية جديدة';
-    document.getElementById('savePodcastBtn').textContent = '💾 حفظ ونشر الحلقة';
-    document.getElementById('cancelPodcastEditBtn').style.display = 'none';
 }
 
 async function deletePodcast(id) {
     if (confirm('هل أنت متأكد من حذف هذه الحلقة الصوتية؟')) {
-        const { error } = await supabaseClient.from('podcasts').delete().eq('id', id);
-        if (!error) {
-            showToast('تم حذف الحلقة بنجاح');
-            fetchPodcasts();
-        } else {
-            showToast('حدث خطأ أثناء الحذف', 'error');
-        }
+        await supabaseClient.from('podcasts').delete().eq('id', id);
+        showToast('تم حذف الحلقة'); fetchPodcasts();
     }
 }
 
-async function fetchEmployeesList() {
-    const container = document.getElementById('employeesList');
-    if (!container || !supabaseClient) return;
-    try {
-        const { data } = await supabaseClient.from('employees').select('*');
-        if (!data || !data.length) {
-            container.innerHTML = '<p style="color:var(--muted); font-size:0.8rem;">لا توجد حسابات موظفين.</p>';
-            return;
-        }
-        container.innerHTML = data.map(emp => `
-            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:8px 12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.85rem; font-weight:700;">${emp.name}</span>
-                <button class="btn red" style="padding:2px 8px; font-size:0.7rem;" onclick="deleteEmployee(${emp.id})">حذف</button>
-            </div>
-        `).join('');
-    } catch(e) {}
-}
-
-async function saveEmployee(e) {
-    e.preventDefault();
-    const name = document.getElementById('emp_name').value.trim();
-    const pass = document.getElementById('emp_pass').value.trim();
-    const perms = [];
-    if (document.getElementById('p_docs').checked) perms.push('docs');
-    if (document.getElementById('p_sources').checked) perms.push('sources');
-    if (document.getElementById('p_videos').checked) perms.push('videos');
-    if (document.getElementById('p_podcasts').checked) perms.push('podcasts');
-
-    const { error } = await supabaseClient.from('employees').insert([{ name, password: pass, permissions: perms }]);
-    if (!error) {
-        showToast('تمت إضافة الموظف بنجاح');
-        document.getElementById('emp_name').value = '';
-        document.getElementById('emp_pass').value = '';
-        fetchEmployeesList();
-    } else {
-        showToast('تعذر إضافة الموظف', 'error');
-    }
-}
-
-async function deleteEmployee(id) {
-    if (confirm('هل أنت متأكد من حذف حساب هذا الموظف؟')) {
-        const { error } = await supabaseClient.from('employees').delete().eq('id', id);
-        if (!error) { showToast('تم الحذف بنجاح'); fetchEmployeesList(); }
-    }
-}
-
-let isListView = false;
-let showingOnlyBookmarks = false;
-
+let isListView = false, showingOnlyBookmarks = false;
 function toggleViewLayout() {
     isListView = !isListView;
-    const docsGrid = document.getElementById('docs');
-    const label = document.getElementById('viewLabel');
-    if (isListView) {
-        docsGrid.classList.add('list-view');
-        label.textContent = 'قائمة';
-    } else {
-        docsGrid.classList.remove('list-view');
-        label.textContent = 'شبكة';
-    }
+    document.getElementById('docs').classList.toggle('list-view', isListView);
+    document.getElementById('viewLabel').textContent = isListView ? 'قائمة' : 'شبكة';
 }
 
 function toggleBookmarksView() {
     showingOnlyBookmarks = !showingOnlyBookmarks;
-    const titleIcon = document.getElementById('libTitleIcon');
-    const titleText = document.getElementById('libTitleText');
-    if (showingOnlyBookmarks) {
-        titleIcon.textContent = '⭐';
-        titleText.textContent = 'المكتبة المفضلة لديك';
-        showToast('تم إظهار أبحاثك المفضلة فقط');
-    } else {
-        titleIcon.textContent = '📚';
-        titleText.textContent = 'مكتبة الوثائق والأبحاث الكاملة';
-    }
+    document.getElementById('libTitleIcon').textContent = showingOnlyBookmarks ? '⭐' : '📚';
+    document.getElementById('libTitleText').textContent = showingOnlyBookmarks ? 'المكتبة المفضلة لديك' : 'مكتبة الوثائق والأبحاث الكاملة';
     filterAndRenderDocs();
 }
 
 function toggleBookmark(docId, event) {
     if (event) event.stopPropagation();
-    const index = bookmarkedIds.indexOf(docId);
-    if (index > -1) {
-        bookmarkedIds.splice(index, 1);
-        showToast('تمت الإزالة من المفضلة');
-    } else {
-        bookmarkedIds.push(docId);
-        showToast('تمت الإضافة للمفضلة ⭐');
-    }
+    const idx = bookmarkedIds.indexOf(docId);
+    if (idx > -1) bookmarkedIds.splice(idx, 1);
+    else bookmarkedIds.push(docId);
     localStorage.setItem('nahj_bookmarks', JSON.stringify(bookmarkedIds));
     filterAndRenderDocs();
 }
 
 function shareDoc(title, url, event) {
     if (event) event.stopPropagation();
-    if (navigator.share) {
-        navigator.share({ title: title, url: url }).catch(()=>{});
-    } else {
-        navigator.clipboard.writeText(url);
-        showToast('تم نسخ رابط الوثيقة للحافظة!');
-    }
+    navigator.clipboard.writeText(url);
+    showToast('تم نسخ رابط الوثيقة!');
 }
 
-/* عرض بطاقات الغلاف التراثية والأيقونية */
 function renderDocs(docs) {
     const grid = document.getElementById('docs');
     if (!grid) return;
     grid.innerHTML = '';
-    if (!docs.length) {
-        document.getElementById('empty').style.display = 'block';
-        document.getElementById('count').textContent = '0 نتائج';
-        return;
-    }
+    if (!docs.length) { document.getElementById('empty').style.display = 'block'; document.getElementById('count').textContent = '0 نتائج'; return; }
     document.getElementById('empty').style.display = 'none';
     document.getElementById('count').textContent = docs.length + ' ملفات';
 
     docs.forEach(doc => {
-        const catName = doc.category || 'منوع';
-        const isBookmarked = bookmarkedIds.includes(doc.id);
+        const isFav = bookmarkedIds.includes(doc.id);
         const card = document.createElement('article');
         card.className = 'book-cover-card' + (doc.cover_url ? ' has-custom-cover' : '');
-        card.setAttribute('data-category', catName);
-        if (doc.cover_url) {
-            card.style.backgroundImage = `linear-gradient(rgba(2, 7, 10, 0.65), rgba(2, 7, 10, 0.85)), url('${doc.cover_url}')`;
-        }
-        
+        card.setAttribute('data-category', doc.category || 'منوع');
+        if (doc.cover_url) card.style.backgroundImage = `linear-gradient(rgba(2, 7, 10, 0.65), rgba(2, 7, 10, 0.85)), url('${doc.cover_url}')`;
+
         card.innerHTML = `
             <div class="book-cover-frame"></div>
-            
-            <div class="cover-box-category">${catName}</div>
+            <div class="cover-box-category">${doc.category || 'منوع'}</div>
             <div class="cover-box-title">${doc.title}</div>
-            <div class="cover-box-desc">
-                <p>${doc.description || 'مستند علمي موثق صادر عن منصة نهج الحقيقة.'}</p>
-                <div style="font-size:0.65rem; color:var(--gold); margin-top:3px; font-weight:700;">
-                    ${doc.author ? '✍️ ' + doc.author : ''}
-                </div>
-            </div>
-
+            <div class="cover-box-desc"><p>${doc.description || ''}</p></div>
             <div class="cover-box-actions">
-                <button class="cover-action-btn" onclick="toggleBookmark(${doc.id}, event)" title="حفظ بالمفضلة">
-                    ${isBookmarked ? '★' : '☆'}
-                </button>
-                <button class="cover-action-btn" onclick="shareDoc('${doc.title}', '${doc.file_url}', event)" title="مشاركة">
-                    🔗
-                </button>
+                <button class="cover-action-btn" onclick="toggleBookmark(${doc.id}, event)">${isFav ? '★' : '☆'}</button>
+                <button class="cover-action-btn" onclick="shareDoc('${doc.title}', '${doc.file_url}', event)">🔗</button>
             </div>
-
-            <div class="cover-box-footer">
-                <span>📖 قراءة PDF</span>
-            </div>
+            <div class="cover-box-footer"><span>📖 قراءة PDF</span></div>
         `;
         card.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url, doc.id));
         grid.appendChild(card);
@@ -1917,14 +1591,11 @@ function renderDocs(docs) {
 }
 
 const q = document.getElementById('q'), cat = document.getElementById('category'), sortBy = document.getElementById('sortBy'), filterAuthor = document.getElementById('filterAuthor');
-
 function filterAndRenderDocs() {
     if (!q || !cat) return;
     let term = q.value.trim().toLowerCase();
     let authorTerm = filterAuthor ? filterAuthor.value.trim().toLowerCase() : '';
     let category = cat.value;
-    let sort = sortBy ? sortBy.value : 'newest';
-
     let filtered = allDocs.filter(d => {
         let match = (d.title + ' ' + (d.description || '')).toLowerCase().includes(term);
         let authorMatch = !authorTerm || (d.author || '').toLowerCase().includes(authorTerm);
@@ -1932,23 +1603,12 @@ function filterAndRenderDocs() {
         let bMatch = !showingOnlyBookmarks || bookmarkedIds.includes(d.id);
         return match && authorMatch && cMatch && bMatch;
     });
-
-    if (sort === 'title') filtered.sort((a,b) => (a.title||'').localeCompare(b.title||'', 'ar'));
-    else filtered.reverse();
-
     renderDocs(filtered);
-}
-
-function filterByTag(c, btn) {
-    if (cat) { cat.value = c; filterAndRenderDocs(); }
-    document.querySelectorAll('.quick-tags .tag-btn').forEach(b => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
 }
 
 if (q) q.addEventListener('input', filterAndRenderDocs);
 if (filterAuthor) filterAuthor.addEventListener('input', filterAndRenderDocs);
 if (cat) cat.addEventListener('change', filterAndRenderDocs);
-if (sortBy) sortBy.addEventListener('change', filterAndRenderDocs);
 
 fetchDocuments();
 fetchSources();
