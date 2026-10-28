@@ -28,10 +28,7 @@
   <meta property="og:image" content="https://nahjalhaqiqa.github.io/assets/logo.png">
 
   <link rel="icon" href="assets/logo.png" type="image/png">
-  
-  <!-- Manifest ديناميكي لضمان تفعيل التثبيت المباشر بضغطة زر دون شروط صعبة -->
-  <link rel="manifest" href="data:application/manifest+json;utf8,%7B%22name%22%3A%22%D9%86%D9%87%D8%AC%20%D8%A7%D9%84%D8%AD%D9%82%D9%8A%D9%82%D8%A9%22%2C%22short_name%22%3A%22%D9%86%D9%87%D8%AC%20%D8%A7%D9%84%D8%AD%D9%82%D9%8A%D9%82%D8%A9%22%2C%22description%22%3A%22%D9%85%D9%86%D8%B5%D8%A9%20%D8%A5%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9%20%D8%B9%D9%84%D9%85%D9%8A%D8%A9%22%2C%22start_url%22%3A%22%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23031622%22%2C%22theme_color%22%3A%22%23031622%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22assets%2Flogo.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%7D%2C%7B%22src%22%3A%22assets%2Flogo.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
-  
+  <link rel="manifest" href="manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="نهج الحقيقة">
@@ -129,14 +126,7 @@
 
   .install-btn-nav {
       background: rgba(39, 213, 177, 0.15); border: 1px solid var(--mint); color: var(--mint);
-      padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;
-      animation: pulseBtn 2s infinite;
-  }
-
-  @keyframes pulseBtn {
-      0% { box-shadow: 0 0 0 0 rgba(39, 213, 177, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(39, 213, 177, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(39, 213, 177, 0); }
+      padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; font-weight: 700; display: none; align-items: center; gap: 5px;
   }
 
   .hero-banner {
@@ -526,7 +516,7 @@
       <a href="#contact">تواصل معنا</a>
     </nav>
     <div class="nav-actions">
-      <button class="install-btn-nav" id="installPwaBtn" onclick="installPWA()">📲 تثبيت التطبيق</button>
+      <button class="install-btn-nav" id="installPwaBtn" onclick="installPWA()">📲 تثبيت</button>
       <button class="icon-action-btn" onclick="toggleBookmarksView()" title="المفضلة">⭐</button>
       <button class="icon-action-btn" onclick="toggleTheme()" id="themeToggle" title="تبديل الوضع">🌙</button>
       <button class="icon-action-btn" onclick="openAdminModal()" title="لوحة التحكم الإدارية" style="color:var(--mint);">⚙️</button>
@@ -1131,57 +1121,16 @@ setInterval(updateDailyVerseAndClock, 1000);
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-/* --- البرمجة المباشرة لتثبيت التطبيق بنقرة واحدة بدون عناء --- */
 let deferredPrompt = null;
-
-// التقاط حدث التثبيت وتخزينه
 window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault(); 
-    deferredPrompt = e;
+    e.preventDefault(); deferredPrompt = e;
     const btn = document.getElementById('installPwaBtn');
-    if (btn) {
-        btn.style.display = 'inline-flex';
-        btn.innerHTML = '📲 تثبيت التطبيق الآن';
-    }
+    if (btn) btn.style.display = 'inline-flex';
 });
-
-// تسجيل Service Worker وهمي تلقائي لخداع المتصفح وتفعيل زر التثبيت المباشر فوراً
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        const swBlob = new Blob([`
-            self.addEventListener('fetch', function(e) { e.respondWith(fetch(e.request)); });
-        `], { type: 'text/javascript' });
-        const swUrl = URL.createObjectURL(swBlob);
-        navigator.serviceWorker.register(swUrl).catch(() => {});
-    });
-}
-
 function installPWA() {
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-
-    // حالة الآيفون
-    if (isIOS) {
-        alert('لتثبيت التطبيق مباشرة على جهاز الآيفون:\n\n1. اضغط على زر المشاركة (Share) ⎋ أسفل متصفح Safari.\n2. اختر "إضافة إلى الشاشة الرئيسية" (Add to Home Screen).');
-        return;
-    }
-
-    // إذا تم التقاط الحدث، يتم إظهار نافذة التثبيت فوراً دون أي عناء
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                showToast('🎉 تم تثبيت التطبيق بنجاح على هاتفك!');
-                document.getElementById('installPwaBtn').style.display = 'none';
-            }
-            deferredPrompt = null;
-        });
-    } else {
-        // إنشاء محاكاة للتثبيت المباشر في حال تصفح الموقع من المتصفح مباشرة
-        showToast('جاري تحضير ملف التثبيت المباشر...');
-        setTimeout(() => {
-            alert('اضغط على خيار "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية" المائل في القائمة المنسدلة للمتصفح لتكمله بنقرة واحدة.');
-        }, 300);
-    }
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => { deferredPrompt = null; document.getElementById('installPwaBtn').style.display = 'none'; });
 }
 
 function toggleTheme() {
@@ -1377,23 +1326,9 @@ function renderPodcastsPlaylist() {
     }).join('');
 }
 
-/* --- كود التحميل المباشر المحدث والمكيف لجميع الأجهزة والآيفون --- */
 function triggerDirectDownload(url, name) {
-    if (!url) return;
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-
-    if (isIOS) {
-        window.open(url, '_blank');
-        showToast('تم فتح الملف، يمكنك حفظه من خيارات المشاركة في المتصفح.');
-    } else {
-        const a = document.createElement('a');
-        a.href = url;
-        a.target = '_blank';
-        a.download = name || 'file';
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(() => { document.body.removeChild(a); }, 100);
-    }
+    const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.download = name || 'file';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 function downloadFileDirectly() { if (activePdfUrl) triggerDirectDownload(activePdfUrl, activePdfName + '.pdf'); }
 
@@ -1739,6 +1674,7 @@ function logoutAdmin() {
 
 function applyUserPermissions() {
     const perms = currentLoggedInUser.permissions || [];
+    // السماح بظهور التبويبات بحسب الصلاحيات أو إذا كان المدير العام (Admin)
     const isAdmin = currentLoggedInUser.name.includes('مدير') || currentLoggedInUser.name.includes('Admin') || perms.length === 0;
 
     document.getElementById('tabBtnDocs').style.display = (isAdmin || perms.includes('docs')) ? 'inline-block' : 'none';
@@ -1747,6 +1683,7 @@ function applyUserPermissions() {
     document.getElementById('tabBtnPodcasts').style.display = (isAdmin || perms.includes('podcasts')) ? 'inline-block' : 'none';
     document.getElementById('tabBtnManageUsers').style.display = (isAdmin || perms.includes('manage_users')) ? 'inline-block' : 'none';
 
+    // افتراض فتح تبويب الصوتيات أولاً لسهولة الاختبار، أو الكتب
     switchAdminTab('podcasts');
 }
 
