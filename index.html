@@ -656,14 +656,15 @@
         <div style="display:flex; align-items:center; gap:12px;">
           <button class="audio-play-btn" id="audioPlayToggleBtn" onclick="toggleAudioPlay()">▶</button>
           <div>
-            <h4 id="audioTrackTitle" style="margin:0; color:var(--gold); font-size:1rem;">حلقة: منهج التحقيق التاريخي والعقائدي</h4>
-            <p id="audioTrackDesc" style="margin:0; color:var(--muted); font-size:0.8rem;">برنامج على طاولة الحقيقة - الحلقة الأولى</p>
+            <h4 id="audioTrackTitle" style="margin:0; color:var(--gold); font-size:1rem;">جاري التحميل...</h4>
+            <p id="audioTrackDesc" style="margin:0; color:var(--muted); font-size:0.8rem;">بودكاست نهج الحقيقة</p>
           </div>
         </div>
-        <audio id="mainAudioPlayer" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" ontimeupdate="updateAudioProgress()"></audio>
+        <audio id="mainAudioPlayer" ontimeupdate="updateAudioProgress()" onended="playNextPodcast()"></audio>
       </div>
       <input type="range" id="audioSeekBar" value="0" min="0" max="100" style="width:100%; accent-color:var(--gold); cursor:pointer;" onchange="seekAudio(this.value)">
     </div>
+    <div id="podcastsListContainer" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px; margin-top:15px;"></div>
   </section>
 
   <section class="wrap" id="library">
@@ -833,7 +834,7 @@
         <div class="stat-card-admin"><h3 id="statDocsCount">0</h3><p>الكتب والملفات</p></div>
         <div class="stat-card-admin"><h3 id="statSourcesCount">0</h3><p>الوثائق المصورة</p></div>
         <div class="stat-card-admin"><h3 id="statVidsCount">0</h3><p>الفيديوهات</p></div>
-        <div class="stat-card-admin"><h3 id="statEmpsCount">0</h3><p>الموظفين</p></div>
+        <div class="stat-card-admin"><h3 id="statPodcastsCount">0</h3><p>الحلقات الصوتية</p></div>
       </div>
 
       <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(39, 213, 177, 0.1); padding:10px 16px; border-radius:14px; border:1px solid var(--mint);">
@@ -845,6 +846,7 @@
         <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 الكتب والملفات</button>
         <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 الوثائق المصورة</button>
         <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ الفيديوهات</button>
+        <button id="tabBtnPodcasts" class="admin-tab-btn" onclick="switchAdminTab('podcasts')">🎧 الصوتيات والبودكاست</button>
         <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين</button>
       </div>
 
@@ -929,7 +931,25 @@
         <div id="adminVidsList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
       </div>
 
-      <!-- 4. الموظفين -->
+      <!-- 4. نموذج الصوتيات والبودكاست -->
+      <div id="addPodcastForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
+        <input type="hidden" id="edit_podcast_id">
+        <h4 id="podcastFormHeading" style="margin:0; color:var(--gold);">➕ إضافة حلقة صوتية جديدة</h4>
+        <input type="text" id="podcast_title" placeholder="عنوان الحلقة الصوتية..." required>
+        <input type="text" id="podcast_url" placeholder="رابط الملف الصوتي المباشر (MP3 URL)..." required>
+        <textarea id="podcast_desc" placeholder="نبذة أو وصف الحلقة..."></textarea>
+        
+        <div style="display:flex; gap:8px;">
+          <button type="button" id="savePodcastBtn" class="btn" onclick="saveNewPodcast(event)">💾 حفظ ونشر الحلقة</button>
+          <button type="button" id="cancelPodcastEditBtn" class="btn red" style="display:none;" onclick="cancelPodcastEdit()">إلغاء التعديل</button>
+        </div>
+
+        <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
+        <h5 style="margin:0; color:var(--gold);">قائمة الحلقات الصوتية المنشورة:</h5>
+        <div id="adminPodcastsList" style="max-height:220px; overflow-y:auto; margin-top:6px;"></div>
+      </div>
+
+      <!-- 5. الموظفين -->
       <div id="manageUsersSec" style="display:none; flex-direction:column; gap:15px;">
         <h4 style="margin:0; color:var(--gold);">إضافة موظف جديد وتحديد المهام</h4>
         <form class="admin-form" onsubmit="saveEmployee(event)" style="display:flex; flex-direction:column; gap:10px;">
@@ -940,6 +960,7 @@
             <label class="perm-checkbox-item"><input type="checkbox" id="p_docs" value="docs"> 📚 الكتب والملفات</label>
             <label class="perm-checkbox-item"><input type="checkbox" id="p_sources" value="sources"> 📜 الوثائق المصورة</label>
             <label class="perm-checkbox-item"><input type="checkbox" id="p_videos" value="videos"> ▶ الفيديوهات</label>
+            <label class="perm-checkbox-item"><input type="checkbox" id="p_podcasts" value="podcasts"> 🎧 الصوتيات</label>
           </div>
           <button type="submit" id="saveEmpBtn" class="btn">➕ إضافة الموظف</button>
         </form>
@@ -1144,12 +1165,46 @@ let activePdfDocId = null;
 let currentPdfScale = 1.3;
 let currentPdfObj = null;
 
+let allPodcasts = [];
+let currentPodcastIndex = 0;
+
+async function fetchPodcasts() {
+    if (!supabaseClient) return;
+    try {
+        const { data, error } = await supabaseClient.from('podcasts').select('*').order('created_at', { ascending: false });
+        if (!error && data && data.length > 0) {
+            allPodcasts = data;
+            loadPodcastIntoPlayer(0);
+            renderPodcastsPlaylist();
+        } else {
+            document.getElementById('audioTrackTitle').textContent = 'لا توجد حلقات صوتية مضافة حالياً';
+            document.getElementById('audioTrackDesc').textContent = 'قم بإضافة الحلقات عبر لوحة التحكم';
+        }
+        if (currentLoggedInUser) populateAdminLists();
+    } catch(e) {
+        document.getElementById('audioTrackTitle').textContent = 'تعذر تحميل الصوتيات';
+    }
+}
+
+function loadPodcastIntoPlayer(index) {
+    if (!allPodcasts.length || !allPodcasts[index]) return;
+    currentPodcastIndex = index;
+    const podcast = allPodcasts[index];
+    const player = document.getElementById('mainAudioPlayer');
+    player.src = podcast.audio_url;
+    document.getElementById('audioTrackTitle').textContent = podcast.title;
+    document.getElementById('audioTrackDesc').textContent = podcast.description || 'بودكاست نهج الحقيقة';
+    document.getElementById('audioPlayToggleBtn').textContent = '▶';
+}
+
 function toggleAudioPlay() {
     const player = document.getElementById('mainAudioPlayer');
     const btn = document.getElementById('audioPlayToggleBtn');
+    if (!player.src && allPodcasts.length) {
+        loadPodcastIntoPlayer(0);
+    }
     if (player.paused) {
-        player.play();
-        btn.textContent = '⏸';
+        player.play().then(() => { btn.textContent = '⏸'; }).catch(() => { showToast('تعذر تشغيل الملف الصوتي', 'error'); });
     } else {
         player.pause();
         btn.textContent = '▶';
@@ -1169,6 +1224,33 @@ function seekAudio(val) {
     if (player.duration) {
         player.currentTime = (val / 100) * player.duration;
     }
+}
+
+function playNextPodcast() {
+    if (currentPodcastIndex + 1 < allPodcasts.length) {
+        loadPodcastIntoPlayer(currentPodcastIndex + 1);
+        document.getElementById('mainAudioPlayer').play();
+        document.getElementById('audioPlayToggleBtn').textContent = '⏸';
+    } else {
+        document.getElementById('audioPlayToggleBtn').textContent = '▶';
+    }
+}
+
+function renderPodcastsPlaylist() {
+    const container = document.getElementById('podcastsListContainer');
+    if (!container) return;
+    container.innerHTML = allPodcasts.map((p, idx) => `
+        <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); border-radius:10px; padding:10px; display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="loadPodcastIntoPlayer(${idx}); toggleAudioPlay();">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:1.1rem; color:var(--gold);">🎧</span>
+                <div>
+                    <h5 style="margin:0; font-size:0.85rem; font-weight:800; color:var(--ink);">${p.title}</h5>
+                    <p style="margin:0; font-size:0.72rem; color:var(--muted);">${p.description || ''}</p>
+                </div>
+            </div>
+            <span style="font-size:0.75rem; color:var(--mint); font-weight:700;">استماع ▶</span>
+        </div>
+    `).join('');
 }
 
 function triggerDirectDownload(url, name) {
@@ -1506,6 +1588,7 @@ function showAdminDashboard() {
     document.getElementById('statDocsCount').textContent = allDocs.length;
     document.getElementById('statSourcesCount').textContent = allSources.length;
     document.getElementById('statVidsCount').textContent = allVideos.length;
+    document.getElementById('statPodcastsCount').textContent = allPodcasts.length;
     
     applyUserPermissions();
     populateAdminLists();
@@ -1523,11 +1606,13 @@ function applyUserPermissions() {
     document.getElementById('tabBtnDocs').style.display = perms.includes('docs') ? 'inline-block' : 'none';
     document.getElementById('tabBtnSources').style.display = perms.includes('sources') ? 'inline-block' : 'none';
     document.getElementById('tabBtnVideos').style.display = perms.includes('videos') ? 'inline-block' : 'none';
+    document.getElementById('tabBtnPodcasts').style.display = perms.includes('podcasts') ? 'inline-block' : 'none';
     document.getElementById('tabBtnManageUsers').style.display = perms.includes('manage_users') ? 'inline-block' : 'none';
 
     if (perms.includes('docs')) switchAdminTab('docs');
     else if (perms.includes('sources')) switchAdminTab('sources');
     else if (perms.includes('videos')) switchAdminTab('videos');
+    else if (perms.includes('podcasts')) switchAdminTab('podcasts');
     else if (perms.includes('manage_users')) switchAdminTab('manage_users');
 }
 
@@ -1536,11 +1621,13 @@ function switchAdminTab(type) {
     document.getElementById('addDocForm').style.display = type === 'docs' ? 'flex' : 'none';
     document.getElementById('addSourceForm').style.display = type === 'sources' ? 'flex' : 'none';
     document.getElementById('addVidForm').style.display = type === 'videos' ? 'flex' : 'none';
+    document.getElementById('addPodcastForm').style.display = type === 'podcasts' ? 'flex' : 'none';
     document.getElementById('manageUsersSec').style.display = type === 'manage_users' ? 'flex' : 'none';
     
     if (type === 'docs') document.getElementById('tabBtnDocs').classList.add('active');
     if (type === 'sources') document.getElementById('tabBtnSources').classList.add('active');
     if (type === 'videos') document.getElementById('tabBtnVideos').classList.add('active');
+    if (type === 'podcasts') document.getElementById('tabBtnPodcasts').classList.add('active');
     if (type === 'manage_users') {
         document.getElementById('tabBtnManageUsers').classList.add('active');
         fetchEmployeesList();
@@ -1561,6 +1648,19 @@ function populateAdminLists() {
                 </div>
             </div>
         `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد عناصر.</p>';
+    }
+
+    const podcastsList = document.getElementById('adminPodcastsList');
+    if (podcastsList) {
+        podcastsList.innerHTML = allPodcasts.map(p => `
+            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:10px; border-radius:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.88rem; font-weight:700;">${p.title}</span>
+                <div style="display:flex; gap:6px;">
+                    <button class="btn shrink" style="padding:3px 8px; font-size:0.75rem;" onclick="editPodcast(${p.id})">✏️ تعديل</button>
+                    <button class="btn red" style="padding:3px 8px; font-size:0.75rem;" onclick="deletePodcast(${p.id})">🗑️ حذف</button>
+                </div>
+            </div>
+        `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد حلقات صوتية مضافة.</p>';
     }
 }
 
@@ -1603,6 +1703,108 @@ async function deleteDoc(id) {
     if (confirm('هل أنت متأكد من الحذف؟')) {
         const { error } = await supabaseClient.from('documents').delete().eq('id', id);
         if (!error) { showToast('تم الحذف بنجاح'); fetchDocuments(); }
+    }
+}
+
+async function saveNewPodcast(e) {
+    e.preventDefault();
+    const editId = document.getElementById('edit_podcast_id').value;
+    const podcastData = {
+        title: document.getElementById('podcast_title').value,
+        audio_url: document.getElementById('podcast_url').value,
+        description: document.getElementById('podcast_desc').value
+    };
+
+    let error = editId
+        ? (await supabaseClient.from('podcasts').update(podcastData).eq('id', editId)).error
+        : (await supabaseClient.from('podcasts').insert([podcastData])).error;
+
+    if (!error) {
+        showToast('تم حفظ الحلقة الصوتية بنجاح!');
+        cancelPodcastEdit();
+        fetchPodcasts();
+    } else {
+        showToast('حدث خطأ أثناء حفظ الحلقة', 'error');
+    }
+}
+
+function editPodcast(id) {
+    const podcast = allPodcasts.find(p => p.id === id);
+    if (!podcast) return;
+    document.getElementById('edit_podcast_id').value = podcast.id;
+    document.getElementById('podcast_title').value = podcast.title;
+    document.getElementById('podcast_url').value = podcast.audio_url;
+    document.getElementById('podcast_desc').value = podcast.description || '';
+    document.getElementById('podcastFormHeading').textContent = '✏️ تعديل الحلقة الصوتية';
+    document.getElementById('savePodcastBtn').textContent = '💾 حفظ التعديلات';
+    document.getElementById('cancelPodcastEditBtn').style.display = 'inline-flex';
+}
+
+function cancelPodcastEdit() {
+    document.getElementById('edit_podcast_id').value = '';
+    document.getElementById('podcast_title').value = '';
+    document.getElementById('podcast_url').value = '';
+    document.getElementById('podcast_desc').value = '';
+    document.getElementById('podcastFormHeading').textContent = '➕ إضافة حلقة صوتية جديدة';
+    document.getElementById('savePodcastBtn').textContent = '💾 حفظ ونشر الحلقة';
+    document.getElementById('cancelPodcastEditBtn').style.display = 'none';
+}
+
+async function deletePodcast(id) {
+    if (confirm('هل أنت متأكد من حذف هذه الحلقة الصوتية؟')) {
+        const { error } = await supabaseClient.from('podcasts').delete().eq('id', id);
+        if (!error) {
+            showToast('تم حذف الحلقة بنجاح');
+            fetchPodcasts();
+        } else {
+            showToast('حدث خطأ أثناء الحذف', 'error');
+        }
+    }
+}
+
+async function fetchEmployeesList() {
+    const container = document.getElementById('employeesList');
+    if (!container || !supabaseClient) return;
+    try {
+        const { data } = await supabaseClient.from('employees').select('*');
+        if (!data || !data.length) {
+            container.innerHTML = '<p style="color:var(--muted); font-size:0.8rem;">لا توجد حسابات موظفين.</p>';
+            return;
+        }
+        container.innerHTML = data.map(emp => `
+            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:8px 12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.85rem; font-weight:700;">${emp.name}</span>
+                <button class="btn red" style="padding:2px 8px; font-size:0.7rem;" onclick="deleteEmployee(${emp.id})">حذف</button>
+            </div>
+        `).join('');
+    } catch(e) {}
+}
+
+async function saveEmployee(e) {
+    e.preventDefault();
+    const name = document.getElementById('emp_name').value.trim();
+    const pass = document.getElementById('emp_pass').value.trim();
+    const perms = [];
+    if (document.getElementById('p_docs').checked) perms.push('docs');
+    if (document.getElementById('p_sources').checked) perms.push('sources');
+    if (document.getElementById('p_videos').checked) perms.push('videos');
+    if (document.getElementById('p_podcasts').checked) perms.push('podcasts');
+
+    const { error } = await supabaseClient.from('employees').insert([{ name, password: pass, permissions: perms }]);
+    if (!error) {
+        showToast('تمت إضافة الموظف بنجاح');
+        document.getElementById('emp_name').value = '';
+        document.getElementById('emp_pass').value = '';
+        fetchEmployeesList();
+    } else {
+        showToast('تعذر إضافة الموظف', 'error');
+    }
+}
+
+async function deleteEmployee(id) {
+    if (confirm('هل أنت متأكد من حذف حساب هذا الموظف؟')) {
+        const { error } = await supabaseClient.from('employees').delete().eq('id', id);
+        if (!error) { showToast('تم الحذف بنجاح'); fetchEmployeesList(); }
     }
 }
 
@@ -1751,6 +1953,7 @@ if (sortBy) sortBy.addEventListener('change', filterAndRenderDocs);
 fetchDocuments();
 fetchSources();
 fetchLatestVideos();
+fetchPodcasts();
 </script>
 </body>
 </html>
