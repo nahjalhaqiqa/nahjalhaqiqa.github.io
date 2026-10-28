@@ -1674,17 +1674,17 @@ function logoutAdmin() {
 
 function applyUserPermissions() {
     const perms = currentLoggedInUser.permissions || [];
-    document.getElementById('tabBtnDocs').style.display = perms.includes('docs') ? 'inline-block' : 'none';
-    document.getElementById('tabBtnSources').style.display = perms.includes('sources') ? 'inline-block' : 'none';
-    document.getElementById('tabBtnVideos').style.display = perms.includes('videos') ? 'inline-block' : 'none';
-    document.getElementById('tabBtnPodcasts').style.display = perms.includes('podcasts') ? 'inline-block' : 'none';
-    document.getElementById('tabBtnManageUsers').style.display = perms.includes('manage_users') ? 'inline-block' : 'none';
+    // السماح بظهور التبويبات بحسب الصلاحيات أو إذا كان المدير العام (Admin)
+    const isAdmin = currentLoggedInUser.name.includes('مدير') || currentLoggedInUser.name.includes('Admin') || perms.length === 0;
 
-    if (perms.includes('docs')) switchAdminTab('docs');
-    else if (perms.includes('sources')) switchAdminTab('sources');
-    else if (perms.includes('videos')) switchAdminTab('videos');
-    else if (perms.includes('podcasts')) switchAdminTab('podcasts');
-    else if (perms.includes('manage_users')) switchAdminTab('manage_users');
+    document.getElementById('tabBtnDocs').style.display = (isAdmin || perms.includes('docs')) ? 'inline-block' : 'none';
+    document.getElementById('tabBtnSources').style.display = (isAdmin || perms.includes('sources')) ? 'inline-block' : 'none';
+    document.getElementById('tabBtnVideos').style.display = (isAdmin || perms.includes('videos')) ? 'inline-block' : 'none';
+    document.getElementById('tabBtnPodcasts').style.display = (isAdmin || perms.includes('podcasts')) ? 'inline-block' : 'none';
+    document.getElementById('tabBtnManageUsers').style.display = (isAdmin || perms.includes('manage_users')) ? 'inline-block' : 'none';
+
+    // افتراض فتح تبويب الصوتيات أولاً لسهولة الاختبار، أو الكتب
+    switchAdminTab('podcasts');
 }
 
 function switchAdminTab(type) {
