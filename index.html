@@ -213,7 +213,7 @@
   .tag-btn { background: var(--panel); border: 1px solid var(--line); color: var(--muted); padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
   .tag-btn:hover, .tag-btn.active { border-color: var(--mint); color: var(--mint); background: var(--panel-hover); }
 
-  /* شبكة العرض المعدلة لإنشاء 4 بطاقات مصغرة وأنيقة بالصف الواحد */
+  /* شبكة العرض المصغرة الموحدة لجميع الأقسام */
   .doc-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr)); 
@@ -222,13 +222,13 @@
   .doc-grid.list-view { grid-template-columns: 1fr !important; }
   .doc-grid.list-view .book-cover-card { aspect-ratio: auto; flex-direction: row; align-items: center; padding: 10px 14px; min-height: 70px; }
 
-  /* تصميم البطاقات الموحد والأصغر حجماً لكل الأقسام بلا استثناء */
+  /* تصميم الغلاف المصغر الموحد لكل بطاقات الأقسام */
   .book-cover-card {
       position: relative;
       width: 100%;
-      aspect-ratio: 1 / 1.35; /* أبعاد مصغرة وأكثر تناسقاً */
+      aspect-ratio: 1 / 1.35;
       background: #150a06;
-      border: 4px solid #2b170c; /* سمك الإطار مصغر */
+      border: 4px solid #2b170c;
       border-radius: 8px;
       padding: 6px;
       display: flex;
@@ -405,7 +405,7 @@
   @media(max-width:768px){
       .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .tools{grid-template-columns:1fr; gap: 8px;}
-      .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));} /* 2 بطاقة في الهاتف لتكون واضحة واحترافية */
+      .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
       .footer-grid { grid-template-columns: 1fr; }
       .mobile-bottom-nav { display: flex; }
       body { padding-bottom: 65px; }
@@ -503,7 +503,7 @@
     </div>
   </div>
 
-  <!-- قسم المكتبة الصوتية (بطاقات مصغرة موحدة) -->
+  <!-- قسم المكتبة الصوتية -->
   <div class="wrap" id="audio-podcast" style="margin-top: 10px;">
     <div class="main-content-grid">
 
@@ -567,7 +567,7 @@
     </div>
   </div>
 
-  <!-- قسم المكتبة الرقمية (بطاقات مصغرة موحدة مع باقي الأقسام) -->
+  <!-- قسم المكتبة الرقمية -->
   <section class="wrap" id="library">
     <div class="head">
       <h2><span id="libTitleIcon">📚</span> <span id="libTitleText">مكتبة الوثائق والأبحاث الكاملة</span></h2>
@@ -607,7 +607,7 @@
     <div class="empty" id="empty">لا توجد نتائج مطابقة لخيارات البحث.</div>
   </section>
 
-  <!-- قسم موسوعة الوثائق المصورة (بطاقات مصغرة موحدة) -->
+  <!-- قسم موسوعة الوثائق المصورة -->
   <section class="wrap" id="sources-section" style="margin-top: 25px;">
     <div class="head">
       <h2><span>📜</span> موسوعة الأدلة والوثائق المصورة النادرة</h2>
@@ -737,11 +737,11 @@
   </div>
 </div>
 
-<!-- لوحة التحكم الإدارية الشاملة لكافة الأقسام مع تغيير أغلفة الصور -->
+<!-- لوحة التحكم الإدارية المحدثة لإضافة وتعديل الأغلفة لجميع الأقسام -->
 <div class="modal" id="adminModal">
   <div class="modal-content" style="max-width:850px;">
     <div class="sticky-close-bar">
-      <h3 id="adminModalTitle" style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة وإدارة الأغلفة الشاملة</h3>
+      <h3 id="adminModalTitle" style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة وإدارة الأغلفة للجميع</h3>
       <button class="back-btn" onclick="closeAdminModal()">✕ إغلاق</button>
     </div>
 
@@ -773,10 +773,10 @@
         <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين</button>
       </div>
 
-      <!-- 1. نموذج الكتب والملفات -->
+      <!-- 1. الكتب والملفات (تعديل الغلاف أسبوعياً أو عند الإضافة) -->
       <div id="addDocForm" class="admin-form" style="display:flex; flex-direction:column; gap:12px;">
         <input type="hidden" id="edit_doc_id">
-        <h4 id="docFormHeading" style="margin:0; color:var(--gold);">➕ إضافة بحث / كتاب جديد مع تخصيص الغلاف</h4>
+        <h4 id="docFormHeading" style="margin:0; color:var(--gold);">🖼️ إضافة / تعديل غلاف وكتاب في المكتبة الرقمية</h4>
         
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
           <input type="text" id="doc_title" placeholder="عنوان البحث / الكتاب" required>
@@ -794,17 +794,21 @@
           <input type="text" id="doc_url" placeholder="رابط الملف المباشر (PDF URL)" required>
         </div>
         
-        <input type="text" id="doc_cover_url" placeholder="رابط صورة الغلاف الوسطى للمستند (Image URL)...">
+        <div style="background:rgba(212, 175, 55, 0.08); border:1px solid var(--gold); padding:10px; border-radius:10px;">
+          <label style="font-size:0.85rem; font-weight:800; color:var(--gold); display:block; margin-bottom:4px;">🖼️ رابط صورة الغلاف الوسطى للمستند:</label>
+          <input type="text" id="doc_cover_url" placeholder="ضع رابط صورة الغلاف هنا (Image URL)...">
+        </div>
+
         <textarea id="doc_desc" placeholder="نبذة مختصرة عن المستند..."></textarea>
         
         <div style="display:flex; gap:8px;">
-          <button type="button" id="saveDocBtn" class="btn" onclick="saveNewDoc(event)">💾 حفظ ونشر الملف</button>
+          <button type="button" id="saveDocBtn" class="btn" onclick="saveNewDoc(event)">💾 حفظ ونشر الكتاب مع الغلاف</button>
           <button type="button" id="cancelDocEditBtn" class="btn red" style="display:none;" onclick="cancelDocEdit()">إلغاء التعديل</button>
         </div>
 
         <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-          <h5 style="margin:0; color:var(--gold);">قائمة العناصر المنشورة:</h5>
+          <h5 style="margin:0; color:var(--gold);">قائمة الكتب المنشورة (اضغط تعديل لتغيير الغلاف):</h5>
           <select id="filterAdminCategory" onchange="populateAdminLists()" style="width:auto; padding:5px 12px; font-size:0.8rem;">
             <option value="">✨ كافة الأقسام</option>
             <option value="بحوث عقائدية">💡 بحوث عقائدية</option>
@@ -817,24 +821,29 @@
         <div id="adminDocsList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
       </div>
 
-      <!-- 2. نموذج الوثائق المصورة -->
+      <!-- 2. الوثائق المصورة (تعديل الغلاف) -->
       <div id="addSourceForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
         <input type="hidden" id="edit_source_id">
-        <h4 id="sourceFormHeading" style="margin:0; color:var(--gold);">➕ إضافة وثيقة مصورة نادرة مع تخصيص الغلاف</h4>
+        <h4 id="sourceFormHeading" style="margin:0; color:var(--gold);">🖼️ إضافة / تعديل غلاف وثيقة مصورة</h4>
         <input type="text" id="source_title" placeholder="عنوان المجموعة (مثال: وثائق فدك)..." required>
-        <input type="text" id="source_img_url" placeholder="رابط صورة الوثيقة أو الغلاف الأوسط (Image URL)" required>
+        
+        <div style="background:rgba(212, 175, 55, 0.08); border:1px solid var(--gold); padding:10px; border-radius:10px;">
+          <label style="font-size:0.85rem; font-weight:800; color:var(--gold); display:block; margin-bottom:4px;">🖼️ رابط صورة الغلاف الوسطى للوثيقة:</label>
+          <input type="text" id="source_img_url" placeholder="رابط صورة الوثيقة أو الغلاف الأوسط (Image URL)..." required>
+        </div>
+
         <textarea id="source_desc" placeholder="شرح تفصيلي للوثيقة..."></textarea>
         
         <div style="display:flex; gap:8px;">
-          <button type="button" id="saveSourceBtn" class="btn" onclick="saveNewSource(event)">💾 حفظ الوثيقة المصورة</button>
+          <button type="button" id="saveSourceBtn" class="btn" onclick="saveNewSource(event)">💾 حفظ الوثيقة والغلاف</button>
           <button type="button" id="cancelSourceEditBtn" class="btn red" style="display:none;" onclick="cancelSourceEdit()">إلغاء التعديل</button>
         </div>
         <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
-        <h5 style="margin:0; color:var(--gold);">قائمة الوثائق المصورة:</h5>
+        <h5 style="margin:0; color:var(--gold);">قائمة الوثائق المصورة (اضغط تعديل لتغيير الغلاف):</h5>
         <div id="adminSourcesList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
       </div>
 
-      <!-- 3. نموذج الفيديوهات -->
+      <!-- 3. الفيديوهات -->
       <div id="addVidForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
         <input type="hidden" id="edit_vid_id">
         <h4 id="vidFormHeading" style="margin:0; color:var(--gold);">➕ إضافة فيديو يوتيوب جديد</h4>
@@ -850,7 +859,7 @@
         <div id="adminVidsList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
       </div>
 
-      <!-- 4. نموذج المكتبة الصوتية وأغلفة الأقسام المزخرفة -->
+      <!-- 4. الصوتيات وأغلفة الأقسام المصورة -->
       <div id="addPodcastForm" class="admin-form" style="display:none; flex-direction:column; gap:14px;">
         <input type="hidden" id="edit_podcast_id">
         <h4 id="podcastFormHeading" style="margin:0; color:var(--gold);">🎧 إدارة أقسام الصوتيات وتغيير الصور الوسطى في الغلاف</h4>
@@ -1154,7 +1163,6 @@ function populatePodcastCategorySelects() {
     select.innerHTML = podcastCategories.map(c => `<option value="${c}">📁 قسم: ${c}</option>`).join('');
 }
 
-// رسم بطاقات الأقسام الصوتية بتصميم الغلاف الموحد والأصغر حجماً
 function renderAudioCategoriesCards() {
     const grid = document.getElementById('audio-categories-grid');
     if (!grid) return;
@@ -1335,7 +1343,6 @@ async function fetchSources() {
     } catch(e){}
 }
 
-// رسم بطاقات موسوعة الوثائق المصورة بتصميم الغلاف المصغر الموحد
 function renderSourcesMain(data) {
     const grid = document.getElementById('sources-grid');
     if (!grid) return;
@@ -1609,7 +1616,7 @@ function applyUserPermissions() {
     document.getElementById('tabBtnPodcasts').style.display = (isAdmin || perms.includes('podcasts')) ? 'inline-block' : 'none';
     document.getElementById('tabBtnManageUsers').style.display = (isAdmin || perms.includes('manage_users')) ? 'inline-block' : 'none';
 
-    switchAdminTab('podcasts');
+    switchAdminTab('docs');
 }
 
 function switchAdminTab(type) {
@@ -1639,11 +1646,24 @@ function populateAdminLists() {
             <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:10px; border-radius:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
                 <span style="font-size:0.88rem; font-weight:700;">${d.title}</span>
                 <div style="display:flex; gap:6px;">
-                    <button class="btn shrink" style="padding:3px 8px; font-size:0.75rem;" onclick="editDoc(${d.id})">✏️ تعديل</button>
+                    <button class="btn shrink" style="padding:3px 8px; font-size:0.75rem;" onclick="editDoc(${d.id})">✏️ تعديل / غلاف</button>
                     <button class="btn red" style="padding:3px 8px; font-size:0.75rem;" onclick="deleteDoc(${d.id})">🗑️ حذف</button>
                 </div>
             </div>
         `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد عناصر.</p>';
+    }
+
+    const sourcesList = document.getElementById('adminSourcesList');
+    if (sourcesList) {
+        sourcesList.innerHTML = allSources.map(s => `
+            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:10px; border-radius:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.88rem; font-weight:700;">${s.title}</span>
+                <div style="display:flex; gap:6px;">
+                    <button class="btn shrink" style="padding:3px 8px; font-size:0.75rem;" onclick="editSource(${s.id})">✏️ تعديل / غلاف</button>
+                    <button class="btn red" style="padding:3px 8px; font-size:0.75rem;" onclick="deleteSource(${s.id})">🗑️ حذف</button>
+                </div>
+            </div>
+        `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد وثائق مصورة.</p>';
     }
 
     const podcastsList = document.getElementById('adminPodcastsList');
@@ -1661,6 +1681,22 @@ function populateAdminLists() {
             </div>
         `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد حلقات صوتية مضافة.</p>';
     }
+}
+
+function editDoc(id) {
+    const doc = allDocs.find(d => d.id === id);
+    if (!doc) return;
+    document.getElementById('edit_doc_id').value = doc.id;
+    document.getElementById('doc_title').value = doc.title;
+    document.getElementById('doc_author').value = doc.author || '';
+    document.getElementById('doc_cat').value = doc.category || 'بحوث عقائدية';
+    document.getElementById('doc_url').value = doc.file_url;
+    document.getElementById('doc_desc').value = doc.description || '';
+    document.getElementById('doc_cover_url').value = doc.cover_url || '';
+    
+    document.getElementById('docFormHeading').textContent = '✏️ تعديل الكتاب وصورة الغلاف';
+    document.getElementById('saveDocBtn').textContent = '💾 حفظ تعديلات الغلاف والكتاب';
+    document.getElementById('cancelDocEditBtn').style.display = 'inline-flex';
 }
 
 async function saveNewDoc(e) {
@@ -1681,7 +1717,7 @@ async function saveNewDoc(e) {
         : (await supabaseClient.from('documents').insert([docData])).error;
 
     if (!error) {
-        showToast('تم نشر الملف بنجاح!');
+        showToast('تم نشر وتحفيظ الملف والغلاف بنجاح!');
         cancelDocEdit();
         fetchDocuments();
     } else {
@@ -1696,12 +1732,67 @@ function cancelDocEdit() {
     document.getElementById('doc_url').value = '';
     document.getElementById('doc_desc').value = '';
     document.getElementById('doc_cover_url').value = '';
+    document.getElementById('docFormHeading').textContent = '🖼️ إضافة / تعديل غلاف وكتاب في المكتبة الرقمية';
+    document.getElementById('saveDocBtn').textContent = '💾 حفظ ونشر الكتاب مع الغلاف';
+    document.getElementById('cancelDocEditBtn').style.display = 'none';
 }
 
 async function deleteDoc(id) {
     if (confirm('هل أنت متأكد من الحذف؟')) {
         const { error } = await supabaseClient.from('documents').delete().eq('id', id);
         if (!error) { showToast('تم الحذف بنجاح'); fetchDocuments(); }
+    }
+}
+
+function editSource(id) {
+    const src = allSources.find(s => s.id === id);
+    if (!src) return;
+    document.getElementById('edit_source_id').value = src.id;
+    document.getElementById('source_title').value = src.title;
+    document.getElementById('source_img_url').value = src.image_url;
+    document.getElementById('source_desc').value = src.description || '';
+    
+    document.getElementById('sourceFormHeading').textContent = '✏️ تعديل غلاف ومعلومات الوثيقة المصورة';
+    document.getElementById('saveSourceBtn').textContent = '💾 حفظ التعديلات';
+    document.getElementById('cancelSourceEditBtn').style.display = 'inline-flex';
+}
+
+async function saveNewSource(e) {
+    e.preventDefault();
+    const editId = document.getElementById('edit_source_id').value;
+    const sourceData = {
+        title: document.getElementById('source_title').value,
+        image_url: document.getElementById('source_img_url').value,
+        description: document.getElementById('source_desc').value
+    };
+
+    let error = editId
+        ? (await supabaseClient.from('sources').update(sourceData).eq('id', editId)).error
+        : (await supabaseClient.from('sources').insert([sourceData])).error;
+
+    if (!error) {
+        showToast('تم حفظ الوثيقة والصورة بنجاح!');
+        cancelSourceEdit();
+        fetchSources();
+    } else {
+        showToast('حدث خطأ أثناء حفظ الوثيقة', 'error');
+    }
+}
+
+function cancelSourceEdit() {
+    document.getElementById('edit_source_id').value = '';
+    document.getElementById('source_title').value = '';
+    document.getElementById('source_img_url').value = '';
+    document.getElementById('source_desc').value = '';
+    document.getElementById('sourceFormHeading').textContent = '🖼️ إضافة / تعديل غلاف وثيقة مصورة';
+    document.getElementById('saveSourceBtn').textContent = '💾 حفظ الوثيقة والغلاف';
+    document.getElementById('cancelSourceEditBtn').style.display = 'none';
+}
+
+async function deleteSource(id) {
+    if (confirm('هل أنت متأكد من حذف هذه الوثيقة؟')) {
+        const { error } = await supabaseClient.from('sources').delete().eq('id', id);
+        if (!error) { showToast('تم الحذف بنجاح'); fetchSources(); }
     }
 }
 
@@ -1840,31 +1931,6 @@ function toggleBookmarksView() {
     filterAndRenderDocs();
 }
 
-function toggleBookmark(docId, event) {
-    if (event) event.stopPropagation();
-    const index = bookmarkedIds.indexOf(docId);
-    if (index > -1) {
-        bookmarkedIds.splice(index, 1);
-        showToast('تمت الإزالة من المفضلة');
-    } else {
-        bookmarkedIds.push(docId);
-        showToast('تمت الإضافة للمفضلة ⭐');
-    }
-    localStorage.setItem('nahj_bookmarks', JSON.stringify(bookmarkedIds));
-    filterAndRenderDocs();
-}
-
-function shareDoc(title, url, event) {
-    if (event) event.stopPropagation();
-    if (navigator.share) {
-        navigator.share({ title: title, url: url }).catch(()=>{});
-    } else {
-        navigator.clipboard.writeText(url);
-        showToast('تم نسخ رابط الوثيقة للحافظة!');
-    }
-}
-
-// رسم بطاقات الكتب والملفات الرقمية بتصميم الغلاف الموحد والجميل
 function renderDocs(docs) {
     const grid = document.getElementById('docs');
     if (!grid) return;
