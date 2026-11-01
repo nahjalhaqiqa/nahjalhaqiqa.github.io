@@ -1000,9 +1000,20 @@ let currentPodcastIndex = 0;
 async function fetchPodcasts() {
     if (!supabaseClient) return;
     try {
-        const { data } = await supabaseClient.from('podcasts').select('*').order('created_at', { ascending: false });
-        if (data) allPodcasts = data;
+        const { data, error } = await supabaseClient.from('podcasts').select('*').order('created_at', { ascending: false });
+        if (!error && data) {
+            allPodcasts = data;
+            
+            // استخراج الأقسام تلقائياً من الحلقات ودمجها لضمان ظهور أي قسم جديد تمت إضافته
+            data.forEach(p => {
+                if (p.category && !podcastCategories.includes(p.category)) {
+                    podcastCategories.push(p.category);
+                }
+            });
+            localStorage.setItem('nahj_podcast_cats', JSON.stringify(podcastCategories));
+        }
         renderAudioCategoriesCards();
+        populatePodcastCategorySelects();
         if (currentLoggedInUser) populateAdminLists();
     } catch(e) {
         renderAudioCategoriesCards();
