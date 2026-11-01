@@ -738,121 +738,305 @@
   </div>
 </div>
 
-<!-- لوحة التحكم الإدارية -->
-<div class="modal" id="adminModal">
-  <div class="modal-content" style="max-width:800px;">
-    <div class="sticky-close-bar">
-      <h3 id="adminModalTitle" style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة</h3>
-      <button class="back-btn" onclick="closeAdminModal()">✕ إغلاق</button>
-    </div>
+/* =========================================================
+   نظام إدارة وتعديل البيانات في لوحة التحكم (Admin System)
+   ========================================================= */
 
-    <div id="adminLoginSec" style="display:flex; flex-direction:column; gap:12px; margin-top:10px;">
-      <p style="font-size:0.88rem; color:var(--muted); margin:0;">ادخل كلمة المرور الخاصة بحسابك للوصول للوحة التحكم:</p>
-      <input type="password" id="adminPassInput" placeholder="كلمة المرور...">
-      <button class="btn" onclick="loginAdmin()">تسجيل الدخول</button>
-    </div>
+// 1. عرض وتحديث القوائم داخل لوحة التحكم مع أزرار التعديل والحذف
+function populateAdminLists() {
+    // أ. قائمة الكتب
+    const docsListContainer = document.getElementById('adminDocsList');
+    if (docsListContainer) {
+        docsListContainer.innerHTML = '';
+        if (typeof allDocs !== 'undefined' && allDocs.length > 0) {
+            allDocs.forEach(doc => {
+                const item = document.createElement('div');
+                item.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem;";
+                item.innerHTML = `
+                    <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:70%;">${doc.title}</span>
+                    <div style="display:flex; gap: 4px;">
+                        <button type="button" onclick="editDoc('${doc.id}')" style="background:#2b5278; color:#fff; border:none; padding:3px 8px; border-radius:4px; cursor:pointer; font-size:0.75rem;">✏️ تعديل</button>
+                        <button type="button" onclick="deleteDoc('${doc.id}')" style="background:#8b1e1e; color:#fff; border:none; padding:3px 8px; border-radius:4px; cursor:pointer; font-size:0.75rem;">🗑️ حذف</button>
+                    </div>
+                `;
+                docsListContainer.appendChild(item);
+            });
+        } else {
+            docsListContainer.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; text-align:center; padding:10px;">لا توجد كتب مضافة.</p>';
+        }
+    }
 
-    <div id="adminPanelSec" style="display:none; flex-direction:column; gap:14px; margin-top:8px;">
-      <div class="stats-grid-admin">
-        <div class="stat-card-admin"><h3 id="statDocsCount">0</h3><p>الكتب</p></div>
-        <div class="stat-card-admin"><h3 id="statSourcesCount">0</h3><p>الوثائق</p></div>
-        <div class="stat-card-admin"><h3 id="statVidsCount">0</h3><p>الفيديوهات</p></div>
-        <div class="stat-card-admin"><h3 id="statPodcastsCount">0</h3><p>الصوتيات</p></div>
-      </div>
+    // ب. قائمة الوثائق
+    const sourcesListContainer = document.getElementById('adminSourcesList');
+    if (sourcesListContainer) {
+        sourcesListContainer.innerHTML = '';
+        if (typeof allSources !== 'undefined' && allSources.length > 0) {
+            allSources.forEach(src => {
+                const item = document.createElement('div');
+                item.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem;";
+                item.innerHTML = `
+                    <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:70%;">${src.title}</span>
+                    <div style="display:flex; gap: 4px;">
+                        <button type="button" onclick="editSource('${src.id}')" style="background:#2b5278; color:#fff; border:none; padding:3px 8px; border-radius:4px; cursor:pointer; font-size:0.75rem;">✏️ تعديل</button>
+                        <button type="button" onclick="deleteSource('${src.id}')" style="background:#8b1e1e; color:#fff; border:none; padding:3px 8px; border-radius:4px; cursor:pointer; font-size:0.75rem;">🗑️ حذف</button>
+                    </div>
+                `;
+                sourcesListContainer.appendChild(item);
+            });
+        } else {
+            sourcesListContainer.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; text-align:center; padding:10px;">لا توجد وثائق مضافة.</p>';
+        }
+    }
 
-      <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(39, 213, 177, 0.1); padding:8px 14px; border-radius:12px; border:1px solid var(--mint);">
-        <span id="currentUserRole" style="font-size:0.85rem; font-weight:800; color:var(--mint);">المستخدم الحالي</span>
-        <button class="btn red" onclick="logoutAdmin()" style="padding:3px 10px; font-size:0.75rem;">تسجيل خروج</button>
-      </div>
+    // ج. قائمة الفيديوهات
+    const vidsListContainer = document.getElementById('adminVidsList');
+    if (vidsListContainer) {
+        vidsListContainer.innerHTML = '';
+        if (typeof allVideos !== 'undefined' && allVideos.length > 0) {
+            allVideos.forEach(vid => {
+                const item = document.createElement('div');
+                item.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem;";
+                item.innerHTML = `
+                    <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:70%;">${vid.title}</span>
+                    <div style="display:flex; gap: 4px;">
+                        <button type="button" onclick="editVid('${vid.id}')" style="background:#2b5278; color:#fff; border:none; padding:3px 8px; border-radius:4px; cursor:pointer; font-size:0.75rem;">✏️ تعديل</button>
+                        <button type="button" onclick="deleteVid('${vid.id}')" style="background:#8b1e1e; color:#fff; border:none; padding:3px 8px; border-radius:4px; cursor:pointer; font-size:0.75rem;">🗑️ حذف</button>
+                    </div>
+                `;
+                vidsListContainer.appendChild(item);
+            });
+        } else {
+            vidsListContainer.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; text-align:center; padding:10px;">لا توجد فيديوهات مضافة.</p>';
+        }
+    }
 
-      <div id="adminTabsNav" style="display:flex; gap:6px; border-bottom:1px solid var(--line); padding-bottom:8px; flex-wrap:wrap;">
-        <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 الكتب</button>
-        <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 الوثائق</button>
-        <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ الفيديوهات</button>
-        <button id="tabBtnPodcasts" class="admin-tab-btn" onclick="switchAdminTab('podcasts')">🎧 الصوتيات والأقسام</button>
-      </div>
+    // د. قائمة الصوتيات
+    const podcastsListContainer = document.getElementById('adminPodcastsList');
+    if (podcastsListContainer) {
+        podcastsListContainer.innerHTML = '';
+        if (typeof allPodcasts !== 'undefined' && allPodcasts.length > 0) {
+            allPodcasts.forEach(pod => {
+                const item = document.createElement('div');
+                item.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 6px 8px; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.85rem;";
+                item.innerHTML = `
+                    <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:65%;">${pod.title} <small style="color:var(--muted)">(${pod.category || 'عام'})</small></span>
+                    <div style="display:flex; gap: 4px;">
+                        <button type="button" onclick="editPodcast('${pod.id}')" style="background:#2b5278; color:#fff; border:none; padding:3px 8px; border-radius:4px; cursor:pointer; font-size:0.75rem;">✏️ تعديل</button>
+                        <button type="button" onclick="deletePodcast('${pod.id}')" style="background:#8b1e1e; color:#fff; border:none; padding:3px 8px; border-radius:4px; cursor:pointer; font-size:0.75rem;">🗑️ حذف</button>
+                    </div>
+                `;
+                podcastsListContainer.appendChild(item);
+            });
+        } else {
+            podcastsListContainer.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; text-align:center; padding:10px;">لا توجد حلقات صوتية مضافة.</p>';
+        }
+    }
+}
 
-      <!-- نموذج الكتب -->
-      <div id="addDocForm" class="admin-form" style="display:flex; flex-direction:column; gap:10px;">
-        <input type="hidden" id="edit_doc_id">
-        <h4 id="docFormHeading" style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة / تعديل كتاب</h4>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-          <input type="text" id="doc_title" placeholder="عنوان الكتاب" required>
-          <input type="text" id="doc_author" placeholder="المؤلف">
-        </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-          <select id="doc_cat" required>
-            <option value="بحوث عقائدية">بحوث عقائدية</option>
-            <option value="وثائق تاريخية">وثائق تاريخية</option>
-            <option value="كتب ومراجع">كتب ومراجع</option>
-            <option value="مقالات ودراسات">مقالات ودراسات</option>
-            <option value="منوع">منوع</option>
-          </select>
-          <input type="text" id="doc_url" placeholder="رابط PDF" required>
-        </div>
-        <input type="text" id="doc_cover_url" placeholder="رابط صورة الغلاف (Image URL)">
-        <textarea id="doc_desc" placeholder="نبذة مختصرة..." style="min-height:70px;"></textarea>
-        <div style="display:flex; gap:6px;">
-          <button type="button" id="saveDocBtn" class="btn" onclick="saveNewDoc(event)">💾 حفظ</button>
-          <button type="button" id="cancelDocEditBtn" class="btn red" style="display:none;" onclick="cancelDocEdit()">إلغاء</button>
-        </div>
-        <div id="adminDocsList" style="max-height:180px; overflow-y:auto; margin-top:4px;"></div>
-      </div>
+// 2. تعبئة القائمة المنسدلة للأقسام في نموذج الصوتيات
+function updatePodcastCategoryOptions() {
+    const select = document.getElementById('podcast_category');
+    if (!select) return;
+    
+    podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["ملاحم كربلاء", "محاضرات عقائدية", "جلسات حوارية"]');
+    select.innerHTML = '';
+    podcastCategories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.textContent = cat;
+        select.appendChild(opt);
+    });
+}
 
-      <!-- نموذج الوثائق -->
-      <div id="addSourceForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
-        <input type="hidden" id="edit_source_id">
-        <h4 style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة / تعديل وثيقة مصورة</h4>
-        <input type="text" id="source_title" placeholder="عنوان الوثيقة" required>
-        <input type="text" id="source_img_url" placeholder="رابط الصورة" required>
-        <textarea id="source_desc" placeholder="وصف الوثيقة..." style="min-height:70px;"></textarea>
-        <div style="display:flex; gap:6px;">
-          <button type="button" id="saveSourceBtn" class="btn" onclick="saveNewSource(event)">💾 حفظ</button>
-          <button type="button" id="cancelSourceEditBtn" class="btn red" style="display:none;" onclick="cancelSourceEdit()">إلغاء</button>
-        </div>
-        <div id="adminSourcesList" style="max-height:180px; overflow-y:auto; margin-top:4px;"></div>
-      </div>
+// 3. إضافة أو تحديث قسم صوتي وغلافه
+function addNewPodcastCategory() {
+    const catName = document.getElementById('new_podcast_category_name').value.trim();
+    const catImg = document.getElementById('new_podcast_category_img').value.trim();
 
-      <!-- نموذج الفيديوهات -->
-      <div id="addVidForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
-        <input type="hidden" id="edit_vid_id">
-        <h4 style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة فيديو يوتيوب</h4>
-        <input type="text" id="vid_title" placeholder="عنوان الفيديو" required>
-        <input type="text" id="vid_yt_id" placeholder="معرف يوتيوب (YouTube Video ID)" required>
-        <div style="display:flex; gap:6px;">
-          <button type="button" id="saveVidBtn" class="btn" onclick="saveNewVid(event)">💾 حفظ</button>
-        </div>
-        <div id="adminVidsList" style="max-height:180px; overflow-y:auto; margin-top:4px;"></div>
-      </div>
+    if (!catName) {
+        alert('يرجى إدخال اسم القسم');
+        return;
+    }
 
-      <!-- نموذج الصوتيات -->
-      <div id="addPodcastForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
-        <input type="hidden" id="edit_podcast_id">
-        <h4 style="margin:0; color:var(--gold); font-size:0.95rem;">إدارة الأقسام والحلقات الصوتية</h4>
-        <div style="background:rgba(0,0,0,0.2); padding:10px; border-radius:10px; border:1px solid var(--line);">
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:6px;">
-            <input type="text" id="new_podcast_category_name" placeholder="اسم القسم الجديد">
-            <input type="text" id="new_podcast_category_img" placeholder="رابط صورة الغلاف للقسم">
-          </div>
-          <button type="button" class="btn shrink" onclick="addNewPodcastCategory()" style="width:100%; font-size:0.78rem;">💾 إضافة أو تحديث القسم وغلافه</button>
-        </div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-          <input type="text" id="podcast_title" placeholder="عنوان الحلقة" required>
-          <select id="podcast_category" required></select>
-        </div>
-        <input type="text" id="podcast_url" placeholder="رابط الملف الصوتي (MP3)" required>
-        <textarea id="podcast_desc" placeholder="نبذة عن الحلقة..." style="min-height:60px;"></textarea>
-        <div style="display:flex; gap:6px;">
-          <button type="button" id="savePodcastBtn" class="btn" onclick="saveNewPodcast(event)">💾 حفظ الحلقة</button>
-          <button type="button" id="cancelPodcastEditBtn" class="btn red" style="display:none;" onclick="cancelPodcastEdit()">إلغاء</button>
-        </div>
-        <div id="adminPodcastsList" style="max-height:160px; overflow-y:auto; margin-top:4px;"></div>
-      </div>
+    podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["ملاحم كربلاء", "محاضرات عقائدية", "جلسات حوارية"]');
+    categoryCovers = JSON.parse(localStorage.getItem('nahj_cat_covers') || '{}');
 
-    </div>
-  </div>
-</div>
+    if (!podcastCategories.includes(catName)) {
+        podcastCategories.push(catName);
+    }
 
+    if (catImg) {
+        categoryCovers[catName] = catImg;
+    }
+
+    localStorage.setItem('nahj_podcast_cats', JSON.stringify(podcastCategories));
+    localStorage.setItem('nahj_cat_covers', JSON.stringify(categoryCovers));
+
+    document.getElementById('new_podcast_category_name').value = '';
+    document.getElementById('new_podcast_category_img').value = '';
+
+    updatePodcastCategoryOptions();
+    if (typeof renderAudioCategoriesCards === 'function') renderAudioCategoriesCards();
+    alert(`تم حفظ القسم "${catName}" وغلافه بنجاح!`);
+}
+
+// 4. دوال التعديل للنماذج المختلفة (تعبئة الحقول بالبيانات المحددة)
+
+// أ. تعديل كتاب
+function editDoc(id) {
+    const doc = allDocs.find(d => d.id == id);
+    if (!doc) return;
+    document.getElementById('edit_doc_id').value = doc.id;
+    document.getElementById('doc_title').value = doc.title || '';
+    document.getElementById('doc_author').value = doc.author || '';
+    document.getElementById('doc_cat').value = doc.category || 'بحوث عقائدية';
+    document.getElementById('doc_url').value = doc.file_url || doc.url || '';
+    document.getElementById('doc_cover_url').value = doc.cover_url || '';
+    document.getElementById('doc_desc').value = doc.description || '';
+    
+    document.getElementById('docFormHeading').innerText = '✏️ تعديل بيانات الكتاب';
+    document.getElementById('saveDocBtn').innerText = '💾 تحديث التعديلات';
+    document.getElementById('cancelDocEditBtn').style.display = 'inline-block';
+}
+
+function cancelDocEdit() {
+    document.getElementById('edit_doc_id').value = '';
+    document.getElementById('doc_title').value = '';
+    document.getElementById('doc_author').value = '';
+    document.getElementById('doc_url').value = '';
+    document.getElementById('doc_cover_url').value = '';
+    document.getElementById('doc_desc').value = '';
+    
+    document.getElementById('docFormHeading').innerText = 'إضافة / تعديل كتاب';
+    document.getElementById('saveDocBtn').innerText = '💾 حفظ';
+    document.getElementById('cancelDocEditBtn').style.display = 'none';
+}
+
+// ب. تعديل وثيقة
+function editSource(id) {
+    const src = allSources.find(s => s.id == id);
+    if (!src) return;
+    document.getElementById('edit_source_id').value = src.id;
+    document.getElementById('source_title').value = src.title || '';
+    document.getElementById('source_img_url').value = src.img_url || src.image_url || '';
+    document.getElementById('source_desc').value = src.description || '';
+    
+    document.getElementById('saveSourceBtn').innerText = '💾 تحديث الوثيقة';
+    document.getElementById('cancelSourceEditBtn').style.display = 'inline-block';
+}
+
+function cancelSourceEdit() {
+    document.getElementById('edit_source_id').value = '';
+    document.getElementById('source_title').value = '';
+    document.getElementById('source_img_url').value = '';
+    document.getElementById('source_desc').value = '';
+    
+    document.getElementById('saveSourceBtn').innerText = '💾 حفظ';
+    document.getElementById('cancelSourceEditBtn').style.display = 'none';
+}
+
+// ج. تعديل فيديو
+function editVid(id) {
+    const vid = allVideos.find(v => v.id == id);
+    if (!vid) return;
+    document.getElementById('edit_vid_id').value = vid.id;
+    document.getElementById('vid_title').value = vid.title || '';
+    document.getElementById('vid_yt_id').value = vid.yt_id || vid.youtube_id || '';
+    
+    document.getElementById('saveVidBtn').innerText = '💾 تحديث الفيديو';
+}
+
+// د. تعديل حلقة صوتية
+function editPodcast(id) {
+    const pod = allPodcasts.find(p => p.id == id);
+    if (!pod) return;
+    document.getElementById('edit_podcast_id').value = pod.id;
+    document.getElementById('podcast_title').value = pod.title || '';
+    document.getElementById('podcast_category').value = pod.category || '';
+    document.getElementById('podcast_url').value = pod.audio_url || pod.url || '';
+    document.getElementById('podcast_desc').value = pod.description || '';
+    
+    document.getElementById('savePodcastBtn').innerText = '💾 تحديث الحلقة';
+    document.getElementById('cancelPodcastEditBtn').style.display = 'inline-block';
+}
+
+function cancelPodcastEdit() {
+    document.getElementById('edit_podcast_id').value = '';
+    document.getElementById('podcast_title').value = '';
+    document.getElementById('podcast_url').value = '';
+    document.getElementById('podcast_desc').value = '';
+    
+    document.getElementById('savePodcastBtn').innerText = '💾 حفظ الحلقة';
+    document.getElementById('cancelPodcastEditBtn').style.display = 'none';
+}
+
+// 5. دوال الحفظ الذكي مع Supabase (تلقائياً تحدد إذا كان إدخال جديد أو تعديل قديم)
+
+async function saveNewDoc(e) {
+    e.preventDefault();
+    const editId = document.getElementById('edit_doc_id').value;
+    const title = document.getElementById('doc_title').value.trim();
+    const author = document.getElementById('doc_author').value.trim();
+    const category = document.getElementById('doc_cat').value;
+    const file_url = document.getElementById('doc_url').value.trim();
+    const cover_url = document.getElementById('doc_cover_url').value.trim();
+    const description = document.getElementById('doc_desc').value.trim();
+
+    if (!title || !file_url) { alert('يرجى ملء العنوان والرابط'); return; }
+
+    const docData = { title, author, category, file_url, cover_url, description };
+
+    try {
+        if (editId) {
+            // تحديث سجل حالي
+            const { error } = await supabaseClient.from('documents').update(docData).eq('id', editId);
+            if (error) throw error;
+            alert('تم تحديث الكتاب بنجاح!');
+        } else {
+            // إضافة سجل جديد
+            const { error } = await supabaseClient.from('documents').insert([docData]);
+            if (error) throw error;
+            alert('تمت إضافة الكتاب بنجاح!');
+        }
+        cancelDocEdit();
+        if (typeof fetchDocuments === 'function') fetchDocuments();
+        populateAdminLists();
+    } catch (err) {
+        alert('خطأ في الحفظ: ' + err.message);
+    }
+}
+
+async function saveNewPodcast(e) {
+    e.preventDefault();
+    const editId = document.getElementById('edit_podcast_id').value;
+    const title = document.getElementById('podcast_title').value.trim();
+    const category = document.getElementById('podcast_category').value;
+    const audio_url = document.getElementById('podcast_url').value.trim();
+    const description = document.getElementById('podcast_desc').value.trim();
+
+    if (!title || !audio_url) { alert('يرجى ملء عنوان الحلقة ورابط الصوت'); return; }
+
+    const podcastData = { title, category, audio_url, description };
+
+    try {
+        if (editId) {
+            // تحديث حلقة قائمة
+            const { error } = await supabaseClient.from('podcasts').update(podcastData).eq('id', editId);
+            if (error) throw error;
+            alert('تم تحديث الحلقة بنجاح!');
+        } else {
+            // إضافة حلقة جديدة
+            const { error } = await supabaseClient.from('podcasts').insert([podcastData]);
+            if (error) throw error;
+            alert('تمت إضافة الحلقة بنجاح!');
+        }
+        cancelPodcastEdit();
+        if (typeof fetchPodcasts === 'function') fetchPodcasts();
+        populateAdminLists();
+    } catch (err) {
+        alert('خطأ في الحفظ: ' + err.message);
+    }
+}
 <!-- مودال استعراض الصور -->
 <div class="modal" id="sourceModal">
   <div class="modal-content">
