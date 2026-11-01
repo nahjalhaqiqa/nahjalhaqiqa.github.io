@@ -1883,8 +1883,8 @@ function filterAndRenderDocs() {
             const firstWithCover = docsInCat.find(p => p.cover_url);
             if (firstWithCover) middleImg = firstWithCover.cover_url;
         }
-      // إذا لم يجد صورة مخصصة للقسم، يستخدم الرابط المباشر الخاص بك كخلفية افتراضية
-    if (!middleImg) {
+// إذا أردت تخصيص هذه الصورة لقسم معين فقط (مثلاً قسم "وثائق تاريخية")، يمكنك استخدام هذا الشرط:
+    if (catName === 'وثائق تاريخية' && !middleImg) {
         middleImg = 'https://nahjalhaqiqa.github.io/haider/h2.png';
     }
 
