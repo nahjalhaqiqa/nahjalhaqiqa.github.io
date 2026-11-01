@@ -80,12 +80,12 @@
       margin:0; color:var(--ink);
       font-family: 'Cairo', system-ui, -apple-system, sans-serif;
       line-height:1.8; background:var(--bg-body);
-      min-height: 100vh; overflow-x: hidden;
+      min-height: 100vh; overflow-x: hidden; width: 100%;
   }
   a{color:inherit;text-decoration:none}
   button,input,select,textarea{font:inherit}
 
-  .wrap{width:min(1240px,calc(100% - 32px));margin:auto}
+  .wrap{width:min(1240px,calc(100% - 32px));margin:auto; box-sizing: border-box;}
 
   header{
       position:sticky; top:0; z-index:100;
@@ -218,6 +218,7 @@
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr)); 
       gap: 14px;
+      width: 100%;
   }
   .doc-grid.list-view { grid-template-columns: 1fr !important; }
   .doc-grid.list-view .book-cover-card { aspect-ratio: auto; flex-direction: row; align-items: center; padding: 10px 14px; min-height: 70px; }
@@ -393,23 +394,33 @@
   .stat-card-admin h3 { margin: 0; font-size: 1.3rem; color: var(--mint); }
   .stat-card-admin p { margin: 0; font-size: 0.75rem; color: var(--muted); }
 
-  @media(max-width:1200px){ .doc-grid{grid-template-columns:repeat(3,minmax(0,1fr));} }
+  /* تحسينات كاملة للتجاوب مع الهواتف والشاشات الصغيرة */
+  @media(max-width:1200px){ 
+      .doc-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;} 
+  }
   @media(max-width:992px){
-      .main-content-grid { grid-template-columns: 1fr; }
-      .quick-cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .tools { grid-template-columns: 1fr 1fr; }
-      .stats-grid-admin { grid-template-columns: repeat(2, 1fr); }
+      .main-content-grid { grid-template-columns: 1fr !important; }
+      .quick-cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+      .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
+      .footer-grid { grid-template-columns: 1fr !important; }
+      .tools { grid-template-columns: 1fr !important; }
+      .stats-grid-admin { grid-template-columns: repeat(2, 1fr) !important; }
   }
   @media(max-width:768px){
-      .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .tools{grid-template-columns:1fr; gap: 8px;}
-      .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
-      .footer-grid { grid-template-columns: 1fr; }
-      .mobile-bottom-nav { display: flex; }
-      body { padding-bottom: 65px; }
-      nav { display: none; }
+      .wrap { width: calc(100% - 20px) !important; padding: 0 4px; }
+      .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px; margin-top: -20px; }
+      .tools{grid-template-columns: 1fr !important; gap: 8px;}
+      .doc-grid{grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px;}
+      .footer-grid { grid-template-columns: 1fr !important; }
+      .mobile-bottom-nav { display: flex !important; }
+      body { padding-bottom: 75px; }
+      nav { display: none !important; }
+      .hero-banner { min-height: 380px; padding: 40px 12px; }
+      .hero-banner h1 { font-size: 2.2rem; }
+  }
+  @media(max-width:480px){
+      .doc-grid { grid-template-columns: 1fr !important; } /* بطاقة واحدة في كل صف على الهواتف الضيقة لضمان أقصى وضوح */
+      .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   }
   </style>
 </head>
