@@ -213,7 +213,6 @@
   .tag-btn { background: var(--panel); border: 1px solid var(--line); color: var(--muted); padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
   .tag-btn:hover, .tag-btn.active { border-color: var(--mint); color: var(--mint); background: var(--panel-hover); }
 
-  /* شبكة العرض المصغرة الموحدة لجميع الأقسام */
   .doc-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr)); 
@@ -222,7 +221,6 @@
   .doc-grid.list-view { grid-template-columns: 1fr !important; }
   .doc-grid.list-view .book-cover-card { aspect-ratio: auto; flex-direction: row; align-items: center; padding: 10px 14px; min-height: 70px; }
 
-  /* تصميم الغلاف المصغر الموحد لكل بطاقات الأقسام */
   .book-cover-card {
       position: relative;
       width: 100%;
@@ -541,7 +539,7 @@
             </div>
           </div>
 
-          <div class="verse-day-note">تتجدد آية اليوم ومواقيت الصلاة تلقائيًا كل يوم</div>
+          <div class="verse-day-note" style="margin-top:10px; font-size:0.75rem; color:var(--muted);">تتجدد آية اليوم ومواقيت الصلاة تلقائيًا كل يوم</div>
           
           <div class="sidebar-menu-list">
             <div class="sidebar-menu-title">أقسام الموقع</div>
@@ -737,7 +735,7 @@
   </div>
 </div>
 
-<!-- لوحة التحكم الإدارية المحدثة مع زر تعديل الأقسام وتغيير الصور -->
+<!-- لوحة التحكم الإدارية المحدثة -->
 <div class="modal" id="adminModal">
   <div class="modal-content" style="max-width:850px;">
     <div class="sticky-close-bar">
@@ -765,7 +763,6 @@
         <button class="btn red" onclick="logoutAdmin()" style="padding:4px 12px; font-size:0.78rem;">تسجيل خروج</button>
       </div>
 
-      <!-- تبويبات اللوحة مع إضافة زر تعديل جميع الأقسام -->
       <div id="adminTabsNav" style="display:flex; gap:8px; border-bottom:1px solid var(--line); padding-bottom:10px; flex-wrap:wrap;">
         <button id="tabBtnSections" class="admin-tab-btn active" onclick="switchAdminTab('sections')">📁 تعديل الأقسام والصور</button>
         <button id="tabBtnDocs" class="admin-tab-btn" onclick="switchAdminTab('docs')">📚 الكتب والملفات</button>
@@ -775,7 +772,7 @@
         <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين</button>
       </div>
 
-      <!-- قسم تعديل جميع الأقسام وإضافة صور لها (مضاف خصيصاً) -->
+      <!-- قسم تعديل جميع الأقسام وإضافة صور لها -->
       <div id="manageSectionsForm" class="admin-form" style="display:flex; flex-direction:column; gap:14px;">
         <h4 style="margin:0; color:var(--gold);">🛠️ تعديل الأقسام وتغيير صور أغفتها</h4>
         <p style="font-size:0.82rem; color:var(--muted); margin:0;">اختر القسم الذي تريد تعديله من القائمة، ثم عدل اسمه أو ضع رابط صورة الغلاف الجديدة:</p>
@@ -1126,8 +1123,11 @@ let currentPdfScale = 1.3;
 let currentPdfObj = null;
 
 let allPodcasts = [];
-let podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["ملاحم كربلاء", "محاضرات عقائدية", "جلسات حوارية"]');
-let categoryCovers = JSON.parse(localStorage.getItem('nahj_cat_covers') || '{}');
+
+// تعريف دائم وموحد لجميع أقسام الموقع لضمان ظهورها بالكامل في القائمة المنسدلة
+let allSectionsList = JSON.parse(localStorage.getItem('nahj_all_sections') || '["ملاحم كربلاء", "بحوث عقائدية", "وثائق تاريخية", "كتب ومراجع", "مقالات ودراسات", "منوع"]');
+let sectionCovers = JSON.parse(localStorage.getItem('nahj_section_covers') || '{}');
+
 let activeCategoryModalName = '';
 let currentPodcastIndex = 0;
 
@@ -1149,15 +1149,15 @@ function renderAudioCategoriesCards() {
     const grid = document.getElementById('audio-categories-grid');
     if (!grid) return;
 
-    if (!podcastCategories.length) {
+    if (!allSectionsList.length) {
         grid.innerHTML = '<p style="color:var(--muted); font-size:0.85rem; grid-column:1/-1;">لا توجد أقسام صوتية حتى الآن.</p>';
         return;
     }
 
     grid.innerHTML = '';
-    podcastCategories.forEach(cat => {
+    allSectionsList.forEach(cat => {
         const podcastsInCat = allPodcasts.filter(p => (p.category || 'ملاحم كربلاء') === cat);
-        const middleImg = categoryCovers[cat] || ''; 
+        const middleImg = sectionCovers[cat] || ''; 
         
         const card = document.createElement('article');
         card.className = 'book-cover-card';
@@ -1564,7 +1564,6 @@ async function loginAdmin() {
         }
     }
     
-    // افتراضي لوحة التحكم إذا أردت الدخول السريع
     if (pass === '12345' || pass === 'admin') {
         currentLoggedInUser = { name: 'مدير الموقع', permissions: [] };
         showAdminDashboard();
@@ -1631,10 +1630,7 @@ function switchAdminTab(type) {
     }
 }
 
-// برمجة إدارة وتعديل الأقسام الشاملة المضافة خصيصاً بناءً على طلبك
-let allSectionsList = JSON.parse(localStorage.getItem('nahj_all_sections') || '["ملاحم كربلاء", "بحوث عقائدية", "وثائق تاريخية", "كتب ومراجع"]');
-let sectionCovers = JSON.parse(localStorage.getItem('nahj_section_covers') || '{}');
-
+// دالة تعبئة قائمة الأقسام في لوحة التحكم وتحديثها بشكل شامل
 function populateSectionSelectDropdown() {
     const select = document.getElementById('selectSectionToEdit');
     if (!select) return;
@@ -1665,7 +1661,9 @@ function saveSectionChanges() {
     if (idx > -1) {
         allSectionsList[idx] = newName;
     } else {
-        allSectionsList.push(newName);
+        if (!allSectionsList.includes(newName)) {
+            allSectionsList.push(newName);
+        }
     }
 
     if (newImg) {
@@ -1680,7 +1678,8 @@ function saveSectionChanges() {
 
     showToast('تم تحديث القسم والصورة بنجاح!');
     populateSectionSelectDropdown();
-    renderAudioCategoriesCardsCustom();
+    populatePodcastCategorySelects();
+    renderAudioCategoriesCards();
 }
 
 function addNewSectionPrompt() {
@@ -1691,38 +1690,19 @@ function addNewSectionPrompt() {
             allSectionsList.push(cleanName);
             localStorage.setItem('nahj_all_sections', JSON.stringify(allSectionsList));
             populateSectionSelectDropdown();
-            renderAudioCategoriesCardsCustom();
+            populatePodcastCategorySelects();
+            renderAudioCategoriesCards();
             showToast('تمت إضافة القسم الجديد بنجاح');
+        } else {
+            showToast('هذا القسم موجود مسبقاً', 'error');
         }
     }
 }
 
-function renderAudioCategoriesCardsCustom() {
-    const grid = document.getElementById('audio-categories-grid');
-    if (!grid) return;
-    grid.innerHTML = '';
-    
-    allSectionsList.forEach(cat => {
-        const middleImg = sectionCovers[cat] || ''; 
-        const card = document.createElement('article');
-        card.className = 'book-cover-card';
-        let bgStyle = middleImg ? `background: url('${middleImg}') center/cover no-repeat;` : `background: #1a0805;`;
-
-        card.innerHTML = `
-            <div class="book-frame-border"></div>
-            <div class="cover-top-title-badge">${cat}</div>
-            <div class="cover-middle-image-area" style="${bgStyle}">
-                <div class="cover-middle-overlay"></div>
-                <div class="cover-inner-content">
-                    <h4>تصفح القسم</h4>
-                    <p>انقر للاستعراض</p>
-                </div>
-            </div>
-            <div class="cover-bottom-badge">استعراض</div>
-        `;
-        card.addEventListener('click', () => openAudioCategoryModal(cat));
-        grid.appendChild(card);
-    });
+function populatePodcastCategorySelects() {
+    const select = document.getElementById('podcast_category');
+    if (!select) return;
+    select.innerHTML = allSectionsList.map(cat => `<option value="${cat}">📁 قسم: ${cat}</option>`).join('');
 }
 
 function populateAdminLists() {
@@ -2092,7 +2072,7 @@ if (filterAuthor) filterAuthor.addEventListener('input', filterAndRenderDocs);
 if (cat) cat.addEventListener('change', filterAndRenderDocs);
 if (sortBy) sortBy.addEventListener('change', filterAndRenderDocs);
 
-renderAudioCategoriesCardsCustom();
+renderAudioCategoriesCards();
 fetchDocuments();
 fetchSources();
 fetchLatestVideos();
