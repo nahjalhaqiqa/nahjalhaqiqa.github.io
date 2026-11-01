@@ -1073,7 +1073,6 @@ function renderAudioCategoriesCards() {
         // جلب صورة الغلاف: من القائمة أو من أول حلقة في القسم
         let middleImg = categoryCovers[cat] || '';
         if (!middleImg && podcastsInCat.length > 0) {
-            // البحث عن صورة مرافقة في بيانات الحلقة إن وجدت
             const firstWithCover = podcastsInCat.find(p => p.cover_url || p.image_url);
             if (firstWithCover) {
                 middleImg = firstWithCover.cover_url || firstWithCover.image_url;
@@ -1084,13 +1083,13 @@ function renderAudioCategoriesCards() {
         card.className = 'book-cover-card';
         card.style.display = 'flex';
         
-        // إعداد الخلفية مع رابط الصورة
-        let bgStyle = middleImg ? `background: url('${middleImg}') center/cover no-repeat !important;` : `background: #1a0805;`;
+        // استخدام الصيغة الصريحة لخلفية الصورة لتفهمها متصفحات الجوال والكمبيوتر بنجاح
+        const imgStyle = middleImg ? `background-image: url('${middleImg}') !important; background-size: cover !important; background-position: center !important;` : `background-color: #1a0805 !important;`;
 
         card.innerHTML = `
             <div class="book-frame-border"></div>
             <div class="cover-top-title-badge">${cat}</div>
-            <div class="cover-middle-image-area" style="${bgStyle}">
+            <div class="cover-middle-image-area" style="${imgStyle}">
                 <div class="cover-middle-overlay"></div>
                 <div class="cover-inner-content">
                     <h4>مكتبة الصوتيات</h4>
