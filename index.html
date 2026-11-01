@@ -1050,7 +1050,11 @@ function populatePodcastCategorySelects() {
 function renderAudioCategoriesCards() {
     const grid = document.getElementById('audio-categories-grid');
     if (!grid) return;
-    
+
+    // إعادة قراءة قائمة الأقسام وصور الأغلفة المحفوظة
+    podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["ملاحم كربلاء", "محاضرات عقائدية", "جلسات حوارية"]');
+    categoryCovers = JSON.parse(localStorage.getItem('nahj_cat_covers') || '{}');
+
     if (!podcastCategories || podcastCategories.length === 0) {
         grid.innerHTML = '<p style="color:var(--muted); font-size:0.85rem; grid-column:1/-1; text-align:center;">لا توجد أقسام صوتية مضافة حالياً.</p>';
         return;
@@ -1059,12 +1063,23 @@ function renderAudioCategoriesCards() {
     grid.innerHTML = '';
     podcastCategories.forEach(cat => {
         const podcastsInCat = allPodcasts.filter(p => (p.category || 'ملاحم كربلاء') === cat);
-        const middleImg = categoryCovers[cat] || ''; 
+        
+        // جلب صورة الغلاف: من القائمة أو من أول حلقة في القسم
+        let middleImg = categoryCovers[cat] || '';
+        if (!middleImg && podcastsInCat.length > 0) {
+            // البحث عن صورة مرافقة في بيانات الحلقة إن وجدت
+            const firstWithCover = podcastsInCat.find(p => p.cover_url || p.image_url);
+            if (firstWithCover) {
+                middleImg = firstWithCover.cover_url || firstWithCover.image_url;
+            }
+        }
+
         const card = document.createElement('article');
         card.className = 'book-cover-card';
-        card.style.display = 'flex'; // ضمان إجبار ظهور العنصر
+        card.style.display = 'flex';
         
-        let bgStyle = middleImg ? `background: url('${middleImg}') center/cover no-repeat;` : `background: #1a0805;`;
+        // إعداد الخلفية مع رابط الصورة
+        let bgStyle = middleImg ? `background: url('${middleImg}') center/cover no-repeat !important;` : `background: #1a0805;`;
 
         card.innerHTML = `
             <div class="book-frame-border"></div>
