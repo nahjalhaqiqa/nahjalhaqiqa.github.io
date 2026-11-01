@@ -372,7 +372,7 @@
   .stat-card-admin h3 { margin: 0; font-size: 1.2rem; color: var(--mint); }
   .stat-card-admin p { margin: 0; font-size: 0.7rem; color: var(--muted); }
 
-  /* =========================================================
+/* =========================================================
      إصلاحات التجاوب مع شاشات الهواتف المحمولة
      ========================================================= */
   @media(max-width:1200px){ 
@@ -397,19 +397,21 @@
           grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
           gap: 10px !important;
       }
-      /* أضف هذا السطر الإضافي خصيصاً لقسم الصوتيات */
-    #audio-categories-grid {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-        gap: 10px !important;
-    }
-    /* أضف هذا السطر هنا لضمان ظهور صورة الغلاف بوضوح على الهاتف */
-    .cover-middle-image-area {
-        min-height: 95px !important;
-        background-size: cover !important;
-        background-position: center !important;
-    }
-}
+      
+      /* قسم الصوتيات */
+      #audio-categories-grid {
+          display: grid !important;
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          gap: 10px !important;
+      }
+      
+      /* ضمان ظهور صورة الغلاف بوضوح على الهاتف */
+      .cover-middle-image-area {
+          min-height: 95px !important;
+          background-size: cover !important;
+          background-position: center !important;
+      }
+
       .footer-grid { grid-template-columns: 1fr !important; }
       .mobile-bottom-nav { display: flex !important; }
       body { padding-bottom: 65px; }
