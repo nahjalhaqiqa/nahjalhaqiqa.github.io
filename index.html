@@ -58,7 +58,7 @@
       --line: rgba(212, 175, 55, 0.25); 
       --input-bg: #02121c;
       --shadow: 0 10px 30px -10px rgba(0,0,0,0.6);
-      --glass-bg: rgba(4, 30, 46, 0.75);
+      --glass-bg: rgba(4, 30, 46, 0.85);
       --glass-border: rgba(212, 175, 55, 0.2);
   }
   [data-theme="light"] {
@@ -74,146 +74,131 @@
       --glass-border: rgba(0, 0, 0, 0.1);
   }
 
-  *{box-sizing:border-box; transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;}
+  *{box-sizing:border-box;}
   html{scroll-behavior:smooth}
   body{
       margin:0; color:var(--ink);
       font-family: 'Cairo', system-ui, -apple-system, sans-serif;
-      line-height:1.8; background:var(--bg-body);
+      line-height:1.7; background:var(--bg-body);
       min-height: 100vh; overflow-x: hidden; width: 100%;
   }
   a{color:inherit;text-decoration:none}
   button,input,select,textarea{font:inherit}
 
-  .wrap{width:min(1240px,calc(100% - 32px));margin:auto; box-sizing: border-box;}
+  .wrap{width:min(1240px, calc(100% - 24px)); margin:auto;}
 
   header{
       position:sticky; top:0; z-index:100;
       background: var(--glass-bg); backdrop-filter: blur(12px); border-bottom:1px solid var(--line);
   }
-  .nav{min-height:80px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-  .brand{display:flex;align-items:center;gap:12px;font-size:1.2rem;font-weight:800;}
+  .nav{min-height:75px; display:flex; align-items:center; justify-content:space-between; gap:12px}
+  .brand{display:flex; align-items:center; gap:10px; font-size:1.1rem; font-weight:800;}
   .brand-text {display: flex; flex-direction: column; line-height: 1.2;}
-  .brand-text span:last-child {font-size: 0.72rem; color: var(--gold); font-weight: 600;}
+  .brand-text span:last-child {font-size: 0.7rem; color: var(--gold); font-weight: 600;}
   
   .brand-logo {
-      width: 52px; height: 52px; object-fit: contain; border-radius: 50%;
-      background: rgba(0,0,0,0.2); padding: 2px; border: 1px solid var(--line); aspect-ratio: 1 / 1;
+      width: 46px; height: 46px; object-fit: contain; border-radius: 50%;
+      background: rgba(0,0,0,0.2); padding: 2px; border: 1px solid var(--line);
   }
 
-  nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-  nav a{font-size:.9rem; font-weight:700; opacity:0.88; color:var(--ink); position: relative; padding: 4px 0;}
+  nav{display:flex; align-items:center; gap:15px; flex-wrap:wrap}
+  nav a{font-size:.88rem; font-weight:700; opacity:0.88; color:var(--ink); position: relative; padding: 4px 0;}
   nav a:hover, nav a.active{color:var(--gold); opacity:1;}
-  nav a.active::after {
-      content: ''; position: absolute; bottom: 0; right: 0; left: 0; height: 2px; background: var(--gold); border-radius: 2px;
-  }
 
-  .nav-actions { display: flex; align-items: center; gap: 10px; }
+  .nav-actions { display: flex; align-items: center; gap: 8px; }
   .icon-action-btn {
-      background: rgba(212, 175, 55, 0.08); border: 1px solid var(--line); color: var(--gold); font-size: 1.1rem; cursor: pointer; padding: 8px;
-      display: flex; align-items: center; justify-content: center; border-radius: 50%; width: 40px; height: 40px;
+      background: rgba(212, 175, 55, 0.08); border: 1px solid var(--line); color: var(--gold); font-size: 1rem; cursor: pointer; padding: 8px;
+      display: flex; align-items: center; justify-content: center; border-radius: 50%; width: 38px; height: 38px;
   }
-  .icon-action-btn:hover { background: var(--gold); color: #031622; transform: scale(1.05); }
 
   .install-btn-nav {
       background: rgba(39, 213, 177, 0.15); border: 1px solid var(--mint); color: var(--mint);
-      padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; font-weight: 700; display: none; align-items: center; gap: 5px;
+      padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.78rem; font-weight: 700; display: none; align-items: center; gap: 4px;
   }
 
   .hero-banner {
-      position: relative; width: 100%; min-height: 480px;
-      background: linear-gradient(180deg, rgba(3, 22, 34, 0.8), rgba(3, 22, 34, 0.98)), url('assets/hero-bg.jpg') center/cover no-repeat;
+      position: relative; width: 100%; min-height: 420px;
+      background: linear-gradient(180deg, rgba(3, 22, 34, 0.85), rgba(3, 22, 34, 0.98)), url('assets/hero-bg.jpg') center/cover no-repeat;
       background-color: #031622; display: flex; flex-direction: column; justify-content: center; align-items: center;
-      text-align: center; padding: 60px 16px; border-bottom: 1px solid var(--line); overflow: hidden;
+      text-align: center; padding: 50px 16px; border-bottom: 1px solid var(--line);
   }
-  .hero-content {
-      max-width: 820px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 14px;
-      animation: fadeInDown 0.8s ease;
-  }
-  @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-  }
+  .hero-content { max-width: 780px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; }
 
-  .hero-banner h1 {
-      font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 900; margin: 0; color: #fff;
-      letter-spacing: -0.5px; text-shadow: 0 4px 25px rgba(0,0,0,0.6);
-  }
-  .hero-subtitle { font-size: 1.15rem; color: var(--gold); font-weight: 700; margin: 0; }
-  .hero-desc { font-size: 1rem; color: var(--muted); max-width: 640px; margin: 0; line-height: 1.8; }
+  .hero-banner h1 { font-size: clamp(2.2rem, 4.5vw, 3.5rem); font-weight: 900; margin: 0; color: #fff; }
+  .hero-subtitle { font-size: 1.1rem; color: var(--gold); font-weight: 700; margin: 0; }
+  .hero-desc { font-size: 0.95rem; color: var(--muted); max-width: 600px; margin: 0; line-height: 1.7; }
 
-  .hero-search-box { margin-top: 18px; width: min(560px, 100%); position: relative; }
+  .hero-search-box { margin-top: 14px; width: min(520px, 100%); position: relative; }
   .hero-search-box input {
-      width: 100%; padding: 16px 24px 16px 55px; border-radius: 35px;
-      border: 1.5px solid var(--line); background: rgba(2, 18, 28, 0.85); color: #fff;
-      outline: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      width: 100%; padding: 14px 20px 14px 50px; border-radius: 30px;
+      border: 1px solid var(--line); background: rgba(2, 18, 28, 0.9); color: #fff;
+      outline: none; font-size: 0.95rem;
   }
-  .hero-search-box input:focus { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
   .hero-search-box button {
-      position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
-      background: var(--gold); border: none; width: 42px; height: 42px; border-radius: 50%;
-      color: #031622; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: bold;
+      position: absolute; left: 6px; top: 50%; transform: translateY(-50%);
+      background: var(--gold); border: none; width: 38px; height: 38px; border-radius: 50%;
+      color: #031622; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold;
   }
 
   .quick-cards-grid {
-      display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; margin: -35px auto 30px; position: relative; z-index: 10;
+      display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin: -30px auto 25px; position: relative; z-index: 10;
   }
   .quick-card {
-      background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 22px 12px;
-      text-align: center; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer;
+      background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px 10px;
+      text-align: center; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer;
   }
-  .quick-card:hover { border-color: var(--mint); transform: translateY(-5px); background: var(--panel-hover); box-shadow: 0 12px 30px rgba(39, 213, 177, 0.15); }
-  .quick-card .q-icon { font-size: 2rem; color: var(--gold); margin-bottom: 2px; }
-  .quick-card h3 { margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--ink); }
-  .quick-card p { margin: 0; font-size: 0.76rem; color: var(--muted); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .quick-card:hover { border-color: var(--mint); transform: translateY(-3px); background: var(--panel-hover); }
+  .quick-card .q-icon { font-size: 1.8rem; color: var(--gold); }
+  .quick-card h3 { margin: 0; font-size: 0.9rem; font-weight: 800; color: var(--ink); }
+  .quick-card p { margin: 0; font-size: 0.72rem; color: var(--muted); }
 
-  section{padding:20px 0}
+  section{padding:15px 0}
 
-  .head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:20px 0 16px}
-  .head h2{margin:0;font-size:1.45rem; font-weight:800; color:var(--ink); display:flex; align-items:center; gap:8px;}
-  .head small{color:var(--gold); font-weight:700; cursor:pointer; font-size:0.9rem;}
+  .head{display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin:16px 0 12px}
+  .head h2{margin:0; font-size:1.35rem; font-weight:800; color:var(--ink); display:flex; align-items:center; gap:8px;}
+  .head small{color:var(--gold); font-weight:700; cursor:pointer; font-size:0.85rem;}
 
-  .main-content-grid { display: grid; grid-template-columns: 1fr 360px; gap: 22px; align-items: start; }
+  .main-content-grid { display: grid; grid-template-columns: 1fr 340px; gap: 20px; align-items: start; }
 
   .verse-side-card {
-      background: linear-gradient(145deg, #041e2e, #02121c); border: 1px solid var(--line); border-radius: 20px;
-      padding: 24px; box-shadow: var(--shadow); text-align: center; position: relative; overflow: hidden;
+      background: linear-gradient(145deg, #041e2e, #02121c); border: 1px solid var(--line); border-radius: 18px;
+      padding: 20px; box-shadow: var(--shadow); text-align: center;
   }
-  .verse-side-card h3 { color: var(--gold); font-size: 1.1rem; margin: 0 0 15px; font-weight: 800; }
-  .verse-text { font-size: 1.15rem; font-weight: 700; color: #fff; line-height: 2; margin-bottom: 12px; padding: 14px 8px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .verse-source { font-size: 0.82rem; color: var(--muted); margin-bottom: 20px; }
+  .verse-side-card h3 { color: var(--gold); font-size: 1.05rem; margin: 0 0 12px; font-weight: 800; }
+  .verse-text { font-size: 1.1rem; font-weight: 700; color: #fff; line-height: 1.9; margin-bottom: 10px; padding: 12px 6px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .verse-source { font-size: 0.8rem; color: var(--muted); margin-bottom: 16px; }
 
-  .verse-day-topline{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold);font-size:.85rem;font-weight:800;margin-bottom:5px}
-  .verse-datetime{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 10px}
-  .verse-time-box{background:rgba(212, 175, 55, 0.06);border:1px solid var(--line);border-radius:12px;padding:10px 6px;display:flex;flex-direction:column;gap:2px}
-  .verse-time-label{font-size:.72rem;color:var(--muted)}
-  .verse-time-box strong{font-size:.9rem;color:var(--gold);font-weight:800;direction:rtl}
+  .verse-day-topline{display:flex; align-items:center; justify-content:center; gap:10px; color:var(--gold); font-size:.82rem; font-weight:800; margin-bottom:4px}
+  .verse-datetime{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:14px 0 10px}
+  .verse-time-box{background:rgba(212, 175, 55, 0.06); border:1px solid var(--line); border-radius:10px; padding:8px 4px; display:flex; flex-direction:column; gap:2px}
+  .verse-time-label{font-size:.7rem; color:var(--muted)}
+  .verse-time-box strong{font-size:.85rem; color:var(--gold); font-weight:800;}
 
-  .prayer-times-box { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); text-align: right; }
-  .prayer-title { font-size: 0.88rem; font-weight: 800; color: var(--gold); margin-bottom: 10px; text-align: center; }
+  .prayer-times-box { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); text-align: right; }
+  .prayer-title { font-size: 0.85rem; font-weight: 800; color: var(--gold); margin-bottom: 8px; text-align: center; }
   .prayer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-  .prayer-item { background: rgba(0, 0, 0, 0.3); border: 1px solid var(--line); border-radius: 10px; padding: 8px 4px; text-align: center; font-size: 0.78rem; }
+  .prayer-item { background: rgba(0, 0, 0, 0.3); border: 1px solid var(--line); border-radius: 8px; padding: 6px 4px; text-align: center; font-size: 0.75rem; }
   .prayer-item.active { border-color: var(--mint); background: rgba(39, 213, 177, 0.15); color: var(--mint); }
-  .prayer-item span { display: block; color: var(--muted); font-size: 0.7rem; }
-  .prayer-item strong { color: #fff; font-size: 0.82rem; font-weight: 800; }
+  .prayer-item span { display: block; color: var(--muted); font-size: 0.68rem; }
+  .prayer-item strong { color: #fff; font-size: 0.8rem; font-weight: 800; }
 
-  .sidebar-menu-list { border-top: 1px solid var(--line); padding-top: 14px; text-align: right; }
-  .sidebar-menu-title { font-size: 0.9rem; font-weight: 800; color: var(--gold); margin-bottom: 10px; }
-  .sidebar-menu-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed var(--line); font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+  .sidebar-menu-list { border-top: 1px solid var(--line); padding-top: 12px; text-align: right; margin-top: 12px; }
+  .sidebar-menu-title { font-size: 0.85rem; font-weight: 800; color: var(--gold); margin-bottom: 8px; }
+  .sidebar-menu-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 0.85rem; font-weight: 600; color: var(--ink); }
 
-  .tools{display:grid;grid-template-columns:2fr 1.2fr 1fr 1fr auto;gap:10px;margin:16px 0 12px; align-items: center;}
-  .tools input,.tools select, .admin-form input, .admin-form select, .admin-form textarea, .contact-form input, .contact-form textarea{
-      width:100%; padding:12px 16px; border-radius:12px; border:1px solid var(--line);
-      background:var(--input-bg); color:var(--ink); outline:none; font-size: 0.9rem;
+  .tools{display:grid; grid-template-columns:2fr 1.2fr 1fr 1fr auto; gap:10px; margin:14px 0 10px; align-items: center;}
+  .tools input, .tools select, .admin-form input, .admin-form select, .admin-form textarea, .contact-form input, .contact-form textarea{
+      width:100%; padding:11px 14px; border-radius:12px; border:1px solid var(--line);
+      background:var(--input-bg); color:var(--ink); outline:none; font-size: 0.88rem;
   }
   
   .view-toggle-btn { background: var(--panel); border: 1px solid var(--line); color: var(--ink); padding: 10px 14px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.85rem; }
 
-  .quick-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-  .tag-btn { background: var(--panel); border: 1px solid var(--line); color: var(--muted); padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+  .quick-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .tag-btn { background: var(--panel); border: 1px solid var(--line); color: var(--muted); padding: 5px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
   .tag-btn:hover, .tag-btn.active { border-color: var(--mint); color: var(--mint); background: var(--panel-hover); }
 
-  /* شبكة العرض المصغرة الموحدة لجميع الأقسام */
+  /* شبكة العرض الموحدة */
   .doc-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr)); 
@@ -223,50 +208,47 @@
   .doc-grid.list-view { grid-template-columns: 1fr !important; }
   .doc-grid.list-view .book-cover-card { aspect-ratio: auto; flex-direction: row; align-items: center; padding: 10px 14px; min-height: 70px; }
 
-  /* تصميم الغلاف المصغر الموحد لكل بطاقات الأقسام */
+  /* تصميم البطاقات العامة */
   .book-cover-card {
       position: relative;
       width: 100%;
       aspect-ratio: 1 / 1.35;
       background: #150a06;
-      border: 4px solid #2b170c;
+      border: 3px solid #2b170c;
       border-radius: 8px;
       padding: 6px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.85), inset 0 0 12px rgba(0,0,0,0.9);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.8);
       cursor: pointer;
       overflow: hidden;
   }
   .book-cover-card:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.95), inset 0 0 10px rgba(212, 175, 55, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.9);
   }
 
   .book-frame-border {
       position: absolute; inset: 3px;
       border: 1px solid #d4af37;
       pointer-events: none;
-      box-sizing: border-box;
       z-index: 5;
       border-radius: 5px;
   }
 
   .cover-top-title-badge {
       background: #4a1515;
-      border: 1.5px solid #d4af37;
-      border-radius: 18px;
-      padding: 4px 8px;
+      border: 1px solid #d4af37;
+      border-radius: 14px;
+      padding: 3px 8px;
       text-align: center;
       color: #ffffff;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 900;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.6);
       position: relative;
       z-index: 6;
       margin-bottom: 4px;
-      letter-spacing: 0.3px;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
 
@@ -276,7 +258,7 @@
       border-radius: 5px;
       background-size: cover !important;
       background-position: center !important;
-      border: 1px solid rgba(212, 175, 55, 0.35);
+      border: 1px solid rgba(212, 175, 55, 0.3);
       position: relative;
       overflow: hidden;
       display: flex;
@@ -287,7 +269,7 @@
   
   .cover-middle-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.05) 30%, rgba(3,22,34,0.88) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 30%, rgba(3,22,34,0.88) 100%);
       z-index: 1;
   }
 
@@ -295,106 +277,104 @@
       position: relative; z-index: 2; text-align: center;
   }
   .cover-inner-content h4 {
-      margin: 0 0 2px; font-size: 0.78rem; color: #fff; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      margin: 0 0 2px; font-size: 0.75rem; color: #fff; font-weight: 800;
       display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.3;
   }
   .cover-inner-content p {
-      margin: 0; font-size: 0.65rem; color: var(--gold-light); text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      margin: 0; font-size: 0.62rem; color: var(--gold-light);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
 
   .cover-bottom-badge {
       background: #4a1515;
       border: 1px solid #d4af37;
-      border-radius: 12px;
-      padding: 2px 8px;
-      margin: 4px auto 1px;
+      border-radius: 10px;
+      padding: 2px 6px;
+      margin: 3px auto 1px;
       width: 60%;
       text-align: center;
       color: #fce8ad;
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       font-weight: 800;
       position: relative;
       z-index: 6;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
   }
 
   .audio-player-card {
-      background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 20px;
-      display: flex; flex-direction: column; gap: 14px; box-shadow: var(--shadow);
+      background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px;
+      display: flex; flex-direction: column; gap: 12px; box-shadow: var(--shadow);
   }
-  .audio-player-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .audio-player-controls { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
   .audio-play-btn {
-      background: var(--gold); color: #031622; border: none; width: 48px; height: 48px; border-radius: 50%;
-      font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold;
+      background: var(--gold); color: #031622; border: none; width: 44px; height: 44px; border-radius: 50%;
+      font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold;
   }
-  .audio-play-btn:hover { background: #fff; transform: scale(1.05); }
 
-  .btn{ display:inline-flex; justify-content:center; align-items:center; padding:9px 20px; border:0; border-radius:22px; background: var(--green); color:white; font-weight:700; cursor:pointer; font-size: 0.88rem; text-decoration: none; gap:6px; }
-  .btn:hover{ opacity: 0.92; transform: translateY(-1px); }
+  .btn{ display:inline-flex; justify-content:center; align-items:center; padding:8px 18px; border:0; border-radius:20px; background: var(--green); color:white; font-weight:700; cursor:pointer; font-size: 0.85rem; gap:6px; }
+  .btn:hover{ opacity: 0.92; }
   .btn.ghost{background:rgba(255,255,255,0.06); border:1px solid var(--line); color: var(--ink);}
   .btn.shrink{background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold); color: var(--gold);}
   .btn.red{background: linear-gradient(135deg, #df252c, #b0181e); color: white;}
 
-  .bottom-banner-cta { background: linear-gradient(135deg, #041e2e, #031622); border: 1px solid var(--line); border-radius: 20px; padding: 26px 32px; margin: 35px 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; box-shadow: var(--shadow); }
-  .bottom-banner-cta h3 { margin: 0 0 6px; font-size: 1.2rem; color: var(--gold); font-weight: 800; }
-  .cta-btn { background: var(--gold); color: #031622; padding: 12px 26px; border-radius: 30px; font-weight: 800; font-size: 0.9rem; border: none; cursor: pointer; }
+  .bottom-banner-cta { background: linear-gradient(135deg, #041e2e, #031622); border: 1px solid var(--line); border-radius: 18px; padding: 22px 26px; margin: 25px 0; display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+  .bottom-banner-cta h3 { margin: 0 0 4px; font-size: 1.1rem; color: var(--gold); font-weight: 800; }
+  .cta-btn { background: var(--gold); color: #031622; padding: 10px 22px; border-radius: 25px; font-weight: 800; font-size: 0.88rem; border: none; cursor: pointer; }
 
-  .empty{padding:40px;text-align:center;border:1px dashed var(--line);border-radius:18px;color:var(--muted);display:none}
+  .empty{padding:30px; text-align:center; border:1px dashed var(--line); border-radius:16px; color:var(--muted); display:none}
 
-  .modal{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;align-items:center;justify-content:center;z-index:200;padding:14px;backdrop-filter:blur(8px)}
-  .modal-content{background:var(--bg-body);border:1px solid var(--mint);border-radius:20px;width:min(920px, 100%);max-height:90vh;overflow-y:auto;padding:20px; position: relative;}
-  .pdf-modal-content { background: var(--bg-body); border: 1px solid var(--mint); border-radius: 20px; width: min(1100px, 100%); height: 92vh; display: flex; flex-direction: column; padding: 16px; }
-  .back-btn{ background: linear-gradient(135deg, #df252c, #b0181e); border: none; color: #fff; padding: 7px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 800; cursor: pointer; }
+  .modal{position:fixed; inset:0; background:rgba(0,0,0,0.9); display:none; align-items:center; justify-content:center; z-index:200; padding:12px; backdrop-filter:blur(6px)}
+  .modal-content{background:var(--bg-body); border:1px solid var(--mint); border-radius:18px; width:min(900px, 100%); max-height:88vh; overflow-y:auto; padding:18px; position: relative;}
+  .pdf-modal-content { background: var(--bg-body); border: 1px solid var(--mint); border-radius: 18px; width: min(1050px, 100%); height: 90vh; display: flex; flex-direction: column; padding: 14px; }
+  .back-btn{ background: linear-gradient(135deg, #df252c, #b0181e); border: none; color: #fff; padding: 6px 16px; border-radius: 18px; font-size: 0.8rem; font-weight: 800; cursor: pointer; }
 
-  .sticky-close-bar { position: sticky; top: 0; z-index: 100; background: var(--bg-body); display: flex; justify-content: space-between; align-items: center; padding: 8px 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+  .sticky-close-bar { position: sticky; top: 0; z-index: 100; background: var(--bg-body); display: flex; justify-content: space-between; align-items: center; padding: 6px 0 10px; border-bottom: 1px solid var(--line); margin-bottom: 12px; }
 
-  .comments-container { margin-top: 15px; border-top: 1px solid var(--line); padding-top: 15px; }
-  .comment-item { background: rgba(0,0,0,0.25); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
-  .comment-header { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--gold); font-weight: 700; margin-bottom: 4px; }
+  .comments-container { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px; }
+  .comment-item { background: rgba(0,0,0,0.25); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin-bottom: 6px; }
+  .comment-header { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--gold); font-weight: 700; margin-bottom: 3px; }
 
   .notification-float-btn {
-      position: fixed; bottom: 75px; left: 25px; z-index: 180;
-      background: var(--gold); color: #031622; border: none; padding: 10px 18px; border-radius: 30px;
-      font-weight: 800; font-size: 0.85rem; cursor: pointer; box-shadow: 0 8px 20px rgba(212,175,55,0.4); display: flex; align-items: center; gap: 6px;
+      position: fixed; bottom: 70px; left: 20px; z-index: 180;
+      background: var(--gold); color: #031622; border: none; padding: 8px 16px; border-radius: 25px;
+      font-weight: 800; font-size: 0.8rem; cursor: pointer; box-shadow: 0 6px 16px rgba(212,175,55,0.35); display: flex; align-items: center; gap: 5px;
   }
-  .notification-float-btn:hover { background: #fff; transform: translateY(-3px); }
 
-  #imageZoomModal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); z-index: 400; display: none; flex-direction: column; align-items: center; justify-content: space-between; padding: 15px; }
-  .zoom-header { width: 100%; display: flex; justify-content: space-between; align-items: center; background: rgba(3, 22, 34, 0.95); padding: 12px 18px; border-radius: 14px; border: 1px solid var(--line); }
-  .zoom-body { flex: 1; width: 100%; display: flex; justify-content: center; align-items: center; overflow: auto; padding: 10px 0; }
-  .zoom-body img { max-width: 100%; max-height: 82vh; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+  #imageZoomModal { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 400; display: none; flex-direction: column; align-items: center; justify-content: space-between; padding: 12px; }
+  .zoom-header { width: 100%; display: flex; justify-content: space-between; align-items: center; background: rgba(3, 22, 34, 0.95); padding: 10px 16px; border-radius: 12px; border: 1px solid var(--line); }
+  .zoom-body { flex: 1; width: 100%; display: flex; justify-content: center; align-items: center; overflow: auto; padding: 8px 0; }
+  .zoom-body img { max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 8px; }
 
-  #toastContainer { position: fixed; bottom: 80px; right: 20px; z-index: 999; display: flex; flex-direction: column; gap: 10px; }
-  .toast { background: var(--panel); border: 1px solid var(--mint); color: var(--ink); padding: 12px 20px; border-radius: 12px; font-size: 0.88rem; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 10px; animation: slideIn 0.3s ease; }
-  @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+  #toastContainer { position: fixed; bottom: 75px; right: 15px; z-index: 999; display: flex; flex-direction: column; gap: 8px; }
+  .toast { background: var(--panel); border: 1px solid var(--mint); color: var(--ink); padding: 10px 16px; border-radius: 10px; font-size: 0.85rem; font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 8px; }
 
-  footer{ margin-top:50px; background:#02121c; border-top:1px solid var(--line); padding:40px 0 25px; color:var(--muted); font-size: 0.88rem; }
-  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 30px; margin-bottom: 35px; }
-  .footer-col h4 { color: var(--gold); font-size: 1.05rem; margin: 0 0 14px; font-weight: 800; }
-  .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
-  .footer-bottom { border-top: 1px solid var(--line); padding-top: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-  .social-icons{display:flex;gap:12px}
-  .social-icons a{ display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.05); border:1px solid var(--line); color:var(--ink); font-size:0.95rem; }
+  footer{ margin-top:40px; background:#02121c; border-top:1px solid var(--line); padding:30px 0 20px; color:var(--muted); font-size: 0.85rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 25px; margin-bottom: 25px; }
+  .footer-col h4 { color: var(--gold); font-size: 1rem; margin: 0 0 12px; font-weight: 800; }
+  .footer-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  .footer-bottom { border-top: 1px solid var(--line); padding-top: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .social-icons{display:flex;gap:10px}
+  .social-icons a{ display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,0.05); border:1px solid var(--line); color:var(--ink); font-size:0.9rem; }
 
-  .mobile-bottom-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; height: 65px; background: rgba(3, 22, 34, 0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--line); z-index: 150; justify-content: space-around; align-items: center; padding: 0 5px; }
-  .mobile-nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--muted); font-size: 0.72rem; font-weight: 700; }
+  .mobile-bottom-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: rgba(3, 22, 34, 0.96); backdrop-filter: blur(10px); border-top: 1px solid var(--line); z-index: 150; justify-content: space-around; align-items: center; padding: 0 4px; }
+  .mobile-nav-item { display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--muted); font-size: 0.7rem; font-weight: 700; }
   .mobile-nav-item.active, .mobile-nav-item:hover { color: var(--gold); }
-  .mobile-nav-item span:first-child { font-size: 1.25rem; }
+  .mobile-nav-item span:first-child { font-size: 1.2rem; }
 
-  #pdfCanvasContainer { flex: 1; width: 100%; overflow-y: auto; text-align: center; background: #010a10; border-radius: 12px; padding: 15px 0; }
-  #pdfCanvasContainer canvas { max-width: 96%; height: auto !important; margin: 0 auto 15px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
+  #pdfCanvasContainer { flex: 1; width: 100%; overflow-y: auto; text-align: center; background: #010a10; border-radius: 10px; padding: 12px 0; }
+  #pdfCanvasContainer canvas { max-width: 96%; height: auto !important; margin: 0 auto 12px; border-radius: 6px; box-shadow: 0 4px 16px rgba(0,0,0,0.5); }
   #pdfCanvasContainer.night-mode canvas { filter: invert(0.9) hue-rotate(180deg); }
 
-  .admin-tab-btn { padding: 9px 18px; border-radius: 20px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-weight: 700; cursor: pointer; font-size: 0.85rem; }
+  .admin-tab-btn { padding: 8px 16px; border-radius: 18px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-weight: 700; cursor: pointer; font-size: 0.82rem; }
   .admin-tab-btn.active { background: var(--gold); color: #031622; border-color: var(--gold); }
 
-  .stats-grid-admin { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
-  .stat-card-admin { background: rgba(0,0,0,0.3); border: 1px solid var(--line); padding: 12px; border-radius: 12px; text-align: center; }
-  .stat-card-admin h3 { margin: 0; font-size: 1.3rem; color: var(--mint); }
-  .stat-card-admin p { margin: 0; font-size: 0.75rem; color: var(--muted); }
+  .stats-grid-admin { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+  .stat-card-admin { background: rgba(0,0,0,0.3); border: 1px solid var(--line); padding: 10px; border-radius: 10px; text-align: center; }
+  .stat-card-admin h3 { margin: 0; font-size: 1.2rem; color: var(--mint); }
+  .stat-card-admin p { margin: 0; font-size: 0.7rem; color: var(--muted); }
 
-  /* تحسينات كاملة للتجاوب مع الهواتف والشاشات الصغيرة */
+  /* =========================================================
+     إصلاحات التجاوب مع شاشات الهواتف المحمولة
+     ========================================================= */
   @media(max-width:1200px){ 
       .doc-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;} 
   }
@@ -402,25 +382,31 @@
       .main-content-grid { grid-template-columns: 1fr !important; }
       .quick-cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
       .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important;}
-      .footer-grid { grid-template-columns: 1fr !important; }
+      .footer-grid { grid-template-columns: 1fr 1fr !important; }
       .tools { grid-template-columns: 1fr !important; }
       .stats-grid-admin { grid-template-columns: repeat(2, 1fr) !important; }
   }
   @media(max-width:768px){
-      .wrap { width: calc(100% - 20px) !important; padding: 0 4px; }
-      .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px; margin-top: -20px; }
-      .tools{grid-template-columns: 1fr !important; gap: 8px;}
-      .doc-grid{grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px;}
+      .wrap { width: calc(100% - 16px) !important; padding: 0 2px; }
+      .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px; margin-top: -20px; }
+      .tools { grid-template-columns: 1fr !important; gap: 8px; }
+      
+      /* تصحيح قسم الصوت وباقي الأقسام لتظهر بعمودين متناسقين على الهاتف */
+      .doc-grid {
+          display: grid !important;
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          gap: 10px !important;
+      }
+      
       .footer-grid { grid-template-columns: 1fr !important; }
       .mobile-bottom-nav { display: flex !important; }
-      body { padding-bottom: 75px; }
+      body { padding-bottom: 65px; }
       nav { display: none !important; }
-      .hero-banner { min-height: 380px; padding: 40px 12px; }
-      .hero-banner h1 { font-size: 2.2rem; }
+      .hero-banner { min-height: 340px; padding: 35px 10px; }
+      .hero-banner h1 { font-size: 2rem; }
   }
-  @media(max-width:480px){
-      .doc-grid { grid-template-columns: 1fr !important; } /* بطاقة واحدة في كل صف على الهواتف الضيقة لضمان أقصى وضوح */
-      .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  @media(max-width:420px){
+      .doc-grid { grid-template-columns: 1fr !important; } /* عمود واحد للشاشات الضيقة جداً لضمان عدم الفراغ */
   }
   </style>
 </head>
@@ -431,13 +417,13 @@
     <a class="brand" href="#top">
       <img src="assets/logo.png" 
            srcset="assets/logo.png 1x" 
-           sizes="52px" 
+           sizes="46px" 
            alt="شعار نهج الحقيقة" 
            class="brand-logo"
-           width="52" 
-           height="52"
+           width="46" 
+           height="46"
            loading="eager"
-           onerror="this.onerror=null; this.src='https://placehold.co/52x52/031622/27d5b1?text=نهج+الحقيقة';">
+           onerror="this.onerror=null; this.src='https://placehold.co/46x46/031622/27d5b1?text=نهج';">
       <div class="brand-text">
         <span>نـهـج الـحـقـيـقـة</span>
         <span>من أجل معرفة أعمق .. لحقيقة أصدق</span>
@@ -456,7 +442,7 @@
       <button class="install-btn-nav" id="installPwaBtn" onclick="installPWA()">📲 تثبيت</button>
       <button class="icon-action-btn" onclick="toggleBookmarksView()" title="المفضلة">⭐</button>
       <button class="icon-action-btn" onclick="toggleTheme()" id="themeToggle" title="تبديل الوضع">🌙</button>
-      <button class="icon-action-btn" onclick="openAdminModal()" title="لوحة التحكم الإدارية" style="color:var(--mint);">⚙️</button>
+      <button class="icon-action-btn" onclick="openAdminModal()" title="لوحة التحكم" style="color:var(--mint);">⚙️</button>
     </div>
   </div>
 </header>
@@ -484,32 +470,32 @@
       <article class="quick-card" onclick="location.href='#library'">
         <div class="q-icon">🔍</div>
         <h3>البحث المتقدم</h3>
-        <p>ابحث في كل محتوى الموقع</p>
+        <p>ابحث في محتوى الموقع</p>
       </article>
       <article class="quick-card" onclick="location.href='#audio-podcast'">
         <div class="q-icon">🎧</div>
         <h3>المكتبة الصوتية</h3>
-        <p>أقسام وتسجيلات صوتية</p>
+        <p>تسجيلات وأقسام</p>
       </article>
       <article class="quick-card" onclick="location.href='#library'">
         <div class="q-icon">📚</div>
         <h3>المكتبة الرقمية</h3>
-        <p>أبحاث ومقالات وبحوث</p>
+        <p>أبحاث ومقالات</p>
       </article>
       <article class="quick-card" onclick="location.href='#sources-section'">
         <div class="q-icon">📜</div>
         <h3>الوثائق</h3>
-        <p>مخطوطات ووثائق نادرة</p>
+        <p>مخطوطات نادرة</p>
       </article>
       <article class="quick-card" onclick="window.open('https://www.youtube.com/channel/UCHTA4uIOV9wdyuxAYL8WoZg', '_blank')">
         <div class="q-icon">🎙️</div>
         <h3>على طاولة الحقيقة</h3>
-        <p>حوار .. فكر .. دليل</p>
+        <p>حوار وفكر</p>
       </article>
       <article class="quick-card" onclick="window.open('https://www.youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw', '_blank')">
         <div class="q-icon">▶</div>
         <h3>قناة يوتيوب</h3>
-        <p>مقاطع ومحاضرات مميزة</p>
+        <p>محاضرات مميزة</p>
       </article>
     </div>
   </div>
@@ -525,7 +511,7 @@
         </div>
 
         <div class="doc-grid" id="audio-categories-grid">
-          <p style="color:var(--muted); font-size:0.88rem; grid-column:1/-1;">جاري تحميل الأقسام الصوتية...</p>
+          <p style="color:var(--muted); font-size:0.85rem; grid-column:1/-1;">جاري تحميل الأقسام الصوتية...</p>
         </div>
       </div>
 
@@ -551,16 +537,13 @@
               <div class="prayer-item" id="p_isha"><span>العشاء</span><strong>06:58</strong></div>
             </div>
           </div>
-
-          <div class="verse-day-note" style="font-size:0.75rem; color:var(--muted); margin-top:10px;">تتجدد آية اليوم ومواقيت الصلاة تلقائيًا كل يوم</div>
           
           <div class="sidebar-menu-list">
             <div class="sidebar-menu-title">أقسام الموقع</div>
             <a href="#audio-podcast" class="sidebar-menu-item"><span>المكتبة الصوتية</span> <span>🎧</span></a>
             <a href="#library" class="sidebar-menu-item"><span>المكتبة الرقمية</span> <span>📚</span></a>
             <a href="#sources-section" class="sidebar-menu-item"><span>الموسوعة المصورة</span> <span>📜</span></a>
-            <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener" class="sidebar-menu-item"><span>قناة يوتيوب</span> <span>▶</span></a>
-            <a href="#youtube" class="sidebar-menu-item"><span>برنامج على طاولة الحقيقة</span> <span>🎙️</span></a>
+            <a href="#contact" class="sidebar-menu-item"><span>تواصل معنا</span> <span>✉️</span></a>
           </div>
         </div>
       </aside>
@@ -572,7 +555,7 @@
     <div class="bottom-banner-cta">
       <div>
         <h3>المعرفة طريق إلى الحق .. فكن جزءاً من رحلتنا</h3>
-        <p>استكشف آلاف الوثائق والكتب والبحوث الصوتية والمكتوبة الموثقة بكل سهولة.</p>
+        <p>استكشف آلاف الوثائق والكتب والبحوث الصوتية والمكتوبة بكل سهولة.</p>
       </div>
       <button class="cta-btn" onclick="location.href='#library'">استكشف المكتبة الآن ←</button>
     </div>
@@ -619,7 +602,7 @@
   </section>
 
   <!-- قسم موسوعة الوثائق المصورة -->
-  <section class="wrap" id="sources-section" style="margin-top: 25px;">
+  <section class="wrap" id="sources-section" style="margin-top: 20px;">
     <div class="head">
       <h2><span>📜</span> موسوعة الأدلة والوثائق المصورة النادرة</h2>
       <small>انقر لعرض المستندات والصور عالية الدقة</small>
@@ -629,34 +612,27 @@
     </div>
   </section>
 
-  <section class="wrap" id="youtube" style="margin-top: 25px;">
+  <section class="wrap" id="youtube" style="margin-top: 20px;">
     <div class="head">
       <h2><span>🎙️</span> أحدث الفيديوهات والحوارات</h2>
       <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener" style="color:var(--gold); font-weight:700;">زيارة القناة الرسمية ↗</a>
     </div>
-    <div class="videos-grid" id="videos-container" style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px;">
+    <div class="videos-grid" id="videos-container" style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px;">
       <p style="color:var(--muted); grid-column:1/-1;">جاري جلب قائمة الفيديوهات...</p>
     </div>
   </section>
 
-  <section class="wrap" id="contact" style="margin-top: 25px;">
-    <div style="background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:28px;">
+  <section class="wrap" id="contact" style="margin-top: 20px;">
+    <div style="background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:24px;">
       <h2 style="margin-top:0; color:var(--gold);">تواصل معنا</h2>
-      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:15px;">يسعدنا استقبال ملحوظاتكم واستفساراتكم وطلبات الوثائق عبر النموذج التالي:</p>
-      <form class="contact-form" id="contactForm" onsubmit="sendEmailMessage(event)" style="display:grid; gap:12px; max-width:650px;">
+      <p style="color:var(--muted); font-size:0.85rem; margin-bottom:12px;">يسعدنا استقبال ملحوظاتكم واستفساراتكم وطلبات الوثائق عبر النموذج التالي:</p>
+      <form class="contact-form" id="contactForm" onsubmit="sendEmailMessage(event)" style="display:grid; gap:10px; max-width:600px;">
         <input type="text" id="from_name" placeholder="اسمك الكريم" required>
         <input type="email" id="from_email" placeholder="بريدك الإلكتروني" required>
         <input type="text" id="subject" placeholder="الموضوع" required>
-        <textarea id="message" placeholder="رسالتك..." required style="resize:vertical; min-height:110px;"></textarea>
+        <textarea id="message" placeholder="رسالتك..." required style="resize:vertical; min-height:100px;"></textarea>
         <button type="submit" id="sendBtn" class="btn" style="width:fit-content">✉️ إرسال الرسالة</button>
       </form>
-    </div>
-  </section>
-
-  <section class="wrap" id="about" style="margin-top: 25px;">
-    <div style="background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:24px;">
-      <h2 style="margin-top:0;">عن نهج الحقيقة</h2>
-      <p style="color:var(--muted); margin:0; font-size:0.92rem; line-height:1.8;">منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية وملفات PDF ونشر المحتوى المرئي الموثق برؤية بحثية موضوعية.</p>
     </div>
   </section>
 
@@ -666,11 +642,11 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-col">
-        <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-          <img src="assets/logo.png" alt="" width="40" height="40" style="object-fit:contain; border-radius:50%;" onerror="this.onerror=null; this.src='https://placehold.co/40x40/031622/27d5b1?text=نهج';">
-          <strong style="color:var(--ink); font-size:1.15rem;">نهج الحقيقة</strong>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+          <img src="assets/logo.png" alt="" width="36" height="36" style="object-fit:contain; border-radius:50%;" onerror="this.src='https://placehold.co/36x36/031622/27d5b1?text=نهج';">
+          <strong style="color:var(--ink); font-size:1.05rem;">نهج الحقيقة</strong>
         </div>
-        <p style="margin:0; font-size:0.88rem; color:var(--muted); line-height:1.8;">من أجل معرفة أعمق .. لحقيقة أصدق. منصة متخصصة في نشر الفكر والوثائق التاريخية.</p>
+        <p style="margin:0; font-size:0.82rem; color:var(--muted); line-height:1.7;">من أجل معرفة أعمق .. لحقيقة أصدق. منصة متخصصة في نشر الفكر والوثائق التاريخية.</p>
       </div>
       <div class="footer-col">
         <h4>معلومات</h4>
@@ -705,8 +681,8 @@
         <a href="https://x.com/raf88idi" target="_blank" rel="noopener" title="منصة إكس">𝕏</a>
         <a href="https://www.tiktok.com/@ha_no_88" target="_blank" rel="noopener" title="تيك توك">🎵</a>
       </div>
-      <span style="font-size:0.85rem;">© <span id="year"></span> نهج الحقيقة، جميع الحقوق محفوظة. 
-        <a href="javascript:void(0)" onclick="openAdminModal()" style="color:var(--gold); margin-right:10px; font-weight:700;">⚙️ دخول الإدارة</a>
+      <span style="font-size:0.8rem;">© <span id="year"></span> نهج الحقيقة، جميع الحقوق محفوظة. 
+        <a href="javascript:void(0)" onclick="openAdminModal()" style="color:var(--gold); margin-right:8px; font-weight:700;">⚙️ دخول الإدارة</a>
       </span>
     </div>
   </div>
@@ -722,19 +698,19 @@
 
 <!-- مودال استعراض ملفات القسم الصوتي -->
 <div class="modal" id="audioCategoryModal">
-  <div class="modal-content" style="max-width:850px;">
+  <div class="modal-content" style="max-width:800px;">
     <div class="sticky-close-bar">
       <h3 id="audioModalCategoryTitle" style="margin:0; color:var(--gold);">🎧 قسم صوتي</h3>
       <button class="back-btn" onclick="closeAudioCategoryModal()">✕ إغلاق</button>
     </div>
 
-    <div class="audio-player-card" style="margin-bottom: 15px;">
+    <div class="audio-player-card" style="margin-bottom: 12px;">
       <div class="audio-player-controls">
-        <div style="display:flex; align-items:center; gap:12px;">
+        <div style="display:flex; align-items:center; gap:10px;">
           <button class="audio-play-btn" id="audioPlayToggleBtn" onclick="toggleAudioPlay()">▶</button>
           <div>
-            <h4 id="audioTrackTitle" style="margin:0; color:var(--gold); font-size:1rem;">اختر حلقة للاستماع</h4>
-            <p id="audioTrackDesc" style="margin:0; color:var(--muted); font-size:0.8rem;">المكتبة الصوتية - نهج الحقيقة</p>
+            <h4 id="audioTrackTitle" style="margin:0; color:var(--gold); font-size:0.95rem;">اختر حلقة للاستماع</h4>
+            <p id="audioTrackDesc" style="margin:0; color:var(--muted); font-size:0.75rem;">المكتبة الصوتية - نهج الحقيقة</p>
           </div>
         </div>
         <audio id="mainAudioPlayer" ontimeupdate="updateAudioProgress()" onended="playNextPodcast()"></audio>
@@ -742,188 +718,121 @@
       <input type="range" id="audioSeekBar" value="0" min="0" max="100" style="width:100%; accent-color:var(--gold); cursor:pointer;" onchange="seekAudio(this.value)">
     </div>
 
-    <div id="categoryPodcastsListContainer" style="display:flex; flex-direction:column; gap:10px;">
+    <div id="categoryPodcastsListContainer" style="display:flex; flex-direction:column; gap:8px;">
       <p style="color:var(--muted);">جاري التحميل...</p>
     </div>
   </div>
 </div>
 
-<!-- لوحة التحكم الإدارية المحدثة لإضافة وتعديل الأغلفة لجميع الأقسام -->
+<!-- لوحة التحكم الإدارية -->
 <div class="modal" id="adminModal">
-  <div class="modal-content" style="max-width:850px;">
+  <div class="modal-content" style="max-width:800px;">
     <div class="sticky-close-bar">
-      <h3 id="adminModalTitle" style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة وإدارة الأغلفة للجميع</h3>
+      <h3 id="adminModalTitle" style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة</h3>
       <button class="back-btn" onclick="closeAdminModal()">✕ إغلاق</button>
     </div>
 
-    <div id="adminLoginSec" style="display:flex; flex-direction:column; gap:14px; margin-top:15px;">
-      <p style="font-size:0.9rem; color:var(--muted); margin:0;">ادخل كلمة المرور الخاصة بحسابك للوصول للوحة التحكم:</p>
-      <input type="password" id="adminPassInput" placeholder="كلمة المرور..." style="padding:12px 16px; border-radius:12px; border:1px solid var(--line); background:var(--input-bg); color:#fff;">
+    <div id="adminLoginSec" style="display:flex; flex-direction:column; gap:12px; margin-top:10px;">
+      <p style="font-size:0.88rem; color:var(--muted); margin:0;">ادخل كلمة المرور الخاصة بحسابك للوصول للوحة التحكم:</p>
+      <input type="password" id="adminPassInput" placeholder="كلمة المرور...">
       <button class="btn" onclick="loginAdmin()">تسجيل الدخول</button>
     </div>
 
-    <div id="adminPanelSec" style="display:none; flex-direction:column; gap:16px; margin-top:10px;">
-      
+    <div id="adminPanelSec" style="display:none; flex-direction:column; gap:14px; margin-top:8px;">
       <div class="stats-grid-admin">
-        <div class="stat-card-admin"><h3 id="statDocsCount">0</h3><p>الكتب والملفات</p></div>
-        <div class="stat-card-admin"><h3 id="statSourcesCount">0</h3><p>الوثائق المصورة</p></div>
+        <div class="stat-card-admin"><h3 id="statDocsCount">0</h3><p>الكتب</p></div>
+        <div class="stat-card-admin"><h3 id="statSourcesCount">0</h3><p>الوثائق</p></div>
         <div class="stat-card-admin"><h3 id="statVidsCount">0</h3><p>الفيديوهات</p></div>
-        <div class="stat-card-admin"><h3 id="statPodcastsCount">0</h3><p>الحلقات الصوتية</p></div>
+        <div class="stat-card-admin"><h3 id="statPodcastsCount">0</h3><p>الصوتيات</p></div>
       </div>
 
-      <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(39, 213, 177, 0.1); padding:10px 16px; border-radius:14px; border:1px solid var(--mint);">
-        <span id="currentUserRole" style="font-size:0.88rem; font-weight:800; color:var(--mint);">المستخدم الحالي</span>
-        <button class="btn red" onclick="logoutAdmin()" style="padding:4px 12px; font-size:0.78rem;">تسجيل خروج</button>
+      <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(39, 213, 177, 0.1); padding:8px 14px; border-radius:12px; border:1px solid var(--mint);">
+        <span id="currentUserRole" style="font-size:0.85rem; font-weight:800; color:var(--mint);">المستخدم الحالي</span>
+        <button class="btn red" onclick="logoutAdmin()" style="padding:3px 10px; font-size:0.75rem;">تسجيل خروج</button>
       </div>
 
-      <div id="adminTabsNav" style="display:flex; gap:8px; border-bottom:1px solid var(--line); padding-bottom:10px; flex-wrap:wrap;">
-        <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 الكتب والملفات</button>
-        <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 الوثائق المصورة</button>
+      <div id="adminTabsNav" style="display:flex; gap:6px; border-bottom:1px solid var(--line); padding-bottom:8px; flex-wrap:wrap;">
+        <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 الكتب</button>
+        <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 الوثائق</button>
         <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ الفيديوهات</button>
-        <button id="tabBtnPodcasts" class="admin-tab-btn" onclick="switchAdminTab('podcasts')">🎧 المكتبة الصوتية للأقسام</button>
-        <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين</button>
+        <button id="tabBtnPodcasts" class="admin-tab-btn" onclick="switchAdminTab('podcasts')">🎧 الصوتيات والأقسام</button>
       </div>
 
-      <!-- 1. الكتب والملفات (تعديل الغلاف أسبوعياً أو عند الإضافة) -->
-      <div id="addDocForm" class="admin-form" style="display:flex; flex-direction:column; gap:12px;">
+      <!-- نموذج الكتب -->
+      <div id="addDocForm" class="admin-form" style="display:flex; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_doc_id">
-        <h4 id="docFormHeading" style="margin:0; color:var(--gold);">🖼️ إضافة / تعديل غلاف وكتاب في المكتبة الرقمية</h4>
-        
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <input type="text" id="doc_title" placeholder="عنوان البحث / الكتاب" required>
-          <input type="text" id="doc_author" placeholder="المؤلف / الباحث">
+        <h4 id="docFormHeading" style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة / تعديل كتاب</h4>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <input type="text" id="doc_title" placeholder="عنوان الكتاب" required>
+          <input type="text" id="doc_author" placeholder="المؤلف">
         </div>
-        
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
           <select id="doc_cat" required>
-            <option value="بحوث عقائدية">💡 قسم: بحوث عقائدية</option>
-            <option value="وثائق تاريخية">📜 قسم: وثائق تاريخية</option>
-            <option value="كتب ومراجع">📖 قسم: كتب ومراجع</option>
-            <option value="مقالات ودراسات">📝 قسم: مقالات ودراسات</option>
-            <option value="منوع">🎨 قسم: منوع</option>
+            <option value="بحوث عقائدية">بحوث عقائدية</option>
+            <option value="وثائق تاريخية">وثائق تاريخية</option>
+            <option value="كتب ومراجع">كتب ومراجع</option>
+            <option value="مقالات ودراسات">مقالات ودراسات</option>
+            <option value="منوع">منوع</option>
           </select>
-          <input type="text" id="doc_url" placeholder="رابط الملف المباشر (PDF URL)" required>
+          <input type="text" id="doc_url" placeholder="رابط PDF" required>
         </div>
-        
-        <div style="background:rgba(212, 175, 55, 0.08); border:1px solid var(--gold); padding:10px; border-radius:10px;">
-          <label style="font-size:0.85rem; font-weight:800; color:var(--gold); display:block; margin-bottom:4px;">🖼️ رابط صورة الغلاف الوسطى للمستند:</label>
-          <input type="text" id="doc_cover_url" placeholder="ضع رابط صورة الغلاف هنا (Image URL)...">
+        <input type="text" id="doc_cover_url" placeholder="رابط صورة الغلاف (Image URL)">
+        <textarea id="doc_desc" placeholder="نبذة مختصرة..." style="min-height:70px;"></textarea>
+        <div style="display:flex; gap:6px;">
+          <button type="button" id="saveDocBtn" class="btn" onclick="saveNewDoc(event)">💾 حفظ</button>
+          <button type="button" id="cancelDocEditBtn" class="btn red" style="display:none;" onclick="cancelDocEdit()">إلغاء</button>
         </div>
-
-        <textarea id="doc_desc" placeholder="نبذة مختصرة عن المستند..."></textarea>
-        
-        <div style="display:flex; gap:8px;">
-          <button type="button" id="saveDocBtn" class="btn" onclick="saveNewDoc(event)">💾 حفظ ونشر الكتاب مع الغلاف</button>
-          <button type="button" id="cancelDocEditBtn" class="btn red" style="display:none;" onclick="cancelDocEdit()">إلغاء التعديل</button>
-        </div>
-
-        <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-          <h5 style="margin:0; color:var(--gold);">قائمة الكتب المنشورة (اضغط تعديل لتغيير الغلاف):</h5>
-          <select id="filterAdminCategory" onchange="populateAdminLists()" style="width:auto; padding:5px 12px; font-size:0.8rem;">
-            <option value="">✨ كافة الأقسام</option>
-            <option value="بحوث عقائدية">💡 بحوث عقائدية</option>
-            <option value="وثائق تاريخية">📜 وثائق تاريخية</option>
-            <option value="كتب ومراجع">📖 كتب ومراجع</option>
-            <option value="مقالات ودراسات">📝 مقالات ودراسات</option>
-            <option value="منوع">🎨 منوع</option>
-          </select>
-        </div>
-        <div id="adminDocsList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
+        <div id="adminDocsList" style="max-height:180px; overflow-y:auto; margin-top:4px;"></div>
       </div>
 
-      <!-- 2. الوثائق المصورة (تعديل الغلاف) -->
-      <div id="addSourceForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
+      <!-- نموذج الوثائق -->
+      <div id="addSourceForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_source_id">
-        <h4 id="sourceFormHeading" style="margin:0; color:var(--gold);">🖼️ إضافة / تعديل غلاف وثيقة مصورة</h4>
-        <input type="text" id="source_title" placeholder="عنوان المجموعة (مثال: وثائق فدك)..." required>
-        
-        <div style="background:rgba(212, 175, 55, 0.08); border:1px solid var(--gold); padding:10px; border-radius:10px;">
-          <label style="font-size:0.85rem; font-weight:800; color:var(--gold); display:block; margin-bottom:4px;">🖼️ رابط صورة الغلاف الوسطى للوثيقة:</label>
-          <input type="text" id="source_img_url" placeholder="رابط صورة الوثيقة أو الغلاف الأوسط (Image URL)..." required>
+        <h4 style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة / تعديل وثيقة مصورة</h4>
+        <input type="text" id="source_title" placeholder="عنوان الوثيقة" required>
+        <input type="text" id="source_img_url" placeholder="رابط الصورة" required>
+        <textarea id="source_desc" placeholder="وصف الوثيقة..." style="min-height:70px;"></textarea>
+        <div style="display:flex; gap:6px;">
+          <button type="button" id="saveSourceBtn" class="btn" onclick="saveNewSource(event)">💾 حفظ</button>
+          <button type="button" id="cancelSourceEditBtn" class="btn red" style="display:none;" onclick="cancelSourceEdit()">إلغاء</button>
         </div>
-
-        <textarea id="source_desc" placeholder="شرح تفصيلي للوثيقة..."></textarea>
-        
-        <div style="display:flex; gap:8px;">
-          <button type="button" id="saveSourceBtn" class="btn" onclick="saveNewSource(event)">💾 حفظ الوثيقة والغلاف</button>
-          <button type="button" id="cancelSourceEditBtn" class="btn red" style="display:none;" onclick="cancelSourceEdit()">إلغاء التعديل</button>
-        </div>
-        <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
-        <h5 style="margin:0; color:var(--gold);">قائمة الوثائق المصورة (اضغط تعديل لتغيير الغلاف):</h5>
-        <div id="adminSourcesList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
+        <div id="adminSourcesList" style="max-height:180px; overflow-y:auto; margin-top:4px;"></div>
       </div>
 
-      <!-- 3. الفيديوهات -->
-      <div id="addVidForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
+      <!-- نموذج الفيديوهات -->
+      <div id="addVidForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_vid_id">
-        <h4 id="vidFormHeading" style="margin:0; color:var(--gold);">➕ إضافة فيديو يوتيوب جديد</h4>
-        <input type="text" id="vid_title" placeholder="عنوان الفيديو..." required>
-        <input type="text" id="vid_yt_id" placeholder="معرف اليوتيوب YouTube Video ID" required>
-        
-        <div style="display:flex; gap:8px;">
-          <button type="button" id="saveVidBtn" class="btn" onclick="saveNewVid(event)">💾 حفظ الفيديو</button>
-          <button type="button" id="cancelVidEditBtn" class="btn red" style="display:none;" onclick="cancelVidEdit()">إلغاء التعديل</button>
+        <h4 style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة فيديو يوتيوب</h4>
+        <input type="text" id="vid_title" placeholder="عنوان الفيديو" required>
+        <input type="text" id="vid_yt_id" placeholder="معرف يوتيوب (YouTube Video ID)" required>
+        <div style="display:flex; gap:6px;">
+          <button type="button" id="saveVidBtn" class="btn" onclick="saveNewVid(event)">💾 حفظ</button>
         </div>
-        <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
-        <h5 style="margin:0; color:var(--gold);">قائمة الفيديوهات:</h5>
-        <div id="adminVidsList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
+        <div id="adminVidsList" style="max-height:180px; overflow-y:auto; margin-top:4px;"></div>
       </div>
 
-      <!-- 4. الصوتيات وأغلفة الأقسام المصورة -->
-      <div id="addPodcastForm" class="admin-form" style="display:none; flex-direction:column; gap:14px;">
+      <!-- نموذج الصوتيات -->
+      <div id="addPodcastForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_podcast_id">
-        <h4 id="podcastFormHeading" style="margin:0; color:var(--gold);">🎧 إدارة أقسام الصوتيات وتغيير الصور الوسطى في الغلاف</h4>
-        
-        <div style="background:rgba(0,0,0,0.25); padding:12px; border-radius:12px; border:1px solid var(--line);">
-          <label style="font-size:0.85rem; font-weight:800; color:var(--gold); display:block; margin-bottom:6px;">🖼️ تعديل اسم القسم وصورة الغلاف الوسطى:</label>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px;">
-            <input type="text" id="new_podcast_category_name" placeholder="اسم القسم (مثل: ملاحم كربلاء)...">
-            <input type="text" id="new_podcast_category_img" placeholder="رابط الصورة التي في المنتصف (Image URL)...">
+        <h4 style="margin:0; color:var(--gold); font-size:0.95rem;">إدارة الأقسام والحلقات الصوتية</h4>
+        <div style="background:rgba(0,0,0,0.2); padding:10px; border-radius:10px; border:1px solid var(--line);">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:6px;">
+            <input type="text" id="new_podcast_category_name" placeholder="اسم القسم الجديد">
+            <input type="text" id="new_podcast_category_img" placeholder="رابط صورة الغلاف للقسم">
           </div>
-          <button type="button" class="btn shrink" onclick="addNewPodcastCategory()" style="padding:6px 14px; font-size:0.8rem; width:100%;">💾 تحديث القسم وغلاف الصورة الوسطى</button>
+          <button type="button" class="btn shrink" onclick="addNewPodcastCategory()" style="width:100%; font-size:0.78rem;">💾 إضافة أو تحديث القسم وغلافه</button>
         </div>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <input type="text" id="podcast_title" placeholder="عنوان الحلقة الصوتية..." required>
-          <select id="podcast_category" required>
-            <option value="ملاحم كربلاء">📁 قسم: ملاحم كربلاء</option>
-          </select>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <input type="text" id="podcast_title" placeholder="عنوان الحلقة" required>
+          <select id="podcast_category" required></select>
         </div>
-
-        <input type="text" id="podcast_url" placeholder="رابط الملف الصوتي المباشر (MP3 URL)..." required>
-        <textarea id="podcast_desc" placeholder="نبذة عن الحلقة الصوتية..."></textarea>
-        
-        <div style="display:flex; gap:8px;">
-          <button type="button" id="savePodcastBtn" class="btn" onclick="saveNewPodcast(event)">💾 حفظ ونشر الحلقة</button>
-          <button type="button" id="cancelPodcastEditBtn" class="btn red" style="display:none;" onclick="cancelPodcastEdit()">إلغاء التعديل</button>
+        <input type="text" id="podcast_url" placeholder="رابط الملف الصوتي (MP3)" required>
+        <textarea id="podcast_desc" placeholder="نبذة عن الحلقة..." style="min-height:60px;"></textarea>
+        <div style="display:flex; gap:6px;">
+          <button type="button" id="savePodcastBtn" class="btn" onclick="saveNewPodcast(event)">💾 حفظ الحلقة</button>
+          <button type="button" id="cancelPodcastEditBtn" class="btn red" style="display:none;" onclick="cancelPodcastEdit()">إلغاء</button>
         </div>
-
-        <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
-        <h5 style="margin:0; color:var(--gold);">قائمة الحلقات الصوتية المنشورة:</h5>
-        <div id="adminPodcastsList" style="max-height:220px; overflow-y:auto; margin-top:6px;"></div>
-      </div>
-
-      <!-- 5. الموظفين -->
-      <div id="manageUsersSec" style="display:none; flex-direction:column; gap:15px;">
-        <h4 style="margin:0; color:var(--gold);">إضافة موظف جديد وتحديد المهام</h4>
-        <form class="admin-form" onsubmit="saveEmployee(event)" style="display:flex; flex-direction:column; gap:10px;">
-          <input type="text" id="emp_name" placeholder="اسم الموظف أو المحرر" required>
-          <input type="text" id="emp_pass" placeholder="كلمة المرور الخاصة به" required>
-          <div style="font-size:0.85rem; font-weight:700; color:var(--mint);">حدد الصلاحيات والمهام:</div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <label class="perm-checkbox-item"><input type="checkbox" id="p_docs" value="docs"> 📚 الكتب والملفات</label>
-            <label class="perm-checkbox-item"><input type="checkbox" id="p_sources" value="sources"> 📜 الوثائق المصورة</label>
-            <label class="perm-checkbox-item"><input type="checkbox" id="p_videos" value="videos"> ▶ الفيديوهات</label>
-            <label class="perm-checkbox-item"><input type="checkbox" id="p_podcasts" value="podcasts"> 🎧 الصوتيات</label>
-          </div>
-          <button type="submit" id="saveEmpBtn" class="btn">➕ إضافة الموظف</button>
-        </form>
-
-        <h4 style="margin:15px 0 0; color:var(--gold);">قائمة الموظفين:</h4>
-        <div id="employeesList" style="display:flex; flex-direction:column; gap:8px;">
-          <p style="color:var(--muted); font-size:0.8rem;">جاري جلب قائمة الموظفين...</p>
-        </div>
+        <div id="adminPodcastsList" style="max-height:160px; overflow-y:auto; margin-top:4px;"></div>
       </div>
 
     </div>
@@ -934,52 +843,51 @@
 <div class="modal" id="sourceModal">
   <div class="modal-content">
     <div class="sticky-close-bar">
-      <h2 id="modalTitle" style="margin:0; color:var(--gold); font-size:1.05rem; flex:1;">عنوان الوثيقة</h2>
+      <h2 id="modalTitle" style="margin:0; color:var(--gold); font-size:1rem; flex:1;">عنوان الوثيقة</h2>
       <button class="back-btn" onclick="closeSourceModal()">✕ إغلاق</button>
     </div>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-top:10px;" id="modalImagesContainer"></div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:8px;" id="modalImagesContainer"></div>
   </div>
 </div>
 
 <!-- مودال التكبير -->
 <div id="imageZoomModal">
   <div class="zoom-header">
-    <h3 id="zoomTitle" style="margin:0; color:var(--gold); font-size:0.95rem; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; max-width:50%;">عرض الصورة</h3>
-    <div style="display:flex; gap:8px;">
-      <button class="btn shrink" onclick="closeZoomModal()" style="padding:5px 14px; font-size:0.8rem;">🔍 تصغير</button>
-      <button class="btn" id="zoomDownloadBtn" style="padding:5px 14px; font-size:0.8rem;">⬇️ تحميل</button>
+    <h3 id="zoomTitle" style="margin:0; color:var(--gold); font-size:0.9rem; max-width:50%;">عرض الصورة</h3>
+    <div style="display:flex; gap:6px;">
+      <button class="btn shrink" id="zoomDownloadBtn" style="padding:4px 10px; font-size:0.75rem;">⬇️ تحميل</button>
       <button class="back-btn" onclick="closeZoomModal()">✕ إغلاق</button>
     </div>
   </div>
   <div class="zoom-body" onclick="closeZoomModal()">
-    <img id="zoomedImg" src="" alt="وثيقة مكبرة" onclick="event.stopPropagation()">
+    <img id="zoomedImg" src="" alt="صورة مكبرة" onclick="event.stopPropagation()">
   </div>
 </div>
 
-<!-- مودال قراءة الـ PDF وقسم التعليقات -->
+<!-- مودال قراءة الـ PDF والتعليقات -->
 <div class="modal" id="pdfModal">
   <div class="pdf-modal-content">
     <div class="sticky-close-bar">
-      <h3 id="pdfTitle" style="margin:0; color:var(--gold); font-size:1rem; max-width:40%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">عرض المستند</h3>
-      <div style="display:flex; gap:8px; align-items:center;">
-        <button class="btn shrink" onclick="togglePdfNightMode()" title="وضع قراءة ليلي" style="padding:5px 10px; font-size:0.8rem;">🌙 وضع ليلي</button>
-        <button class="btn shrink" onclick="zoomPdf(0.2)" style="padding:5px 10px; font-size:0.8rem;">➕</button>
-        <button class="btn shrink" onclick="zoomPdf(-0.2)" style="padding:5px 10px; font-size:0.8rem;">➖</button>
-        <button class="btn" onclick="downloadFileDirectly()" style="padding:5px 14px; font-size:0.8rem;">⬇️ تنزيل</button>
-        <button class="btn red" onclick="closePdfModal()" style="padding:5px 14px; font-size:0.8rem;">✕ إغلاق</button>
+      <h3 id="pdfTitle" style="margin:0; color:var(--gold); font-size:0.95rem; max-width:38%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">عرض المستند</h3>
+      <div style="display:flex; gap:6px; align-items:center;">
+        <button class="btn shrink" onclick="togglePdfNightMode()" style="padding:4px 8px; font-size:0.75rem;">🌙 ليلي</button>
+        <button class="btn shrink" onclick="zoomPdf(0.2)" style="padding:4px 8px; font-size:0.75rem;">➕</button>
+        <button class="btn shrink" onclick="zoomPdf(-0.2)" style="padding:4px 8px; font-size:0.75rem;">➖</button>
+        <button class="btn" onclick="downloadFileDirectly()" style="padding:4px 10px; font-size:0.75rem;">⬇️ تنزيل</button>
+        <button class="btn red" onclick="closePdfModal()" style="padding:4px 10px; font-size:0.75rem;">✕ إغلاق</button>
       </div>
     </div>
     <div id="pdfCanvasContainer">
-      <p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل المستند لقراءته...</p>
+      <p id="pdfLoadingText" style="color:var(--gold); margin-top:25px; font-weight:700;">جاري تحميل المستند...</p>
     </div>
 
     <div class="comments-container">
-      <h4 style="margin:0 0 10px; color:var(--gold); font-size:0.95rem;">💬 المناقشات المباشرة والتعليقات العلميّة:</h4>
-      <div id="commentsList" style="max-height: 120px; overflow-y: auto; margin-bottom: 10px;"></div>
-      <div style="display:grid; grid-template-columns: 1fr 2fr auto; gap:8px;">
-        <input type="text" id="commentUserName" placeholder="اسمك الكريم..." style="padding:8px 12px; border-radius:10px; border:1px solid var(--line); background:var(--input-bg); color:#fff; font-size:0.85rem;">
-        <input type="text" id="newCommentInput" placeholder="أضف تعليقاً أو استفساراً علمياً..." style="padding:8px 12px; border-radius:10px; border:1px solid var(--line); background:var(--input-bg); color:#fff; font-size:0.85rem;">
-        <button class="btn" onclick="addDocComment()" style="padding:8px 16px; font-size:0.82rem;">إرسال</button>
+      <h4 style="margin:0 0 8px; color:var(--gold); font-size:0.9rem;">💬 التعليقات والمناقشات العلمية:</h4>
+      <div id="commentsList" style="max-height: 100px; overflow-y: auto; margin-bottom: 8px;"></div>
+      <div style="display:grid; grid-template-columns: 1fr 2fr auto; gap:6px;">
+        <input type="text" id="commentUserName" placeholder="اسمك..." style="padding:6px 10px; border-radius:8px; border:1px solid var(--line); background:var(--input-bg); color:#fff; font-size:0.8rem;">
+        <input type="text" id="newCommentInput" placeholder="أضف تعليقاً..." style="padding:6px 10px; border-radius:8px; border:1px solid var(--line); background:var(--input-bg); color:#fff; font-size:0.8rem;">
+        <button class="btn" onclick="addDocComment()" style="padding:6px 12px; font-size:0.78rem;">إرسال</button>
       </div>
     </div>
   </div>
@@ -996,24 +904,14 @@ function showToast(message, type = 'success') {
     toast.className = 'toast';
     toast.innerHTML = `<span>${type === 'success' ? '✅' : '⚠️'}</span> <span>${message}</span>`;
     container.appendChild(toast);
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateX(100%)';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
+    setTimeout(() => { toast.remove(); }, 3000);
 }
 
 const dailyQuranVerses = [
   { text: '﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾', source: 'سورة الشرح · الآية 6' },
   { text: '﴿وَهُوَ مَعَكُمْ أَيْنَ مَا كُنْتُمْ﴾', source: 'سورة الحديد · الآية 4' },
   { text: '﴿وَقُلْ رَبِّ زِدْنِي عِلْمًا﴾', source: 'سورة طه · الآية 114' },
-  { text: '﴿إِنَّ اللَّهَ مَعَ الصَّابِرِينَ﴾', source: 'سورة البقرة · الآية 153' },
-  { text: '﴿وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ﴾', source: 'سورة الطلاق · الآية 3' },
-  { text: '﴿فَاذْكُرُونِي أَذْكُرْكُمْ﴾', source: 'سورة البقرة · الآية 152' },
-  { text: '﴿وَلَا تَيْأَسُوا مِن رَّوْحِ اللَّهِ﴾', source: 'سورة يوسف · الآية 87' },
-  { text: '﴿إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ﴾', source: 'سورة التوبة · الآية 120' },
-  { text: '﴿أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ﴾', source: 'سورة الرعد · الآية 28' },
-  { text: '﴿وَقُلِ الْحَقُّ مِن رَّبِّكُمْ﴾', source: 'سورة الكهف · الآية 29' }
+  { text: '﴿إِنَّ اللَّهَ مَعَ الصَّابِرِينَ﴾', source: 'سورة البقرة · الآية 153' }
 ];
 
 function updateDailyVerseAndClock() {
@@ -1023,40 +921,11 @@ function updateDailyVerseAndClock() {
   const dayOfYear = Math.floor((baghdadNow - start) / 86400000);
   const verse = dailyQuranVerses[(dayOfYear - 1) % dailyQuranVerses.length];
   
-  const verseText = document.getElementById('dailyVerseText');
-  const verseSource = document.getElementById('dailyVerseSource');
-  const clock = document.getElementById('siteClock');
-  const date = document.getElementById('siteDate');
-  
-  if (verseText) verseText.textContent = verse.text;
-  if (verseSource) verseSource.textContent = verse.source;
-  if (clock) clock.textContent = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Baghdad', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
-  if (date) date.textContent = new Intl.DateTimeFormat('ar-IQ', { timeZone: 'Asia/Baghdad', year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' }).format(now);
-  
-  updateActivePrayerTime(baghdadNow);
+  if (document.getElementById('dailyVerseText')) document.getElementById('dailyVerseText').textContent = verse.text;
+  if (document.getElementById('dailyVerseSource')) document.getElementById('dailyVerseSource').textContent = verse.source;
+  if (document.getElementById('siteClock')) document.getElementById('siteClock').textContent = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Baghdad', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
+  if (document.getElementById('siteDate')) document.getElementById('siteDate').textContent = new Intl.DateTimeFormat('ar-IQ', { timeZone: 'Asia/Baghdad', year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' }).format(now);
 }
-
-function updateActivePrayerTime(now) {
-    const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-    const prayers = [
-        { id: 'p_fajr', time: '04:52' },
-        { id: 'p_shuruq', time: '06:15' },
-        { id: 'p_dhuhr', time: '11:55' },
-        { id: 'p_asr', time: '15:02' },
-        { id: 'p_maghrib', time: '17:38' },
-        { id: 'p_isha', time: '18:58' }
-    ];
-    
-    document.querySelectorAll('.prayer-item').forEach(el => el.classList.remove('active'));
-    for (let p of prayers) {
-        if (timeStr < p.time) {
-            const activeEl = document.getElementById(p.id);
-            if (activeEl) activeEl.classList.add('active');
-            break;
-        }
-    }
-}
-
 updateDailyVerseAndClock();
 setInterval(updateDailyVerseAndClock, 1000);
 
@@ -1091,14 +960,9 @@ function toggleTheme() {
 function requestNotificationPermission() {
     if ("Notification" in window) {
         Notification.requestPermission().then(permission => {
-            if (permission === "granted") {
-                showToast("تم تفعيل الإشعارات بنجاح!");
-            } else {
-                showToast("لم يتم إعطاء الإذن للإشعارات.", "error");
-            }
+            if (permission === "granted") showToast("تم تفعيل الإشعارات بنجاح!");
+            else showToast("تم رفض إذن الإشعارات.", "error");
         });
-    } else {
-        showToast("المتصفح لا يدعم الإشعارات.", "error");
     }
 }
 
@@ -1119,19 +983,19 @@ let activePdfDocId = null;
 let currentPdfScale = 1.3;
 let currentPdfObj = null;
 
+let allDocs = [];
+let allSources = [];
+let allVideos = [];
 let allPodcasts = [];
 let podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["ملاحم كربلاء", "محاضرات عقائدية", "جلسات حوارية"]');
 let categoryCovers = JSON.parse(localStorage.getItem('nahj_cat_covers') || '{}');
-let activeCategoryModalName = '';
 let currentPodcastIndex = 0;
 
 async function fetchPodcasts() {
     if (!supabaseClient) return;
     try {
-        const { data, error } = await supabaseClient.from('podcasts').select('*').order('created_at', { ascending: false });
-        if (!error && data && data.length > 0) {
-            allPodcasts = data;
-        }
+        const { data } = await supabaseClient.from('podcasts').select('*').order('created_at', { ascending: false });
+        if (data) allPodcasts = data;
         renderAudioCategoriesCards();
         if (currentLoggedInUser) populateAdminLists();
     } catch(e) {
@@ -1145,25 +1009,17 @@ function addNewPodcastCategory() {
     const catName = input.value.trim();
     const imgUrl = imgInput ? imgInput.value.trim() : '';
 
-    if (!catName) {
-        showToast('يرجى كتابة اسم القسم الصوتي', 'error');
-        return;
-    }
-
+    if (!catName) { showToast('يرجى كتابة اسم القسم', 'error'); return; }
     if (!podcastCategories.includes(catName)) {
         podcastCategories.push(catName);
         localStorage.setItem('nahj_podcast_cats', JSON.stringify(podcastCategories));
     }
-
     if (imgUrl) {
         categoryCovers[catName] = imgUrl;
         localStorage.setItem('nahj_cat_covers', JSON.stringify(categoryCovers));
     }
-
-    showToast('تم تحديث القسم وغلاف الصورة الوسطى بنجاح!');
-    input.value = '';
-    if (imgInput) imgInput.value = '';
-    
+    showToast('تم تحديث القسم بنجاح!');
+    input.value = ''; if (imgInput) imgInput.value = '';
     populatePodcastCategorySelects();
     renderAudioCategoriesCards();
 }
@@ -1171,15 +1027,14 @@ function addNewPodcastCategory() {
 function populatePodcastCategorySelects() {
     const select = document.getElementById('podcast_category');
     if (!select) return;
-    select.innerHTML = podcastCategories.map(c => `<option value="${c}">📁 قسم: ${c}</option>`).join('');
+    select.innerHTML = podcastCategories.map(c => `<option value="${c}">${c}</option>`).join('');
 }
 
 function renderAudioCategoriesCards() {
     const grid = document.getElementById('audio-categories-grid');
     if (!grid) return;
-
     if (!podcastCategories.length) {
-        grid.innerHTML = '<p style="color:var(--muted); font-size:0.85rem; grid-column:1/-1;">لا توجد أقسام صوتية حتى الآن.</p>';
+        grid.innerHTML = '<p style="color:var(--muted); font-size:0.85rem; grid-column:1/-1;">لا توجد أقسام صوتية.</p>';
         return;
     }
 
@@ -1187,24 +1042,20 @@ function renderAudioCategoriesCards() {
     podcastCategories.forEach(cat => {
         const podcastsInCat = allPodcasts.filter(p => (p.category || 'ملاحم كربلاء') === cat);
         const middleImg = categoryCovers[cat] || ''; 
-        
         const card = document.createElement('article');
         card.className = 'book-cover-card';
-
         let bgStyle = middleImg ? `background: url('${middleImg}') center/cover no-repeat;` : `background: #1a0805;`;
 
         card.innerHTML = `
             <div class="book-frame-border"></div>
             <div class="cover-top-title-badge">${cat}</div>
-            
             <div class="cover-middle-image-area" style="${bgStyle}">
                 <div class="cover-middle-overlay"></div>
                 <div class="cover-inner-content">
                     <h4>مكتبة الصوتيات</h4>
-                    <p>${podcastsInCat.length} حلقة مسجلة</p>
+                    <p>${podcastsInCat.length} حلقة</p>
                 </div>
             </div>
-
             <div class="cover-bottom-badge">استعراض</div>
         `;
         card.addEventListener('click', () => openAudioCategoryModal(cat));
@@ -1213,42 +1064,30 @@ function renderAudioCategoriesCards() {
 }
 
 function openAudioCategoryModal(catName) {
-    activeCategoryModalName = catName;
     document.getElementById('audioModalCategoryTitle').textContent = '🎧 قسم: ' + catName;
-    renderCategoryPodcastsList(catName);
-    document.getElementById('audioCategoryModal').style.display = 'flex';
-}
-
-function closeAudioCategoryModal() {
-    document.getElementById('audioCategoryModal').style.display = 'none';
-}
-
-function renderCategoryPodcastsList(catName) {
     const container = document.getElementById('categoryPodcastsListContainer');
-    if (!container) return;
     const activeList = allPodcasts.filter(p => (p.category || 'ملاحم كربلاء') === catName);
 
     if (!activeList.length) {
-        container.innerHTML = '<p style="color:var(--muted); font-size:0.88rem;">لا توجد حلقات صوتية منشورة في هذا القسم حالياً.</p>';
-        return;
-    }
-
-    container.innerHTML = activeList.map((p) => {
-        let globalIdx = allPodcasts.findIndex(item => item.id === p.id);
-        return `
-            <div style="background:rgba(0,0,0,0.35); border:1px solid var(--line); border-radius:12px; padding:12px; display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="loadPodcastIntoPlayer(${globalIdx}); toggleAudioPlay();">
-                <div style="display:flex; align-items:center; gap:12px;">
-                    <span style="font-size:1.4rem; color:var(--mint);">🎧</span>
+        container.innerHTML = '<p style="color:var(--muted); font-size:0.85rem;">لا توجد حلقات في هذا القسم.</p>';
+    } else {
+        container.innerHTML = activeList.map((p) => {
+            let globalIdx = allPodcasts.findIndex(item => item.id === p.id);
+            return `
+                <div style="background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:10px; padding:10px; display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="loadPodcastIntoPlayer(${globalIdx}); toggleAudioPlay();">
                     <div>
-                        <h5 style="margin:0 0 4px; font-size:0.92rem; font-weight:800; color:var(--ink);">${p.title}</h5>
-                        <p style="margin:0; font-size:0.78rem; color:var(--muted);">${p.description || 'تسجيل صوتي'}</p>
+                        <h5 style="margin:0 0 3px; font-size:0.88rem; font-weight:800; color:var(--ink);">${p.title}</h5>
+                        <p style="margin:0; font-size:0.75rem; color:var(--muted);">${p.description || 'تسجيل صوتي'}</p>
                     </div>
+                    <button class="btn shrink" style="padding:4px 12px; font-size:0.75rem;">تشغيل ▶</button>
                 </div>
-                <button class="btn shrink" style="padding:6px 14px; font-size:0.8rem;">تشغيل ▶</button>
-            </div>
-        `;
-    }).join('');
+            `;
+        }).join('');
+    }
+    document.getElementById('audioCategoryModal').style.display = 'flex';
 }
+
+function closeAudioCategoryModal() { document.getElementById('audioCategoryModal').style.display = 'none'; }
 
 function loadPodcastIntoPlayer(index) {
     if (!allPodcasts.length || !allPodcasts[index]) return;
@@ -1257,46 +1096,36 @@ function loadPodcastIntoPlayer(index) {
     const player = document.getElementById('mainAudioPlayer');
     player.src = podcast.audio_url;
     document.getElementById('audioTrackTitle').textContent = podcast.title;
-    document.getElementById('audioTrackDesc').textContent = (podcast.category ? 'القسم: ' + podcast.category + ' · ' : '') + (podcast.description || 'المكتبة الصوتية');
+    document.getElementById('audioTrackDesc').textContent = podcast.description || 'المكتبة الصوتية';
     document.getElementById('audioPlayToggleBtn').textContent = '▶';
 }
 
 function toggleAudioPlay() {
     const player = document.getElementById('mainAudioPlayer');
     const btn = document.getElementById('audioPlayToggleBtn');
-    if (!player.src && allPodcasts.length) {
-        loadPodcastIntoPlayer(0);
-    }
+    if (!player.src && allPodcasts.length) loadPodcastIntoPlayer(0);
     if (player.paused) {
-        player.play().then(() => { btn.textContent = '⏸'; }).catch(() => { showToast('تعذر تشغيل الملف الصوتي', 'error'); });
+        player.play().then(() => { btn.textContent = '⏸'; }).catch(() => { showToast('تعذر التشغيل', 'error'); });
     } else {
-        player.pause();
-        btn.textContent = '▶';
+        player.pause(); btn.textContent = '▶';
     }
 }
 
 function updateAudioProgress() {
     const player = document.getElementById('mainAudioPlayer');
     const seekBar = document.getElementById('audioSeekBar');
-    if (player.duration) {
-        seekBar.value = (player.currentTime / player.duration) * 100;
-    }
+    if (player.duration) seekBar.value = (player.currentTime / player.duration) * 100;
 }
 
 function seekAudio(val) {
     const player = document.getElementById('mainAudioPlayer');
-    if (player.duration) {
-        player.currentTime = (val / 100) * player.duration;
-    }
+    if (player.duration) player.currentTime = (val / 100) * player.duration;
 }
 
 function playNextPodcast() {
     if (currentPodcastIndex + 1 < allPodcasts.length) {
         loadPodcastIntoPlayer(currentPodcastIndex + 1);
         document.getElementById('mainAudioPlayer').play();
-        document.getElementById('audioPlayToggleBtn').textContent = '⏸';
-    } else {
-        document.getElementById('audioPlayToggleBtn').textContent = '▶';
     }
 }
 
@@ -1321,18 +1150,13 @@ function sendEmailMessage(e) {
         subject: document.getElementById('subject').value,
         message: document.getElementById('message').value
     }).then(() => {
-        showToast('تم إرسال رسالتك بنجاح!');
+        showToast('تم الإرسال بنجاح!');
         document.getElementById('contactForm').reset(); btn.disabled = false; btn.textContent = '✉️ إرسال الرسالة';
     }).catch(() => {
-        showToast('تعذر الإرسال، يُرجى المحاولة لاحقاً', 'error');
+        showToast('تعذر الإرسال', 'error');
         btn.disabled = false; btn.textContent = '✉️ إرسال الرسالة';
     });
 }
-
-let allDocs = [];
-let allSources = [];
-let allVideos = [];
-let bookmarkedIds = JSON.parse(localStorage.getItem('nahj_bookmarks') || '[]');
 
 async function fetchDocuments() {
     if (!supabaseClient) return;
@@ -1357,7 +1181,7 @@ async function fetchSources() {
 function renderSourcesMain(data) {
     const grid = document.getElementById('sources-grid');
     if (!grid) return;
-    if (!data.length) { grid.innerHTML = '<p style="color:var(--muted);">لا توجد مصادر مضافة.</p>'; return; }
+    if (!data.length) { grid.innerHTML = '<p style="color:var(--muted);">لا توجد مصادر.</p>'; return; }
 
     const grouped = {};
     data.forEach(item => {
@@ -1371,13 +1195,11 @@ function renderSourcesMain(data) {
         const group = grouped[title];
         const card = document.createElement('article');
         card.className = 'book-cover-card';
-        
         let coverBg = group[0].image_url ? `background: url('${group[0].image_url}') center/cover no-repeat;` : `background: #1a0805;`;
 
         card.innerHTML = `
             <div class="book-frame-border"></div>
             <div class="cover-top-title-badge">${title}</div>
-            
             <div class="cover-middle-image-area" style="${coverBg}">
                 <div class="cover-middle-overlay"></div>
                 <div class="cover-inner-content">
@@ -1385,7 +1207,6 @@ function renderSourcesMain(data) {
                     <p>${group.length} مستند</p>
                 </div>
             </div>
-
             <div class="cover-bottom-badge">استعراض</div>
         `;
         card.addEventListener('click', () => openSourceModal(title, group));
@@ -1398,23 +1219,16 @@ async function fetchLatestVideos() {
     try {
         const { data } = await supabaseClient.from('videos').select('*');
         allVideos = data || [];
-        if (!data || !data.length) return;
-        
         const container = document.getElementById('videos-container');
-        if (container) {
-            container.innerHTML = '';
-            data.forEach(vid => {
-                if (vid.youtube_id) {
-                    const card = document.createElement('div');
-                    card.innerHTML = `
-                        <div style="position:relative; width:100%; padding-bottom:56.25%; background:#000; border-radius:12px; overflow:hidden; margin-bottom:8px; border:1px solid var(--line);">
-                            <iframe src="https://www.youtube.com/embed/${vid.youtube_id}" title="${vid.title}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                        <h4 style="margin:0; font-size:0.92rem; font-weight:800; color:var(--ink);">${vid.title}</h4>
-                    `;
-                    container.appendChild(card);
-                }
-            });
+        if (container && data && data.length) {
+            container.innerHTML = data.map(vid => `
+                <div>
+                    <div style="position:relative; width:100%; padding-bottom:56.25%; background:#000; border-radius:10px; overflow:hidden; margin-bottom:6px; border:1px solid var(--line);">
+                        <iframe src="https://www.youtube.com/embed/${vid.youtube_id}" title="${vid.title}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                    <h4 style="margin:0; font-size:0.88rem; font-weight:800; color:var(--ink);">${vid.title}</h4>
+                </div>
+            `).join('');
         }
         if (currentLoggedInUser) populateAdminLists();
     } catch(e){}
@@ -1423,9 +1237,8 @@ async function fetchLatestVideos() {
 async function openPdfViewer(title, url, id) {
     activePdfUrl = url; activePdfName = title; activePdfDocId = id; currentPdfScale = 1.3;
     document.getElementById('pdfTitle').textContent = title;
-    
     const container = document.getElementById('pdfCanvasContainer');
-    container.innerHTML = '<p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل وسحب صفحات المستند للقراءة...</p>';
+    container.innerHTML = '<p style="color:var(--gold); margin-top:25px; font-weight:700;">جاري تحميل المستند...</p>';
     document.getElementById('pdfModal').style.display = 'flex';
     fetchDocComments();
 
@@ -1433,85 +1246,34 @@ async function openPdfViewer(title, url, id) {
         currentPdfObj = await pdfjsLib.getDocument(url).promise;
         renderPdfPages();
     } catch (error) {
-        container.innerHTML = `
-            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:15px; color:var(--ink); padding:20px; text-align:center;">
-                <p>تعذر عرض معالجة المستند مباشرة داخل المتصفح.</p>
-                <button class="btn" onclick="triggerDirectDownload('${url}', '${title}.pdf')">⬇️ اضغط هنا لتنزيل الملف وقراءته فوراً</button>
-            </div>
-        `;
+        container.innerHTML = `<p style="padding:20px;">تعذر عرض المعاينة. <button class="btn" onclick="triggerDirectDownload('${url}', '${title}.pdf')">تنزيل الملف</button></p>`;
     }
 }
 
 async function fetchDocComments() {
     const list = document.getElementById('commentsList');
-    if (!list) return;
-    list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; margin:0;">جاري تحميل التعليقات...</p>';
-
-    if (!supabaseClient || !activePdfDocId) {
-        list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; margin:0;">لا توجد تعليقات بعد.</p>';
-        return;
-    }
-
+    if (!list || !supabaseClient || !activePdfDocId) return;
     try {
-        const { data, error } = await supabaseClient
-            .from('comments')
-            .select('*')
-            .eq('doc_id', activePdfDocId)
-            .order('created_at', { ascending: false });
-
-        if (error || !data || data.length === 0) {
-            list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; margin:0;">لا توجد تعليقات أو مناقشات مدونة حول هذا البحث بعد.</p>';
-            return;
-        }
-
+        const { data } = await supabaseClient.from('comments').select('*').eq('doc_id', activePdfDocId).order('created_at', { ascending: false });
+        if (!data || !data.length) { list.innerHTML = '<p style="color:var(--muted); font-size:0.75rem; margin:0;">لا توجد تعليقات.</p>'; return; }
         list.innerHTML = data.map(c => `
             <div class="comment-item">
-                <div class="comment-header">
-                    <span>✍️ ${c.user_name || 'باحث / زائر'}</span>
-                    <span>${new Date(c.created_at).toLocaleDateString('ar-IQ')}</span>
-                </div>
-                <div style="font-size:0.85rem; color:var(--ink); line-height:1.5;">${c.comment_text}</div>
+                <div class="comment-header"><span>✍️ ${c.user_name || 'زائر'}</span><span>${new Date(c.created_at).toLocaleDateString('ar-IQ')}</span></div>
+                <div style="font-size:0.8rem; color:var(--ink);">${c.comment_text}</div>
             </div>
         `).join('');
-    } catch (e) {
-        list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; margin:0;">تعذر تحميل التعليقات حالياً.</p>';
-    }
+    } catch(e) {}
 }
 
 async function addDocComment() {
-    const userNameInput = document.getElementById('commentUserName');
-    const commentInput = document.getElementById('newCommentInput');
-    const userName = userNameInput.value.trim() || 'زائر';
-    const commentText = commentInput.value.trim();
-
-    if (!commentText) {
-        showToast('يرجى كتابة نص التعليق أو السؤال أولاً', 'error');
-        return;
-    }
-
-    if (!supabaseClient || !activePdfDocId) {
-        showToast('تعذر الاتصال بقاعدة البيانات', 'error');
-        return;
-    }
-
-    try {
-        const { error } = await supabaseClient
-            .from('comments')
-            .insert([{
-                doc_id: activePdfDocId,
-                user_name: userName,
-                comment_text: commentText
-            }]);
-
-        if (!error) {
-            commentInput.value = '';
-            showToast('تم إرسال ونشر تعليقك بنجاح');
-            fetchDocComments();
-        } else {
-            showToast('حدث خطأ أثناء حفظ التعليق', 'error');
-        }
-    } catch(e) {
-        showToast('تعذر حفظ التعليق', 'error');
+    const userName = document.getElementById('commentUserName').value.trim() || 'زائر';
+    const commentText = document.getElementById('newCommentInput').value.trim();
+    if (!commentText || !supabaseClient || !activePdfDocId) return;
+    const { error } = await supabaseClient.from('comments').insert([{ doc_id: activePdfDocId, user_name: userName, comment_text: commentText }]);
+    if (!error) {
+        document.getElementById('newCommentInput').value = '';
+        showToast('تم إرسال التعليق');
+        fetchDocComments();
     }
 }
 
@@ -1519,58 +1281,39 @@ async function renderPdfPages() {
     if (!currentPdfObj) return;
     const container = document.getElementById('pdfCanvasContainer');
     container.innerHTML = '';
-    
     for (let pageNum = 1; pageNum <= currentPdfObj.numPages; pageNum++) {
         const page = await currentPdfObj.getPage(pageNum);
         const viewport = page.getViewport({ scale: currentPdfScale });
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-        
+        canvas.height = viewport.height; canvas.width = viewport.width;
         await page.render({ canvasContext: context, viewport: viewport }).promise;
         container.appendChild(canvas);
     }
 }
 
-function zoomPdf(delta) {
-    currentPdfScale = Math.max(0.6, Math.min(2.5, currentPdfScale + delta));
-    renderPdfPages();
-}
-
-function togglePdfNightMode() {
-    document.getElementById('pdfCanvasContainer').classList.toggle('night-mode');
-}
-
+function zoomPdf(delta) { currentPdfScale = Math.max(0.6, Math.min(2.5, currentPdfScale + delta)); renderPdfPages(); }
+function togglePdfNightMode() { document.getElementById('pdfCanvasContainer').classList.toggle('night-mode'); }
 function closePdfModal() { document.getElementById('pdfModal').style.display = 'none'; }
 
 function openSourceModal(title, images) {
     document.getElementById('modalTitle').textContent = title;
     const container = document.getElementById('modalImagesContainer');
-    container.innerHTML = '';
-    images.forEach(img => {
-        const div = document.createElement('div');
-        div.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:14px; padding:12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:8px;';
-        div.innerHTML = `
-            <img src="${img.image_url}" alt="${title}" loading="lazy" style="width:100%; max-height:350px; object-fit:contain; border-radius:8px; cursor:pointer;" onclick="zoomImage('${img.image_url}', '${title}')" onerror="this.onerror=null; this.src='https://placehold.co/400x300/031622/27d5b1?text=صورة+الوثيقة';">
-            <p style="font-size:0.82rem; color:var(--muted); margin:0; line-height:1.5;">${img.description || ''}</p>
-            <div style="display:flex; gap:8px; width:100%; justify-content:center; margin-top: auto;">
-                <button class="btn" style="padding:6px 14px; font-size:0.78rem;" onclick="triggerDirectDownload('${img.image_url}', '${title}')">⬇️ تحميل</button>
-                <button class="btn ghost" style="padding:6px 14px; font-size:0.78rem;" onclick="zoomImage('${img.image_url}', '${title}')">🔍 تكبير</button>
-            </div>
-        `;
-        container.appendChild(div);
-    });
+    container.innerHTML = images.map(img => `
+        <div style="background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:12px; padding:10px; text-align:center;">
+            <img src="${img.image_url}" alt="${title}" loading="lazy" style="width:100%; max-height:280px; object-fit:contain; border-radius:6px; cursor:pointer;" onclick="zoomImage('${img.image_url}', '${title}')">
+            <p style="font-size:0.78rem; color:var(--muted); margin:6px 0;">${img.description || ''}</p>
+            <button class="btn" style="padding:4px 10px; font-size:0.75rem;" onclick="triggerDirectDownload('${img.image_url}', '${title}')">⬇️ تحميل</button>
+        </div>
+    `).join('');
     document.getElementById('sourceModal').style.display = 'flex';
 }
-
 function closeSourceModal() { document.getElementById('sourceModal').style.display = 'none'; }
 
 function zoomImage(url, title) {
     document.getElementById('zoomTitle').textContent = title;
     document.getElementById('zoomedImg').src = url;
-    document.getElementById('zoomDownloadBtn').onclick = function() { triggerDirectDownload(url, title); };
+    document.getElementById('zoomDownloadBtn').onclick = () => triggerDirectDownload(url, title);
     document.getElementById('imageZoomModal').style.display = 'flex';
 }
 function closeZoomModal() { document.getElementById('imageZoomModal').style.display = 'none'; }
@@ -1581,31 +1324,25 @@ function closeAdminModal() { document.getElementById('adminModal').style.display
 
 async function loginAdmin() {
     const pass = document.getElementById('adminPassInput').value.trim();
-    if (!pass) return;
-
-    if (supabaseClient) {
-        const { data, error } = await supabaseClient.from('employees').select('*').eq('password', pass).single();
-        if (data && !error) {
-            currentLoggedInUser = data;
-            showAdminDashboard();
-            showToast('تم تسجيل الدخول بنجاح');
-        } else {
-            showToast('كلمة المرور غير صحيحة', 'error');
-        }
+    if (!pass || !supabaseClient) return;
+    const { data, error } = await supabaseClient.from('employees').select('*').eq('password', pass).single();
+    if (data && !error) {
+        currentLoggedInUser = data;
+        showAdminDashboard();
+        showToast('تم تسجيل الدخول');
+    } else {
+        showToast('كلمة المرور غير صحيحة', 'error');
     }
 }
 
 function showAdminDashboard() {
     document.getElementById('adminLoginSec').style.display = 'none';
     document.getElementById('adminPanelSec').style.display = 'flex';
-    document.getElementById('currentUserRole').textContent = 'المستخدم الحالي: ' + currentLoggedInUser.name;
-    
+    document.getElementById('currentUserRole').textContent = 'المستخدم: ' + currentLoggedInUser.name;
     document.getElementById('statDocsCount').textContent = allDocs.length;
     document.getElementById('statSourcesCount').textContent = allSources.length;
     document.getElementById('statVidsCount').textContent = allVideos.length;
     document.getElementById('statPodcastsCount').textContent = allPodcasts.length;
-    
-    applyUserPermissions();
     populateAdminLists();
     populatePodcastCategorySelects();
 }
@@ -1617,102 +1354,32 @@ function logoutAdmin() {
     document.getElementById('adminPanelSec').style.display = 'none';
 }
 
-function applyUserPermissions() {
-    const perms = currentLoggedInUser.permissions || [];
-    const isAdmin = currentLoggedInUser.name.includes('مدير') || currentLoggedInUser.name.includes('Admin') || perms.length === 0;
-
-    document.getElementById('tabBtnDocs').style.display = (isAdmin || perms.includes('docs')) ? 'inline-block' : 'none';
-    document.getElementById('tabBtnSources').style.display = (isAdmin || perms.includes('sources')) ? 'inline-block' : 'none';
-    document.getElementById('tabBtnVideos').style.display = (isAdmin || perms.includes('videos')) ? 'inline-block' : 'none';
-    document.getElementById('tabBtnPodcasts').style.display = (isAdmin || perms.includes('podcasts')) ? 'inline-block' : 'none';
-    document.getElementById('tabBtnManageUsers').style.display = (isAdmin || perms.includes('manage_users')) ? 'inline-block' : 'none';
-
-    switchAdminTab('docs');
-}
-
 function switchAdminTab(type) {
     document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('addDocForm').style.display = type === 'docs' ? 'flex' : 'none';
     document.getElementById('addSourceForm').style.display = type === 'sources' ? 'flex' : 'none';
     document.getElementById('addVidForm').style.display = type === 'videos' ? 'flex' : 'none';
     document.getElementById('addPodcastForm').style.display = type === 'podcasts' ? 'flex' : 'none';
-    document.getElementById('manageUsersSec').style.display = type === 'manage_users' ? 'flex' : 'none';
-    
     if (type === 'docs') document.getElementById('tabBtnDocs').classList.add('active');
     if (type === 'sources') document.getElementById('tabBtnSources').classList.add('active');
     if (type === 'videos') document.getElementById('tabBtnVideos').classList.add('active');
     if (type === 'podcasts') document.getElementById('tabBtnPodcasts').classList.add('active');
-    if (type === 'manage_users') {
-        document.getElementById('tabBtnManageUsers').classList.add('active');
-        fetchEmployeesList();
-    }
 }
 
 function populateAdminLists() {
     const docsList = document.getElementById('adminDocsList');
-    const filterCat = document.getElementById('filterAdminCategory') ? document.getElementById('filterAdminCategory').value : '';
     if (docsList) {
-        let filtered = filterCat ? allDocs.filter(d => d.category === filterCat) : allDocs;
-        docsList.innerHTML = filtered.map(d => `
-            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:10px; border-radius:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.88rem; font-weight:700;">${d.title}</span>
-                <div style="display:flex; gap:6px;">
-                    <button class="btn shrink" style="padding:3px 8px; font-size:0.75rem;" onclick="editDoc(${d.id})">✏️ تعديل / غلاف</button>
-                    <button class="btn red" style="padding:3px 8px; font-size:0.75rem;" onclick="deleteDoc(${d.id})">🗑️ حذف</button>
-                </div>
+        docsList.innerHTML = allDocs.map(d => `
+            <div style="background:rgba(0,0,0,0.2); padding:8px; border-radius:8px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.82rem; font-weight:700;">${d.title}</span>
+                <button class="btn red" style="padding:2px 6px; font-size:0.7rem;" onclick="deleteDoc(${d.id})">حذف</button>
             </div>
-        `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد عناصر.</p>';
+        `).join('') || '<p style="color:var(--muted); font-size:0.75rem;">لا توجد كتب.</p>';
     }
-
-    const sourcesList = document.getElementById('adminSourcesList');
-    if (sourcesList) {
-        sourcesList.innerHTML = allSources.map(s => `
-            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:10px; border-radius:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.88rem; font-weight:700;">${s.title}</span>
-                <div style="display:flex; gap:6px;">
-                    <button class="btn shrink" style="padding:3px 8px; font-size:0.75rem;" onclick="editSource(${s.id})">✏️ تعديل / غلاف</button>
-                    <button class="btn red" style="padding:3px 8px; font-size:0.75rem;" onclick="deleteSource(${s.id})">🗑️ حذف</button>
-                </div>
-            </div>
-        `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد وثائق مصورة.</p>';
-    }
-
-    const podcastsList = document.getElementById('adminPodcastsList');
-    if (podcastsList) {
-        podcastsList.innerHTML = allPodcasts.map(p => `
-            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:10px; border-radius:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                <div>
-                    <span style="font-size:0.68rem; color:var(--mint); font-weight:700; background:rgba(39,213,177,0.1); padding:2px 6px; border-radius:6px; margin-left:6px;">${p.category || 'عام'}</span>
-                    <span style="font-size:0.88rem; font-weight:700;">${p.title}</span>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <button class="btn shrink" style="padding:3px 8px; font-size:0.75rem;" onclick="editPodcast(${p.id})">✏️ تعديل</button>
-                    <button class="btn red" style="padding:3px 8px; font-size:0.75rem;" onclick="deletePodcast(${p.id})">🗑️ حذف</button>
-                </div>
-            </div>
-        `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد حلقات صوتية مضافة.</p>';
-    }
-}
-
-function editDoc(id) {
-    const doc = allDocs.find(d => d.id === id);
-    if (!doc) return;
-    document.getElementById('edit_doc_id').value = doc.id;
-    document.getElementById('doc_title').value = doc.title;
-    document.getElementById('doc_author').value = doc.author || '';
-    document.getElementById('doc_cat').value = doc.category || 'بحوث عقائدية';
-    document.getElementById('doc_url').value = doc.file_url;
-    document.getElementById('doc_desc').value = doc.description || '';
-    document.getElementById('doc_cover_url').value = doc.cover_url || '';
-    
-    document.getElementById('docFormHeading').textContent = '✏️ تعديل الكتاب وصورة الغلاف';
-    document.getElementById('saveDocBtn').textContent = '💾 حفظ تعديلات الغلاف والكتاب';
-    document.getElementById('cancelDocEditBtn').style.display = 'inline-flex';
 }
 
 async function saveNewDoc(e) {
     e.preventDefault();
-    const editId = document.getElementById('edit_doc_id').value;
     const docData = {
         title: document.getElementById('doc_title').value,
         author: document.getElementById('doc_author').value,
@@ -1722,223 +1389,63 @@ async function saveNewDoc(e) {
         cover_url: document.getElementById('doc_cover_url').value || null,
         date: new Date().toISOString().split('T')[0]
     };
-
-    let error = editId 
-        ? (await supabaseClient.from('documents').update(docData).eq('id', editId)).error
-        : (await supabaseClient.from('documents').insert([docData])).error;
-
-    if (!error) {
-        showToast('تم نشر وتحفيظ الملف والغلاف بنجاح!');
-        cancelDocEdit();
-        fetchDocuments();
-    } else {
-        showToast('حدث خطأ أثناء الحفظ', 'error');
-    }
-}
-
-function cancelDocEdit() {
-    document.getElementById('edit_doc_id').value = '';
-    document.getElementById('doc_title').value = '';
-    document.getElementById('doc_author').value = '';
-    document.getElementById('doc_url').value = '';
-    document.getElementById('doc_desc').value = '';
-    document.getElementById('doc_cover_url').value = '';
-    document.getElementById('docFormHeading').textContent = '🖼️ إضافة / تعديل غلاف وكتاب في المكتبة الرقمية';
-    document.getElementById('saveDocBtn').textContent = '💾 حفظ ونشر الكتاب مع الغلاف';
-    document.getElementById('cancelDocEditBtn').style.display = 'none';
+    const { error } = await supabaseClient.from('documents').insert([docData]);
+    if (!error) { showToast('تم الحفظ بنجاح'); fetchDocuments(); } else { showToast('خطأ في الحفظ', 'error'); }
 }
 
 async function deleteDoc(id) {
-    if (confirm('هل أنت متأكد من الحذف؟')) {
-        const { error } = await supabaseClient.from('documents').delete().eq('id', id);
-        if (!error) { showToast('تم الحذف بنجاح'); fetchDocuments(); }
+    if (confirm('هل أنت متأكد؟')) {
+        await supabaseClient.from('documents').delete().eq('id', id);
+        fetchDocuments();
     }
-}
-
-function editSource(id) {
-    const src = allSources.find(s => s.id === id);
-    if (!src) return;
-    document.getElementById('edit_source_id').value = src.id;
-    document.getElementById('source_title').value = src.title;
-    document.getElementById('source_img_url').value = src.image_url;
-    document.getElementById('source_desc').value = src.description || '';
-    
-    document.getElementById('sourceFormHeading').textContent = '✏️ تعديل غلاف ومعلومات الوثيقة المصورة';
-    document.getElementById('saveSourceBtn').textContent = '💾 حفظ التعديلات';
-    document.getElementById('cancelSourceEditBtn').style.display = 'inline-flex';
 }
 
 async function saveNewSource(e) {
     e.preventDefault();
-    const editId = document.getElementById('edit_source_id').value;
     const sourceData = {
         title: document.getElementById('source_title').value,
         image_url: document.getElementById('source_img_url').value,
         description: document.getElementById('source_desc').value
     };
-
-    let error = editId
-        ? (await supabaseClient.from('sources').update(sourceData).eq('id', editId)).error
-        : (await supabaseClient.from('sources').insert([sourceData])).error;
-
-    if (!error) {
-        showToast('تم حفظ الوثيقة والصورة بنجاح!');
-        cancelSourceEdit();
-        fetchSources();
-    } else {
-        showToast('حدث خطأ أثناء حفظ الوثيقة', 'error');
-    }
+    const { error } = await supabaseClient.from('sources').insert([sourceData]);
+    if (!error) { showToast('تم الحفظ'); fetchSources(); }
 }
 
-function cancelSourceEdit() {
-    document.getElementById('edit_source_id').value = '';
-    document.getElementById('source_title').value = '';
-    document.getElementById('source_img_url').value = '';
-    document.getElementById('source_desc').value = '';
-    document.getElementById('sourceFormHeading').textContent = '🖼️ إضافة / تعديل غلاف وثيقة مصورة';
-    document.getElementById('saveSourceBtn').textContent = '💾 حفظ الوثيقة والغلاف';
-    document.getElementById('cancelSourceEditBtn').style.display = 'none';
-}
-
-async function deleteSource(id) {
-    if (confirm('هل أنت متأكد من حذف هذه الوثيقة؟')) {
-        const { error } = await supabaseClient.from('sources').delete().eq('id', id);
-        if (!error) { showToast('تم الحذف بنجاح'); fetchSources(); }
-    }
+async function saveNewVid(e) {
+    e.preventDefault();
+    const vidData = {
+        title: document.getElementById('vid_title').value,
+        youtube_id: document.getElementById('vid_yt_id').value
+    };
+    const { error } = await supabaseClient.from('videos').insert([vidData]);
+    if (!error) { showToast('تم الحفظ'); fetchLatestVideos(); }
 }
 
 async function saveNewPodcast(e) {
     e.preventDefault();
-    const editId = document.getElementById('edit_podcast_id').value;
     const podcastData = {
         title: document.getElementById('podcast_title').value,
         category: document.getElementById('podcast_category').value,
         audio_url: document.getElementById('podcast_url').value,
         description: document.getElementById('podcast_desc').value
     };
-
-    let error = editId
-        ? (await supabaseClient.from('podcasts').update(podcastData).eq('id', editId)).error
-        : (await supabaseClient.from('podcasts').insert([podcastData])).error;
-
-    if (!error) {
-        showToast('تم حفظ الحلقة الصوتية بنجاح!');
-        cancelPodcastEdit();
-        fetchPodcasts();
-    } else {
-        showToast('حدث خطأ أثناء حفظ الحلقة', 'error');
-    }
-}
-
-function editPodcast(id) {
-    const podcast = allPodcasts.find(p => p.id === id);
-    if (!podcast) return;
-    document.getElementById('edit_podcast_id').value = podcast.id;
-    document.getElementById('podcast_title').value = podcast.title;
-    document.getElementById('podcast_category').value = podcast.category || 'ملاحم كربلاء';
-    document.getElementById('podcast_url').value = podcast.audio_url;
-    document.getElementById('podcast_desc').value = podcast.description || '';
-    document.getElementById('podcastFormHeading').textContent = '✏️ تعديل الحلقة الصوتية';
-    document.getElementById('savePodcastBtn').textContent = '💾 حفظ التعديلات';
-    document.getElementById('cancelPodcastEditBtn').style.display = 'inline-flex';
-}
-
-function cancelPodcastEdit() {
-    document.getElementById('edit_podcast_id').value = '';
-    document.getElementById('podcast_title').value = '';
-    document.getElementById('podcast_url').value = '';
-    document.getElementById('podcast_desc').value = '';
-    document.getElementById('podcastFormHeading').textContent = '🎧 إدارة أقسام الصوتيات وتغيير الصور الوسطى في الغلاف';
-    document.getElementById('savePodcastBtn').textContent = '💾 حفظ ونشر الحلقة';
-    document.getElementById('cancelPodcastEditBtn').style.display = 'none';
-}
-
-async function deletePodcast(id) {
-    if (confirm('هل أنت متأكد من حذف هذه الحلقة الصوتية؟')) {
-        const { error } = await supabaseClient.from('podcasts').delete().eq('id', id);
-        if (!error) {
-            showToast('تم حذف الحلقة بنجاح');
-            fetchPodcasts();
-        } else {
-            showToast('حدث خطأ أثناء الحذف', 'error');
-        }
-    }
-}
-
-async function fetchEmployeesList() {
-    const container = document.getElementById('employeesList');
-    if (!container || !supabaseClient) return;
-    try {
-        const { data } = await supabaseClient.from('employees').select('*');
-        if (!data || !data.length) {
-            container.innerHTML = '<p style="color:var(--muted); font-size:0.8rem;">لا توجد حسابات موظفين.</p>';
-            return;
-        }
-        container.innerHTML = data.map(emp => `
-            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:8px 12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.85rem; font-weight:700;">${emp.name}</span>
-                <button class="btn red" style="padding:2px 8px; font-size:0.7rem;" onclick="deleteEmployee(${emp.id})">حذف</button>
-            </div>
-        `).join('');
-    } catch(e) {}
-}
-
-async function saveEmployee(e) {
-    e.preventDefault();
-    const name = document.getElementById('emp_name').value.trim();
-    const pass = document.getElementById('emp_pass').value.trim();
-    const perms = [];
-    if (document.getElementById('p_docs').checked) perms.push('docs');
-    if (document.getElementById('p_sources').checked) perms.push('sources');
-    if (document.getElementById('p_videos').checked) perms.push('videos');
-    if (document.getElementById('p_podcasts').checked) perms.push('podcasts');
-
-    const { error } = await supabaseClient.from('employees').insert([{ name, password: pass, permissions: perms }]);
-    if (!error) {
-        showToast('تمت إضافة الموظف بنجاح');
-        document.getElementById('emp_name').value = '';
-        document.getElementById('emp_pass').value = '';
-        fetchEmployeesList();
-    } else {
-        showToast('تعذر إضافة الموظف', 'error');
-    }
-}
-
-async function deleteEmployee(id) {
-    if (confirm('هل أنت متأكد من حذف حساب هذا الموظف؟')) {
-        const { error } = await supabaseClient.from('employees').delete().eq('id', id);
-        if (!error) { showToast('تم الحذف بنجاح'); fetchEmployeesList(); }
-    }
+    const { error } = await supabaseClient.from('podcasts').insert([podcastData]);
+    if (!error) { showToast('تم حفظ الحلقة'); fetchPodcasts(); }
 }
 
 let isListView = false;
 let showingOnlyBookmarks = false;
+let bookmarkedIds = JSON.parse(localStorage.getItem('nahj_bookmarks') || '[]');
 
 function toggleViewLayout() {
     isListView = !isListView;
     const docsGrid = document.getElementById('docs');
-    const label = document.getElementById('viewLabel');
-    if (isListView) {
-        docsGrid.classList.add('list-view');
-        label.textContent = 'قائمة';
-    } else {
-        docsGrid.classList.remove('list-view');
-        label.textContent = 'شبكة';
-    }
+    if (isListView) docsGrid.classList.add('list-view');
+    else docsGrid.classList.remove('list-view');
 }
 
 function toggleBookmarksView() {
     showingOnlyBookmarks = !showingOnlyBookmarks;
-    const titleIcon = document.getElementById('libTitleIcon');
-    const titleText = document.getElementById('libTitleText');
-    if (showingOnlyBookmarks) {
-        titleIcon.textContent = '⭐';
-        titleText.textContent = 'المكتبة المفضلة لديك';
-        showToast('تم إظهار أبحاثك المفضلة فقط');
-    } else {
-        titleIcon.textContent = '📚';
-        titleText.textContent = 'مكتبة الوثائق والأبحاث الكاملة';
-    }
     filterAndRenderDocs();
 }
 
@@ -1958,14 +1465,11 @@ function renderDocs(docs) {
         const catName = doc.category || 'منوع';
         const card = document.createElement('article');
         card.className = 'book-cover-card';
-        card.setAttribute('data-category', catName);
-        
         let coverBg = doc.cover_url ? `background: url('${doc.cover_url}') center/cover no-repeat;` : `background: #1a0805;`;
 
         card.innerHTML = `
             <div class="book-frame-border"></div>
             <div class="cover-top-title-badge">${catName}</div>
-            
             <div class="cover-middle-image-area" style="${coverBg}">
                 <div class="cover-middle-overlay"></div>
                 <div class="cover-inner-content">
@@ -1973,7 +1477,6 @@ function renderDocs(docs) {
                     <p>${doc.author ? '✍️ ' + doc.author : 'نهج الحقيقة'}</p>
                 </div>
             </div>
-
             <div class="cover-bottom-badge">📖 قراءة PDF</div>
         `;
         card.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url, doc.id));
