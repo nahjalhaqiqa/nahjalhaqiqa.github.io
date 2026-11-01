@@ -1033,8 +1033,9 @@ function populatePodcastCategorySelects() {
 function renderAudioCategoriesCards() {
     const grid = document.getElementById('audio-categories-grid');
     if (!grid) return;
-    if (!podcastCategories.length) {
-        grid.innerHTML = '<p style="color:var(--muted); font-size:0.85rem; grid-column:1/-1;">لا توجد أقسام صوتية.</p>';
+    
+    if (!podcastCategories || podcastCategories.length === 0) {
+        grid.innerHTML = '<p style="color:var(--muted); font-size:0.85rem; grid-column:1/-1; text-align:center;">لا توجد أقسام صوتية مضافة حالياً.</p>';
         return;
     }
 
@@ -1044,6 +1045,8 @@ function renderAudioCategoriesCards() {
         const middleImg = categoryCovers[cat] || ''; 
         const card = document.createElement('article');
         card.className = 'book-cover-card';
+        card.style.display = 'flex'; // ضمان إجبار ظهور العنصر
+        
         let bgStyle = middleImg ? `background: url('${middleImg}') center/cover no-repeat;` : `background: #1a0805;`;
 
         card.innerHTML = `
@@ -1053,7 +1056,7 @@ function renderAudioCategoriesCards() {
                 <div class="cover-middle-overlay"></div>
                 <div class="cover-inner-content">
                     <h4>مكتبة الصوتيات</h4>
-                    <p>${podcastsInCat.length} حلقة</p>
+                    <p>${podcastsInCat.length} حلقة مسجلة</p>
                 </div>
             </div>
             <div class="cover-bottom-badge">استعراض</div>
