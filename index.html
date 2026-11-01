@@ -372,9 +372,6 @@
   .stat-card-admin h3 { margin: 0; font-size: 1.2rem; color: var(--mint); }
   .stat-card-admin p { margin: 0; font-size: 0.7rem; color: var(--muted); }
 
-/* =========================================================
-     إصلاحات التجاوب مع شاشات الهواتف المحمولة
-     ========================================================= */
   @media(max-width:1200px){ 
       .doc-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important;} 
   }
@@ -763,13 +760,13 @@
       </div>
 
       <div id="adminTabsNav" style="display:flex; gap:6px; border-bottom:1px solid var(--line); padding-bottom:8px; flex-wrap:wrap;">
-        <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 الكتب</button>
-        <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 الوثائق</button>
+        <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 الكتب والملفات</button>
+        <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 الوثائق المصورة</button>
         <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ الفيديوهات</button>
         <button id="tabBtnPodcasts" class="admin-tab-btn" onclick="switchAdminTab('podcasts')">🎧 الصوتيات والأقسام</button>
       </div>
 
-      <!-- نموذج الكتب -->
+      <!-- نموذج الكتب والملفات -->
       <div id="addDocForm" class="admin-form" style="display:flex; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_doc_id">
         <h4 id="docFormHeading" style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة / تعديل كتاب</h4>
@@ -790,49 +787,58 @@
         <input type="text" id="doc_cover_url" placeholder="رابط صورة الغلاف (Image URL)">
         <textarea id="doc_desc" placeholder="نبذة مختصرة..." style="min-height:70px;"></textarea>
         <div style="display:flex; gap:6px;">
-          <button type="button" id="saveDocBtn" class="btn" onclick="saveNewDoc(event)">💾 حفظ</button>
-          <button type="button" id="cancelDocEditBtn" class="btn red" style="display:none;" onclick="cancelDocEdit()">إلغاء</button>
+          <button type="button" id="saveDocBtn" class="btn" onclick="saveNewDoc(event)">💾 حفظ الكتاب</button>
+          <button type="button" id="cancelDocEditBtn" class="btn red" style="display:none;" onclick="cancelDocEdit()">إلغاء التعديل</button>
         </div>
-        <div id="adminDocsList" style="max-height:180px; overflow-y:auto; margin-top:4px;"></div>
+        <h5 style="margin:10px 0 4px; color:var(--gold);">قائمة جميع الكتب والملفات:</h5>
+        <div id="adminDocsList" style="max-height:220px; overflow-y:auto; border:1px solid var(--line); padding:6px; border-radius:8px;"></div>
       </div>
 
-      <!-- نموذج الوثائق -->
+      <!-- نموذج الوثائق المصورة -->
       <div id="addSourceForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_source_id">
-        <h4 style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة / تعديل وثيقة مصورة</h4>
+        <h4 id="sourceFormHeading" style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة / تعديل وثيقة مصورة</h4>
         <input type="text" id="source_title" placeholder="عنوان الوثيقة" required>
         <input type="text" id="source_img_url" placeholder="رابط الصورة" required>
         <textarea id="source_desc" placeholder="وصف الوثيقة..." style="min-height:70px;"></textarea>
         <div style="display:flex; gap:6px;">
-          <button type="button" id="saveSourceBtn" class="btn" onclick="saveNewSource(event)">💾 حفظ</button>
-          <button type="button" id="cancelSourceEditBtn" class="btn red" style="display:none;" onclick="cancelSourceEdit()">إلغاء</button>
+          <button type="button" id="saveSourceBtn" class="btn" onclick="saveNewSource(event)">💾 حفظ الوثيقة</button>
+          <button type="button" id="cancelSourceEditBtn" class="btn red" style="display:none;" onclick="cancelSourceEdit()">إلغاء التعديل</button>
         </div>
-        <div id="adminSourcesList" style="max-height:180px; overflow-y:auto; margin-top:4px;"></div>
+        <h5 style="margin:10px 0 4px; color:var(--gold);">قائمة الوثائق المصورة:</h5>
+        <div id="adminSourcesList" style="max-height:220px; overflow-y:auto; border:1px solid var(--line); padding:6px; border-radius:8px;"></div>
       </div>
 
       <!-- نموذج الفيديوهات -->
       <div id="addVidForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_vid_id">
-        <h4 style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة فيديو يوتيوب</h4>
+        <h4 id="vidFormHeading" style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة / تعديل فيديو يوتيوب</h4>
         <input type="text" id="vid_title" placeholder="عنوان الفيديو" required>
         <input type="text" id="vid_yt_id" placeholder="معرف يوتيوب (YouTube Video ID)" required>
         <div style="display:flex; gap:6px;">
-          <button type="button" id="saveVidBtn" class="btn" onclick="saveNewVid(event)">💾 حفظ</button>
+          <button type="button" id="saveVidBtn" class="btn" onclick="saveNewVid(event)">💾 حفظ الفيديو</button>
+          <button type="button" id="cancelVidEditBtn" class="btn red" style="display:none;" onclick="cancelVidEdit()">إلغاء التعديل</button>
         </div>
-        <div id="adminVidsList" style="max-height:180px; overflow-y:auto; margin-top:4px;"></div>
+        <h5 style="margin:10px 0 4px; color:var(--gold);">قائمة الفيديوهات:</h5>
+        <div id="adminVidsList" style="max-height:220px; overflow-y:auto; border:1px solid var(--line); padding:6px; border-radius:8px;"></div>
       </div>
 
-      <!-- نموذج الصوتيات -->
+      <!-- نموذج الصوتيات والأقسام -->
       <div id="addPodcastForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_podcast_id">
-        <h4 style="margin:0; color:var(--gold); font-size:0.95rem;">إدارة الأقسام والحلقات الصوتية</h4>
-        <div style="background:rgba(0,0,0,0.2); padding:10px; border-radius:10px; border:1px solid var(--line);">
+        
+        <div style="background:rgba(0,0,0,0.25); padding:10px; border-radius:10px; border:1px solid var(--line);">
+          <h5 style="margin:0 0 8px; color:var(--gold);">إدارة الأقسام الصوتية وتعديل غلافها:</h5>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:6px;">
-            <input type="text" id="new_podcast_category_name" placeholder="اسم القسم الجديد">
+            <input type="text" id="new_podcast_category_name" placeholder="اسم القسم الصوتي">
             <input type="text" id="new_podcast_category_img" placeholder="رابط صورة الغلاف للقسم">
           </div>
           <button type="button" class="btn shrink" onclick="addNewPodcastCategory()" style="width:100%; font-size:0.78rem;">💾 إضافة أو تحديث القسم وغلافه</button>
+          
+          <div id="adminCategoriesList" style="max-height:120px; overflow-y:auto; margin-top:8px; border-top:1px dashed var(--line); padding-top:6px;"></div>
         </div>
+
+        <h4 id="podcastFormHeading" style="margin:6px 0 0; color:var(--gold); font-size:0.95rem;">إضافة / تعديل حلقة صوتية</h4>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
           <input type="text" id="podcast_title" placeholder="عنوان الحلقة" required>
           <select id="podcast_category" required></select>
@@ -841,9 +847,10 @@
         <textarea id="podcast_desc" placeholder="نبذة عن الحلقة..." style="min-height:60px;"></textarea>
         <div style="display:flex; gap:6px;">
           <button type="button" id="savePodcastBtn" class="btn" onclick="saveNewPodcast(event)">💾 حفظ الحلقة</button>
-          <button type="button" id="cancelPodcastEditBtn" class="btn red" style="display:none;" onclick="cancelPodcastEdit()">إلغاء</button>
+          <button type="button" id="cancelPodcastEditBtn" class="btn red" style="display:none;" onclick="cancelPodcastEdit()">إلغاء التعديل</button>
         </div>
-        <div id="adminPodcastsList" style="max-height:160px; overflow-y:auto; margin-top:4px;"></div>
+        <h5 style="margin:10px 0 4px; color:var(--gold);">قائمة جميع الحلقات الصوتية:</h5>
+        <div id="adminPodcastsList" style="max-height:200px; overflow-y:auto; border:1px solid var(--line); padding:6px; border-radius:8px;"></div>
       </div>
 
     </div>
@@ -1042,6 +1049,26 @@ function addNewPodcastCategory() {
     input.value = ''; if (imgInput) imgInput.value = '';
     populatePodcastCategorySelects();
     renderAudioCategoriesCards();
+    if (currentLoggedInUser) populateAdminLists();
+}
+
+function deletePodcastCategory(catName) {
+    if (confirm(`هل أنت متأكد من حذف قسم "${catName}"؟ (لن تحذف الحلقات التابعة له)`)) {
+        podcastCategories = podcastCategories.filter(c => c !== catName);
+        delete categoryCovers[catName];
+        localStorage.setItem('nahj_podcast_cats', JSON.stringify(podcastCategories));
+        localStorage.setItem('nahj_cat_covers', JSON.stringify(categoryCovers));
+        showToast('تم حذف القسم بنجاح');
+        populatePodcastCategorySelects();
+        renderAudioCategoriesCards();
+        if (currentLoggedInUser) populateAdminLists();
+    }
+}
+
+function editPodcastCategory(catName) {
+    document.getElementById('new_podcast_category_name').value = catName;
+    document.getElementById('new_podcast_category_img').value = categoryCovers[catName] || '';
+    showToast('أدخل البيانات الجديدة ثم انقر حفظ');
 }
 
 function populatePodcastCategorySelects() {
@@ -1408,26 +1435,87 @@ function switchAdminTab(type) {
     if (type === 'videos') document.getElementById('tabBtnVideos').classList.add('active');
     if (type === 'podcasts') document.getElementById('tabBtnPodcasts').classList.add('active');
 
-    if (typeof populateAdminLists === 'function') populateAdminLists();
-    if (type === 'podcasts' && typeof updatePodcastCategoryOptions === 'function') {
-        updatePodcastCategoryOptions();
-    }
+    populateAdminLists();
 }
 
 function populateAdminLists() {
+    // 1. الكتب والملفات
     const docsList = document.getElementById('adminDocsList');
     if (docsList) {
         docsList.innerHTML = allDocs.map(d => `
-            <div style="background:rgba(0,0,0,0.2); padding:8px; border-radius:8px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.82rem; font-weight:700;">${d.title}</span>
-                <button class="btn red" style="padding:2px 6px; font-size:0.7rem;" onclick="deleteDoc(${d.id})">حذف</button>
+            <div style="background:rgba(0,0,0,0.25); padding:8px 12px; border-radius:8px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.84rem; font-weight:700;">${d.title} <small style="color:var(--gold);">(${d.category || 'غير محدد'})</small></span>
+                <div style="display:flex; gap:6px;">
+                    <button class="btn shrink" style="padding:3px 8px; font-size:0.72rem;" onclick="editDoc(${d.id})">✏️ تعديل</button>
+                    <button class="btn red" style="padding:3px 8px; font-size:0.72rem;" onclick="deleteDoc(${d.id})">🗑️ حذف</button>
+                </div>
             </div>
         `).join('') || '<p style="color:var(--muted); font-size:0.75rem;">لا توجد كتب.</p>';
     }
+
+    // 2. الوثائق المصورة
+    const sourcesList = document.getElementById('adminSourcesList');
+    if (sourcesList) {
+        sourcesList.innerHTML = allSources.map(s => `
+            <div style="background:rgba(0,0,0,0.25); padding:8px 12px; border-radius:8px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.84rem; font-weight:700;">${s.title}</span>
+                <div style="display:flex; gap:6px;">
+                    <button class="btn shrink" style="padding:3px 8px; font-size:0.72rem;" onclick="editSource(${s.id})">✏️ تعديل</button>
+                    <button class="btn red" style="padding:3px 8px; font-size:0.72rem;" onclick="deleteSource(${s.id})">🗑️ حذف</button>
+                </div>
+            </div>
+        `).join('') || '<p style="color:var(--muted); font-size:0.75rem;">لا توجد وثائق.</p>';
+    }
+
+    // 3. الفيديوهات
+    const vidsList = document.getElementById('adminVidsList');
+    if (vidsList) {
+        vidsList.innerHTML = allVideos.map(v => `
+            <div style="background:rgba(0,0,0,0.25); padding:8px 12px; border-radius:8px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.84rem; font-weight:700;">${v.title}</span>
+                <div style="display:flex; gap:6px;">
+                    <button class="btn shrink" style="padding:3px 8px; font-size:0.72rem;" onclick="editVid(${v.id})">✏️ تعديل</button>
+                    <button class="btn red" style="padding:3px 8px; font-size:0.72rem;" onclick="deleteVid(${v.id})">🗑️ حذف</button>
+                </div>
+            </div>
+        `).join('') || '<p style="color:var(--muted); font-size:0.75rem;">لا توجد فيديوهات.</p>';
+    }
+
+    // 4. الحلقات الصوتية
+    const podcastsList = document.getElementById('adminPodcastsList');
+    if (podcastsList) {
+        podcastsList.innerHTML = allPodcasts.map(p => `
+            <div style="background:rgba(0,0,0,0.25); padding:8px 12px; border-radius:8px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.84rem; font-weight:700;">${p.title} <small style="color:var(--gold);">(${p.category})</small></span>
+                <div style="display:flex; gap:6px;">
+                    <button class="btn shrink" style="padding:3px 8px; font-size:0.72rem;" onclick="editPodcast(${p.id})">✏️ تعديل</button>
+                    <button class="btn red" style="padding:3px 8px; font-size:0.72rem;" onclick="deletePodcast(${p.id})">🗑️ حذف</button>
+                </div>
+            </div>
+        `).join('') || '<p style="color:var(--muted); font-size:0.75rem;">لا توجد حلقات صوتية.</p>';
+    }
+
+    // 5. الأقسام الصوتية
+    const catsList = document.getElementById('adminCategoriesList');
+    if (catsList) {
+        catsList.innerHTML = podcastCategories.map(c => `
+            <div style="background:rgba(212,175,55,0.06); padding:4px 8px; border-radius:6px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.78rem; font-weight:700; color:var(--mint);">${c}</span>
+                <div style="display:flex; gap:4px;">
+                    <button type="button" class="btn shrink" style="padding:1px 6px; font-size:0.68rem;" onclick="editPodcastCategory('${c}')">✏️ تعديل</button>
+                    <button type="button" class="btn red" style="padding:1px 6px; font-size:0.68rem;" onclick="deletePodcastCategory('${c}')">🗑️ حذف</button>
+                </div>
+            </div>
+        `).join('');
+    }
 }
 
+/* =========================================================
+     إداريات الكتاب والملفات
+   ========================================================= */
 async function saveNewDoc(e) {
     e.preventDefault();
+    const editId = document.getElementById('edit_doc_id').value;
     const docData = {
         title: document.getElementById('doc_title').value,
         author: document.getElementById('doc_author').value,
@@ -1437,48 +1525,211 @@ async function saveNewDoc(e) {
         cover_url: document.getElementById('doc_cover_url').value || null,
         date: new Date().toISOString().split('T')[0]
     };
-    const { error } = await supabaseClient.from('documents').insert([docData]);
-    if (!error) { showToast('تم الحفظ بنجاح'); fetchDocuments(); } else { showToast('خطأ في الحفظ', 'error'); }
-}
 
-async function deleteDoc(id) {
-    if (confirm('هل أنت متأكد؟')) {
-        await supabaseClient.from('documents').delete().eq('id', id);
-        fetchDocuments();
+    let error;
+    if (editId) {
+        const res = await supabaseClient.from('documents').update(docData).eq('id', editId);
+        error = res.error;
+    } else {
+        const res = await supabaseClient.from('documents').insert([docData]);
+        error = res.error;
+    }
+
+    if (!error) { 
+        showToast(editId ? 'تم تحديث الكتاب' : 'تم إضافة الكتاب'); 
+        cancelDocEdit();
+        fetchDocuments(); 
+    } else { 
+        showToast('خطأ في الحفظ', 'error'); 
     }
 }
 
+function editDoc(id) {
+    const doc = allDocs.find(d => d.id === id);
+    if (!doc) return;
+    document.getElementById('edit_doc_id').value = doc.id;
+    document.getElementById('doc_title').value = doc.title || '';
+    document.getElementById('doc_author').value = doc.author || '';
+    document.getElementById('doc_cat').value = doc.category || 'بحوث عقائدية';
+    document.getElementById('doc_url').value = doc.file_url || '';
+    document.getElementById('doc_desc').value = doc.description || '';
+    document.getElementById('doc_cover_url').value = doc.cover_url || '';
+    document.getElementById('docFormHeading').textContent = 'تعديل كتاب: ' + doc.title;
+    document.getElementById('cancelDocEditBtn').style.display = 'inline-flex';
+}
+
+function cancelDocEdit() {
+    document.getElementById('edit_doc_id').value = '';
+    document.getElementById('addDocForm').reset();
+    document.getElementById('docFormHeading').textContent = 'إضافة / تعديل كتاب';
+    document.getElementById('cancelDocEditBtn').style.display = 'none';
+}
+
+async function deleteDoc(id) {
+    if (confirm('هل أنت متأكد من حذف هذا الكتاب نهائياً؟')) {
+        const { error } = await supabaseClient.from('documents').delete().eq('id', id);
+        if (!error) { showToast('تم الحذف بنجاح'); fetchDocuments(); }
+        else { showToast('تعذر الحذف', 'error'); }
+    }
+}
+
+/* =========================================================
+     إداريات الوثائق المصورة
+   ========================================================= */
 async function saveNewSource(e) {
     e.preventDefault();
+    const editId = document.getElementById('edit_source_id').value;
     const sourceData = {
         title: document.getElementById('source_title').value,
         image_url: document.getElementById('source_img_url').value,
         description: document.getElementById('source_desc').value
     };
-    const { error } = await supabaseClient.from('sources').insert([sourceData]);
-    if (!error) { showToast('تم الحفظ'); fetchSources(); }
+
+    let error;
+    if (editId) {
+        const res = await supabaseClient.from('sources').update(sourceData).eq('id', editId);
+        error = res.error;
+    } else {
+        const res = await supabaseClient.from('sources').insert([sourceData]);
+        error = res.error;
+    }
+
+    if (!error) { 
+        showToast(editId ? 'تم تحديث الوثيقة' : 'تمت إضافة الوثيقة'); 
+        cancelSourceEdit();
+        fetchSources(); 
+    } else { showToast('خطأ بالحفظ', 'error'); }
 }
 
+function editSource(id) {
+    const s = allSources.find(item => item.id === id);
+    if (!s) return;
+    document.getElementById('edit_source_id').value = s.id;
+    document.getElementById('source_title').value = s.title || '';
+    document.getElementById('source_img_url').value = s.image_url || '';
+    document.getElementById('source_desc').value = s.description || '';
+    document.getElementById('sourceFormHeading').textContent = 'تعديل الوثيقة: ' + s.title;
+    document.getElementById('cancelSourceEditBtn').style.display = 'inline-flex';
+}
+
+function cancelSourceEdit() {
+    document.getElementById('edit_source_id').value = '';
+    document.getElementById('addSourceForm').reset();
+    document.getElementById('sourceFormHeading').textContent = 'إضافة / تعديل وثيقة مصورة';
+    document.getElementById('cancelSourceEditBtn').style.display = 'none';
+}
+
+async function deleteSource(id) {
+    if (confirm('هل أنت متأكد من حذف هذه الوثيقة المصورة؟')) {
+        const { error } = await supabaseClient.from('sources').delete().eq('id', id);
+        if (!error) { showToast('تم الحذف'); fetchSources(); }
+    }
+}
+
+/* =========================================================
+     إداريات الفيديوهات
+   ========================================================= */
 async function saveNewVid(e) {
     e.preventDefault();
+    const editId = document.getElementById('edit_vid_id').value;
     const vidData = {
         title: document.getElementById('vid_title').value,
         youtube_id: document.getElementById('vid_yt_id').value
     };
-    const { error } = await supabaseClient.from('videos').insert([vidData]);
-    if (!error) { showToast('تم الحفظ'); fetchLatestVideos(); }
+
+    let error;
+    if (editId) {
+        const res = await supabaseClient.from('videos').update(vidData).eq('id', editId);
+        error = res.error;
+    } else {
+        const res = await supabaseClient.from('videos').insert([vidData]);
+        error = res.error;
+    }
+
+    if (!error) { 
+        showToast(editId ? 'تم تحديث الفيديو' : 'تم حفظ الفيديو'); 
+        cancelVidEdit();
+        fetchLatestVideos(); 
+    } else { showToast('خطأ بالحفظ', 'error'); }
 }
 
+function editVid(id) {
+    const v = allVideos.find(item => item.id === id);
+    if (!v) return;
+    document.getElementById('edit_vid_id').value = v.id;
+    document.getElementById('vid_title').value = v.title || '';
+    document.getElementById('vid_yt_id').value = v.youtube_id || '';
+    document.getElementById('vidFormHeading').textContent = 'تعديل الفيديو: ' + v.title;
+    document.getElementById('cancelVidEditBtn').style.display = 'inline-flex';
+}
+
+function cancelVidEdit() {
+    document.getElementById('edit_vid_id').value = '';
+    document.getElementById('addVidForm').reset();
+    document.getElementById('vidFormHeading').textContent = 'إضافة / تعديل فيديو يوتيوب';
+    document.getElementById('cancelVidEditBtn').style.display = 'none';
+}
+
+async function deleteVid(id) {
+    if (confirm('هل أنت متأكد من حذف هذا الفيديو؟')) {
+        const { error } = await supabaseClient.from('videos').delete().eq('id', id);
+        if (!error) { showToast('تم الحذف'); fetchLatestVideos(); }
+    }
+}
+
+/* =========================================================
+     إداريات الصوتيات
+   ========================================================= */
 async function saveNewPodcast(e) {
     e.preventDefault();
+    const editId = document.getElementById('edit_podcast_id').value;
     const podcastData = {
         title: document.getElementById('podcast_title').value,
         category: document.getElementById('podcast_category').value,
         audio_url: document.getElementById('podcast_url').value,
         description: document.getElementById('podcast_desc').value
     };
-    const { error } = await supabaseClient.from('podcasts').insert([podcastData]);
-    if (!error) { showToast('تم حفظ الحلقة'); fetchPodcasts(); }
+
+    let error;
+    if (editId) {
+        const res = await supabaseClient.from('podcasts').update(podcastData).eq('id', editId);
+        error = res.error;
+    } else {
+        const res = await supabaseClient.from('podcasts').insert([podcastData]);
+        error = res.error;
+    }
+
+    if (!error) { 
+        showToast(editId ? 'تم تحديث الحلقة' : 'تم حفظ الحلقة الصوتية'); 
+        cancelPodcastEdit();
+        fetchPodcasts(); 
+    } else { showToast('خطأ بالحفظ', 'error'); }
+}
+
+function editPodcast(id) {
+    const p = allPodcasts.find(item => item.id === id);
+    if (!p) return;
+    document.getElementById('edit_podcast_id').value = p.id;
+    document.getElementById('podcast_title').value = p.title || '';
+    document.getElementById('podcast_category').value = p.category || podcastCategories[0];
+    document.getElementById('podcast_url').value = p.audio_url || '';
+    document.getElementById('podcast_desc').value = p.description || '';
+    document.getElementById('podcastFormHeading').textContent = 'تعديل حلقة: ' + p.title;
+    document.getElementById('cancelPodcastEditBtn').style.display = 'inline-flex';
+}
+
+function cancelPodcastEdit() {
+    document.getElementById('edit_podcast_id').value = '';
+    document.getElementById('addPodcastForm').reset();
+    document.getElementById('podcastFormHeading').textContent = 'إضافة / تعديل حلقة صوتية';
+    document.getElementById('cancelPodcastEditBtn').style.display = 'none';
+}
+
+async function deletePodcast(id) {
+    if (confirm('هل أنت متأكد من حذف هذه الحلقة الصوتية؟')) {
+        const { error } = await supabaseClient.from('podcasts').delete().eq('id', id);
+        if (!error) { showToast('تم الحذف بنجاح'); fetchPodcasts(); }
+    }
 }
 
 let isListView = false;
