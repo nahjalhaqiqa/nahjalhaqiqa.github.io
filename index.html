@@ -581,11 +581,6 @@
       <input id="filterAuthor" type="text" placeholder="اسم المؤلف..." aria-label="المؤلف">
       <select id="category" aria-label="التصنيف">
         <option value="">✨ كل التصنيفات</option>
-        <option value="وثائق تاريخية">📜 وثائق تاريخية</option>
-        <option value="بحوث عقائدية">💡 بحوث عقائدية</option>
-        <option value="كتب ومراجع">📖 كتب ومراجع</option>
-        <option value="مقالات ودراسات">📝 مقالات ودراسات</option>
-        <option value="منوع">🎨 منوع</option>
       </select>
       <select id="sortBy" aria-label="الترتيب">
         <option value="newest">📅 الأحدث أولاً</option>
@@ -596,13 +591,8 @@
       </button>
     </div>
 
-    <div class="quick-tags">
+    <div class="quick-tags" id="docQuickTags">
       <button class="tag-btn active" onclick="filterByTag('', this)">الكل</button>
-      <button class="tag-btn" onclick="filterByTag('بحوث عقائدية', this)">💡 بحوث عقائدية</button>
-      <button class="tag-btn" onclick="filterByTag('وثائق تاريخية', this)">📜 وثائق تاريخية</button>
-      <button class="tag-btn" onclick="filterByTag('كتب ومراجع', this)">📖 كتب ومراجع</button>
-      <button class="tag-btn" onclick="filterByTag('مقالات ودراسات', this)">📝 مقالات ودراسات</button>
-      <button class="tag-btn" onclick="filterByTag('منوع', this)">🎨 منوع</button>
     </div>
 
     <div class="doc-grid" id="docs"></div>
@@ -760,7 +750,7 @@
       </div>
 
       <div id="adminTabsNav" style="display:flex; gap:6px; border-bottom:1px solid var(--line); padding-bottom:8px; flex-wrap:wrap;">
-        <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 الكتب والملفات</button>
+        <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 الكتب والملفات والأقسام</button>
         <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 الوثائق المصورة</button>
         <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ الفيديوهات</button>
         <button id="tabBtnPodcasts" class="admin-tab-btn" onclick="switchAdminTab('podcasts')">🎧 الصوتيات والأقسام</button>
@@ -769,22 +759,29 @@
       <!-- نموذج الكتب والملفات -->
       <div id="addDocForm" class="admin-form" style="display:flex; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_doc_id">
-        <h4 id="docFormHeading" style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة / تعديل كتاب</h4>
+
+        <!-- إدارية أقسام الكتب -->
+        <div style="background:rgba(0,0,0,0.25); padding:10px; border-radius:10px; border:1px solid var(--line);">
+          <h5 style="margin:0 0 8px; color:var(--gold);">إدارة أقسام وتصنيفات الكتب:</h5>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:6px;">
+            <input type="text" id="new_doc_category_name" placeholder="اسم قسم الكتب الجديد">
+            <input type="text" id="new_doc_category_img" placeholder="رابط صورة الغلاف للقسم (اختياري)">
+          </div>
+          <button type="button" class="btn shrink" onclick="addNewDocCategory()" style="width:100%; font-size:0.78rem;">💾 إضافة أو تحديث قسم الكتب</button>
+          
+          <div id="adminDocCategoriesList" style="max-height:120px; overflow-y:auto; margin-top:8px; border-top:1px dashed var(--line); padding-top:6px;"></div>
+        </div>
+
+        <h4 id="docFormHeading" style="margin:6px 0 0; color:var(--gold); font-size:0.95rem;">إضافة / تعديل كتاب</h4>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
           <input type="text" id="doc_title" placeholder="عنوان الكتاب" required>
           <input type="text" id="doc_author" placeholder="المؤلف">
         </div>
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-          <select id="doc_cat" required>
-            <option value="بحوث عقائدية">بحوث عقائدية</option>
-            <option value="وثائق تاريخية">وثائق تاريخية</option>
-            <option value="كتب ومراجع">كتب ومراجع</option>
-            <option value="مقالات ودراسات">مقالات ودراسات</option>
-            <option value="منوع">منوع</option>
-          </select>
+          <select id="doc_cat" required></select>
           <input type="text" id="doc_url" placeholder="رابط PDF" required>
         </div>
-        <input type="text" id="doc_cover_url" placeholder="رابط صورة الغلاف (Image URL)">
+        <input type="text" id="doc_cover_url" placeholder="رابط صورة الغلاف الخاص بالكتاب (Image URL)">
         <textarea id="doc_desc" placeholder="نبذة مختصرة..." style="min-height:70px;"></textarea>
         <div style="display:flex; gap:6px;">
           <button type="button" id="saveDocBtn" class="btn" onclick="saveNewDoc(event)">💾 حفظ الكتاب</button>
@@ -1005,10 +1002,78 @@ let allDocs = [];
 let allSources = [];
 let allVideos = [];
 let allPodcasts = [];
+
+// أقسام الكتب الملفات
+let docCategories = JSON.parse(localStorage.getItem('nahj_doc_cats') || '["بحوث عقائدية", "وثائق تاريخية", "كتب ومراجع", "مقالات ودراسات", "منوع"]');
+let docCategoryCovers = JSON.parse(localStorage.getItem('nahj_doc_cat_covers') || '{}');
+
+// أقسام المكتبة الصوتية
 let podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["ملاحم كربلاء", "محاضرات عقائدية", "جلسات حوارية"]');
 let categoryCovers = JSON.parse(localStorage.getItem('nahj_cat_covers') || '{}');
 let currentPodcastIndex = 0;
 
+/* =========================================================
+     إدارة أقسام الكتب والملفات
+   ========================================================= */
+function addNewDocCategory() {
+    const input = document.getElementById('new_doc_category_name');
+    const imgInput = document.getElementById('new_doc_category_img');
+    const catName = input.value.trim();
+    const imgUrl = imgInput ? imgInput.value.trim() : '';
+
+    if (!catName) { showToast('يرجى كتابة اسم قسم الكتب', 'error'); return; }
+    if (!docCategories.includes(catName)) {
+        docCategories.push(catName);
+        localStorage.setItem('nahj_doc_cats', JSON.stringify(docCategories));
+    }
+    if (imgUrl) {
+        docCategoryCovers[catName] = imgUrl;
+        localStorage.setItem('nahj_doc_cat_covers', JSON.stringify(docCategoryCovers));
+    }
+    showToast('تم حفظ قسم الكتب بنجاح!');
+    input.value = ''; if (imgInput) imgInput.value = '';
+    populateDocCategorySelects();
+    if (currentLoggedInUser) populateAdminLists();
+}
+
+function deleteDocCategory(catName) {
+    if (confirm(`هل أنت متأكد من حذف قسم "${catName}"؟`)) {
+        docCategories = docCategories.filter(c => c !== catName);
+        delete docCategoryCovers[catName];
+        localStorage.setItem('nahj_doc_cats', JSON.stringify(docCategories));
+        localStorage.setItem('nahj_doc_cat_covers', JSON.stringify(docCategoryCovers));
+        showToast('تم حذف قسم الكتب');
+        populateDocCategorySelects();
+        if (currentLoggedInUser) populateAdminLists();
+    }
+}
+
+function editDocCategory(catName) {
+    document.getElementById('new_doc_category_name').value = catName;
+    document.getElementById('new_doc_category_img').value = docCategoryCovers[catName] || '';
+    showToast('أدخل البيانات الجديدة ثم انقر حفظ');
+}
+
+function populateDocCategorySelects() {
+    const docCatSelect = document.getElementById('doc_cat');
+    const filterCatSelect = document.getElementById('category');
+    const tagsContainer = document.getElementById('docQuickTags');
+
+    if (docCatSelect) {
+        docCatSelect.innerHTML = docCategories.map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+    if (filterCatSelect) {
+        filterCatSelect.innerHTML = '<option value="">✨ كل التصنيفات</option>' + docCategories.map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+    if (tagsContainer) {
+        tagsContainer.innerHTML = '<button class="tag-btn active" onclick="filterByTag(\'\', this)">الكل</button>' +
+            docCategories.map(c => `<button class="tag-btn" onclick="filterByTag('${c}', this)">📁 ${c}</button>`).join('');
+    }
+}
+
+/* =========================================================
+     إدارة أقسام الصوتيات
+   ========================================================= */
 async function fetchPodcasts() {
     if (!supabaseClient) return;
     try {
@@ -1232,6 +1297,13 @@ async function fetchDocuments() {
     try {
         const { data } = await supabaseClient.from('documents').select('*');
         allDocs = data || [];
+        allDocs.forEach(d => {
+            if (d.category && !docCategories.includes(d.category)) {
+                docCategories.push(d.category);
+            }
+        });
+        localStorage.setItem('nahj_doc_cats', JSON.stringify(docCategories));
+        populateDocCategorySelects();
         filterAndRenderDocs();
         if (currentLoggedInUser) populateAdminLists();
     } catch(e){}
@@ -1413,6 +1485,7 @@ function showAdminDashboard() {
     document.getElementById('statVidsCount').textContent = allVideos.length;
     document.getElementById('statPodcastsCount').textContent = allPodcasts.length;
     populateAdminLists();
+    populateDocCategorySelects();
     populatePodcastCategorySelects();
 }
 
@@ -1451,6 +1524,20 @@ function populateAdminLists() {
                 </div>
             </div>
         `).join('') || '<p style="color:var(--muted); font-size:0.75rem;">لا توجد كتب.</p>';
+    }
+
+    // أقسام الكتب والملفات
+    const docCatsList = document.getElementById('adminDocCategoriesList');
+    if (docCatsList) {
+        docCatsList.innerHTML = docCategories.map(c => `
+            <div style="background:rgba(212,175,55,0.06); padding:4px 8px; border-radius:6px; margin-bottom:4px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:0.78rem; font-weight:700; color:var(--mint);">${c}</span>
+                <div style="display:flex; gap:4px;">
+                    <button type="button" class="btn shrink" style="padding:1px 6px; font-size:0.68rem;" onclick="editDocCategory('${c}')">✏️ تعديل</button>
+                    <button type="button" class="btn red" style="padding:1px 6px; font-size:0.68rem;" onclick="deleteDocCategory('${c}')">🗑️ حذف</button>
+                </div>
+            </div>
+        `).join('');
     }
 
     // 2. الوثائق المصورة
@@ -1550,7 +1637,7 @@ function editDoc(id) {
     document.getElementById('edit_doc_id').value = doc.id;
     document.getElementById('doc_title').value = doc.title || '';
     document.getElementById('doc_author').value = doc.author || '';
-    document.getElementById('doc_cat').value = doc.category || 'بحوث عقائدية';
+    document.getElementById('doc_cat').value = doc.category || (docCategories[0] || 'بحوث عقائدية');
     document.getElementById('doc_url').value = doc.file_url || '';
     document.getElementById('doc_desc').value = doc.description || '';
     document.getElementById('doc_cover_url').value = doc.cover_url || '';
@@ -1764,12 +1851,14 @@ function renderDocs(docs) {
         const catName = doc.category || 'منوع';
         const card = document.createElement('article');
         card.className = 'book-cover-card';
-        let coverBg = doc.cover_url ? `background-image: url('${doc.cover_url}') !important; background-size: cover !important; background-position: center !important;` : `background: #1a0805;`;
+        
+        let coverBg = doc.cover_url || docCategoryCovers[catName] || '';
+        let styleCover = coverBg ? `background-image: url('${coverBg}') !important; background-size: cover !important; background-position: center !important;` : `background: #1a0805;`;
 
         card.innerHTML = `
             <div class="book-frame-border"></div>
             <div class="cover-top-title-badge">${catName}</div>
-            <div class="cover-middle-image-area" style="${coverBg}">
+            <div class="cover-middle-image-area" style="${styleCover}">
                 <div class="cover-middle-overlay"></div>
                 <div class="cover-inner-content">
                     <h4>${doc.title}</h4>
@@ -1808,7 +1897,7 @@ function filterAndRenderDocs() {
 
 function filterByTag(c, btn) {
     if (cat) { cat.value = c; filterAndRenderDocs(); }
-    document.querySelectorAll('.quick-tags .tag-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('#docQuickTags .tag-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
 }
 
@@ -1817,6 +1906,7 @@ if (filterAuthor) filterAuthor.addEventListener('input', filterAndRenderDocs);
 if (cat) cat.addEventListener('change', filterAndRenderDocs);
 if (sortBy) sortBy.addEventListener('change', filterAndRenderDocs);
 
+populateDocCategorySelects();
 fetchDocuments();
 fetchSources();
 fetchLatestVideos();
