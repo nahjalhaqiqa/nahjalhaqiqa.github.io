@@ -118,8 +118,8 @@
 
   .hero-banner {
       position: relative; width: 100%; min-height: 420px;
-      background: linear-gradient(180deg, rgba(3, 22, 34, 0.85), rgba(3, 22, 34, 0.98)), url('assets/hero-bg.jpg') center/cover no-repeat;
-      background-color: #031622; display: flex; flex-direction: column; justify-content: center; align-items: center;
+      background: linear-gradient(180deg, rgba(3, 22, 34, 0.85), rgba(3, 22, 34, 0.98)), #031622;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
       text-align: center; padding: 50px 16px; border-bottom: 1px solid var(--line);
   }
   .hero-content { max-width: 780px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 12px; }
@@ -198,7 +198,6 @@
   .tag-btn { background: var(--panel); border: 1px solid var(--line); color: var(--muted); padding: 5px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
   .tag-btn:hover, .tag-btn.active { border-color: var(--mint); color: var(--mint); background: var(--panel-hover); }
 
-  /* شبكة العرض الموحدة */
   .doc-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr)); 
@@ -208,7 +207,6 @@
   .doc-grid.list-view { grid-template-columns: 1fr !important; }
   .doc-grid.list-view .book-cover-card { aspect-ratio: auto; flex-direction: row; align-items: center; padding: 10px 14px; min-height: 70px; }
 
-  /* تصميم البطاقات العامة */
   .book-cover-card {
       position: relative;
       width: 100%;
@@ -740,7 +738,6 @@
       <button class="back-btn" onclick="closeDocCategoryModal()">✕ إغلاق</button>
     </div>
     
-    <!-- شريط بحث سريع داخل مودال القسم -->
     <div style="margin-bottom: 12px;">
       <input type="search" id="modalDocSearchInput" placeholder="ابحث داخل هذا القسم..." oninput="filterModalDocs(this.value)" style="width:100%; padding:10px 14px; border-radius:10px; border:1px solid var(--line); background:var(--input-bg); color:#fff; font-size:0.85rem;">
     </div>
@@ -785,11 +782,9 @@
         <button id="tabBtnPodcasts" class="admin-tab-btn" onclick="switchAdminTab('podcasts')">🎧 الصوتيات والأقسام</button>
       </div>
 
-      <!-- نموذج الكتب والملفات والأقسام -->
       <div id="addDocForm" class="admin-form" style="display:flex; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_doc_id">
         
-        <!-- إدارة أقسام الكتب وتحديد غلاف لكل قسم -->
         <div style="background:rgba(0,0,0,0.25); padding:10px; border-radius:10px; border:1px solid var(--line);">
           <h5 style="margin:0 0 8px; color:var(--gold);">إدارة أقسام الكتب والملفات والغلاف الخاص بها:</h5>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:6px;">
@@ -820,7 +815,6 @@
         <div id="adminDocsList" style="max-height:200px; overflow-y:auto; border:1px solid var(--line); padding:6px; border-radius:8px;"></div>
       </div>
 
-      <!-- نموذج الوثائق المصورة -->
       <div id="addSourceForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_source_id">
         <h4 id="sourceFormHeading" style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة / تعديل وثيقة مصورة</h4>
@@ -835,7 +829,6 @@
         <div id="adminSourcesList" style="max-height:220px; overflow-y:auto; border:1px solid var(--line); padding:6px; border-radius:8px;"></div>
       </div>
 
-      <!-- نموذج الفيديوهات -->
       <div id="addVidForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_vid_id">
         <h4 id="vidFormHeading" style="margin:0; color:var(--gold); font-size:0.95rem;">إضافة / تعديل فيديو يوتيوب</h4>
@@ -849,7 +842,6 @@
         <div id="adminVidsList" style="max-height:220px; overflow-y:auto; border:1px solid var(--line); padding:6px; border-radius:8px;"></div>
       </div>
 
-      <!-- نموذج الصوتيات والأقسام -->
       <div id="addPodcastForm" class="admin-form" style="display:none; flex-direction:column; gap:10px;">
         <input type="hidden" id="edit_podcast_id">
         
@@ -883,7 +875,6 @@
   </div>
 </div>
 
-<!-- مودال استعراض الصور -->
 <div class="modal" id="sourceModal">
   <div class="modal-content">
     <div class="sticky-close-bar">
@@ -894,7 +885,6 @@
   </div>
 </div>
 
-<!-- مودال التكبير -->
 <div id="imageZoomModal">
   <div class="zoom-header">
     <h3 id="zoomTitle" style="margin:0; color:var(--gold); font-size:0.9rem; max-width:50%;">عرض الصورة</h3>
@@ -908,7 +898,6 @@
   </div>
 </div>
 
-<!-- مودال قراءة الـ PDF والتعليقات -->
 <div class="modal" id="pdfModal">
   <div class="pdf-modal-content">
     <div class="sticky-close-bar">
@@ -1032,20 +1021,15 @@ let allSources = [];
 let allVideos = [];
 let allPodcasts = [];
 
-// أقسام الأغلفة والأقسام الصوتية
 let podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["ملاحم كربلاء", "محاضرات عقائدية", "جلسات حوارية"]');
 let categoryCovers = JSON.parse(localStorage.getItem('nahj_cat_covers') || '{}');
 
-// أقسام وأغلفة الكتب والملفات
 let docCategories = JSON.parse(localStorage.getItem('nahj_doc_cats') || '["بحوث عقائدية", "وثائق تاريخية", "كتب ومراجع", "مقالات ودراسات", "منوع"]');
 let docCategoryCovers = JSON.parse(localStorage.getItem('nahj_doc_cat_covers') || '{}');
 
 let currentPodcastIndex = 0;
 let currentActiveDocCategory = '';
 
-/* =========================================================
-     إدارة أقسام الكتب وأغلفتها
-   ========================================================= */
 function addNewDocCategory() {
     const input = document.getElementById('new_doc_category_name');
     const imgInput = document.getElementById('new_doc_category_img');
@@ -1111,9 +1095,6 @@ function renderDocCategoryQuickTags() {
     tagsContainer.innerHTML = html;
 }
 
-/* =========================================================
-     إدارة الصوتيات والأقسام الصوتية
-   ========================================================= */
 async function fetchPodcasts() {
     if (!supabaseClient) return;
     try {
@@ -1545,7 +1526,6 @@ function switchAdminTab(type) {
 }
 
 function populateAdminLists() {
-    // 1. الكتب والملفات
     const docsList = document.getElementById('adminDocsList');
     if (docsList) {
         docsList.innerHTML = allDocs.map(d => `
@@ -1559,7 +1539,6 @@ function populateAdminLists() {
         `).join('') || '<p style="color:var(--muted); font-size:0.75rem;">لا توجد كتب.</p>';
     }
 
-    // 2. أقسام الكتب
     const docCatsList = document.getElementById('adminDocCategoriesList');
     if (docCatsList) {
         docCatsList.innerHTML = docCategories.map(c => `
@@ -1573,7 +1552,6 @@ function populateAdminLists() {
         `).join('');
     }
 
-    // 3. الوثائق المصورة
     const sourcesList = document.getElementById('adminSourcesList');
     if (sourcesList) {
         sourcesList.innerHTML = allSources.map(s => `
@@ -1587,7 +1565,6 @@ function populateAdminLists() {
         `).join('') || '<p style="color:var(--muted); font-size:0.75rem;">لا توجد وثائق.</p>';
     }
 
-    // 4. الفيديوهات
     const vidsList = document.getElementById('adminVidsList');
     if (vidsList) {
         vidsList.innerHTML = allVideos.map(v => `
@@ -1601,7 +1578,6 @@ function populateAdminLists() {
         `).join('') || '<p style="color:var(--muted); font-size:0.75rem;">لا توجد فيديوهات.</p>';
     }
 
-    // 5. الحلقات الصوتية
     const podcastsList = document.getElementById('adminPodcastsList');
     if (podcastsList) {
         podcastsList.innerHTML = allPodcasts.map(p => `
@@ -1615,7 +1591,6 @@ function populateAdminLists() {
         `).join('') || '<p style="color:var(--muted); font-size:0.75rem;">لا توجد حلقات صوتية.</p>';
     }
 
-    // 6. الأقسام الصوتية
     const catsList = document.getElementById('adminCategoriesList');
     if (catsList) {
         catsList.innerHTML = podcastCategories.map(c => `
@@ -1630,9 +1605,6 @@ function populateAdminLists() {
     }
 }
 
-/* =========================================================
-     إداريات الكتاب والملفات
-   ========================================================= */
 async function saveNewDoc(e) {
     e.preventDefault();
     const editId = document.getElementById('edit_doc_id').value;
@@ -1693,9 +1665,6 @@ async function deleteDoc(id) {
     }
 }
 
-/* =========================================================
-     إداريات الوثائق المصورة
-   ========================================================= */
 async function saveNewSource(e) {
     e.preventDefault();
     const editId = document.getElementById('edit_source_id').value;
@@ -1746,9 +1715,6 @@ async function deleteSource(id) {
     }
 }
 
-/* =========================================================
-     إداريات الفيديوهات
-   ========================================================= */
 async function saveNewVid(e) {
     e.preventDefault();
     const editId = document.getElementById('edit_vid_id').value;
@@ -1797,9 +1763,6 @@ async function deleteVid(id) {
     }
 }
 
-/* =========================================================
-     إداريات الصوتيات
-   ========================================================= */
 async function saveNewPodcast(e) {
     e.preventDefault();
     const editId = document.getElementById('edit_podcast_id').value;
@@ -1868,21 +1831,22 @@ function toggleBookmarksView() {
     filterAndRenderDocs();
 }
 
-/* =========================================================
-     عرض الأقسام وتصفية الكتب المحدثة
-   ========================================================= */
 function filterAndRenderDocs() {
     const grid = document.getElementById('docs');
     const emptyEl = document.getElementById('empty');
     const countEl = document.getElementById('count');
     if (!grid) return;
 
-    let term = q ? q.value.trim().toLowerCase() : '';
-    let authorTerm = filterAuthor ? filterAuthor.value.trim().toLowerCase() : '';
-    let category = cat ? cat.value : '';
-    let sort = sortBy ? sortBy.value : 'newest';
+    const qInput = document.getElementById('q');
+    const authorInput = document.getElementById('filterAuthor');
+    const catSelect = document.getElementById('category');
+    const sortSelect = document.getElementById('sortBy');
 
-    // إذا كان هناك بحث أو فلترة محددة، تعرض البطاقات مباشرة (الوضع التقليدي)
+    let term = qInput ? qInput.value.trim().toLowerCase() : '';
+    let authorTerm = authorInput ? authorInput.value.trim().toLowerCase() : '';
+    let category = catSelect ? catSelect.value : '';
+    let sort = sortSelect ? sortSelect.value : 'newest';
+
     if (term || authorTerm || category || showingOnlyBookmarks) {
         let filtered = allDocs.filter(d => {
             let match = (d.title + ' ' + (d.description || '')).toLowerCase().includes(term);
@@ -1899,7 +1863,6 @@ function filterAndRenderDocs() {
         return;
     }
 
-    // الوضع الافتراضي: عرض بطاقات الأقسام الرئيسة مثل المكتبة الصوتية
     docCategories = JSON.parse(localStorage.getItem('nahj_doc_cats') || '["بحوث عقائدية", "وثائق تاريخية", "كتب ومراجع", "مقالات ودراسات", "منوع"]');
     docCategoryCovers = JSON.parse(localStorage.getItem('nahj_doc_cat_covers') || '{}');
 
@@ -1946,7 +1909,6 @@ function filterAndRenderDocs() {
     if (emptyEl) emptyEl.style.display = 'none';
 }
 
-// عرض الكتب المباشرة في نتائج البحث
 function renderDirectDocs(docs) {
     const grid = document.getElementById('docs');
     const emptyEl = document.getElementById('empty');
@@ -1989,7 +1951,6 @@ function renderDirectDocs(docs) {
     });
 }
 
-// فتح مودال قسم الكتب وعرض المحتويات
 function openDocCategoryModal(catName) {
     currentActiveDocCategory = catName;
     const titleEl = document.getElementById('docModalCategoryTitle');
@@ -2048,15 +2009,21 @@ function renderModalDocsList(catName, query) {
 }
 
 function filterByTag(c, btn) {
-    if (cat) { cat.value = c; filterAndRenderDocs(); }
+    const catSelect = document.getElementById('category');
+    if (catSelect) { catSelect.value = c; filterAndRenderDocs(); }
     document.querySelectorAll('.quick-tags .tag-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');
 }
 
-if (q) q.addEventListener('input', filterAndRenderDocs);
-if (filterAuthor) filterAuthor.addEventListener('input', filterAndRenderDocs);
-if (cat) cat.addEventListener('change', filterAndRenderDocs);
-if (sortBy) sortBy.addEventListener('change', filterAndRenderDocs);
+const qInput = document.getElementById('q');
+const authorInput = document.getElementById('filterAuthor');
+const catSelect = document.getElementById('category');
+const sortSelect = document.getElementById('sortBy');
+
+if (qInput) qInput.addEventListener('input', filterAndRenderDocs);
+if (authorInput) authorInput.addEventListener('input', filterAndRenderDocs);
+if (catSelect) catSelect.addEventListener('change', filterAndRenderDocs);
+if (sortSelect) sortSelect.addEventListener('change', filterAndRenderDocs);
 
 fetchDocuments();
 fetchSources();
