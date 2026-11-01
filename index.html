@@ -255,7 +255,7 @@
   .tag-btn { background: var(--panel); border: 1px solid var(--line); color: var(--muted); padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
   .tag-btn:hover, .tag-btn.active { border-color: var(--mint); color: var(--mint); background: var(--panel-hover); }
 
-  .doc-grid{display:grid; grid-template-columns:repeat(5, minmax(0, 1fr)); gap:16px;}
+  .doc-grid{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:16px;}
   .doc-grid.list-view { grid-template-columns: 1fr !important; }
   .doc-grid.list-view .book-cover-card { aspect-ratio: auto; flex-direction: row; align-items: center; padding: 12px 16px; min-height: 80px; }
   .doc-grid.list-view .cover-box-category, 
@@ -264,69 +264,60 @@
   .doc-grid.list-view .cover-box-footer { margin: 0; width: auto; clip-path: none; border-radius: 8px; }
   .doc-grid.list-view .cover-box-desc { display: block; text-align: right; flex: 1; margin: 0 15px; }
 
+  /* تصميم غلاف الكتاب والبطاقة */
   .book-cover-card {
       position: relative;
       width: 100%;
-      aspect-ratio: 1 / 1.55;
-      background: #02070a;
+      aspect-ratio: 1 / 1.5;
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
       border: 2px solid #d4af37;
-      border-radius: 6px;
-      padding: 8px;
+      border-radius: 8px;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.9);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.8), inset 0 0 15px rgba(0,0,0,0.8);
       cursor: pointer;
       overflow: hidden;
   }
   .book-cover-card:hover {
       transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 16px 32px rgba(0,0,0,0.95), inset 0 0 10px rgba(212, 175, 55, 0.4);
+      box-shadow: 0 16px 35px rgba(0,0,0,0.95), inset 0 0 10px rgba(212, 175, 55, 0.5);
   }
 
   .book-cover-frame {
-      position: absolute; inset: 2px;
+      position: absolute; inset: 3px;
       border: 1px solid #d4af37;
       pointer-events: none;
       box-sizing: border-box;
-  }
-  .book-cover-frame::before {
-      content: ''; position: absolute; inset: 2px;
-      border: 1px dashed rgba(212, 175, 55, 0.5);
-  }
-
-  .book-cover-card.has-custom-cover {
-      background-size: cover;
-      background-position: center;
-  }
-  .book-cover-card.has-custom-cover .cover-box-desc {
-      background: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(2px);
+      z-index: 1;
   }
 
   .cover-box-category {
-      background: #5c1114;
+      background: rgba(92, 17, 20, 0.9);
       border: 1.5px solid #d4af37;
-      clip-path: polygon(12px 0%, calc(100% - 12px) 0%, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0% calc(100% - 12px), 0% 12px);
-      border-radius: 4px; padding: 4px 6px; text-align: center; color: #fce8ad; font-size: 0.68rem; font-weight: 800;
+      border-radius: 4px; padding: 4px 8px; text-align: center; color: #fce8ad; font-size: 0.75rem; font-weight: 800;
       margin-top: 4px; position: relative; z-index: 2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      backdrop-filter: blur(3px);
   }
 
   .cover-box-title {
-      background: #5c1114;
+      background: rgba(3, 22, 34, 0.88);
       border: 1.5px solid #d4af37;
-      clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0% calc(100% - 14px), 0% 14px);
-      border-radius: 4px; padding: 8px 6px; text-align: center; color: #ffffff; font-size: 0.8rem; font-weight: 900;
-      margin-top: 5px; line-height: 1.35; position: relative; z-index: 2;
+      border-radius: 6px; padding: 8px 10px; text-align: center; color: #ffffff; font-size: 0.95rem; font-weight: 900;
+      margin-top: 5px; line-height: 1.35; position: relative; z-index: 2; backdrop-filter: blur(4px);
       display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   }
 
   .cover-box-desc {
-      background: rgba(0, 0, 0, 0.85);
-      border: 1px dashed rgba(212, 175, 55, 0.3);
-      border-radius: 4px; padding: 6px; margin: 5px 0; flex: 1;
+      background: rgba(2, 18, 28, 0.85);
+      border: 1px dashed rgba(212, 175, 55, 0.4);
+      border-radius: 6px; padding: 8px; margin: 5px 0; flex: 1;
       display: flex; flex-direction: column; justify-content: center; text-align: center;
-      color: #d1e2e5; font-size: 0.68rem; line-height: 1.35; position: relative; z-index: 2; overflow: hidden;
+      color: #d1e2e5; font-size: 0.75rem; line-height: 1.4; position: relative; z-index: 2; overflow: hidden;
+      backdrop-filter: blur(4px);
   }
   .cover-box-desc p { margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
@@ -334,51 +325,22 @@
       display: flex; justify-content: center; gap: 6px; position: relative; z-index: 5; margin-bottom: 2px;
   }
   .cover-action-btn {
-      background: rgba(3, 22, 34, 0.85); border: 1px solid var(--gold); color: var(--gold); border-radius: 50%; width: 26px; height: 26px;
-      display: flex; align-items: center; justify-content: center; font-size: 0.72rem; cursor: pointer;
+      background: rgba(3, 22, 34, 0.9); border: 1px solid var(--gold); color: var(--gold); border-radius: 50%; width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center; font-size: 0.8rem; cursor: pointer;
   }
   .cover-action-btn:hover { background: var(--gold); color: #031622; }
 
   .cover-box-footer {
-      background: #5c1114; border: 1px solid #d4af37; border-radius: 12px; padding: 3px 8px; margin: 0 auto 3px;
-      width: 82%; text-align: center; color: #fce8ad; font-size: 0.62rem; font-weight: 800; position: relative; z-index: 2;
-      display: flex; align-items: center; justify-content: center; gap: 4px;
+      background: rgba(92, 17, 20, 0.92); border: 1px solid #d4af37; border-radius: 12px; padding: 4px 10px; margin: 0 auto 3px;
+      width: 88%; text-align: center; color: #fce8ad; font-size: 0.72rem; font-weight: 800; position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: center; gap: 4px; backdrop-filter: blur(2px);
   }
 
-  .book-cover-card[data-category="وثائق تاريخية"] .cover-box-category,
-  .book-cover-card[data-category="وثائق تاريخية"] .cover-box-title,
-  .book-cover-card[data-category="وثائق تاريخية"] .cover-box-footer { background: #5c1114; border-color: #d4af37; color: #fce8ad; }
-
-  .book-cover-card[data-category="بحوث عقائدية"] { border-color: #27d5b1; }
-  .book-cover-card[data-category="بحوث عقائدية"] .cover-box-category,
-  .book-cover-card[data-category="بحوث عقائدية"] .cover-box-title,
-  .book-cover-card[data-category="بحوث عقائدية"] .cover-box-footer { background: #123b32; border-color: #27d5b1; color: #d6faff; }
-
-  .book-cover-card[data-category="كتب ومراجع"] { border-color: #d9933d; }
-  .book-cover-card[data-category="كتب ومراجع"] .cover-box-category,
-  .book-cover-card[data-category="كتب ومراجع"] .cover-box-title,
-  .book-cover-card[data-category="كتب ومراجع"] .cover-box-footer { background: #3b1d07; border-color: #e0a353; color: #fcecd2; }
-
-  .book-cover-card[data-category="مقالات ودراسات"] { border-color: #00a977; }
-  .book-cover-card[data-category="مقالات ودراسات"] .cover-box-category,
-  .book-cover-card[data-category="مقالات ودراسات"] .cover-box-title,
-  .book-cover-card[data-category="مقالات ودراسات"] .cover-box-footer { background: #093121; border-color: #00a977; color: #e1fbf2; }
-
-  .book-cover-card[data-category="منوع"] { border-color: #5392a6; }
-  .book-cover-card[data-category="منوع"] .cover-box-category,
-  .book-cover-card[data-category="منوع"] .cover-box-title,
-  .book-cover-card[data-category="منوع"] .cover-box-footer { background: #1c3d47; border-color: #5392a6; color: #ffe8a3; }
-
-  .book-cover-card.source-card-theme { border-color: #d4af37; }
-  .book-cover-card.source-card-theme .cover-box-category,
-  .book-cover-card.source-card-theme .cover-box-title,
-  .book-cover-card.source-card-theme .cover-box-footer { background: #2b230c; border-color: #fce28b; color: #fffae8; }
-
-  /* طابع البطاقة الصوتية */
+  /* طابع البطاقات الصوتية */
   .book-cover-card.audio-card-theme { border-color: #27d5b1; }
   .book-cover-card.audio-card-theme .cover-box-category,
   .book-cover-card.audio-card-theme .cover-box-title,
-  .book-cover-card.audio-card-theme .cover-box-footer { background: #072a40; border-color: #27d5b1; color: #27d5b1; }
+  .book-cover-card.audio-card-theme .cover-box-footer { background: rgba(4, 30, 46, 0.9); border-color: #27d5b1; color: #27d5b1; }
 
   .audio-player-card {
       background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 20px;
@@ -461,11 +423,11 @@
   .stat-card-admin h3 { margin: 0; font-size: 1.3rem; color: var(--mint); }
   .stat-card-admin p { margin: 0; font-size: 0.75rem; color: var(--muted); }
 
-  @media(max-width:1200px){ .doc-grid{grid-template-columns:repeat(4,minmax(0,1fr));} }
+  @media(max-width:1200px){ .doc-grid{grid-template-columns:repeat(3,minmax(0,1fr));} }
   @media(max-width:992px){
       .main-content-grid { grid-template-columns: 1fr; }
       .quick-cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .doc-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+      .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .tools { grid-template-columns: 1fr 1fr; }
       .stats-grid-admin { grid-template-columns: repeat(2, 1fr); }
@@ -473,7 +435,7 @@
   @media(max-width:768px){
       .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .tools{grid-template-columns:1fr; gap: 8px;}
-      .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .doc-grid{grid-template-columns:repeat(1,minmax(0,1fr));}
       .footer-grid { grid-template-columns: 1fr; }
       .mobile-bottom-nav { display: flex; }
       body { padding-bottom: 65px; }
@@ -571,19 +533,19 @@
     </div>
   </div>
 
-  <div class="wrap" style="margin-top: 10px;">
+  <!-- تم استبدال "قسم المقالات" بـ "قسم المكتبة الصوتية المصورة" في الواجهة الرئيسية -->
+  <div class="wrap" id="audio-podcast" style="margin-top: 10px;">
     <div class="main-content-grid">
 
-      <!-- تم استبدال أحدث المقالات بالقسم المطور للمكتبة الصوتية الأنيقة -->
       <div>
         <div class="head" style="margin-top:0;">
-          <h2><span>🎧</span> أقسام المكتبة الصوتية</h2>
-          <small onclick="location.href='#audio-podcast'">عرض الأقسام ←</small>
+          <h2><span>🎧</span> المكتبة الصوتية (الأقسام المصورة)</h2>
+          <small onclick="location.href='#audio-podcast'">اضغط على القسم للبدء الاستماع ←</small>
         </div>
 
-        <!-- شبكة أقسام المكتبة الصوتية (بطاقات مصورة مثل الأدلة المصورة) -->
+        <!-- شبكة بطاقات الأقسام الصوتية المصورة بأسلوب كتاب الأدلة المصورة -->
         <div class="doc-grid" id="audio-categories-grid">
-          <p style="color:var(--muted); font-size:0.88rem; grid-column:1/-1;">جاري جلب الأقسام الصوتية...</p>
+          <p style="color:var(--muted); font-size:0.88rem; grid-column:1/-1;">جاري تحميل الأقسام الصوتية...</p>
         </div>
       </div>
 
@@ -781,7 +743,7 @@
   <a href="#sources-section" class="mobile-nav-item"><span>📜</span><span>الوثائق</span></a>
 </div>
 
-<!-- مودال استعراض ملفات قسم محدد في المكتبة الصوتية -->
+<!-- نافذة مودال عند النقر على أحد أقسام المكتبة الصوتية لعرض مقاطعه وحلقاته -->
 <div class="modal" id="audioCategoryModal">
   <div class="modal-content" style="max-width:850px;">
     <div class="sticky-close-bar">
@@ -789,13 +751,13 @@
       <button class="back-btn" onclick="closeAudioCategoryModal()">✕ إغلاق</button>
     </div>
 
-    <!-- مشغل صوت مدمج ضمن المودال -->
+    <!-- مشغل الصوت الداخلي التفاعلي -->
     <div class="audio-player-card" style="margin-bottom: 15px;">
       <div class="audio-player-controls">
         <div style="display:flex; align-items:center; gap:12px;">
           <button class="audio-play-btn" id="audioPlayToggleBtn" onclick="toggleAudioPlay()">▶</button>
           <div>
-            <h4 id="audioTrackTitle" style="margin:0; color:var(--gold); font-size:1rem;">اختر حلقة للاستماع</h4>
+            <h4 id="audioTrackTitle" style="margin:0; color:var(--gold); font-size:1rem;">اضغط تشغيل للاستماع</h4>
             <p id="audioTrackDesc" style="margin:0; color:var(--muted); font-size:0.8rem;">المكتبة الصوتية - نهج الحقيقة</p>
           </div>
         </div>
@@ -805,7 +767,7 @@
     </div>
 
     <div id="categoryPodcastsListContainer" style="display:flex; flex-direction:column; gap:10px;">
-      <p style="color:var(--muted);">جاري التحميل...</p>
+      <p style="color:var(--muted);">جاري تحميل الحلقات...</p>
     </div>
   </div>
 </div>
@@ -867,7 +829,7 @@
           <input type="text" id="doc_url" placeholder="رابط الملف المباشر (PDF URL)" required>
         </div>
         
-        <input type="text" id="doc_cover_url" placeholder="رابط صورة غلاف مخصصة (اختياري)...">
+        <input type="text" id="doc_cover_url" placeholder="رابط صورة غلاف مخصصة (مثال: ملحمة كربلاء)...">
         <textarea id="doc_desc" placeholder="نبذة مختصرة عن المستند..."></textarea>
         
         <div style="display:flex; gap:8px;">
@@ -927,38 +889,37 @@
         <div id="adminVidsList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
       </div>
 
-      <!-- 4. نموذج المكتبة الصوتية والأقسام الجديدة وصور الأغلفة -->
+      <!-- 4. نموذج المكتبة الصوتية وتحديد أغلفة الأقسام المصورة -->
       <div id="addPodcastForm" class="admin-form" style="display:none; flex-direction:column; gap:14px;">
         <input type="hidden" id="edit_podcast_id">
-        <h4 id="podcastFormHeading" style="margin:0; color:var(--gold);">🎧 إضافة حلقة صوتية أو قسم جديد بالمكتبة</h4>
+        <h4 id="podcastFormHeading" style="margin:0; color:var(--gold);">🎧 إضافة حلقة صوتية وتخصيص صورة الغلاف للقسم</h4>
         
-        <!-- إدارة وإضافة الأقسام الصوتية مع صور الأغلفة المخصصة -->
-        <div style="background:rgba(0,0,0,0.2); padding:12px; border-radius:12px; border:1px solid var(--line);">
-          <label style="font-size:0.85rem; font-weight:800; color:var(--gold); display:block; margin-bottom:6px;">📁 إضافة / تحديث غلاف القسم الصوتي:</label>
+        <div style="background:rgba(0,0,0,0.25); padding:12px; border-radius:12px; border:1px solid var(--line);">
+          <label style="font-size:0.85rem; font-weight:800; color:var(--gold); display:block; margin-bottom:6px;">🖼️ إنشاء / تعديل صورة غلاف قسم صوتي (مثل غلاف ملحمة كربلاء):</label>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px;">
-            <input type="text" id="new_podcast_category_name" placeholder="اسم القسم الصوتي...">
-            <input type="text" id="new_podcast_category_img" placeholder="رابط صورة غلاف للقسم (Image URL)...">
+            <input type="text" id="new_podcast_category_name" placeholder="اسم القسم (مثال: ملحمة كربلاء)...">
+            <input type="text" id="new_podcast_category_img" placeholder="رابط صورة الغلاف المباشر (URL)...">
           </div>
-          <button type="button" class="btn shrink" onclick="addNewPodcastCategory()" style="padding:6px 14px; font-size:0.8rem; width:100%;">➕ إضافة أو تعيين صورة للقسم</button>
+          <button type="button" class="btn shrink" onclick="addNewPodcastCategory()" style="padding:6px 14px; font-size:0.8rem; width:100%;">💾 تعيين وتحديث غلاف القسم الصوتي</button>
         </div>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <input type="text" id="podcast_title" placeholder="عنوان الحلقة الصوتية..." required>
+          <input type="text" id="podcast_title" placeholder="عنوان الحلقة / التسجيل الصوتي..." required>
           <select id="podcast_category" required>
-            <option value="عام">📁 قسم: عام</option>
+            <option value="ملحمة كربلاء">📁 قسم: ملحمة كربلاء</option>
           </select>
         </div>
 
         <input type="text" id="podcast_url" placeholder="رابط الملف الصوتي المباشر (MP3 URL)..." required>
-        <textarea id="podcast_desc" placeholder="نبذة أو وصف الحلقة..."></textarea>
+        <textarea id="podcast_desc" placeholder="نبذة عن المقطع الصوتي..."></textarea>
         
         <div style="display:flex; gap:8px;">
-          <button type="button" id="savePodcastBtn" class="btn" onclick="saveNewPodcast(event)">💾 حفظ ونشر الحلقة</button>
+          <button type="button" id="savePodcastBtn" class="btn" onclick="saveNewPodcast(event)">💾 حفظ ونشر الملف الصوتي</button>
           <button type="button" id="cancelPodcastEditBtn" class="btn red" style="display:none;" onclick="cancelPodcastEdit()">إلغاء التعديل</button>
         </div>
 
         <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
-        <h5 style="margin:0; color:var(--gold);">قائمة الحلقات الصوتية المنشورة:</h5>
+        <h5 style="margin:0; color:var(--gold);">قائمة الحلقات المنشورة:</h5>
         <div id="adminPodcastsList" style="max-height:220px; overflow-y:auto; margin-top:6px;"></div>
       </div>
 
@@ -1178,7 +1139,7 @@ let currentPdfScale = 1.3;
 let currentPdfObj = null;
 
 let allPodcasts = [];
-let podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["عام", "محاضرات عقائدية", "جلسات حوارية"]');
+let podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["ملحمة كربلاء", "محاضرات عقائدية", "جلسات حوارية"]');
 let categoryCovers = JSON.parse(localStorage.getItem('nahj_cat_covers') || '{}');
 let activeCategoryModalName = '';
 let currentPodcastIndex = 0;
@@ -1189,10 +1150,8 @@ async function fetchPodcasts() {
         const { data, error } = await supabaseClient.from('podcasts').select('*').order('created_at', { ascending: false });
         if (!error && data && data.length > 0) {
             allPodcasts = data;
-            renderAudioCategoriesCards();
-        } else {
-            renderAudioCategoriesCards();
         }
+        renderAudioCategoriesCards();
         if (currentLoggedInUser) populateAdminLists();
     } catch(e) {
         renderAudioCategoriesCards();
@@ -1220,9 +1179,10 @@ function addNewPodcastCategory() {
         localStorage.setItem('nahj_cat_covers', JSON.stringify(categoryCovers));
     }
 
-    showToast('تمت إضافة / تحديث غلاف القسم بنجاح');
+    showToast('تمت تحديث صورة غلاف القسم بنجاح!');
     input.value = '';
     if (imgInput) imgInput.value = '';
+    
     populatePodcastCategorySelects();
     renderAudioCategoriesCards();
 }
@@ -1233,6 +1193,7 @@ function populatePodcastCategorySelects() {
     select.innerHTML = podcastCategories.map(c => `<option value="${c}">📁 قسم: ${c}</option>`).join('');
 }
 
+// رسم بطاقات الأقسام الصوتية كأغلفة كتب مجسدة وجميلة 
 function renderAudioCategoriesCards() {
     const grid = document.getElementById('audio-categories-grid');
     if (!grid) return;
@@ -1244,24 +1205,28 @@ function renderAudioCategoriesCards() {
 
     grid.innerHTML = '';
     podcastCategories.forEach(cat => {
-        const podcastsInCat = allPodcasts.filter(p => (p.category || 'عام') === cat);
-        const coverImg = categoryCovers[cat] || '';
+        const podcastsInCat = allPodcasts.filter(p => (p.category || 'ملحمة كربلاء') === cat);
+        const coverImg = categoryCovers[cat] || ''; 
         
         const card = document.createElement('article');
-        card.className = 'book-cover-card audio-card-theme' + (coverImg ? ' has-custom-cover' : '');
+        card.className = 'book-cover-card audio-card-theme';
+
+        // إضافة صورة الغلاف المخصصة خلف البطاقة
         if (coverImg) {
-            card.style.backgroundImage = `linear-gradient(rgba(2, 7, 10, 0.65), rgba(2, 7, 10, 0.85)), url('${coverImg}')`;
+            card.style.background = `linear-gradient(180deg, rgba(3, 22, 34, 0.4) 0%, rgba(3, 22, 34, 0.95) 100%), url('${coverImg}') center/cover no-repeat`;
+        } else {
+            card.style.background = `linear-gradient(180deg, rgba(3, 22, 34, 0.7), rgba(3, 22, 34, 0.95))`;
         }
 
         card.innerHTML = `
             <div class="book-cover-frame"></div>
-            <div class="cover-box-category">🎧 قسم صوتي</div>
+            <div class="cover-box-category">🎧 قسم صوتي مصور</div>
             <div class="cover-box-title">${cat}</div>
             <div class="cover-box-desc">
                 <p>يتضمن ${podcastsInCat.length} تسجيلات وحلقات صوتية موثقة.</p>
             </div>
             <div class="cover-box-footer">
-                <span>🔊 استعراض الحلقات (${podcastsInCat.length})</span>
+                <span>🔊 اضغط لاستعراض الصوتيات (${podcastsInCat.length})</span>
             </div>
         `;
         card.addEventListener('click', () => openAudioCategoryModal(cat));
@@ -1283,7 +1248,7 @@ function closeAudioCategoryModal() {
 function renderCategoryPodcastsList(catName) {
     const container = document.getElementById('categoryPodcastsListContainer');
     if (!container) return;
-    const activeList = allPodcasts.filter(p => (p.category || 'عام') === catName);
+    const activeList = allPodcasts.filter(p => (p.category || 'ملحمة كربلاء') === catName);
 
     if (!activeList.length) {
         container.innerHTML = '<p style="color:var(--muted); font-size:0.88rem;">لا توجد ملفات صوتية منشورة في هذا القسم حالياً.</p>';
@@ -1293,12 +1258,12 @@ function renderCategoryPodcastsList(catName) {
     container.innerHTML = activeList.map((p) => {
         let globalIdx = allPodcasts.findIndex(item => item.id === p.id);
         return `
-            <div style="background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:12px; padding:12px; display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="loadPodcastIntoPlayer(${globalIdx}); toggleAudioPlay();">
+            <div style="background:rgba(0,0,0,0.35); border:1px solid var(--line); border-radius:12px; padding:12px; display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="loadPodcastIntoPlayer(${globalIdx}); toggleAudioPlay();">
                 <div style="display:flex; align-items:center; gap:12px;">
                     <span style="font-size:1.4rem; color:var(--mint);">🎧</span>
                     <div>
                         <h5 style="margin:0 0 4px; font-size:0.92rem; font-weight:800; color:var(--ink);">${p.title}</h5>
-                        <p style="margin:0; font-size:0.78rem; color:var(--muted);">${p.description || 'حلقة صوتية'}</p>
+                        <p style="margin:0; font-size:0.78rem; color:var(--muted);">${p.description || 'تسجيل صوتي'}</p>
                     </div>
                 </div>
                 <button class="btn shrink" style="padding:6px 14px; font-size:0.8rem;">تشغيل ▶</button>
@@ -1803,7 +1768,7 @@ function editPodcast(id) {
     if (!podcast) return;
     document.getElementById('edit_podcast_id').value = podcast.id;
     document.getElementById('podcast_title').value = podcast.title;
-    document.getElementById('podcast_category').value = podcast.category || 'عام';
+    document.getElementById('podcast_category').value = podcast.category || 'ملحمة كربلاء';
     document.getElementById('podcast_url').value = podcast.audio_url;
     document.getElementById('podcast_desc').value = podcast.description || '';
     document.getElementById('podcastFormHeading').textContent = '✏️ تعديل الحلقة الصوتية';
@@ -1950,10 +1915,10 @@ function renderDocs(docs) {
         const catName = doc.category || 'منوع';
         const isBookmarked = bookmarkedIds.includes(doc.id);
         const card = document.createElement('article');
-        card.className = 'book-cover-card' + (doc.cover_url ? ' has-custom-cover' : '');
+        card.className = 'book-cover-card';
         card.setAttribute('data-category', catName);
         if (doc.cover_url) {
-            card.style.backgroundImage = `linear-gradient(rgba(2, 7, 10, 0.65), rgba(2, 7, 10, 0.85)), url('${doc.cover_url}')`;
+            card.style.background = `linear-gradient(180deg, rgba(3, 22, 34, 0.4) 0%, rgba(3, 22, 34, 0.95) 100%), url('${doc.cover_url}') center/cover no-repeat`;
         }
         
         card.innerHTML = `
