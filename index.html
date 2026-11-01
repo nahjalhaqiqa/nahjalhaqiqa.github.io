@@ -243,15 +243,25 @@
   .sidebar-menu-title { font-size: 0.9rem; font-weight: 800; color: var(--gold); margin-bottom: 10px; }
   .sidebar-menu-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed var(--line); font-size: 0.88rem; font-weight: 600; color: var(--ink); }
 
-  .research-grid-main { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .research-card-item { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; box-shadow: var(--shadow); }
-  .research-card-item:hover { border-color: var(--mint); transform: translateY(-4px); }
-  .research-card-img { width: 100%; height: 135px; object-fit: cover; background: #010a10; position: relative; }
-  .research-card-badge { position: absolute; top: 10px; right: 10px; background: rgba(3, 22, 34, 0.9); color: var(--gold); padding: 3px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 800; border: 1px solid var(--line); }
-  .research-card-body { padding: 14px; display: flex; flex-direction: column; flex: 1; }
-  .research-card-body h4 { margin: 0 0 6px; font-size: 0.95rem; font-weight: 800; color: var(--ink); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .research-card-body p { margin: 0 0 12px; font-size: 0.78rem; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex: 1; }
-  .research-card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
+  /* بطاقات أقسام المكتبة الصوتية */
+  .podcast-category-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, border-color 0.2s;
+  }
+  .podcast-category-card:hover { border-color: var(--mint); transform: translateY(-4px); }
+  .podcast-cat-img { width: 100%; height: 160px; object-fit: cover; background: #010a10; position: relative; }
+  .podcast-cat-badge { position: absolute; top: 10px; right: 10px; background: rgba(3, 22, 34, 0.9); color: var(--gold); padding: 4px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 800; border: 1px solid var(--line); }
+  .podcast-cat-body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
+  .podcast-cat-body h4 { margin: 0 0 6px; font-size: 1.05rem; font-weight: 800; color: var(--ink); }
+  .podcast-cat-body p { margin: 0 0 12px; font-size: 0.82rem; color: var(--muted); flex: 1; }
+  .podcast-cat-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--gold); border-top: 1px solid var(--line); padding-top: 10px; font-weight: 700; }
 
   .tools{display:grid;grid-template-columns:2fr 1.2fr 1fr 1fr auto;gap:10px;margin:16px 0 12px; align-items: center;}
   .tools input,.tools select, .admin-form input, .admin-form select, .admin-form textarea, .contact-form input, .contact-form textarea{
@@ -355,35 +365,6 @@
       display: flex; align-items: center; justify-content: center; gap: 4px;
   }
 
-  .book-cover-card[data-category="وثائق تاريخية"] .cover-box-category,
-  .book-cover-card[data-category="وثائق تاريخية"] .cover-box-title,
-  .book-cover-card[data-category="وثائق تاريخية"] .cover-box-footer { background: #5c1114; border-color: #d4af37; color: #fce8ad; }
-
-  .book-cover-card[data-category="بحوث عقائدية"] { border-color: #27d5b1; }
-  .book-cover-card[data-category="بحوث عقائدية"] .cover-box-category,
-  .book-cover-card[data-category="بحوث عقائدية"] .cover-box-title,
-  .book-cover-card[data-category="بحوث عقائدية"] .cover-box-footer { background: #123b32; border-color: #27d5b1; color: #d6faff; }
-
-  .book-cover-card[data-category="كتب ومراجع"] { border-color: #d9933d; }
-  .book-cover-card[data-category="كتب ومراجع"] .cover-box-category,
-  .book-cover-card[data-category="كتب ومراجع"] .cover-box-title,
-  .book-cover-card[data-category="كتب ومراجع"] .cover-box-footer { background: #3b1d07; border-color: #e0a353; color: #fcecd2; }
-
-  .book-cover-card[data-category="مقالات ودراسات"] { border-color: #00a977; }
-  .book-cover-card[data-category="مقالات ودراسات"] .cover-box-category,
-  .book-cover-card[data-category="مقالات ودراسات"] .cover-box-title,
-  .book-cover-card[data-category="مقالات ودراسات"] .cover-box-footer { background: #093121; border-color: #00a977; color: #e1fbf2; }
-
-  .book-cover-card[data-category="منوع"] { border-color: #5392a6; }
-  .book-cover-card[data-category="منوع"] .cover-box-category,
-  .book-cover-card[data-category="منوع"] .cover-box-title,
-  .book-cover-card[data-category="منوع"] .cover-box-footer { background: #1c3d47; border-color: #5392a6; color: #ffe8a3; }
-
-  .book-cover-card.source-card-theme { border-color: #d4af37; }
-  .book-cover-card.source-card-theme .cover-box-category,
-  .book-cover-card.source-card-theme .cover-box-title,
-  .book-cover-card.source-card-theme .cover-box-footer { background: #2b230c; border-color: #fce28b; color: #fffae8; }
-
   .audio-player-card {
       background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 20px;
       display: flex; flex-direction: column; gap: 14px; box-shadow: var(--shadow);
@@ -455,7 +436,6 @@
 
   #pdfCanvasContainer { flex: 1; width: 100%; overflow-y: auto; text-align: center; background: #010a10; border-radius: 12px; padding: 15px 0; }
   #pdfCanvasContainer canvas { max-width: 96%; height: auto !important; margin: 0 auto 15px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
-  #pdfCanvasContainer.night-mode canvas { filter: invert(0.9) hue-rotate(180deg); }
 
   .admin-tab-btn { padding: 9px 18px; border-radius: 20px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-weight: 700; cursor: pointer; font-size: 0.85rem; }
   .admin-tab-btn.active { background: var(--gold); color: #031622; border-color: var(--gold); }
@@ -469,15 +449,12 @@
   @media(max-width:992px){
       .main-content-grid { grid-template-columns: 1fr; }
       .quick-cards-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .research-grid-main { grid-template-columns: 1fr 1fr; }
-      .doc-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .tools { grid-template-columns: 1fr 1fr; }
       .stats-grid-admin { grid-template-columns: repeat(2, 1fr); }
   }
   @media(max-width:768px){
       .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .research-grid-main { grid-template-columns: 1fr; }
       .tools{grid-template-columns:1fr; gap: 8px;}
       .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
       .footer-grid { grid-template-columns: 1fr; }
@@ -493,13 +470,10 @@
   <div class="wrap nav">
     <a class="brand" href="#top">
       <img src="assets/logo.png" 
-           srcset="assets/logo.png 1x" 
-           sizes="52px" 
            alt="شعار نهج الحقيقة" 
            class="brand-logo"
            width="52" 
            height="52"
-           loading="eager"
            onerror="this.onerror=null; this.src='https://placehold.co/52x52/031622/27d5b1?text=نهج+الحقيقة';">
       <div class="brand-text">
         <span>نـهـج الـحـقـيـقـة</span>
@@ -508,9 +482,9 @@
     </a>
     <nav>
       <a href="#top" class="active">الرئيسية</a>
-      <a href="#library">المكتبة</a>
-      <a href="#sources-section">الوثائق</a>
       <a href="#audio-podcast">المكتبة الصوتية</a>
+      <a href="#library">المكتبة الرقمية</a>
+      <a href="#sources-section">الوثائق المصورة</a>
       <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener">قناة يوتيوب</a>
       <a href="#about">من نحن</a>
       <a href="#contact">تواصل معنا</a>
@@ -534,7 +508,7 @@
     <div class="hero-content">
       <h1>نـهـج الـحـقـيـقـة</h1>
       <div class="hero-subtitle">من أجل معرفة أعمق .. لحقيقة أصدق</div>
-      <div class="hero-desc">منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية، وملفات PDF، وقناة يوتيوب، وبرنامج حواري.</div>
+      <div class="hero-desc">منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية، وملفات PDF، والتسجيلات الصوتية.</div>
       <div class="hero-search-box">
         <input type="text" id="heroSearchInput" placeholder="ابحث في كل المكتبة والوثائق..." oninput="syncHeroSearch(this.value)">
         <button onclick="location.href='#library'">🔍</button>
@@ -549,20 +523,20 @@
         <h3>البحث المتقدم</h3>
         <p>ابحث في كل محتوى الموقع</p>
       </article>
+      <article class="quick-card" onclick="location.href='#audio-podcast'">
+        <div class="q-icon">🎧</div>
+        <h3>المكتبة الصوتية</h3>
+        <p>تسجيلات وأقسام صوتية</p>
+      </article>
       <article class="quick-card" onclick="location.href='#library'">
         <div class="q-icon">📚</div>
-        <h3>المكتبة</h3>
+        <h3>المكتبة الرقمية</h3>
         <p>أبحاث ومقالات وبحوث</p>
       </article>
       <article class="quick-card" onclick="location.href='#sources-section'">
         <div class="q-icon">📜</div>
         <h3>الوثائق</h3>
         <p>مخطوطات ووثائق نادرة</p>
-      </article>
-      <article class="quick-card" onclick="location.href='#audio-podcast'">
-        <div class="q-icon">🎧</div>
-        <h3>المكتبة الصوتية</h3>
-        <p>تسجيلات ودروس صوتية</p>
       </article>
       <article class="quick-card" onclick="window.open('https://www.youtube.com/channel/UCHTA4uIOV9wdyuxAYL8WoZg', '_blank')">
         <div class="q-icon">🎙️</div>
@@ -577,16 +551,34 @@
     </div>
   </div>
 
+  <!-- مكان قسم المقالات سابقاً أصبح الآن مخصصاً للمكتبة الصوتية وأقسامها -->
   <div class="wrap" style="margin-top: 10px;">
     <div class="main-content-grid">
 
       <div>
         <div class="head" style="margin-top:0;">
-          <h2><span>📖</span> أحدث المقالات والأبحاث</h2>
-          <small onclick="location.href='#library'">عرض الكل ←</small>
+          <h2><span>🎧</span> أقسام المكتبة الصوتية</h2>
+          <small onclick="location.href='#audio-podcast'">عرض كل الحلقات ←</small>
         </div>
-        <div class="research-grid-main" id="latest-research-container">
-          <p style="color:var(--muted); font-size:0.88rem;">جاري جلب أحدث الأبحاث...</p>
+        
+        <!-- مشغل الصوتيات الرئيسي -->
+        <div class="audio-player-card" style="margin-bottom: 18px;">
+          <div class="audio-player-controls">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <button class="audio-play-btn" id="audioPlayToggleBtn" onclick="toggleAudioPlay()">▶</button>
+              <div>
+                <h4 id="audioTrackTitle" style="margin:0; color:var(--gold); font-size:1rem;">اختر حلقة صوتية للاستماع...</h4>
+                <p id="audioTrackDesc" style="margin:0; color:var(--muted); font-size:0.8rem;">المكتبة الصوتية - نهج الحقيقة</p>
+              </div>
+            </div>
+            <audio id="mainAudioPlayer" ontimeupdate="updateAudioProgress()" onended="playNextPodcast()"></audio>
+          </div>
+          <input type="range" id="audioSeekBar" value="0" min="0" max="100" style="width:100%; accent-color:var(--gold); cursor:pointer;" onchange="seekAudio(this.value)">
+        </div>
+
+        <!-- شبكة عرض أقسام المكتبة الصوتية المخصصة بالصور -->
+        <div id="podcastCategoriesGrid" style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:16px;">
+          <p style="color:var(--muted); font-size:0.88rem;">جاري جلب أقسام المكتبة الصوتية...</p>
         </div>
       </div>
 
@@ -613,15 +605,12 @@
             </div>
           </div>
 
-          <div class="verse-day-note">تتجدد آية اليوم ومواقيت الصلاة تلقائيًا كل يوم</div>
-          
           <div class="sidebar-menu-list">
             <div class="sidebar-menu-title">أقسام الموقع</div>
+            <a href="#audio-podcast" class="sidebar-menu-item"><span>المكتبة الصوتية</span> <span>🎧</span></a>
             <a href="#library" class="sidebar-menu-item"><span>المكتبة الرقمية</span> <span>📚</span></a>
             <a href="#sources-section" class="sidebar-menu-item"><span>الموسوعة المصورة</span> <span>📜</span></a>
-            <a href="#audio-podcast" class="sidebar-menu-item"><span>المكتبة الصوتية</span> <span>🎧</span></a>
             <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener" class="sidebar-menu-item"><span>قناة يوتيوب</span> <span>▶</span></a>
-            <a href="#youtube" class="sidebar-menu-item"><span>برنامج على طاولة الحقيقة</span> <span>🎙️</span></a>
           </div>
         </div>
       </aside>
@@ -629,44 +618,22 @@
     </div>
   </div>
 
-  <div class="wrap">
-    <div class="bottom-banner-cta">
-      <div>
-        <h3>المعرفة طريق إلى الحق .. فكن جزءاً من رحلتنا</h3>
-        <p>استكشف آلاف الوثائق والكتب والبحوث الموثقة بكل سهولة.</p>
-      </div>
-      <button class="cta-btn" onclick="location.href='#library'">استكشف المكتبة الآن ←</button>
-    </div>
-  </div>
-
-  <!-- مكتبة الصوتيات والبودكاست -->
+  <!-- تفاصيل الحلقات الصوتية والتصنيفات -->
   <section class="wrap" id="audio-podcast" style="margin-top: 25px;">
     <div class="head">
-      <h2><span>🎧</span> المكتبة الصوتية (بودكاست نهج الحقيقة)</h2>
-      <small id="podcastSectionSubtitle">استمع للحوارات والدروس الصوتية المباشرة</small>
+      <h2><span>🎧</span> جميع الحلقات والتسجيلات الصوتية</h2>
+      <small id="podcastSectionSubtitle">اختر القسم الصوتي لعرض حلقاته المخصصة</small>
     </div>
 
-    <!-- أزرار تصنيفات وأقسام المكتبة الصوتية -->
+    <!-- أزرار التصفية والفلترة حسب أقسام المكتبة الصوتية -->
     <div class="quick-tags" id="podcastCategoriesTags">
-      <button class="tag-btn active" onclick="filterPodcastsByCategory('')">جميع الأقسام</button>
+      <button class="tag-btn active" onclick="filterPodcastsByCategory('')">جميع الحلقات</button>
     </div>
 
-    <div class="audio-player-card">
-      <div class="audio-player-controls">
-        <div style="display:flex; align-items:center; gap:12px;">
-          <button class="audio-play-btn" id="audioPlayToggleBtn" onclick="toggleAudioPlay()">▶</button>
-          <div>
-            <h4 id="audioTrackTitle" style="margin:0; color:var(--gold); font-size:1rem;">جاري التحميل...</h4>
-            <p id="audioTrackDesc" style="margin:0; color:var(--muted); font-size:0.8rem;">المكتبة الصوتية - نهج الحقيقة</p>
-          </div>
-        </div>
-        <audio id="mainAudioPlayer" ontimeupdate="updateAudioProgress()" onended="playNextPodcast()"></audio>
-      </div>
-      <input type="range" id="audioSeekBar" value="0" min="0" max="100" style="width:100%; accent-color:var(--gold); cursor:pointer;" onchange="seekAudio(this.value)">
-    </div>
     <div id="podcastsListContainer" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px; margin-top:15px;"></div>
   </section>
 
+  <!-- باقي أقسام المكتبة والوثائق -->
   <section class="wrap" id="library">
     <div class="head">
       <h2><span id="libTitleIcon">📚</span> <span id="libTitleText">مكتبة الوثائق والأبحاث الكاملة</span></h2>
@@ -693,15 +660,6 @@
       </button>
     </div>
 
-    <div class="quick-tags">
-      <button class="tag-btn active" onclick="filterByTag('', this)">الكل</button>
-      <button class="tag-btn" onclick="filterByTag('بحوث عقائدية', this)">💡 بحوث عقائدية</button>
-      <button class="tag-btn" onclick="filterByTag('وثائق تاريخية', this)">📜 وثائق تاريخية</button>
-      <button class="tag-btn" onclick="filterByTag('كتب ومراجع', this)">📖 كتب ومراجع</button>
-      <button class="tag-btn" onclick="filterByTag('مقالات ودراسات', this)">📝 مقالات ودراسات</button>
-      <button class="tag-btn" onclick="filterByTag('منوع', this)">🎨 منوع</button>
-    </div>
-
     <div class="doc-grid" id="docs"></div>
     <div class="empty" id="empty">لا توجد نتائج مطابقة لخيارات البحث.</div>
   </section>
@@ -716,231 +674,33 @@
     </div>
   </section>
 
-  <section class="wrap" id="youtube" style="margin-top: 25px;">
-    <div class="head">
-      <h2><span>🎙️</span> أحدث الفيديوهات والحوارات</h2>
-      <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener" style="color:var(--gold); font-weight:700;">زيارة القناة الرسمية ↗</a>
-    </div>
-    <div class="videos-grid" id="videos-container" style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px;">
-      <p style="color:var(--muted); grid-column:1/-1;">جاري جلب قائمة الفيديوهات...</p>
-    </div>
-  </section>
-
-  <section class="wrap" id="contact" style="margin-top: 25px;">
-    <div style="background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:28px;">
-      <h2 style="margin-top:0; color:var(--gold);">تواصل معنا</h2>
-      <p style="color:var(--muted); font-size:0.88rem; margin-bottom:15px;">يسعدنا استقبال ملحوظاتكم واستفساراتكم وطلبات الوثائق عبر النموذج التالي:</p>
-      <form class="contact-form" id="contactForm" onsubmit="sendEmailMessage(event)" style="display:grid; gap:12px; max-width:650px;">
-        <input type="text" id="from_name" placeholder="اسمك الكريم" required>
-        <input type="email" id="from_email" placeholder="بريدك الإلكتروني" required>
-        <input type="text" id="subject" placeholder="الموضوع" required>
-        <textarea id="message" placeholder="رسالتك..." required style="resize:vertical; min-height:110px;"></textarea>
-        <button type="submit" id="sendBtn" class="btn" style="width:fit-content">✉️ إرسال الرسالة</button>
-      </form>
-    </div>
-  </section>
-
-  <section class="wrap" id="about" style="margin-top: 25px;">
-    <div style="background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:24px;">
-      <h2 style="margin-top:0;">عن نهج الحقيقة</h2>
-      <p style="color:var(--muted); margin:0; font-size:0.92rem; line-height:1.8;">منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية وملفات PDF ونشر المحتوى المرئي الموثق برؤية بحثية موضوعية.</p>
-    </div>
-  </section>
-
 </main>
 
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-          <img src="assets/logo.png" 
-               alt="" 
-               width="40" 
-               height="40" 
-               style="object-fit:contain; border-radius:50%;"
-               onerror="this.onerror=null; this.src='https://placehold.co/40x40/031622/27d5b1?text=نهج';">
-          <strong style="color:var(--ink); font-size:1.15rem;">نهج الحقيقة</strong>
-        </div>
-        <p style="margin:0; font-size:0.88rem; color:var(--muted); line-height:1.8;">من أجل معرفة أعمق .. لحقيقة أصدق. منصة متخصصة في نشر الفكر والوثائق التاريخية.</p>
-      </div>
-      <div class="footer-col">
-        <h4>معلومات</h4>
-        <ul>
-          <li><a href="#about">من نحن</a></li>
-          <li><a href="#about">سياسة الخصوصية</a></li>
-          <li><a href="#about">شروط الاستخدام</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>خدمات الموقع</h4>
-        <ul>
-          <li><a href="#library">البحث المتقدم</a></li>
-          <li><a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener">قناة يوتيوب</a></li>
-          <li><a href="#sources-section">الوثائق المصورة</a></li>
-          <li><a href="#library">ملفات PDF</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>روابط سريعة</h4>
-        <ul>
-          <li><a href="#top">الرئيسية</a></li>
-          <li><a href="#library">المكتبة</a></li>
-          <li><a href="#sources-section">الوثائق</a></li>
-          <li><a href="#contact">تواصل معنا</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="social-icons">
-        <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener" title="اليوتيوب">▶</a>
-        <a href="https://x.com/raf88idi" target="_blank" rel="noopener" title="منصة إكس">𝕏</a>
-        <a href="https://www.tiktok.com/@ha_no_88" target="_blank" rel="noopener" title="تيك توك">🎵</a>
-      </div>
-      <span style="font-size:0.85rem;">© <span id="year"></span> نهج الحقيقة، جميع الحقوق محفوظة. 
-        <a href="javascript:void(0)" onclick="openAdminModal()" style="color:var(--gold); margin-right:10px; font-weight:700;">⚙️ دخول الإدارة</a>
-      </span>
-    </div>
-  </div>
-</footer>
-
-<div class="mobile-bottom-nav">
-  <a href="#top" class="mobile-nav-item active"><span>🏠</span><span>الرئيسية</span></a>
-  <a href="#library" class="mobile-nav-item"><span>📚</span><span>المكتبة</span></a>
-  <a href="#library" class="mobile-nav-item"><span>📁</span><span>ملفات PDF</span></a>
-  <a href="https://youtube.com/channel/UCQHlBznG46xNg1nnS4CXgIw?si=iTVw1x1bCp0UlX5K" target="_blank" rel="noopener" class="mobile-nav-item"><span>▶</span><span>يوتيوب</span></a>
-  <a href="#sources-section" class="mobile-nav-item"><span>📜</span><span>الوثائق</span></a>
-</div>
-
-<!-- لوحة التحكم الإدارية والإحصائيات -->
+<!-- لوحة التحكم الإدارية -->
 <div class="modal" id="adminModal">
   <div class="modal-content" style="max-width:850px;">
     <div class="sticky-close-bar">
-      <h3 id="adminModalTitle" style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة والإحصائيات الشاملة</h3>
+      <h3 id="adminModalTitle" style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة الشاملة</h3>
       <button class="back-btn" onclick="closeAdminModal()">✕ إغلاق</button>
     </div>
 
     <div id="adminLoginSec" style="display:flex; flex-direction:column; gap:14px; margin-top:15px;">
-      <p style="font-size:0.9rem; color:var(--muted); margin:0;">ادخل كلمة المرور الخاصة بحسابك للوصول للوحة التحكم:</p>
+      <p style="font-size:0.9rem; color:var(--muted); margin:0;">ادخل كلمة المرور للوصول للوحة التحكم:</p>
       <input type="password" id="adminPassInput" placeholder="كلمة المرور..." style="padding:12px 16px; border-radius:12px; border:1px solid var(--line); background:var(--input-bg); color:#fff;">
       <button class="btn" onclick="loginAdmin()">تسجيل الدخول</button>
     </div>
 
     <div id="adminPanelSec" style="display:none; flex-direction:column; gap:16px; margin-top:10px;">
-      
-      <div class="stats-grid-admin">
-        <div class="stat-card-admin"><h3 id="statDocsCount">0</h3><p>الكتب والملفات</p></div>
-        <div class="stat-card-admin"><h3 id="statSourcesCount">0</h3><p>الوثائق المصورة</p></div>
-        <div class="stat-card-admin"><h3 id="statVidsCount">0</h3><p>الفيديوهات</p></div>
-        <div class="stat-card-admin"><h3 id="statPodcastsCount">0</h3><p>الحلقات الصوتية</p></div>
-      </div>
-
-      <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(39, 213, 177, 0.1); padding:10px 16px; border-radius:14px; border:1px solid var(--mint);">
-        <span id="currentUserRole" style="font-size:0.88rem; font-weight:800; color:var(--mint);">المستخدم الحالي</span>
-        <button class="btn red" onclick="logoutAdmin()" style="padding:4px 12px; font-size:0.78rem;">تسجيل خروج</button>
-      </div>
-
-      <div id="adminTabsNav" style="display:flex; gap:8px; border-bottom:1px solid var(--line); padding-bottom:10px; flex-wrap:wrap;">
-        <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 الكتب والملفات</button>
-        <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 الوثائق المصورة</button>
-        <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ الفيديوهات</button>
-        <button id="tabBtnPodcasts" class="admin-tab-btn" onclick="switchAdminTab('podcasts')">🎧 المكتبة الصوتية والأقسام</button>
-        <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين</button>
-      </div>
-
-      <!-- 1. نموذج الكتب والملفات -->
-      <div id="addDocForm" class="admin-form" style="display:flex; flex-direction:column; gap:12px;">
-        <input type="hidden" id="edit_doc_id">
-        <h4 id="docFormHeading" style="margin:0; color:var(--gold);">➕ إضافة بحث / كتاب جديد</h4>
+      <!-- إدارة الأقسام الصوتية والحلقات -->
+      <div id="addPodcastForm" class="admin-form" style="display:flex; flex-direction:column; gap:14px;">
+        <h4 style="margin:0; color:var(--gold);">🎧 إدارة المكتبة الصوتية والأقسام المصورة</h4>
         
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <input type="text" id="doc_title" placeholder="عنوان البحث / الكتاب" required>
-          <input type="text" id="doc_author" placeholder="المؤلف / الباحث">
-        </div>
-        
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-          <select id="doc_cat" required>
-            <option value="بحوث عقائدية">💡 قسم: بحوث عقائدية</option>
-            <option value="وثائق تاريخية">📜 قسم: وثائق تاريخية</option>
-            <option value="كتب ومراجع">📖 قسم: كتب ومراجع</option>
-            <option value="مقالات ودراسات">📝 قسم: مقالات ودراسات</option>
-            <option value="منوع">🎨 قسم: منوع</option>
-          </select>
-          <input type="text" id="doc_url" placeholder="رابط الملف المباشر (PDF URL)" required>
-        </div>
-        
-        <input type="text" id="doc_cover_url" placeholder="رابط صورة غلاف مخصصة (اختياري)...">
-        <textarea id="doc_desc" placeholder="نبذة مختصرة عن المستند..."></textarea>
-        
-        <div style="display:flex; gap:8px;">
-          <button type="button" id="saveDocBtn" class="btn" onclick="saveNewDoc(event)">💾 حفظ ونشر الملف</button>
-          <button type="button" id="cancelDocEditBtn" class="btn red" style="display:none;" onclick="cancelDocEdit()">إلغاء التعديل</button>
-        </div>
-
-        <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
-
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-          <h5 style="margin:0; color:var(--gold);">قائمة العناصر المنشورة:</h5>
-          <select id="filterAdminCategory" onchange="populateAdminLists()" style="width:auto; padding:5px 12px; font-size:0.8rem;">
-            <option value="">✨ كافة الأقسام</option>
-            <option value="بحوث عقائدية">💡 بحوث عقائدية</option>
-            <option value="وثائق تاريخية">📜 وثائق تاريخية</option>
-            <option value="كتب ومراجع">📖 كتب ومراجع</option>
-            <option value="مقالات ودراسات">📝 مقالات ودراسات</option>
-            <option value="منوع">🎨 منوع</option>
-          </select>
-        </div>
-        
-        <div id="adminDocsList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
-      </div>
-
-      <!-- 2. نموذج الوثائق -->
-      <div id="addSourceForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
-        <input type="hidden" id="edit_source_id">
-        <h4 id="sourceFormHeading" style="margin:0; color:var(--gold);">➕ إضافة وثيقة مصورة نادرة</h4>
-        <input type="text" id="source_title" placeholder="عنوان المجموعة (مثال: وثائق تاريخية / فدك وشواهدها)" required>
-        <input type="text" id="source_img_url" placeholder="رابط الصورة المباشر (Image URL)" required>
-        <textarea id="source_desc" placeholder="شرح تفصيلي للوثيقة المصورة..."></textarea>
-        
-        <div style="display:flex; gap:8px;">
-          <button type="button" id="saveSourceBtn" class="btn" onclick="saveNewSource(event)">💾 حفظ الوثيقة المصورة</button>
-          <button type="button" id="cancelSourceEditBtn" class="btn red" style="display:none;" onclick="cancelSourceEdit()">إلغاء التعديل</button>
-        </div>
-
-        <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
-        <h5 style="margin:0; color:var(--gold);">قائمة الوثائق المصورة:</h5>
-        <div id="adminSourcesList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
-      </div>
-
-      <!-- 3. نموذج الفيديوهات -->
-      <div id="addVidForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
-        <input type="hidden" id="edit_vid_id">
-        <h4 id="vidFormHeading" style="margin:0; color:var(--gold);">➕ إضافة فيديو يوتيوب جديد</h4>
-        <input type="text" id="vid_title" placeholder="عنوان الفيديو / الحلقة" required>
-        <input type="text" id="vid_yt_id" placeholder="معرف اليوتيوب YouTube Video ID" required>
-        
-        <div style="display:flex; gap:8px;">
-          <button type="button" id="saveVidBtn" class="btn" onclick="saveNewVid(event)">💾 حفظ الفيديو</button>
-          <button type="button" id="cancelVidEditBtn" class="btn red" style="display:none;" onclick="cancelVidEdit()">إلغاء التعديل</button>
-        </div>
-
-        <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
-        <h5 style="margin:0; color:var(--gold);">قائمة الفيديوهات:</h5>
-        <div id="adminVidsList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
-      </div>
-
-      <!-- 4. نموذج المكتبة الصوتية والأقسام الجديدة -->
-      <div id="addPodcastForm" class="admin-form" style="display:none; flex-direction:column; gap:14px;">
-        <input type="hidden" id="edit_podcast_id">
-        <h4 id="podcastFormHeading" style="margin:0; color:var(--gold);">🎧 إضافة حلقة صوتية أو قسم جديد بالمكتبة</h4>
-        
-        <!-- إدارة وإضافة الأقسام الصوتية -->
-        <div style="background:rgba(0,0,0,0.2); padding:12px; border-radius:12px; border:1px solid var(--line);">
-          <label style="font-size:0.85rem; font-weight:800; color:var(--gold); display:block; margin-bottom:6px;">📁 إدارة الأقسام الصوتية:</label>
-          <div style="display:flex; gap:8px;">
-            <input type="text" id="new_podcast_category_name" placeholder="اسم القسم الصوتي الجديد (مثال: محاضرات عقائدية)..." style="flex:1;">
-            <button type="button" class="btn shrink" onclick="addNewPodcastCategory()" style="padding:6px 14px; font-size:0.8rem;">➕ إضافة القسم</button>
-          </div>
+        <div style="background:rgba(0,0,0,0.2); padding:12px; border-radius:12px; border:1px solid var(--line); display:flex; flex-direction:column; gap:8px;">
+          <label style="font-size:0.85rem; font-weight:800; color:var(--gold);">📁 إضافة قسم صوتي جديد (مع صورة مخصصة):</label>
+          <input type="text" id="new_podcast_category_name" placeholder="اسم القسم الصوتي...">
+          <input type="text" id="new_podcast_category_img" placeholder="رابط صورة غلاف مخصصة للقسم (URL)...">
+          <textarea id="new_podcast_category_desc" placeholder="وصف مقتضب للقسم..."></textarea>
+          <button type="button" class="btn shrink" onclick="addNewPodcastCategory()" style="padding:6px 14px; font-size:0.8rem; width:fit-content;">➕ إنتاج القسم</button>
         </div>
 
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
@@ -949,290 +709,93 @@
             <option value="عام">📁 قسم: عام</option>
           </select>
         </div>
-
         <input type="text" id="podcast_url" placeholder="رابط الملف الصوتي المباشر (MP3 URL)..." required>
-        <textarea id="podcast_desc" placeholder="نبذة أو وصف الحلقة..."></textarea>
-        
-        <div style="display:flex; gap:8px;">
-          <button type="button" id="savePodcastBtn" class="btn" onclick="saveNewPodcast(event)">💾 حفظ ونشر الحلقة</button>
-          <button type="button" id="cancelPodcastEditBtn" class="btn red" style="display:none;" onclick="cancelPodcastEdit()">إلغاء التعديل</button>
-        </div>
-
-        <hr style="border:0; border-top:1px solid var(--line); margin:10px 0;">
-        <h5 style="margin:0; color:var(--gold);">قائمة الحلقات الصوتية المنشورة:</h5>
-        <div id="adminPodcastsList" style="max-height:220px; overflow-y:auto; margin-top:6px;"></div>
-      </div>
-
-      <!-- 5. الموظفين -->
-      <div id="manageUsersSec" style="display:none; flex-direction:column; gap:15px;">
-        <h4 style="margin:0; color:var(--gold);">إضافة موظف جديد وتحديد المهام</h4>
-        <form class="admin-form" onsubmit="saveEmployee(event)" style="display:flex; flex-direction:column; gap:10px;">
-          <input type="text" id="emp_name" placeholder="اسم الموظف أو المحرر" required>
-          <input type="text" id="emp_pass" placeholder="كلمة المرور الخاصة به" required>
-          <div style="font-size:0.85rem; font-weight:700; color:var(--mint);">حدد الصلاحيات والمهام:</div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-            <label class="perm-checkbox-item"><input type="checkbox" id="p_docs" value="docs"> 📚 الكتب والملفات</label>
-            <label class="perm-checkbox-item"><input type="checkbox" id="p_sources" value="sources"> 📜 الوثائق المصورة</label>
-            <label class="perm-checkbox-item"><input type="checkbox" id="p_videos" value="videos"> ▶ الفيديوهات</label>
-            <label class="perm-checkbox-item"><input type="checkbox" id="p_podcasts" value="podcasts"> 🎧 الصوتيات</label>
-          </div>
-          <button type="submit" id="saveEmpBtn" class="btn">➕ إضافة الموظف</button>
-        </form>
-
-        <h4 style="margin:15px 0 0; color:var(--gold);">قائمة الموظفين:</h4>
-        <div id="employeesList" style="display:flex; flex-direction:column; gap:8px;">
-          <p style="color:var(--muted); font-size:0.8rem;">جاري جلب قائمة الموظفين...</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- مودال استعراض الصور -->
-<div class="modal" id="sourceModal">
-  <div class="modal-content">
-    <div class="sticky-close-bar">
-      <h2 id="modalTitle" style="margin:0; color:var(--gold); font-size:1.05rem; flex:1;">عنوان الوثيقة</h2>
-      <button class="back-btn" onclick="closeSourceModal()">✕ إغلاق</button>
-    </div>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-top:10px;" id="modalImagesContainer"></div>
-  </div>
-</div>
-
-<!-- مودال التكبير -->
-<div id="imageZoomModal">
-  <div class="zoom-header">
-    <h3 id="zoomTitle" style="margin:0; color:var(--gold); font-size:0.95rem; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; max-width:50%;">عرض الصورة</h3>
-    <div style="display:flex; gap:8px;">
-      <button class="btn shrink" onclick="closeZoomModal()" style="padding:5px 14px; font-size:0.8rem;">🔍 تصغير</button>
-      <button class="btn" id="zoomDownloadBtn" style="padding:5px 14px; font-size:0.8rem;">⬇️ تحميل</button>
-      <button class="back-btn" onclick="closeZoomModal()">✕ إغلاق</button>
-    </div>
-  </div>
-  <div class="zoom-body" onclick="closeZoomModal()">
-    <img id="zoomedImg" src="" alt="وثيقة مكبرة" onclick="event.stopPropagation()">
-  </div>
-</div>
-
-<!-- مودال قراءة الـ PDF وقسم التعليقات -->
-<div class="modal" id="pdfModal">
-  <div class="pdf-modal-content">
-    <div class="sticky-close-bar">
-      <h3 id="pdfTitle" style="margin:0; color:var(--gold); font-size:1rem; max-width:40%; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">عرض المستند</h3>
-      <div style="display:flex; gap:8px; align-items:center;">
-        <button class="btn shrink" onclick="togglePdfNightMode()" title="وضع قراءة ليلي" style="padding:5px 10px; font-size:0.8rem;">🌙 وضع ليلي</button>
-        <button class="btn shrink" onclick="zoomPdf(0.2)" style="padding:5px 10px; font-size:0.8rem;">➕</button>
-        <button class="btn shrink" onclick="zoomPdf(-0.2)" style="padding:5px 10px; font-size:0.8rem;">➖</button>
-        <button class="btn" onclick="downloadFileDirectly()" style="padding:5px 14px; font-size:0.8rem;">⬇️ تنزيل</button>
-        <button class="btn red" onclick="closePdfModal()" style="padding:5px 14px; font-size:0.8rem;">✕ إغلاق</button>
-      </div>
-    </div>
-    <div id="pdfCanvasContainer">
-      <p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل المستند لقراءته...</p>
-    </div>
-
-    <div class="comments-container">
-      <h4 style="margin:0 0 10px; color:var(--gold); font-size:0.95rem;">💬 المناقشات المباشرة والتعليقات العلميّة:</h4>
-      <div id="commentsList" style="max-height: 120px; overflow-y: auto; margin-bottom: 10px;"></div>
-      <div style="display:grid; grid-template-columns: 1fr 2fr auto; gap:8px;">
-        <input type="text" id="commentUserName" placeholder="اسمك الكريم..." style="padding:8px 12px; border-radius:10px; border:1px solid var(--line); background:var(--input-bg); color:#fff; font-size:0.85rem;">
-        <input type="text" id="newCommentInput" placeholder="أضف تعليقاً أو استفساراً علمياً..." style="padding:8px 12px; border-radius:10px; border:1px solid var(--line); background:var(--input-bg); color:#fff; font-size:0.85rem;">
-        <button class="btn" onclick="addDocComment()" style="padding:8px 16px; font-size:0.82rem;">إرسال</button>
+        <button type="button" id="savePodcastBtn" class="btn" onclick="saveNewPodcast(event)">💾 حفظ ونشر الحلقة الصوتية</button>
       </div>
     </div>
   </div>
 </div>
-
-<div id="toastContainer"></div>
 
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
-
-function showToast(message, type = 'success') {
-    const container = document.getElementById('toastContainer');
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerHTML = `<span>${type === 'success' ? '✅' : '⚠️'}</span> <span>${message}</span>`;
-    container.appendChild(toast);
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateX(100%)';
-        setTimeout(() => toast.remove(), 300);
-    }, 3000);
-}
-
-const dailyQuranVerses = [
-  { text: '﴿إِنَّ مَعَ الْعُسْرِ يُسْرًا﴾', source: 'سورة الشرح · الآية 6' },
-  { text: '﴿وَهُوَ مَعَكُمْ أَيْنَ مَا كُنْتُمْ﴾', source: 'سورة الحديد · الآية 4' },
-  { text: '﴿وَقُلْ رَبِّ زِدْنِي عِلْمًا﴾', source: 'سورة طه · الآية 114' },
-  { text: '﴿إِنَّ اللَّهَ مَعَ الصَّابِرِينَ﴾', source: 'سورة البقرة · الآية 153' },
-  { text: '﴿وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ﴾', source: 'سورة الطلاق · الآية 3' },
-  { text: '﴿فَاذْكُرُونِي أَذْكُرْكُمْ﴾', source: 'سورة البقرة · الآية 152' },
-  { text: '﴿وَلَا تَيْأَسُوا مِن رَّوْحِ اللَّهِ﴾', source: 'سورة يوسف · الآية 87' },
-  { text: '﴿إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ﴾', source: 'سورة التوبة · الآية 120' },
-  { text: '﴿أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ﴾', source: 'سورة الرعد · الآية 28' },
-  { text: '﴿وَقُلِ الْحَقُّ مِن رَّبِّكُمْ﴾', source: 'سورة الكهف · الآية 29' }
-];
-
-function updateDailyVerseAndClock() {
-  const now = new Date();
-  const baghdadNow = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Baghdad' }));
-  const start = new Date(baghdadNow.getFullYear(), 0, 0);
-  const dayOfYear = Math.floor((baghdadNow - start) / 86400000);
-  const verse = dailyQuranVerses[(dayOfYear - 1) % dailyQuranVerses.length];
-  
-  const verseText = document.getElementById('dailyVerseText');
-  const verseSource = document.getElementById('dailyVerseSource');
-  const clock = document.getElementById('siteClock');
-  const date = document.getElementById('siteDate');
-  
-  if (verseText) verseText.textContent = verse.text;
-  if (verseSource) verseSource.textContent = verse.source;
-  if (clock) clock.textContent = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Baghdad', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now);
-  if (date) date.textContent = new Intl.DateTimeFormat('ar-IQ', { timeZone: 'Asia/Baghdad', year: 'numeric', month: 'long', day: 'numeric', weekday: 'short' }).format(now);
-  
-  updateActivePrayerTime(baghdadNow);
-}
-
-function updateActivePrayerTime(now) {
-    const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-    const prayers = [
-        { id: 'p_fajr', time: '04:52' },
-        { id: 'p_shuruq', time: '06:15' },
-        { id: 'p_dhuhr', time: '11:55' },
-        { id: 'p_asr', time: '15:02' },
-        { id: 'p_maghrib', time: '17:38' },
-        { id: 'p_isha', time: '18:58' }
-    ];
-    
-    document.querySelectorAll('.prayer-item').forEach(el => el.classList.remove('active'));
-    for (let p of prayers) {
-        if (timeStr < p.time) {
-            const activeEl = document.getElementById(p.id);
-            if (activeEl) activeEl.classList.add('active');
-            break;
-        }
-    }
-}
-
-updateDailyVerseAndClock();
-setInterval(updateDailyVerseAndClock, 1000);
-
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-let deferredPrompt = null;
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault(); deferredPrompt = e;
-    const btn = document.getElementById('installPwaBtn');
-    if (btn) btn.style.display = 'inline-flex';
-});
-function installPWA() {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(() => { deferredPrompt = null; document.getElementById('installPwaBtn').style.display = 'none'; });
-}
-
-function toggleTheme() {
-    const html = document.documentElement;
-    const btn = document.getElementById('themeToggle');
-    if (html.getAttribute('data-theme') === 'dark') {
-        html.setAttribute('data-theme', 'light');
-        btn.textContent = '☀️';
-        localStorage.setItem('theme', 'light');
-    } else {
-        html.setAttribute('data-theme', 'dark');
-        btn.textContent = '🌙';
-        localStorage.setItem('theme', 'dark');
-    }
-}
-
-function requestNotificationPermission() {
-    if ("Notification" in window) {
-        Notification.requestPermission().then(permission => {
-            if (permission === "granted") {
-                showToast("تم تفعيل الإشعارات بنجاح! ستتلقى تنبيهات بالدروس والأبحاث الجديدة.");
-            } else {
-                showToast("لم يتم إعطاء الإذن للإشعارات.", "error");
-            }
-        });
-    } else {
-        showToast("المتصفح لا يدعم نظام الإشعارات المباشرة.", "error");
-    }
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-    const saved = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', saved);
-    document.getElementById('themeToggle').textContent = saved === 'dark' ? '🌙' : '☀️';
-    try { emailjs.init("xd1Jo81I__MsksgB9"); } catch(e){}
-});
-
 const SUPABASE_URL = 'https://txsxxkauxouyneaamehw.supabase.co'; 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4c3h4a2F1eG91eW5lYWFtZWh3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE3MjQxMjMsImV4cCI6MjEwNzMwMDEyM30.wvVWq3TXd83mJ2FtViIwWO7O_hN1OazD91MkmiWZdh0'; 
 let supabaseClient = null;
 try { supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY); } catch(e){}
 
-let activePdfUrl = '', activePdfName = '';
-let activePdfDocId = null;
-let currentPdfScale = 1.3;
-let currentPdfObj = null;
-
 let allPodcasts = [];
-let podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["عام", "محاضرات عقائدية", "جلسات حوارية"]');
+let podcastCategoriesData = JSON.parse(localStorage.getItem('nahj_podcast_cats_meta') || JSON.stringify([
+    { name: "عام", image: "https://placehold.co/400x300/031622/27d5b1?text=قسم+عام", desc: "الحلقات والدروس العامة" },
+    { name: "محاضرات عقائدية", image: "https://placehold.co/400x300/031622/d4af37?text=محاضرات+عقائدية", desc: "سلسلة المحاضرات والبحوث العقائدية" },
+    { name: "جلسات حوارية", image: "https://placehold.co/400x300/031622/00a977?text=جلسات+حوارية", desc: "حوارات وبرامج على طاولة الحقيقة" }
+]));
+
 let currentPodcastCategoryFilter = '';
-let currentPodcastIndex = 0;
 
 async function fetchPodcasts() {
     if (!supabaseClient) return;
     try {
         const { data, error } = await supabaseClient.from('podcasts').select('*').order('created_at', { ascending: false });
-        if (!error && data && data.length > 0) {
+        if (!error && data) {
             allPodcasts = data;
-            loadPodcastIntoPlayer(0);
+            renderPodcastCategoriesGrid();
             renderPodcastsCategoriesTags();
             renderPodcastsPlaylist();
-        } else {
-            document.getElementById('audioTrackTitle').textContent = 'لا توجد حلقات صوتية مضافة حالياً';
-            document.getElementById('audioTrackDesc').textContent = 'قم بإضافة الحلقات عبر لوحة التحكم';
         }
-        if (currentLoggedInUser) populateAdminLists();
-    } catch(e) {
-        document.getElementById('audioTrackTitle').textContent = 'تعذر تحميل الصوتيات';
-    }
+    } catch(e) {}
 }
 
 function addNewPodcastCategory() {
-    const input = document.getElementById('new_podcast_category_name');
-    const catName = input.value.trim();
-    if (!catName) {
-        showToast('يرجى كتابة اسم القسم الصوتي', 'error');
-        return;
-    }
-    if (!podcastCategories.includes(catName)) {
-        podcastCategories.push(catName);
-        localStorage.setItem('nahj_podcast_cats', JSON.stringify(podcastCategories));
-        showToast('تمت إضافة القسم بنجاح');
-        input.value = '';
-        populatePodcastCategorySelects();
+    const nameInput = document.getElementById('new_podcast_category_name');
+    const imgInput = document.getElementById('new_podcast_category_img');
+    const descInput = document.getElementById('new_podcast_category_desc');
+    
+    const catName = nameInput.value.trim();
+    if (!catName) return;
+    
+    if (!podcastCategoriesData.some(c => c.name === catName)) {
+        podcastCategoriesData.push({
+            name: catName,
+            image: imgInput.value.trim() || 'https://placehold.co/400x300/031622/27d5b1?text=' + encodeURIComponent(catName),
+            desc: descInput.value.trim() || 'مجموعة الحلقات الصوتية التابعة لهذا القسم'
+        });
+        localStorage.setItem('nahj_podcast_cats_meta', JSON.stringify(podcastCategoriesData));
+        nameInput.value = ''; imgInput.value = ''; descInput.value = '';
+        renderPodcastCategoriesGrid();
         renderPodcastsCategoriesTags();
-    } else {
-        showToast('هذا القسم موجود مسبقاً', 'error');
     }
 }
 
-function populatePodcastCategorySelects() {
-    const select = document.getElementById('podcast_category');
-    if (!select) return;
-    select.innerHTML = podcastCategories.map(c => `<option value="${c}">📁 قسم: ${c}</option>`).join('');
+function renderPodcastCategoriesGrid() {
+    const container = document.getElementById('podcastCategoriesGrid');
+    if (!container) return;
+    
+    container.innerHTML = podcastCategoriesData.map(cat => {
+        let count = allPodcasts.filter(p => (p.category || 'عام') === cat.name).length;
+        return `
+            <div class="podcast-category-card" onclick="filterPodcastsByCategory('${cat.name}'); location.href='#audio-podcast';">
+                <div class="podcast-cat-img">
+                    <span class="podcast-cat-badge">${count} حلقات</span>
+                    <img src="${cat.image}" alt="${cat.name}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='https://placehold.co/400x300/031622/27d5b1?text=نهج+الحقيقة';">
+                </div>
+                <div class="podcast-cat-body">
+                    <h4>${cat.name}</h4>
+                    <p>${cat.desc}</p>
+                    <div class="podcast-cat-footer">
+                        <span>تصفح الصوتيات 🎧</span>
+                        <span>←</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
 }
 
 function renderPodcastsCategoriesTags() {
     const container = document.getElementById('podcastCategoriesTags');
     if (!container) return;
-    let html = `<button class="tag-btn ${currentPodcastCategoryFilter === '' ? 'active' : ''}" onclick="filterPodcastsByCategory('')">جميع الأقسام</button>`;
-    podcastCategories.forEach(cat => {
-        html += `<button class="tag-btn ${currentPodcastCategoryFilter === cat ? 'active' : ''}" onclick="filterPodcastsByCategory('${cat}')">${cat}</button>`;
+    let html = `<button class="tag-btn ${currentPodcastCategoryFilter === '' ? 'active' : ''}" onclick="filterPodcastsByCategory('')">جميع الحلقات</button>`;
+    podcastCategoriesData.forEach(cat => {
+        html += `<button class="tag-btn ${currentPodcastCategoryFilter === cat.name ? 'active' : ''}" onclick="filterPodcastsByCategory('${cat.name}')">${cat.name}</button>`;
     });
     container.innerHTML = html;
 }
@@ -1243,793 +806,31 @@ function filterPodcastsByCategory(cat) {
     renderPodcastsPlaylist();
 }
 
-function loadPodcastIntoPlayer(index) {
-    let activeList = currentPodcastCategoryFilter ? allPodcasts.filter(p => (p.category || 'عام') === currentPodcastCategoryFilter) : allPodcasts;
-    if (!activeList.length || !activeList[index]) return;
-    const podcast = activeList[index];
-    currentPodcastIndex = allPodcasts.findIndex(p => p.id === podcast.id);
-    const player = document.getElementById('mainAudioPlayer');
-    player.src = podcast.audio_url;
-    document.getElementById('audioTrackTitle').textContent = podcast.title;
-    document.getElementById('audioTrackDesc').textContent = (podcast.category ? 'القسم: ' + podcast.category + ' · ' : '') + (podcast.description || 'المكتبة الصوتية');
-    document.getElementById('audioPlayToggleBtn').textContent = '▶';
-}
-
-function toggleAudioPlay() {
-    const player = document.getElementById('mainAudioPlayer');
-    const btn = document.getElementById('audioPlayToggleBtn');
-    if (!player.src && allPodcasts.length) {
-        loadPodcastIntoPlayer(0);
-    }
-    if (player.paused) {
-        player.play().then(() => { btn.textContent = '⏸'; }).catch(() => { showToast('تعذر تشغيل الملف الصوتي', 'error'); });
-    } else {
-        player.pause();
-        btn.textContent = '▶';
-    }
-}
-
-function updateAudioProgress() {
-    const player = document.getElementById('mainAudioPlayer');
-    const seekBar = document.getElementById('audioSeekBar');
-    if (player.duration) {
-        seekBar.value = (player.currentTime / player.duration) * 100;
-    }
-}
-
-function seekAudio(val) {
-    const player = document.getElementById('mainAudioPlayer');
-    if (player.duration) {
-        player.currentTime = (val / 100) * player.duration;
-    }
-}
-
-function playNextPodcast() {
-    let activeList = currentPodcastCategoryFilter ? allPodcasts.filter(p => (p.category || 'عام') === currentPodcastCategoryFilter) : allPodcasts;
-    let currentFilteredIdx = activeList.findIndex(p => p.id === allPodcasts[currentPodcastIndex]?.id);
-    if (currentFilteredIdx + 1 < activeList.length) {
-        let nextPodcast = activeList[currentFilteredIdx + 1];
-        let nextGlobalIdx = allPodcasts.findIndex(p => p.id === nextPodcast.id);
-        loadPodcastIntoPlayer(nextGlobalIdx);
-        document.getElementById('mainAudioPlayer').play();
-        document.getElementById('audioPlayToggleBtn').textContent = '⏸';
-    } else {
-        document.getElementById('audioPlayToggleBtn').textContent = '▶';
-    }
-}
-
 function renderPodcastsPlaylist() {
     const container = document.getElementById('podcastsListContainer');
     if (!container) return;
     let activeList = currentPodcastCategoryFilter ? allPodcasts.filter(p => (p.category || 'عام') === currentPodcastCategoryFilter) : allPodcasts;
     
     if (!activeList.length) {
-        container.innerHTML = '<p style="color:var(--muted); font-size:0.85rem; grid-column:1/-1;">لا توجد حلقات صوتية ضمن هذا القسم.</p>';
+        container.innerHTML = '<p style="color:var(--muted); font-size:0.85rem; grid-column:1/-1;">لا توجد حلقات صوتية ضمن هذا القسم حالياً.</p>';
         return;
     }
 
-    container.innerHTML = activeList.map((p) => {
-        let globalIdx = allPodcasts.findIndex(item => item.id === p.id);
-        return `
-            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); border-radius:10px; padding:12px; display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="loadPodcastIntoPlayer(${globalIdx}); toggleAudioPlay();">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:1.2rem; color:var(--gold);">🎧</span>
-                    <div>
-                        <span style="font-size:0.68rem; color:var(--mint); font-weight:700; background:rgba(39,213,177,0.1); padding:2px 6px; border-radius:6px;">${p.category || 'عام'}</span>
-                        <h5 style="margin:4px 0 2px; font-size:0.88rem; font-weight:800; color:var(--ink);">${p.title}</h5>
-                        <p style="margin:0; font-size:0.72rem; color:var(--muted);">${p.description || ''}</p>
-                    </div>
-                </div>
-                <span style="font-size:0.75rem; color:var(--gold); font-weight:700;">استماع ▶</span>
-            </div>
-        `;
-    }).join('');
-}
-
-function triggerDirectDownload(url, name) {
-    const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.download = name || 'file';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-}
-function downloadFileDirectly() { if (activePdfUrl) triggerDirectDownload(activePdfUrl, activePdfName + '.pdf'); }
-
-function syncHeroSearch(val) {
-    const mainSearch = document.getElementById('q');
-    if (mainSearch) { mainSearch.value = val; filterAndRenderDocs(); }
-}
-
-function sendEmailMessage(e) {
-    e.preventDefault();
-    const btn = document.getElementById('sendBtn');
-    btn.disabled = true; btn.textContent = 'جاري الإرسال...';
-    emailjs.send('service_bwh87m7', 'template_ogee95s', {
-        from_name: document.getElementById('from_name').value,
-        from_email: document.getElementById('from_email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
-    }).then(() => {
-        showToast('تم إرسال رسالتك بنجاح!');
-        document.getElementById('contactForm').reset(); btn.disabled = false; btn.textContent = '✉️ إرسال الرسالة';
-    }).catch(() => {
-        showToast('تعذر الإرسال، يُرجى المحاولة لاحقاً', 'error');
-        btn.disabled = false; btn.textContent = '✉️ إرسال الرسالة';
-    });
-}
-
-let allDocs = [];
-let allSources = [];
-let allVideos = [];
-let bookmarkedIds = JSON.parse(localStorage.getItem('nahj_bookmarks') || '[]');
-
-async function fetchDocuments() {
-    if (!supabaseClient) return;
-    try {
-        const { data } = await supabaseClient.from('documents').select('*');
-        allDocs = data || [];
-        filterAndRenderDocs();
-        renderLatestResearchMini(allDocs);
-        if (currentLoggedInUser) populateAdminLists();
-    } catch(e){}
-}
-
-function renderLatestResearchMini(docs) {
-    const container = document.getElementById('latest-research-container');
-    if (!container) return;
-    const latest = docs.slice(0, 3);
-    if (!latest.length) { container.innerHTML = '<p style="color:var(--muted); font-size:0.85rem;">لا توجد أبحاث حالياً.</p>'; return; }
-    
-    container.innerHTML = '';
-    latest.forEach(doc => {
-        let badgeText = 'أبحاث';
-        if (doc.category === 'كتب ومراجع') badgeText = 'كتب';
-        else if (doc.category === 'وثائق تاريخية') badgeText = 'وثائق';
-
-        const card = document.createElement('article');
-        card.className = 'research-card-item';
-        card.innerHTML = `
-            <div class="research-card-img">
-                <span class="research-card-badge">${badgeText}</span>
-                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:2.5rem; background:rgba(0,0,0,0.3);">📖</div>
-            </div>
-            <div class="research-card-body">
-                <h4>${doc.title}</h4>
-                <p>${doc.description || doc.author || ''}</p>
-                <div class="research-card-footer">
-                    <span>${doc.date || ''}</span>
-                    <span style="color:var(--mint); font-weight:700;">قراءة ←</span>
-                </div>
-            </div>
-        `;
-        card.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url, doc.id));
-        container.appendChild(card);
-    });
-}
-
-async function fetchSources() {
-    if (!supabaseClient) return;
-    try {
-        const { data } = await supabaseClient.from('sources').select('*');
-        allSources = data || [];
-        renderSourcesMain(allSources);
-        if (currentLoggedInUser) populateAdminLists();
-    } catch(e){}
-}
-
-function renderSourcesMain(data) {
-    const grid = document.getElementById('sources-grid');
-    if (!grid) return;
-    if (!data.length) { grid.innerHTML = '<p style="color:var(--muted);">لا توجد مصادر مضافة.</p>'; return; }
-
-    const grouped = {};
-    data.forEach(item => {
-        const t = item.title || 'أدلة مصورة';
-        if (!grouped[t]) grouped[t] = [];
-        grouped[t].push(item);
-    });
-
-    grid.innerHTML = '';
-    Object.keys(grouped).forEach(title => {
-        const group = grouped[title];
-        const card = document.createElement('article');
-        card.className = 'book-cover-card source-card-theme';
-        
-        card.innerHTML = `
-            <div class="book-cover-frame"></div>
-            <div class="cover-box-category">📜 وثيقة مصورة</div>
-            <div class="cover-box-title">${title}</div>
-            <div class="cover-box-desc">
-                <p>${group[0].description || 'تتضمن ' + group.length + ' وثائق ومستندات تاريخية مصدقة عالية الدقة.'}</p>
-            </div>
-            <div class="cover-box-footer">
-                <span>🔍 استعراض (${group.length})</span>
-            </div>
-        `;
-        card.addEventListener('click', () => openSourceModal(title, group));
-        grid.appendChild(card);
-    });
-}
-
-async function fetchLatestVideos() {
-    if (!supabaseClient) return;
-    try {
-        const { data } = await supabaseClient.from('videos').select('*');
-        allVideos = data || [];
-        if (!data || !data.length) return;
-        
-        const container = document.getElementById('videos-container');
-        if (container) {
-            container.innerHTML = '';
-            data.forEach(vid => {
-                if (vid.youtube_id) {
-                    const card = document.createElement('div');
-                    card.innerHTML = `
-                        <div style="position:relative; width:100%; padding-bottom:56.25%; background:#000; border-radius:12px; overflow:hidden; margin-bottom:8px; border:1px solid var(--line);">
-                            <iframe src="https://www.youtube.com/embed/${vid.youtube_id}" title="${vid.title}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen loading="lazy"></iframe>
-                        </div>
-                        <h4 style="margin:0; font-size:0.92rem; font-weight:800; color:var(--ink);">${vid.title}</h4>
-                    `;
-                    container.appendChild(card);
-                }
-            });
-        }
-        if (currentLoggedInUser) populateAdminLists();
-    } catch(e){}
-}
-
-async function openPdfViewer(title, url, id) {
-    activePdfUrl = url; activePdfName = title; activePdfDocId = id; currentPdfScale = 1.3;
-    document.getElementById('pdfTitle').textContent = title;
-    
-    const container = document.getElementById('pdfCanvasContainer');
-    container.innerHTML = '<p id="pdfLoadingText" style="color:var(--gold); margin-top:30px; font-weight:700;">جاري تحميل وسحب صفحات المستند للقراءة...</p>';
-    document.getElementById('pdfModal').style.display = 'flex';
-    fetchDocComments();
-
-    try {
-        currentPdfObj = await pdfjsLib.getDocument(url).promise;
-        renderPdfPages();
-    } catch (error) {
-        container.innerHTML = `
-            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:15px; color:var(--ink); padding:20px; text-align:center;">
-                <p>تعذر عرض معالجة المستند مباشرة داخل المتصفح.</p>
-                <button class="btn" onclick="triggerDirectDownload('${url}', '${title}.pdf')">⬇️ اضغط هنا لتنزيل الملف وقراءته فوراً</button>
-            </div>
-        `;
-    }
-}
-
-async function fetchDocComments() {
-    const list = document.getElementById('commentsList');
-    if (!list) return;
-    list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; margin:0;">جاري تحميل التعليقات...</p>';
-
-    if (!supabaseClient || !activePdfDocId) {
-        list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; margin:0;">لا توجد تعليقات بعد.</p>';
-        return;
-    }
-
-    try {
-        const { data, error } = await supabaseClient
-            .from('comments')
-            .select('*')
-            .eq('doc_id', activePdfDocId)
-            .order('created_at', { ascending: false });
-
-        if (error || !data || data.length === 0) {
-            list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; margin:0;">لا توجد تعليقات أو مناقشات مدونة حول هذا البحث بعد.</p>';
-            return;
-        }
-
-        list.innerHTML = data.map(c => `
-            <div class="comment-item">
-                <div class="comment-header">
-                    <span>✍️ ${c.user_name || 'باحث / زائر'}</span>
-                    <span>${new Date(c.created_at).toLocaleDateString('ar-IQ')}</span>
-                </div>
-                <div style="font-size:0.85rem; color:var(--ink); line-height:1.5;">${c.comment_text}</div>
-            </div>
-        `).join('');
-    } catch (e) {
-        list.innerHTML = '<p style="color:var(--muted); font-size:0.8rem; margin:0;">تعذر تحميل التعليقات حالياً.</p>';
-    }
-}
-
-async function addDocComment() {
-    const userNameInput = document.getElementById('commentUserName');
-    const commentInput = document.getElementById('newCommentInput');
-    const userName = userNameInput.value.trim() || 'زائر';
-    const commentText = commentInput.value.trim();
-
-    if (!commentText) {
-        showToast('يرجى كتابة نص التعليق أو السؤال أولاً', 'error');
-        return;
-    }
-
-    if (!supabaseClient || !activePdfDocId) {
-        showToast('تعذر الاتصال بقاعدة البيانات', 'error');
-        return;
-    }
-
-    try {
-        const { error } = await supabaseClient
-            .from('comments')
-            .insert([{
-                doc_id: activePdfDocId,
-                user_name: userName,
-                comment_text: commentText
-            }]);
-
-        if (!error) {
-            commentInput.value = '';
-            showToast('تم إرسال ونشر تعليقك بنجاح');
-            fetchDocComments();
-        } else {
-            showToast('حدث خطأ أثناء حفظ التعليق', 'error');
-        }
-    } catch(e) {
-        showToast('تعذر حفظ التعليق', 'error');
-    }
-}
-
-async function renderPdfPages() {
-    if (!currentPdfObj) return;
-    const container = document.getElementById('pdfCanvasContainer');
-    container.innerHTML = '';
-    
-    for (let pageNum = 1; pageNum <= currentPdfObj.numPages; pageNum++) {
-        const page = await currentPdfObj.getPage(pageNum);
-        const viewport = page.getViewport({ scale: currentPdfScale });
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-        
-        await page.render({ canvasContext: context, viewport: viewport }).promise;
-        container.appendChild(canvas);
-    }
-}
-
-function zoomPdf(delta) {
-    currentPdfScale = Math.max(0.6, Math.min(2.5, currentPdfScale + delta));
-    renderPdfPages();
-}
-
-function togglePdfNightMode() {
-    document.getElementById('pdfCanvasContainer').classList.toggle('night-mode');
-}
-
-function closePdfModal() { document.getElementById('pdfModal').style.display = 'none'; }
-
-function openSourceModal(title, images) {
-    document.getElementById('modalTitle').textContent = title;
-    const container = document.getElementById('modalImagesContainer');
-    container.innerHTML = '';
-    images.forEach(img => {
-        const div = document.createElement('div');
-        div.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:14px; padding:12px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:8px;';
-        div.innerHTML = `
-            <img src="${img.image_url}" alt="${title}" loading="lazy" style="width:100%; max-height:350px; object-fit:contain; border-radius:8px; cursor:pointer;" onclick="zoomImage('${img.image_url}', '${title}')" onerror="this.onerror=null; this.src='https://placehold.co/400x300/031622/27d5b1?text=صورة+الوثيقة';">
-            <p style="font-size:0.82rem; color:var(--muted); margin:0; line-height:1.5;">${img.description || ''}</p>
-            <div style="display:flex; gap:8px; width:100%; justify-content:center; margin-top: auto;">
-                <button class="btn" style="padding:6px 14px; font-size:0.78rem;" onclick="triggerDirectDownload('${img.image_url}', '${title}')">⬇️ تحميل</button>
-                <button class="btn ghost" style="padding:6px 14px; font-size:0.78rem;" onclick="zoomImage('${img.image_url}', '${title}')">🔍 تكبير</button>
-            </div>
-        `;
-        container.appendChild(div);
-    });
-    document.getElementById('sourceModal').style.display = 'flex';
-}
-
-function closeSourceModal() { document.getElementById('sourceModal').style.display = 'none'; }
-
-function zoomImage(url, title) {
-    document.getElementById('zoomTitle').textContent = title;
-    document.getElementById('zoomedImg').src = url;
-    document.getElementById('zoomDownloadBtn').onclick = function() { triggerDirectDownload(url, title); };
-    document.getElementById('imageZoomModal').style.display = 'flex';
-}
-function closeZoomModal() { document.getElementById('imageZoomModal').style.display = 'none'; }
-
-let currentLoggedInUser = null;
-function openAdminModal() { document.getElementById('adminModal').style.display = 'flex'; }
-function closeAdminModal() { document.getElementById('adminModal').style.display = 'none'; }
-
-async function loginAdmin() {
-    const pass = document.getElementById('adminPassInput').value.trim();
-    if (!pass) return;
-
-    if (supabaseClient) {
-        const { data, error } = await supabaseClient.from('employees').select('*').eq('password', pass).single();
-        if (data && !error) {
-            currentLoggedInUser = data;
-            showAdminDashboard();
-            showToast('تم تسجيل الدخول بنجاح');
-        } else {
-            showToast('كلمة المرور غير صحيحة', 'error');
-        }
-    }
-}
-
-function showAdminDashboard() {
-    document.getElementById('adminLoginSec').style.display = 'none';
-    document.getElementById('adminPanelSec').style.display = 'flex';
-    document.getElementById('currentUserRole').textContent = 'المستخدم الحالي: ' + currentLoggedInUser.name;
-    
-    document.getElementById('statDocsCount').textContent = allDocs.length;
-    document.getElementById('statSourcesCount').textContent = allSources.length;
-    document.getElementById('statVidsCount').textContent = allVideos.length;
-    document.getElementById('statPodcastsCount').textContent = allPodcasts.length;
-    
-    applyUserPermissions();
-    populateAdminLists();
-    populatePodcastCategorySelects();
-}
-
-function logoutAdmin() {
-    currentLoggedInUser = null;
-    document.getElementById('adminPassInput').value = '';
-    document.getElementById('adminLoginSec').style.display = 'flex';
-    document.getElementById('adminPanelSec').style.display = 'none';
-}
-
-function applyUserPermissions() {
-    const perms = currentLoggedInUser.permissions || [];
-    // السماح بظهور التبويبات بحسب الصلاحيات أو إذا كان المدير العام (Admin)
-    const isAdmin = currentLoggedInUser.name.includes('مدير') || currentLoggedInUser.name.includes('Admin') || perms.length === 0;
-
-    document.getElementById('tabBtnDocs').style.display = (isAdmin || perms.includes('docs')) ? 'inline-block' : 'none';
-    document.getElementById('tabBtnSources').style.display = (isAdmin || perms.includes('sources')) ? 'inline-block' : 'none';
-    document.getElementById('tabBtnVideos').style.display = (isAdmin || perms.includes('videos')) ? 'inline-block' : 'none';
-    document.getElementById('tabBtnPodcasts').style.display = (isAdmin || perms.includes('podcasts')) ? 'inline-block' : 'none';
-    document.getElementById('tabBtnManageUsers').style.display = (isAdmin || perms.includes('manage_users')) ? 'inline-block' : 'none';
-
-    // افتراض فتح تبويب الصوتيات أولاً لسهولة الاختبار، أو الكتب
-    switchAdminTab('podcasts');
-}
-
-function switchAdminTab(type) {
-    document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('addDocForm').style.display = type === 'docs' ? 'flex' : 'none';
-    document.getElementById('addSourceForm').style.display = type === 'sources' ? 'flex' : 'none';
-    document.getElementById('addVidForm').style.display = type === 'videos' ? 'flex' : 'none';
-    document.getElementById('addPodcastForm').style.display = type === 'podcasts' ? 'flex' : 'none';
-    document.getElementById('manageUsersSec').style.display = type === 'manage_users' ? 'flex' : 'none';
-    
-    if (type === 'docs') document.getElementById('tabBtnDocs').classList.add('active');
-    if (type === 'sources') document.getElementById('tabBtnSources').classList.add('active');
-    if (type === 'videos') document.getElementById('tabBtnVideos').classList.add('active');
-    if (type === 'podcasts') document.getElementById('tabBtnPodcasts').classList.add('active');
-    if (type === 'manage_users') {
-        document.getElementById('tabBtnManageUsers').classList.add('active');
-        fetchEmployeesList();
-    }
-}
-
-function populateAdminLists() {
-    const docsList = document.getElementById('adminDocsList');
-    const filterCat = document.getElementById('filterAdminCategory') ? document.getElementById('filterAdminCategory').value : '';
-    if (docsList) {
-        let filtered = filterCat ? allDocs.filter(d => d.category === filterCat) : allDocs;
-        docsList.innerHTML = filtered.map(d => `
-            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:10px; border-radius:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.88rem; font-weight:700;">${d.title}</span>
-                <div style="display:flex; gap:6px;">
-                    <button class="btn shrink" style="padding:3px 8px; font-size:0.75rem;" onclick="editDoc(${d.id})">✏️ تعديل</button>
-                    <button class="btn red" style="padding:3px 8px; font-size:0.75rem;" onclick="deleteDoc(${d.id})">🗑️ حذف</button>
-                </div>
-            </div>
-        `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد عناصر.</p>';
-    }
-
-    const podcastsList = document.getElementById('adminPodcastsList');
-    if (podcastsList) {
-        podcastsList.innerHTML = allPodcasts.map(p => `
-            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:10px; border-radius:10px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+    container.innerHTML = activeList.map((p) => `
+        <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); border-radius:10px; padding:12px; display:flex; align-items:center; justify-content:space-between; cursor:pointer;">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:1.2rem; color:var(--gold);">🎧</span>
                 <div>
-                    <span style="font-size:0.68rem; color:var(--mint); font-weight:700; background:rgba(39,213,177,0.1); padding:2px 6px; border-radius:6px; margin-left:6px;">${p.category || 'عام'}</span>
-                    <span style="font-size:0.88rem; font-weight:700;">${p.title}</span>
-                </div>
-                <div style="display:flex; gap:6px;">
-                    <button class="btn shrink" style="padding:3px 8px; font-size:0.75rem;" onclick="editPodcast(${p.id})">✏️ تعديل</button>
-                    <button class="btn red" style="padding:3px 8px; font-size:0.75rem;" onclick="deletePodcast(${p.id})">🗑️ حذف</button>
+                    <span style="font-size:0.68rem; color:var(--mint); font-weight:700; background:rgba(39,213,177,0.1); padding:2px 6px; border-radius:6px;">${p.category || 'عام'}</span>
+                    <h5 style="margin:4px 0 2px; font-size:0.88rem; font-weight:800; color:var(--ink);">${p.title}</h5>
                 </div>
             </div>
-        `).join('') || '<p style="color:var(--muted); font-size:0.8rem;">لا توجد حلقات صوتية مضافة.</p>';
-    }
+            <span style="font-size:0.75rem; color:var(--gold); font-weight:700;">استماع ▶</span>
+        </div>
+    `).join('');
 }
 
-async function saveNewDoc(e) {
-    e.preventDefault();
-    const editId = document.getElementById('edit_doc_id').value;
-    const docData = {
-        title: document.getElementById('doc_title').value,
-        author: document.getElementById('doc_author').value,
-        category: document.getElementById('doc_cat').value,
-        file_url: document.getElementById('doc_url').value,
-        description: document.getElementById('doc_desc').value,
-        cover_url: document.getElementById('doc_cover_url').value || null,
-        date: new Date().toISOString().split('T')[0]
-    };
-
-    let error = editId 
-        ? (await supabaseClient.from('documents').update(docData).eq('id', editId)).error
-        : (await supabaseClient.from('documents').insert([docData])).error;
-
-    if (!error) {
-        showToast('تم نشر الملف بنجاح!');
-        cancelDocEdit();
-        fetchDocuments();
-    } else {
-        showToast('حدث خطأ أثناء الحفظ', 'error');
-    }
-}
-
-function cancelDocEdit() {
-    document.getElementById('edit_doc_id').value = '';
-    document.getElementById('doc_title').value = '';
-    document.getElementById('doc_author').value = '';
-    document.getElementById('doc_url').value = '';
-    document.getElementById('doc_desc').value = '';
-    document.getElementById('doc_cover_url').value = '';
-}
-
-async function deleteDoc(id) {
-    if (confirm('هل أنت متأكد من الحذف؟')) {
-        const { error } = await supabaseClient.from('documents').delete().eq('id', id);
-        if (!error) { showToast('تم الحذف بنجاح'); fetchDocuments(); }
-    }
-}
-
-async function saveNewPodcast(e) {
-    e.preventDefault();
-    const editId = document.getElementById('edit_podcast_id').value;
-    const podcastData = {
-        title: document.getElementById('podcast_title').value,
-        category: document.getElementById('podcast_category').value,
-        audio_url: document.getElementById('podcast_url').value,
-        description: document.getElementById('podcast_desc').value
-    };
-
-    let error = editId
-        ? (await supabaseClient.from('podcasts').update(podcastData).eq('id', editId)).error
-        : (await supabaseClient.from('podcasts').insert([podcastData])).error;
-
-    if (!error) {
-        showToast('تم حفظ الحلقة الصوتية بنجاح!');
-        cancelPodcastEdit();
-        fetchPodcasts();
-    } else {
-        showToast('حدث خطأ أثناء حفظ الحلقة', 'error');
-    }
-}
-
-function editPodcast(id) {
-    const podcast = allPodcasts.find(p => p.id === id);
-    if (!podcast) return;
-    document.getElementById('edit_podcast_id').value = podcast.id;
-    document.getElementById('podcast_title').value = podcast.title;
-    document.getElementById('podcast_category').value = podcast.category || 'عام';
-    document.getElementById('podcast_url').value = podcast.audio_url;
-    document.getElementById('podcast_desc').value = podcast.description || '';
-    document.getElementById('podcastFormHeading').textContent = '✏️ تعديل الحلقة الصوتية';
-    document.getElementById('savePodcastBtn').textContent = '💾 حفظ التعديلات';
-    document.getElementById('cancelPodcastEditBtn').style.display = 'inline-flex';
-}
-
-function cancelPodcastEdit() {
-    document.getElementById('edit_podcast_id').value = '';
-    document.getElementById('podcast_title').value = '';
-    document.getElementById('podcast_url').value = '';
-    document.getElementById('podcast_desc').value = '';
-    document.getElementById('podcastFormHeading').textContent = '🎧 إضافة حلقة صوتية أو قسم جديد بالمكتبة';
-    document.getElementById('savePodcastBtn').textContent = '💾 حفظ ونشر الحلقة';
-    document.getElementById('cancelPodcastEditBtn').style.display = 'none';
-}
-
-async function deletePodcast(id) {
-    if (confirm('هل أنت متأكد من حذف هذه الحلقة الصوتية؟')) {
-        const { error } = await supabaseClient.from('podcasts').delete().eq('id', id);
-        if (!error) {
-            showToast('تم حذف الحلقة بنجاح');
-            fetchPodcasts();
-        } else {
-            showToast('حدث خطأ أثناء الحذف', 'error');
-        }
-    }
-}
-
-async function fetchEmployeesList() {
-    const container = document.getElementById('employeesList');
-    if (!container || !supabaseClient) return;
-    try {
-        const { data } = await supabaseClient.from('employees').select('*');
-        if (!data || !data.length) {
-            container.innerHTML = '<p style="color:var(--muted); font-size:0.8rem;">لا توجد حسابات موظفين.</p>';
-            return;
-        }
-        container.innerHTML = data.map(emp => `
-            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--line); padding:8px 12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-size:0.85rem; font-weight:700;">${emp.name}</span>
-                <button class="btn red" style="padding:2px 8px; font-size:0.7rem;" onclick="deleteEmployee(${emp.id})">حذف</button>
-            </div>
-        `).join('');
-    } catch(e) {}
-}
-
-async function saveEmployee(e) {
-    e.preventDefault();
-    const name = document.getElementById('emp_name').value.trim();
-    const pass = document.getElementById('emp_pass').value.trim();
-    const perms = [];
-    if (document.getElementById('p_docs').checked) perms.push('docs');
-    if (document.getElementById('p_sources').checked) perms.push('sources');
-    if (document.getElementById('p_videos').checked) perms.push('videos');
-    if (document.getElementById('p_podcasts').checked) perms.push('podcasts');
-
-    const { error } = await supabaseClient.from('employees').insert([{ name, password: pass, permissions: perms }]);
-    if (!error) {
-        showToast('تمت إضافة الموظف بنجاح');
-        document.getElementById('emp_name').value = '';
-        document.getElementById('emp_pass').value = '';
-        fetchEmployeesList();
-    } else {
-        showToast('تعذر إضافة الموظف', 'error');
-    }
-}
-
-async function deleteEmployee(id) {
-    if (confirm('هل أنت متأكد من حذف حساب هذا الموظف؟')) {
-        const { error } = await supabaseClient.from('employees').delete().eq('id', id);
-        if (!error) { showToast('تم الحذف بنجاح'); fetchEmployeesList(); }
-    }
-}
-
-let isListView = false;
-let showingOnlyBookmarks = false;
-
-function toggleViewLayout() {
-    isListView = !isListView;
-    const docsGrid = document.getElementById('docs');
-    const label = document.getElementById('viewLabel');
-    if (isListView) {
-        docsGrid.classList.add('list-view');
-        label.textContent = 'قائمة';
-    } else {
-        docsGrid.classList.remove('list-view');
-        label.textContent = 'شبكة';
-    }
-}
-
-function toggleBookmarksView() {
-    showingOnlyBookmarks = !showingOnlyBookmarks;
-    const titleIcon = document.getElementById('libTitleIcon');
-    const titleText = document.getElementById('libTitleText');
-    if (showingOnlyBookmarks) {
-        titleIcon.textContent = '⭐';
-        titleText.textContent = 'المكتبة المفضلة لديك';
-        showToast('تم إظهار أبحاثك المفضلة فقط');
-    } else {
-        titleIcon.textContent = '📚';
-        titleText.textContent = 'مكتبة الوثائق والأبحاث الكاملة';
-    }
-    filterAndRenderDocs();
-}
-
-function toggleBookmark(docId, event) {
-    if (event) event.stopPropagation();
-    const index = bookmarkedIds.indexOf(docId);
-    if (index > -1) {
-        bookmarkedIds.splice(index, 1);
-        showToast('تمت الإزالة من المفضلة');
-    } else {
-        bookmarkedIds.push(docId);
-        showToast('تمت الإضافة للمفضلة ⭐');
-    }
-    localStorage.setItem('nahj_bookmarks', JSON.stringify(bookmarkedIds));
-    filterAndRenderDocs();
-}
-
-function shareDoc(title, url, event) {
-    if (event) event.stopPropagation();
-    if (navigator.share) {
-        navigator.share({ title: title, url: url }).catch(()=>{});
-    } else {
-        navigator.clipboard.writeText(url);
-        showToast('تم نسخ رابط الوثيقة للحافظة!');
-    }
-}
-
-function renderDocs(docs) {
-    const grid = document.getElementById('docs');
-    if (!grid) return;
-    grid.innerHTML = '';
-    if (!docs.length) {
-        document.getElementById('empty').style.display = 'block';
-        document.getElementById('count').textContent = '0 نتائج';
-        return;
-    }
-    document.getElementById('empty').style.display = 'none';
-    document.getElementById('count').textContent = docs.length + ' ملفات';
-
-    docs.forEach(doc => {
-        const catName = doc.category || 'منوع';
-        const isBookmarked = bookmarkedIds.includes(doc.id);
-        const card = document.createElement('article');
-        card.className = 'book-cover-card' + (doc.cover_url ? ' has-custom-cover' : '');
-        card.setAttribute('data-category', catName);
-        if (doc.cover_url) {
-            card.style.backgroundImage = `linear-gradient(rgba(2, 7, 10, 0.65), rgba(2, 7, 10, 0.85)), url('${doc.cover_url}')`;
-        }
-        
-        card.innerHTML = `
-            <div class="book-cover-frame"></div>
-            
-            <div class="cover-box-category">${catName}</div>
-            <div class="cover-box-title">${doc.title}</div>
-            <div class="cover-box-desc">
-                <p>${doc.description || 'مستند علمي موثق صادر عن منصة نهج الحقيقة.'}</p>
-                <div style="font-size:0.65rem; color:var(--gold); margin-top:3px; font-weight:700;">
-                    ${doc.author ? '✍️ ' + doc.author : ''}
-                </div>
-            </div>
-
-            <div class="cover-box-actions">
-                <button class="cover-action-btn" onclick="toggleBookmark(${doc.id}, event)" title="حفظ بالمفضلة">
-                    ${isBookmarked ? '★' : '☆'}
-                </button>
-                <button class="cover-action-btn" onclick="shareDoc('${doc.title}', '${doc.file_url}', event)" title="مشاركة">
-                    🔗
-                </button>
-            </div>
-
-            <div class="cover-box-footer">
-                <span>📖 قراءة PDF</span>
-            </div>
-        `;
-        card.addEventListener('click', () => openPdfViewer(doc.title, doc.file_url, doc.id));
-        grid.appendChild(card);
-    });
-}
-
-const q = document.getElementById('q'), cat = document.getElementById('category'), sortBy = document.getElementById('sortBy'), filterAuthor = document.getElementById('filterAuthor');
-
-function filterAndRenderDocs() {
-    if (!q || !cat) return;
-    let term = q.value.trim().toLowerCase();
-    let authorTerm = filterAuthor ? filterAuthor.value.trim().toLowerCase() : '';
-    let category = cat.value;
-    let sort = sortBy ? sortBy.value : 'newest';
-
-    let filtered = allDocs.filter(d => {
-        let match = (d.title + ' ' + (d.description || '')).toLowerCase().includes(term);
-        let authorMatch = !authorTerm || (d.author || '').toLowerCase().includes(authorTerm);
-        let cMatch = !category || d.category === category;
-        let bMatch = !showingOnlyBookmarks || bookmarkedIds.includes(d.id);
-        return match && authorMatch && cMatch && bMatch;
-    });
-
-    if (sort === 'title') filtered.sort((a,b) => (a.title||'').localeCompare(b.title||'', 'ar'));
-    else filtered.reverse();
-
-    renderDocs(filtered);
-}
-
-function filterByTag(c, btn) {
-    if (cat) { cat.value = c; filterAndRenderDocs(); }
-    document.querySelectorAll('.quick-tags .tag-btn').forEach(b => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
-}
-
-if (q) q.addEventListener('input', filterAndRenderDocs);
-if (filterAuthor) filterAuthor.addEventListener('input', filterAndRenderDocs);
-if (cat) cat.addEventListener('change', filterAndRenderDocs);
-if (sortBy) sortBy.addEventListener('change', filterAndRenderDocs);
-
-fetchDocuments();
-fetchSources();
-fetchLatestVideos();
 fetchPodcasts();
-populatePodcastCategorySelects();
 </script>
 </body>
 </html>
