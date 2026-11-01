@@ -732,6 +732,25 @@
   </div>
 </div>
 
+<!-- مودال استعراض كتب ومحتوى القسم في المكتبة الرقمية -->
+<div class="modal" id="docCategoryModal">
+  <div class="modal-content" style="max-width:900px;">
+    <div class="sticky-close-bar">
+      <h3 id="docModalCategoryTitle" style="margin:0; color:var(--gold);">📚 قسم الكتب والبحوث</h3>
+      <button class="back-btn" onclick="closeDocCategoryModal()">✕ إغلاق</button>
+    </div>
+    
+    <!-- شريط بحث سريع داخل مودال القسم -->
+    <div style="margin-bottom: 12px;">
+      <input type="search" id="modalDocSearchInput" placeholder="ابحث داخل هذا القسم..." oninput="filterModalDocs(this.value)" style="width:100%; padding:10px 14px; border-radius:10px; border:1px solid var(--line); background:var(--input-bg); color:#fff; font-size:0.85rem;">
+    </div>
+
+    <div id="categoryDocsListContainer" class="doc-grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap:12px;">
+      <p style="color:var(--muted); grid-column:1/-1;">جاري التحميل...</p>
+    </div>
+  </div>
+</div>
+
 <!-- لوحة التحكم الإدارية -->
 <div class="modal" id="adminModal">
   <div class="modal-content" style="max-width:800px;">
@@ -1022,6 +1041,7 @@ let docCategories = JSON.parse(localStorage.getItem('nahj_doc_cats') || '["بح�
 let docCategoryCovers = JSON.parse(localStorage.getItem('nahj_doc_cat_covers') || '{}');
 
 let currentPodcastIndex = 0;
+let currentActiveDocCategory = '';
 
 /* =========================================================
      إدارة أقسام الكتب وأغلفتها
@@ -1848,24 +1868,105 @@ function toggleBookmarksView() {
     filterAndRenderDocs();
 }
 
-function renderDocs(docs) {
+/* =========================================================
+     عرض الأقسام وتصفية الكتب المحدثة
+   ========================================================= */
+function filterAndRenderDocs() {
     const grid = document.getElementById('docs');
+    const emptyEl = document.getElementById('empty');
+    const countEl = document.getElementById('count');
     if (!grid) return;
-    grid.innerHTML = '';
-    if (!docs.length) {
-        document.getElementById('empty').style.display = 'block';
-        document.getElementById('count').textContent = '0 نتائج';
+
+    let term = q ? q.value.trim().toLowerCase() : '';
+    let authorTerm = filterAuthor ? filterAuthor.value.trim().toLowerCase() : '';
+    let category = cat ? cat.value : '';
+    let sort = sortBy ? sortBy.value : 'newest';
+
+    // إذا كان هناك بحث أو فلترة محددة، تعرض البطاقات مباشرة (الوضع التقليدي)
+    if (term || authorTerm || category || showingOnlyBookmarks) {
+        let filtered = allDocs.filter(d => {
+            let match = (d.title + ' ' + (d.description || '')).toLowerCase().includes(term);
+            let authorMatch = !authorTerm || (d.author || '').toLowerCase().includes(authorTerm);
+            let cMatch = !category || d.category === category;
+            let bMatch = !showingOnlyBookmarks || bookmarkedIds.includes(d.id);
+            return match && authorMatch && cMatch && bMatch;
+        });
+
+        if (sort === 'title') filtered.sort((a,b) => (a.title||'').localeCompare(b.title||'', 'ar'));
+        else filtered.reverse();
+
+        renderDirectDocs(filtered);
         return;
     }
-    document.getElementById('empty').style.display = 'none';
-    document.getElementById('count').textContent = docs.length + ' ملفات';
+
+    // الوضع الافتراضي: عرض بطاقات الأقسام الرئيسة مثل المكتبة الصوتية
+    docCategories = JSON.parse(localStorage.getItem('nahj_doc_cats') || '["بحوث عقائدية", "وثائق تاريخية", "كتب ومراجع", "مقالات ودراسات", "منوع"]');
+    docCategoryCovers = JSON.parse(localStorage.getItem('nahj_doc_cat_covers') || '{}');
+
+    if (!docCategories || docCategories.length === 0) {
+        grid.innerHTML = '<p style="color:var(--muted); font-size:0.85rem; grid-column:1/-1; text-align:center;">لا توجد أقسام مضافة حالياً.</p>';
+        if (countEl) countEl.textContent = '0 أقسام';
+        return;
+    }
+
+    grid.innerHTML = '';
+    if (countEl) countEl.textContent = docCategories.length + ' أقسام رئيسية';
+
+    docCategories.forEach(catName => {
+        const docsInCat = allDocs.filter(d => (d.category || 'منوع') === catName);
+        
+        let middleImg = docCategoryCovers[catName] || '';
+        if (!middleImg && docsInCat.length > 0) {
+            const firstWithCover = docsInCat.find(p => p.cover_url);
+            if (firstWithCover) middleImg = firstWithCover.cover_url;
+        }
+
+        const card = document.createElement('article');
+        card.className = 'book-cover-card';
+        card.style.display = 'flex';
+        
+        let coverBg = middleImg ? `background-image: url('${middleImg}') !important; background-size: cover !important; background-position: center !important;` : `background: #1a0805 !important;`;
+
+        card.innerHTML = `
+            <div class="book-frame-border"></div>
+            <div class="cover-top-title-badge">${catName}</div>
+            <div class="cover-middle-image-area" style="${coverBg}">
+                <div class="cover-middle-overlay"></div>
+                <div class="cover-inner-content">
+                    <h4>المكتبة الرقمية</h4>
+                    <p>${docsInCat.length} كتاب ومستند</p>
+                </div>
+            </div>
+            <div class="cover-bottom-badge">استعراض القسم</div>
+        `;
+        card.addEventListener('click', () => openDocCategoryModal(catName));
+        grid.appendChild(card);
+    });
+
+    if (emptyEl) emptyEl.style.display = 'none';
+}
+
+// عرض الكتب المباشرة في نتائج البحث
+function renderDirectDocs(docs) {
+    const grid = document.getElementById('docs');
+    const emptyEl = document.getElementById('empty');
+    const countEl = document.getElementById('count');
+    if (!grid) return;
+    
+    grid.innerHTML = '';
+    if (!docs.length) {
+        if (emptyEl) emptyEl.style.display = 'block';
+        if (countEl) countEl.textContent = '0 نتائج';
+        return;
+    }
+    if (emptyEl) emptyEl.style.display = 'none';
+    if (countEl) countEl.textContent = docs.length + ' ملفات';
 
     docs.forEach(doc => {
         const catName = doc.category || 'منوع';
         const card = document.createElement('article');
         card.className = 'book-cover-card';
         
-        // التحقق من صورة غلاف الكتاب المباشرة أو صورة غلاف القسم
         let effectiveCover = doc.cover_url || docCategoryCovers[catName] || '';
         let coverBg = (effectiveCover && effectiveCover.trim() !== '') 
             ? `background-image: url('${effectiveCover}') !important; background-size: cover !important; background-position: center !important;` 
@@ -1888,27 +1989,62 @@ function renderDocs(docs) {
     });
 }
 
-const q = document.getElementById('q'), cat = document.getElementById('category'), sortBy = document.getElementById('sortBy'), filterAuthor = document.getElementById('filterAuthor');
+// فتح مودال قسم الكتب وعرض المحتويات
+function openDocCategoryModal(catName) {
+    currentActiveDocCategory = catName;
+    const titleEl = document.getElementById('docModalCategoryTitle');
+    const modal = document.getElementById('docCategoryModal');
+    const searchInput = document.getElementById('modalDocSearchInput');
 
-function filterAndRenderDocs() {
-    if (!q || !cat) return;
-    let term = q.value.trim().toLowerCase();
-    let authorTerm = filterAuthor ? filterAuthor.value.trim().toLowerCase() : '';
-    let category = cat.value;
-    let sort = sortBy ? sortBy.value : 'newest';
+    if (titleEl) titleEl.textContent = '📚 قسم: ' + catName;
+    if (searchInput) searchInput.value = '';
 
-    let filtered = allDocs.filter(d => {
-        let match = (d.title + ' ' + (d.description || '')).toLowerCase().includes(term);
-        let authorMatch = !authorTerm || (d.author || '').toLowerCase().includes(authorTerm);
-        let cMatch = !category || d.category === category;
-        let bMatch = !showingOnlyBookmarks || bookmarkedIds.includes(d.id);
-        return match && authorMatch && cMatch && bMatch;
-    });
+    renderModalDocsList(catName, '');
+    if (modal) modal.style.display = 'flex';
+}
 
-    if (sort === 'title') filtered.sort((a,b) => (a.title||'').localeCompare(b.title||'', 'ar'));
-    else filtered.reverse();
+function closeDocCategoryModal() {
+    const modal = document.getElementById('docCategoryModal');
+    if (modal) modal.style.display = 'none';
+}
 
-    renderDocs(filtered);
+function filterModalDocs(query) {
+    renderModalDocsList(currentActiveDocCategory, query.trim().toLowerCase());
+}
+
+function renderModalDocsList(catName, query) {
+    const container = document.getElementById('categoryDocsListContainer');
+    if (!container) return;
+
+    let activeList = allDocs.filter(d => (d.category || 'منوع') === catName);
+
+    if (query) {
+        activeList = activeList.filter(d => (d.title + ' ' + (d.author || '') + ' ' + (d.description || '')).toLowerCase().includes(query));
+    }
+
+    if (!activeList.length) {
+        container.innerHTML = '<p style="color:var(--muted); font-size:0.85rem; grid-column:1/-1; text-align:center; padding:20px 0;">لا توجد كتب مطابقة حالياً.</p>';
+    } else {
+        container.innerHTML = activeList.map((doc) => {
+            let effectiveCover = doc.cover_url || docCategoryCovers[catName] || '';
+            let coverBg = effectiveCover ? `background-image: url('${effectiveCover}') !important; background-size: cover !important; background-position: center !important;` : `background: #1a0805;`;
+            
+            return `
+                <div class="book-cover-card" style="cursor:pointer;" onclick="closeDocCategoryModal(); openPdfViewer('${doc.title}', '${doc.file_url}', ${doc.id})">
+                    <div class="book-frame-border"></div>
+                    <div class="cover-top-title-badge">${catName}</div>
+                    <div class="cover-middle-image-area" style="${coverBg}">
+                        <div class="cover-middle-overlay"></div>
+                        <div class="cover-inner-content">
+                            <h4>${doc.title}</h4>
+                            <p>${doc.author ? '✍️ ' + doc.author : 'نهج الحقيقة'}</p>
+                        </div>
+                    </div>
+                    <div class="cover-bottom-badge">📖 قراءة PDF</div>
+                </div>
+            `;
+        }).join('');
+    }
 }
 
 function filterByTag(c, btn) {
