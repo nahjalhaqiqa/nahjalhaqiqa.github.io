@@ -213,75 +213,80 @@
   .tag-btn { background: var(--panel); border: 1px solid var(--line); color: var(--muted); padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
   .tag-btn:hover, .tag-btn.active { border-color: var(--mint); color: var(--mint); background: var(--panel-hover); }
 
-  .doc-grid{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:16px;}
+  /* شبكة العرض المعدلة لإنشاء 4 بطاقات مصغرة وأنيقة بالصف الواحد */
+  .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr)); 
+      gap: 14px;
+  }
   .doc-grid.list-view { grid-template-columns: 1fr !important; }
-  .doc-grid.list-view .book-cover-card { aspect-ratio: auto; flex-direction: row; align-items: center; padding: 12px 16px; min-height: 80px; }
+  .doc-grid.list-view .book-cover-card { aspect-ratio: auto; flex-direction: row; align-items: center; padding: 10px 14px; min-height: 70px; }
 
-  /* التصميم الموحد لكل بطاقات الأقسام (صوتيات، كتب، وثائق) بنفس الشكل والحجم بدقة */
+  /* تصميم البطاقات الموحد والأصغر حجماً لكل الأقسام بلا استثناء */
   .book-cover-card {
       position: relative;
       width: 100%;
-      aspect-ratio: 1 / 1.45;
+      aspect-ratio: 1 / 1.35; /* أبعاد مصغرة وأكثر تناسقاً */
       background: #150a06;
-      border: 6px solid #2b170c;
-      border-radius: 10px;
-      padding: 10px;
+      border: 4px solid #2b170c; /* سمك الإطار مصغر */
+      border-radius: 8px;
+      padding: 6px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.85), inset 0 0 20px rgba(0,0,0,0.9);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.85), inset 0 0 12px rgba(0,0,0,0.9);
       cursor: pointer;
       overflow: hidden;
   }
   .book-cover-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 18px 38px rgba(0,0,0,0.95), inset 0 0 15px rgba(212, 175, 55, 0.4);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.95), inset 0 0 10px rgba(212, 175, 55, 0.4);
   }
 
   .book-frame-border {
-      position: absolute; inset: 4px;
-      border: 1.5px solid #d4af37;
+      position: absolute; inset: 3px;
+      border: 1px solid #d4af37;
       pointer-events: none;
       box-sizing: border-box;
       z-index: 5;
-      border-radius: 6px;
+      border-radius: 5px;
   }
 
   .cover-top-title-badge {
       background: #4a1515;
-      border: 2px solid #d4af37;
-      border-radius: 25px;
-      padding: 8px 12px;
+      border: 1.5px solid #d4af37;
+      border-radius: 18px;
+      padding: 4px 8px;
       text-align: center;
       color: #ffffff;
-      font-size: 1.05rem;
+      font-size: 0.85rem;
       font-weight: 900;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.6);
       position: relative;
       z-index: 6;
-      margin-bottom: 6px;
-      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      letter-spacing: 0.3px;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
 
   .cover-middle-image-area {
       flex: 1;
       width: 100%;
-      border-radius: 6px;
+      border-radius: 5px;
       background-size: cover !important;
       background-position: center !important;
-      border: 1px solid rgba(212, 175, 55, 0.4);
+      border: 1px solid rgba(212, 175, 55, 0.35);
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 8px;
+      padding: 6px;
   }
   
   .cover-middle-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.1) 40%, rgba(3,22,34,0.85) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0.05) 30%, rgba(3,22,34,0.88) 100%);
       z-index: 1;
   }
 
@@ -289,27 +294,28 @@
       position: relative; z-index: 2; text-align: center;
   }
   .cover-inner-content h4 {
-      margin: 0 0 4px; font-size: 0.88rem; color: #fff; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      margin: 0 0 2px; font-size: 0.78rem; color: #fff; font-weight: 800; text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.3;
   }
   .cover-inner-content p {
-      margin: 0; font-size: 0.72rem; color: var(--gold-light); text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      margin: 0; font-size: 0.65rem; color: var(--gold-light); text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
 
   .cover-bottom-badge {
       background: #4a1515;
-      border: 1.5px solid #d4af37;
-      border-radius: 16px;
-      padding: 4px 10px;
-      margin: 6px auto 2px;
-      width: 50%;
+      border: 1px solid #d4af37;
+      border-radius: 12px;
+      padding: 2px 8px;
+      margin: 4px auto 1px;
+      width: 60%;
       text-align: center;
       color: #fce8ad;
-      font-size: 0.72rem;
+      font-size: 0.65rem;
       font-weight: 800;
       position: relative;
       z-index: 6;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
   }
 
   .audio-player-card {
@@ -399,7 +405,7 @@
   @media(max-width:768px){
       .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .tools{grid-template-columns:1fr; gap: 8px;}
-      .doc-grid{grid-template-columns:repeat(1,minmax(0,1fr));}
+      .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));} /* 2 بطاقة في الهاتف لتكون واضحة واحترافية */
       .footer-grid { grid-template-columns: 1fr; }
       .mobile-bottom-nav { display: flex; }
       body { padding-bottom: 65px; }
@@ -497,7 +503,7 @@
     </div>
   </div>
 
-  <!-- قسم المكتبة الصوتية -->
+  <!-- قسم المكتبة الصوتية (بطاقات مصغرة موحدة) -->
   <div class="wrap" id="audio-podcast" style="margin-top: 10px;">
     <div class="main-content-grid">
 
@@ -561,7 +567,7 @@
     </div>
   </div>
 
-  <!-- قسم المكتبة الرقمية (الكتب والملفات) بتصميم الغلاف الموحد -->
+  <!-- قسم المكتبة الرقمية (بطاقات مصغرة موحدة مع باقي الأقسام) -->
   <section class="wrap" id="library">
     <div class="head">
       <h2><span id="libTitleIcon">📚</span> <span id="libTitleText">مكتبة الوثائق والأبحاث الكاملة</span></h2>
@@ -601,7 +607,7 @@
     <div class="empty" id="empty">لا توجد نتائج مطابقة لخيارات البحث.</div>
   </section>
 
-  <!-- قسم موسوعة الوثائق المصورة بتصميم الغلاف الموحد -->
+  <!-- قسم موسوعة الوثائق المصورة (بطاقات مصغرة موحدة) -->
   <section class="wrap" id="sources-section" style="margin-top: 25px;">
     <div class="head">
       <h2><span>📜</span> موسوعة الأدلة والوثائق المصورة النادرة</h2>
@@ -731,11 +737,11 @@
   </div>
 </div>
 
-<!-- لوحة التحكم الإدارية -->
+<!-- لوحة التحكم الإدارية الشاملة لكافة الأقسام مع تغيير أغلفة الصور -->
 <div class="modal" id="adminModal">
   <div class="modal-content" style="max-width:850px;">
     <div class="sticky-close-bar">
-      <h3 id="adminModalTitle" style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة والإحصائيات الشاملة</h3>
+      <h3 id="adminModalTitle" style="margin:0; color:var(--gold);">⚙️ لوحة الإدارة وإدارة الأغلفة الشاملة</h3>
       <button class="back-btn" onclick="closeAdminModal()">✕ إغلاق</button>
     </div>
 
@@ -763,14 +769,14 @@
         <button id="tabBtnDocs" class="admin-tab-btn active" onclick="switchAdminTab('docs')">📚 الكتب والملفات</button>
         <button id="tabBtnSources" class="admin-tab-btn" onclick="switchAdminTab('sources')">📜 الوثائق المصورة</button>
         <button id="tabBtnVideos" class="admin-tab-btn" onclick="switchAdminTab('videos')">▶ الفيديوهات</button>
-        <button id="tabBtnPodcasts" class="admin-tab-btn" onclick="switchAdminTab('podcasts')">🎧 المكتبة الصوتية والأقسام</button>
+        <button id="tabBtnPodcasts" class="admin-tab-btn" onclick="switchAdminTab('podcasts')">🎧 المكتبة الصوتية للأقسام</button>
         <button id="tabBtnManageUsers" class="admin-tab-btn" onclick="switchAdminTab('manage_users')">👥 إدارة الموظفين</button>
       </div>
 
       <!-- 1. نموذج الكتب والملفات -->
       <div id="addDocForm" class="admin-form" style="display:flex; flex-direction:column; gap:12px;">
         <input type="hidden" id="edit_doc_id">
-        <h4 id="docFormHeading" style="margin:0; color:var(--gold);">➕ إضافة بحث / كتاب جديد</h4>
+        <h4 id="docFormHeading" style="margin:0; color:var(--gold);">➕ إضافة بحث / كتاب جديد مع تخصيص الغلاف</h4>
         
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
           <input type="text" id="doc_title" placeholder="عنوان البحث / الكتاب" required>
@@ -788,7 +794,7 @@
           <input type="text" id="doc_url" placeholder="رابط الملف المباشر (PDF URL)" required>
         </div>
         
-        <input type="text" id="doc_cover_url" placeholder="رابط صورة الغلاف الوسطى (Image URL)...">
+        <input type="text" id="doc_cover_url" placeholder="رابط صورة الغلاف الوسطى للمستند (Image URL)...">
         <textarea id="doc_desc" placeholder="نبذة مختصرة عن المستند..."></textarea>
         
         <div style="display:flex; gap:8px;">
@@ -811,13 +817,13 @@
         <div id="adminDocsList" style="max-height:240px; overflow-y:auto; margin-top:6px;"></div>
       </div>
 
-      <!-- 2. نموذج الوثائق -->
+      <!-- 2. نموذج الوثائق المصورة -->
       <div id="addSourceForm" class="admin-form" style="display:none; flex-direction:column; gap:12px;">
         <input type="hidden" id="edit_source_id">
-        <h4 id="sourceFormHeading" style="margin:0; color:var(--gold);">➕ إضافة وثيقة مصورة نادرة</h4>
-        <input type="text" id="source_title" placeholder="عنوان المجموعة..." required>
-        <input type="text" id="source_img_url" placeholder="رابط الصورة المباشر (Image URL)" required>
-        <textarea id="source_desc" placeholder="شرح تفصيلي..."></textarea>
+        <h4 id="sourceFormHeading" style="margin:0; color:var(--gold);">➕ إضافة وثيقة مصورة نادرة مع تخصيص الغلاف</h4>
+        <input type="text" id="source_title" placeholder="عنوان المجموعة (مثال: وثائق فدك)..." required>
+        <input type="text" id="source_img_url" placeholder="رابط صورة الوثيقة أو الغلاف الأوسط (Image URL)" required>
+        <textarea id="source_desc" placeholder="شرح تفصيلي للوثيقة..."></textarea>
         
         <div style="display:flex; gap:8px;">
           <button type="button" id="saveSourceBtn" class="btn" onclick="saveNewSource(event)">💾 حفظ الوثيقة المصورة</button>
@@ -1148,7 +1154,7 @@ function populatePodcastCategorySelects() {
     select.innerHTML = podcastCategories.map(c => `<option value="${c}">📁 قسم: ${c}</option>`).join('');
 }
 
-// رسم بطاقات الأقسام الصوتية بتصميم الغلاف الفاخر الموحد
+// رسم بطاقات الأقسام الصوتية بتصميم الغلاف الموحد والأصغر حجماً
 function renderAudioCategoriesCards() {
     const grid = document.getElementById('audio-categories-grid');
     if (!grid) return;
@@ -1329,6 +1335,7 @@ async function fetchSources() {
     } catch(e){}
 }
 
+// رسم بطاقات موسوعة الوثائق المصورة بتصميم الغلاف المصغر الموحد
 function renderSourcesMain(data) {
     const grid = document.getElementById('sources-grid');
     if (!grid) return;
@@ -1857,7 +1864,7 @@ function shareDoc(title, url, event) {
     }
 }
 
-// رسم بطاقات الكتب والملفات الرقمية بتصميم الغلاف الموحد المتناسق
+// رسم بطاقات الكتب والملفات الرقمية بتصميم الغلاف الموحد والجميل
 function renderDocs(docs) {
     const grid = document.getElementById('docs');
     if (!grid) return;
