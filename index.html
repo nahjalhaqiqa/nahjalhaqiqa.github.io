@@ -382,37 +382,37 @@
       .stats-grid-admin { grid-template-columns: repeat(2, 1fr) !important; }
   }
   @media(max-width:768px){
-      .wrap { width: calc(100% - 16px) !important; padding: 0 2px; }
-      .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px; margin-top: -20px; }
-      .tools { grid-template-columns: 1fr !important; gap: 8px; }
-      
-      .doc-grid {
-          display: grid !important;
-          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-          gap: 10px !important;
-      }
-      
-      #audio-categories-grid {
-          display: grid !important;
-          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-          gap: 10px !important;
-      }
-      
-.cover-middle-image-area {
-          min-height: 160px !important;
-          height: auto !important;
-          display: block !important;
-          background-size: cover !important;
-          background-position: center center !important;
-          background-repeat: no-repeat !important;
-      }
+    .wrap { width: calc(100% - 16px) !important; padding: 0 2px; }
+    .quick-cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px; margin-top: -20px; }
+    .tools { grid-template-columns: 1fr !important; gap: 8px; }
+    
+    .doc-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+    }
+    
+    #audio-categories-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+    }
+    
+    .cover-middle-image-area {
+        min-height: 160px !important;
+        height: auto !important;
+        display: block !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+    }
 
-      .footer-grid { grid-template-columns: 1fr !important; }
-      .mobile-bottom-nav { display: flex !important; }
-      body { padding-bottom: 65px; }
-      nav { display: none !important; }
-      .hero-banner { min-height: 340px; padding: 35px 10px; }
-      .hero-banner h1 { font-size: 2rem; }
+    .footer-grid { grid-template-columns: 1fr !important; }
+    .mobile-bottom-nav { display: flex !important; }
+    body { padding-bottom: 65px; }
+    nav { display: none !important; }
+    .hero-banner { min-height: 340px; padding: 35px 10px; }
+    .hero-banner h1 { font-size: 2rem; }
   }
   @media(max-width:420px){
       .doc-grid { grid-template-columns: 1fr !important; }
@@ -1886,8 +1886,6 @@ function filterAndRenderDocs() {
             const firstWithCover = docsInCat.find(p => p.cover_url);
             if (firstWithCover) middleImg = firstWithCover.cover_url;
         }
-
-    }
 
         const card = document.createElement('article');
         card.className = 'book-cover-card';
