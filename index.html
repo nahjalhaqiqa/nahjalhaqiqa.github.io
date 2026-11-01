@@ -1,29 +1,16 @@
 <!doctype html>
 <html lang="ar" dir="rtl" data-theme="dark">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6GEV65PB24"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-6GEV65PB24');
-  </script>
-  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#031622">
 
   <title>نهج الحقيقة | من أجل معرفة أعمق .. لحقيقة أصدق</title>
-  <meta name="description" content="منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية، وملفات PDF، وقناة يوتيوب، وبرنامج حواري.">
+  <meta name="description" content="منصة إسلامية علمية متخصصة في نشر الأبحاث العقائدية والوثائق التاريخية وملفات PDF.">
   <meta name="robots" content="index, follow">
 
   <link rel="icon" href="assets/logo.png" type="image/png">
   <link rel="manifest" href="manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="نهج الحقيقة">
-  <link rel="apple-touch-icon" href="assets/logo.png">
 
   <!-- الخطوط -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -120,43 +107,9 @@
   .hero-subtitle { font-size: 1.15rem; color: var(--gold); font-weight: 700; margin: 0; }
   .hero-desc { font-size: 1rem; color: var(--muted); max-width: 640px; margin: 0; line-height: 1.8; }
 
-  .hero-search-box { margin-top: 18px; width: min(560px, 100%); position: relative; }
-  .hero-search-box input {
-      width: 100%; padding: 16px 24px 16px 55px; border-radius: 35px;
-      border: 1.5px solid var(--line); background: rgba(2, 18, 28, 0.85); color: #fff;
-      outline: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  }
-  .hero-search-box button {
-      position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
-      background: var(--gold); border: none; width: 42px; height: 42px; border-radius: 50%;
-      color: #031622; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: bold;
-  }
-
-  .quick-cards-grid {
-      display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px; margin: -35px auto 30px; position: relative; z-index: 10;
-  }
-  .quick-card {
-      background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 22px 12px;
-      text-align: center; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer;
-  }
-  .quick-card:hover { border-color: var(--mint); transform: translateY(-5px); background: var(--panel-hover); }
-  .quick-card .q-icon { font-size: 2rem; color: var(--gold); }
-  .quick-card h3 { margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--ink); }
-
   section{padding:20px 0}
   .head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:20px 0 16px}
   .head h2{margin:0;font-size:1.45rem; font-weight:800; color:var(--ink); display:flex; align-items:center; gap:8px;}
-  .head small{color:var(--gold); font-weight:700; cursor:pointer; font-size:0.9rem;}
-
-  .main-content-grid { display: grid; grid-template-columns: 1fr 360px; gap: 22px; align-items: start; }
-
-  .verse-side-card {
-      background: linear-gradient(145deg, #041e2e, #02121c); border: 1px solid var(--line); border-radius: 20px;
-      padding: 24px; box-shadow: var(--shadow); text-align: center; position: relative; overflow: hidden;
-  }
-  .verse-side-card h3 { color: var(--gold); font-size: 1.1rem; margin: 0 0 15px; font-weight: 800; }
-  .verse-text { font-size: 1.15rem; font-weight: 700; color: #fff; line-height: 2; margin-bottom: 12px; padding: 14px 8px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .verse-source { font-size: 0.82rem; color: var(--muted); margin-bottom: 20px; }
 
   .tools{display:grid;grid-template-columns:2fr 1.2fr 1fr 1fr auto;gap:10px;margin:16px 0 12px; align-items: center;}
   .tools input,.tools select, .admin-form input, .admin-form select, .admin-form textarea{
@@ -218,6 +171,11 @@
   .toast { background: var(--panel); border: 1px solid var(--mint); color: var(--ink); padding: 12px 20px; border-radius: 12px; font-size: 0.88rem; font-weight: 700; box-shadow: 0 10px 25px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 10px; }
 
   footer{ margin-top:50px; background:#02121c; border-top:1px solid var(--line); padding:30px 0; color:var(--muted); font-size: 0.88rem; text-align: center; }
+
+  @media(max-width:992px){
+      .doc-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+      .tools { grid-template-columns: 1fr; }
+  }
   </style>
 </head>
 <body>
@@ -233,9 +191,8 @@
     </a>
     <nav>
       <a href="#top" class="active">الرئيسية</a>
-      <a href="#audio-podcast">المكتبة الصوتية</a>
+      <a href="#audio-podcast">المكتبة الصوتية والأقسام</a>
       <a href="#library">المكتبة</a>
-      <a href="#sources-section">الوثائق</a>
       <a href="#contact">تواصل معنا</a>
     </nav>
     <div class="nav-actions">
@@ -253,13 +210,13 @@
     </div>
   </div>
 
-  <!-- قسم المكتبة الصوتية -->
+  <!-- قسم الأقسام الرئيسية -->
   <div class="wrap" id="audio-podcast" style="margin-top: 20px;">
     <div class="head">
-      <h2><span>🎧</span> المكتبة الصوتية (الأقسام)</h2>
+      <h2><span>🎧</span> أقسام الموقع (مع إمكانية تعديل الأغلفة والصور)</h2>
     </div>
     <div class="doc-grid" id="audio-categories-grid">
-      <p style="color:var(--muted);">جاري تحميل الأقسام الصوتية...</p>
+      <p style="color:var(--muted);">جاري تحميل الأقسام...</p>
     </div>
   </div>
 
@@ -279,14 +236,6 @@
     </div>
     <div class="doc-grid" id="docs"></div>
   </section>
-
-  <!-- قسم الوثائق المصورة -->
-  <section class="wrap" id="sources-section" style="margin-top: 30px;">
-    <div class="head">
-      <h2><span>📜</span> موسوعة الأدلة والوثائق المصورة النادرة</h2>
-    </div>
-    <div class="doc-grid" id="sources-grid"></div>
-  </section>
 </main>
 
 <footer>
@@ -295,7 +244,7 @@
   </div>
 </footer>
 
-<!-- لوحة التحكم الإدارية مع زر تعديل الأقسام الشامل والصور -->
+<!-- لوحة التحكم الإدارية المحدثة -->
 <div class="modal" id="adminModal">
   <div class="modal-content">
     <div class="sticky-close-bar">
@@ -316,7 +265,7 @@
         <button class="admin-tab-btn" onclick="switchAdminTab('docs')">📚 إضافة ملفات المكتبة</button>
       </div>
 
-      <!-- زر وتعديل الأقسام الشامل والصور -->
+      <!-- تعديل الأقسام الشامل والصور -->
       <div id="manageSectionsSec" class="admin-form" style="display:flex; flex-direction:column; gap:14px;">
         <h4 style="margin:0; color:var(--gold);">🛠️ تعديل أسماء الأقسام وصور الأغلفة لجميع أقسام الموقع</h4>
         <p style="font-size:0.82rem; color:var(--muted); margin:0;">اختر القسم الذي تريد تعديله، ثم عدل اسمه أو ضع رابط صورة الغلاف الجديدة:</p>
@@ -324,7 +273,6 @@
         <div style="display:flex; flex-direction:column; gap:10px; background:rgba(0,0,0,0.25); padding:14px; border-radius:12px; border:1px solid var(--line);">
           <label style="font-size:0.85rem; font-weight:800; color:var(--gold);">اختر القسم للتعديل عليه:</label>
           <select id="selectSectionToEdit" onchange="loadSectionDataForEdit()" style="padding:10px; border-radius:10px; background:var(--input-bg); color:#fff; border:1px solid var(--line);">
-            <!-- يتم تعبئتها تلقائياً -->
           </select>
 
           <label style="font-size:0.85rem; font-weight:800; color:var(--gold); margin-top:6px;">اسم القسم الجديد أو الحالي:</label>
@@ -333,7 +281,7 @@
           <label style="font-size:0.85rem; font-weight:800; color:var(--gold); margin-top:6px;">رابط صورة الغلاف الوسطى للقسم (Image URL):</label>
           <input type="text" id="edit_section_image" placeholder="ضع رابط الصورة هنا...">
 
-          <div style="display:flex; gap:10px; margin-top:10px;">
+          <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
             <button type="button" class="btn" onclick="saveSectionChanges()">💾 حفظ التعديلات وتحديث الصورة</button>
             <button type="button" class="btn red" onclick="addNewSectionPrompt()">➕ إضافة قسم جديد بالكامل</button>
           </div>
@@ -400,13 +348,13 @@ function closeAdminModal() { document.getElementById('adminModal').style.display
 
 function loginAdmin() {
     const pass = document.getElementById('adminPassInput').value.trim();
-    if (pass === '12345' || pass.length > 0) { // كلمة مرور مرنة للاختبار
+    if (pass.length > 0) {
         document.getElementById('adminLoginSec').style.display = 'none';
         document.getElementById('adminPanelSec').style.display = 'flex';
         populateSectionSelectDropdown();
         showToast('تم تسجيل الدخول بنجاح');
     } else {
-        showToast('كلمة المرور غير صحيحة', 'error');
+        showToast('يرجى إدخال كلمة المرور', 'error');
     }
 }
 
@@ -443,7 +391,6 @@ function saveSectionChanges() {
         return;
     }
 
-    // تحديث الاسم في القائمة
     const idx = allSectionsList.indexOf(oldName);
     if (idx > -1) {
         allSectionsList[idx] = newName;
@@ -451,7 +398,6 @@ function saveSectionChanges() {
         allSectionsList.push(newName);
     }
 
-    // حفظ الصورة
     if (newImg) {
         sectionCovers[newName] = newImg;
         if (oldName !== newName) delete sectionCovers[oldName];
@@ -481,7 +427,6 @@ function addNewSectionPrompt() {
     }
 }
 
-// دمج الوثائق والملفات العادية
 let allDocs = [];
 async function fetchDocuments() {
     allDocs = [
