@@ -1290,27 +1290,41 @@ function renderAudioCategoriesCards() {
 }
 
 function openAudioCategoryModal(catName) {
-    document.getElementById('audioModalCategoryTitle').textContent = '🎧 قسم: ' + catName;
+    // حماية العناصر للتأكد من وجودها في الصفحة أولاً
+    const titleEl = document.getElementById('audioModalCategoryTitle');
     const container = document.getElementById('categoryPodcastsListContainer');
-    const activeList = allPodcasts.filter(p => (p.category || 'ملاحم كربلاء') === catName);
+    const modal = document.getElementById('audioCategoryModal');
 
-    if (!activeList.length) {
-        container.innerHTML = '<p style="color:var(--muted); font-size:0.85rem;">لا توجد حلقات في هذا القسم.</p>';
-    } else {
-        container.innerHTML = activeList.map((p) => {
-            let globalIdx = allPodcasts.findIndex(item => item.id === p.id);
-            return `
-                <div style="background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:10px; padding:10px; display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="loadPodcastIntoPlayer(${globalIdx}); toggleAudioPlay();">
-                    <div>
-                        <h5 style="margin:0 0 3px; font-size:0.88rem; font-weight:800; color:var(--ink);">${p.title}</h5>
-                        <p style="margin:0; font-size:0.75rem; color:var(--muted);">${p.description || 'تسجيل صوتي'}</p>
+    if (titleEl) titleEl.textContent = '🎧 قسم: ' + catName;
+    
+    // التأكد أن مصفوفة الحلقات معرفة وليست فارغة لمنع انهيار الكود
+    const podcastsList = (typeof allPodcasts !== 'undefined' && Array.isArray(allPodcasts)) ? allPodcasts : [];
+    const activeList = podcastsList.filter(p => (p.category || 'ملاحم كربلاء') === catName);
+
+    if (container) {
+        if (!activeList.length) {
+            container.innerHTML = '<p style="color:var(--muted); font-size:0.85rem;">لا توجد حلقات في هذا القسم.</p>';
+        } else {
+            container.innerHTML = activeList.map((p) => {
+                let globalIdx = podcastsList.findIndex(item => item.id === p.id);
+                return `
+                    <div style="background:rgba(0,0,0,0.3); border:1px solid var(--line); border-radius:10px; padding:10px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; margin-bottom: 8px;" onclick="loadPodcastIntoPlayer(${globalIdx}); toggleAudioPlay();">
+                        <div>
+                            <h5 style="margin:0 0 3px; font-size:0.88rem; font-weight:800; color:var(--ink);">${p.title}</h5>
+                            <p style="margin:0; font-size:0.75rem; color:var(--muted);">${p.description || 'تسجيل صوتي'}</p>
+                        </div>
+                        <button class="btn shrink" style="padding:4px 12px; font-size:0.75rem;">تشغيل ▶</button>
                     </div>
-                    <button class="btn shrink" style="padding:4px 12px; font-size:0.75rem;">تشغيل ▶</button>
-                </div>
-            `;
-        }).join('');
+                `;
+            }).join('');
+        }
     }
-    document.getElementById('audioCategoryModal').style.display = 'flex';
+
+    if (modal) {
+        modal.style.display = 'flex';
+    } else {
+        console.error('عنصر النافذة audioCategoryModal غير موجود في الـ HTML!');
+    }
 }
 
 function closeAudioCategoryModal() { document.getElementById('audioCategoryModal').style.display = 'none'; }
@@ -1590,8 +1604,12 @@ function switchAdminTab(type) {
     if (type === 'sources') document.getElementById('tabBtnSources').classList.add('active');
     if (type === 'videos') document.getElementById('tabBtnVideos').classList.add('active');
     if (type === 'podcasts') document.getElementById('tabBtnPodcasts').classList.add('active');
+// 💡 أضف هذا السطر هنا لتحديث القوائم وأزرار التعديل فوراً عند التبديل:
+    if (typeof populateAdminLists === 'function') populateAdminLists();
+    if (type === 'podcasts' && typeof updatePodcastCategoryOptions === 'function') {
+        updatePodcastCategoryOptions();
+    }
 }
-
 function populateAdminLists() {
     const docsList = document.getElementById('adminDocsList');
     if (docsList) {
