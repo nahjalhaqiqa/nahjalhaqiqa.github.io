@@ -1040,7 +1040,7 @@ let allSources = [];
 let allVideos = [];
 let allPodcasts = [];
 
-let podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["ملاحم كربلاء", "محاضرات عقائدية", "جلسات حوارية"]');
+let podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["ملاحم كربلاء", "محاضرات عقائدية", "مناظرات"]');
 let categoryCovers = JSON.parse(localStorage.getItem('nahj_cat_covers') || '{}');
 
 let docCategories = JSON.parse(localStorage.getItem('nahj_doc_cats') || '["بحوث عقائدية", "وثائق تاريخية", "كتب ومراجع", "مقالات ودراسات", "منوع"]');
@@ -1186,7 +1186,7 @@ function renderAudioCategoriesCards() {
     const grid = document.getElementById('audio-categories-grid');
     if (!grid) return;
 
-    podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["ملاحم كربلاء", "محاضرات عقائدية", "جلسات حوارية"]');
+    podcastCategories = JSON.parse(localStorage.getItem('nahj_podcast_cats') || '["ملاحم كربلاء", "محاضرات عقائدية", "مناظرات"]');
     categoryCovers = JSON.parse(localStorage.getItem('nahj_cat_covers') || '{}');
 
     if (!podcastCategories || podcastCategories.length === 0) {
